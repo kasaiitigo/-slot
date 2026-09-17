@@ -11,590 +11,698 @@
   -webkit-tap-highlight-color:transparent;
 }
 html,body{
+  margin:0;
   width:100%;
   height:100%;
-  margin:0;
   overflow:hidden;
   background:#120008;
-  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
-  user-select:none;
+  color:#fff;
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",
+    "Hiragino Kaku Gothic ProN",sans-serif;
 }
 body{
+  user-select:none;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+#stage{
   position:fixed;
   inset:0;
-}
-button{font:inherit}
-
-#game{
-  position:absolute;
-  inset:0;
   overflow:hidden;
+  background-color:#120008;
   background-image:url("./9E28B31B-C619-4F41-AB55-91C025168D02.png");
   background-size:auto 100%;
   background-position:center top;
   background-repeat:no-repeat;
-  background-color:#120008;
 }
 
-/* START */
-#startScreen{
+#stage::after{
+  content:"";
   position:absolute;
   inset:0;
-  z-index:100;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:flex-end;
-  padding-bottom:max(9vh,55px);
-  background:rgba(20,0,10,.16);
-}
-#startButton{
-  width:min(78vw,390px);
-  padding:20px;
-  border:2px solid rgba(255,255,255,.9);
-  border-radius:999px;
-  background:linear-gradient(#ff78b9,#d51c72);
-  color:#fff;
-  font-size:32px;
-  font-weight:900;
-  letter-spacing:.1em;
-  box-shadow:0 7px 0 #8f0045,0 12px 25px rgba(0,0,0,.45);
-}
-#startButton:active{
-  transform:translateY(5px);
-  box-shadow:0 2px 0 #8f0045,0 7px 15px rgba(0,0,0,.35);
-}
-#probability{
-  margin-top:20px;
-  color:#fff;
-  text-align:center;
-  font-size:14px;
-  line-height:1.8;
-  font-weight:700;
-  text-shadow:0 2px 5px #000;
+  z-index:2;
+  pointer-events:none;
+  background:rgba(0,0,0,0);
+  transition:background 1s;
 }
 
-/* COUNTDOWN */
+#stage.bgDark::after{
+  background:rgba(0,0,0,.76);
+}
+
 #number{
   position:absolute;
-  z-index:30;
+  z-index:20;
   left:50%;
   top:61%;
   transform:translate(-50%,-50%);
+  width:100%;
+  text-align:center;
+
   font-size:min(52vw,255px);
   line-height:1;
   font-weight:1000;
+
   color:#fff7fb;
   -webkit-text-stroke:clamp(5px,1.6vw,9px) #ff4b9d;
+
   text-shadow:
     0 6px 0 #d82779,
     0 12px 0 #a80052,
     0 18px 8px rgba(60,0,28,.72);
-  display:none;
-  pointer-events:none;
+
+  transition:
+    color .18s,
+    transform .18s,
+    opacity .18s,
+    filter .18s;
 }
-.numberPop{animation:numberPop .20s ease-out}
+
+#number.show{
+  animation:numberPop .32s ease-out;
+}
+
 @keyframes numberPop{
-  0%{transform:translate(-50%,-50%) scale(.78)}
-  70%{transform:translate(-50%,-50%) scale(1.07)}
-  100%{transform:translate(-50%,-50%) scale(1)}
-}
-#message{
-  position:absolute;
-  z-index:35;
-  left:50%;
-  top:61%;
-  transform:translate(-50%,-50%);
-  width:100%;
-  text-align:center;
-  color:#fff;
-  font-size:90px;
-  font-weight:1000;
-  -webkit-text-stroke:3px #ff4b9d;
-  text-shadow:0 5px 0 #c8186b,0 10px 12px rgba(0,0,0,.7);
-  display:none;
-}
-.goldNumber{
-  color:#fff6bd!important;
-  -webkit-text-stroke-color:#f0ad00!important;
-}
-.redNumber{
-  color:#fff!important;
-  -webkit-text-stroke-color:#ff1717!important;
-}
-
-/* SHOOTING STARS */
-#starLayer{
-  position:absolute;
-  inset:0;
-  z-index:20;
-  overflow:hidden;
-  pointer-events:none;
-}
-.shootingStar{
-  position:absolute;
-  width:13px;
-  height:13px;
-  border-radius:50%;
-  background:#fff;
-  opacity:0;
-  filter:drop-shadow(0 0 7px #fff) drop-shadow(0 0 17px #ffcce5);
-  animation:shoot var(--duration) cubic-bezier(.12,.65,.25,1) forwards;
-}
-.shootingStar::before{
-  content:"";
-  position:absolute;
-  right:3px;
-  top:50%;
-  width:var(--tail);
-  height:5px;
-  transform:translateY(-50%);
-  background:linear-gradient(90deg,transparent,rgba(255,230,246,.4),#fff);
-  border-radius:100%;
-}
-.shootingStar::after{
-  content:"";
-  position:absolute;
-  inset:-7px;
-  border-radius:50%;
-  background:rgba(255,255,255,.5);
-  filter:blur(7px);
-}
-@keyframes shoot{
   0%{
     opacity:0;
-    transform:translate3d(0,0,0) rotate(var(--angle)) scale(.4);
+    transform:translate(-50%,-50%) scale(1.16);
   }
-  8%,70%{opacity:1}
-  100%{
-    opacity:0;
-    transform:translate3d(var(--travelX),var(--travelY),0)
-      rotate(var(--angle)) scale(.7);
-  }
-}
-
-/* HIT */
-#blackout{
-  position:absolute;
-  inset:0;
-  z-index:50;
-  background:#000;
-  opacity:0;
-  pointer-events:none;
-}
-#hitDark{
-  position:absolute;
-  inset:0;
-  z-index:55;
-  opacity:0;
-  pointer-events:none;
-  background:radial-gradient(circle at center,
-    rgba(0,0,0,.12) 0%,
-    rgba(0,0,0,.72) 65%,
-    rgba(0,0,0,.98) 100%);
-}
-#slashLayer{
-  position:absolute;
-  inset:0;
-  z-index:70;
-  overflow:hidden;
-  pointer-events:none;
-}
-.slash{
-  position:absolute;
-  left:-35%;
-  top:49%;
-  width:170%;
-  height:28px;
-  opacity:0;
-  border-radius:100%;
-  background:linear-gradient(
-    90deg,
-    transparent 0%,
-    #ff2d91 12%,
-    #fff 35%,
-    #fff 65%,
-    #ff2d91 88%,
-    transparent 100%
-  );
-  box-shadow:
-    0 0 8px #fff,
-    0 0 20px #fff,
-    0 0 42px #ff54a6,
-    0 0 85px #ff0077,
-    0 0 130px rgba(255,0,119,.75);
-  transform:rotate(-18deg) scaleX(.02);
-  animation:slashImpact .72s cubic-bezier(.05,.82,.12,1) forwards;
-}
-.slash::before{
-  content:"";
-  position:absolute;
-  left:5%;
-  right:5%;
-  top:-25px;
-  height:78px;
-  background:linear-gradient(transparent,rgba(255,255,255,.8),transparent);
-  filter:blur(14px);
-}
-.slash::after{
-  content:"";
-  position:absolute;
-  left:8%;
-  right:8%;
-  top:50%;
-  height:5px;
-  transform:translateY(-50%);
-  background:#fff;
-  box-shadow:0 0 12px #fff,0 0 25px #fff;
-}
-.slash.second{
-  top:53%;
-  animation-name:slashImpact2;
-  animation-delay:.08s;
-}
-@keyframes slashImpact{
-  0%{opacity:0;transform:rotate(-18deg) scaleX(.01)}
-  8%{opacity:1}
-  30%{opacity:1;transform:rotate(-18deg) scaleX(1)}
-  65%{opacity:1;transform:rotate(-18deg) scaleX(1.03)}
-  100%{opacity:0;transform:rotate(-18deg) scaleX(1.08)}
-}
-@keyframes slashImpact2{
-  0%{opacity:0;transform:rotate(19deg) scaleX(.01)}
-  8%{opacity:1}
-  30%{opacity:1;transform:rotate(19deg) scaleX(1)}
-  65%{opacity:1;transform:rotate(19deg) scaleX(1.03)}
-  100%{opacity:0;transform:rotate(19deg) scaleX(1.08)}
-}
-
-#flash{
-  position:absolute;
-  inset:0;
-  z-index:75;
-  background:#fff;
-  opacity:0;
-  pointer-events:none;
-}
-.flashExplosion{animation:flashExplosion .55s ease-out forwards}
-@keyframes flashExplosion{
-  0%{opacity:0}
-  8%,25%{opacity:1}
-  55%{opacity:.7}
-  100%{opacity:0}
-}
-
-#hitText{
-  position:absolute;
-  z-index:85;
-  left:50%;
-  top:52%;
-  width:180vw;
-  text-align:center;
-  color:#fff7c7;
-  font-size:min(43vw,220px);
-  line-height:.9;
-  font-weight:1000;
-  letter-spacing:-.08em;
-  -webkit-text-stroke:clamp(7px,2.4vw,13px) #ff0877;
-  text-shadow:
-    0 8px 0 #d00060,
-    0 17px 0 #730035,
-    0 0 12px #fff,
-    0 0 30px #fff,
-    0 0 55px #ff48a0,
-    0 0 100px #ff0073;
-  opacity:0;
-  transform:translate(-50%,-50%) scale(1);
-  pointer-events:none;
-}
-.hitTextImpact{
-  animation:hitTextImpact .82s cubic-bezier(.12,.9,.18,1.12) forwards;
-}
-@keyframes hitTextImpact{
-  0%{
-    opacity:0;
-    transform:translate(-50%,-50%) scale(4.2);
-    filter:brightness(4) blur(5px);
-  }
-  18%{
-    opacity:1;
-    transform:translate(-50%,-50%) scale(.72);
-    filter:brightness(1.7) blur(0);
-  }
-  38%{transform:translate(-50%,-50%) scale(1.22)}
-  55%{transform:translate(-50%,-50%) scale(.94)}
-  72%{transform:translate(-50%,-50%) scale(1.08)}
   100%{
     opacity:1;
     transform:translate(-50%,-50%) scale(1);
-    filter:brightness(1);
   }
 }
-.hitTextPulse{animation:hitTextPulse .36s ease-out}
-@keyframes hitTextPulse{
+
+#number.bigChance{
+  animation:bigChance .7s cubic-bezier(.1,1.4,.2,1);
+}
+
+@keyframes bigChance{
   0%{transform:translate(-50%,-50%) scale(1)}
-  35%{transform:translate(-50%,-50%) scale(1.18)}
+  35%{transform:translate(-50%,-50%) scale(1.55)}
+  65%{transform:translate(-50%,-50%) scale(.92)}
   100%{transform:translate(-50%,-50%) scale(1)}
 }
 
-.hitShake{animation:hitShake .48s linear}
-@keyframes hitShake{
-  0%{transform:translate(0,0) scale(1)}
-  8%{transform:translate(-20px,12px) scale(1.025)}
-  16%{transform:translate(18px,-11px) scale(1.03)}
-  25%{transform:translate(-15px,-9px) scale(1.025)}
-  34%{transform:translate(13px,10px) scale(1.02)}
-  44%{transform:translate(-10px,7px) scale(1.015)}
-  55%{transform:translate(8px,-6px) scale(1.01)}
-  68%{transform:translate(-5px,4px) scale(1.005)}
-  82%{transform:translate(3px,-2px) scale(1)}
-  100%{transform:translate(0,0) scale(1)}
-}
-.hitZoom{animation:hitZoom .65s ease-out}
-@keyframes hitZoom{
-  0%{background-size:auto 100%}
-  20%{background-size:auto 108%}
-  100%{background-size:auto 100%}
+#number.red{
+  color:#ff5353;
+  -webkit-text-stroke-color:#fff;
 }
 
-/* TREASURE */
-#treasure{
+#number.gold{
+  color:#fff0a0;
+  -webkit-text-stroke-color:#ffb300;
+  text-shadow:
+    0 6px 0 #d78c00,
+    0 12px 0 #8c5200,
+    0 0 20px #fff,
+    0 0 45px #ffc400;
+}
+
+#number.pink{
+  color:#ffb6dc;
+}
+
+#number.cracked{
+  filter:contrast(1.5);
+  text-shadow:
+    -4px -2px 0 rgba(255,255,255,.5),
+    4px 3px 0 #8b003d,
+    0 8px 0 #d82779,
+    0 15px 0 #7a003a;
+}
+
+#dots{
   position:absolute;
+  z-index:22;
+  display:none;
+  left:50%;
+  top:61%;
+  transform:translate(-50%,-50%);
+  font-size:90px;
+  font-weight:1000;
+  color:#fff7fb;
+  -webkit-text-stroke:4px #ff4b9d;
+  text-shadow:
+    0 5px 0 #d82779,
+    0 10px 0 #970049;
+}
+
+/* =========================
+   START
+========================= */
+
+#start{
+  position:absolute;
+  z-index:100;
+  left:50%;
+  bottom:max(7%,env(safe-area-inset-bottom));
+  transform:translateX(-50%);
+  width:min(72vw,330px);
+  padding:17px 20px;
+
+  border:2px solid rgba(255,255,255,.9);
+  border-radius:999px;
+
+  background:linear-gradient(180deg,#ff73b9,#d00064);
+  color:#fff;
+
+  font-size:21px;
+  font-weight:1000;
+  letter-spacing:.12em;
+
+  box-shadow:
+    0 5px 0 #79003a,
+    0 0 25px rgba(255,40,140,.7);
+}
+
+#start:active{
+  transform:translateX(-50%) translateY(4px);
+}
+
+#info{
+  position:absolute;
+  z-index:100;
+  left:0;
+  right:0;
+  bottom:calc(max(7%,env(safe-area-inset-bottom)) + 75px);
+  text-align:center;
+  font-size:11px;
+  font-weight:800;
+  line-height:1.6;
+  text-shadow:0 2px 5px #000;
+}
+
+/* =========================
+   COMMON EFFECTS
+========================= */
+
+#black{
+  position:fixed;
   inset:0;
-  z-index:110;
+  z-index:150;
+  display:none;
+  background:#000;
+}
+
+#noise{
+  position:fixed;
+  inset:0;
+  z-index:125;
+  display:none;
+  pointer-events:none;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,.13) 0px,
+      rgba(255,255,255,.13) 1px,
+      rgba(0,0,0,.2) 2px,
+      rgba(0,0,0,.2) 4px
+    );
+  mix-blend-mode:screen;
+}
+
+#noise.go{
+  display:block;
+  animation:noiseMove .07s steps(2) infinite;
+}
+
+@keyframes noiseMove{
+  0%{transform:translate(0,0)}
+  25%{transform:translate(5px,-4px)}
+  50%{transform:translate(-5px,3px)}
+  75%{transform:translate(3px,5px)}
+  100%{transform:translate(-3px,-5px)}
+}
+
+#lightning{
+  position:fixed;
+  inset:0;
+  z-index:130;
+  display:none;
+  pointer-events:none;
+}
+
+#lightning.go{
+  display:block;
+}
+
+.bolt{
+  position:absolute;
+  left:48%;
+  top:-10%;
+  width:10px;
+  height:125%;
+  background:#fff;
+  transform:rotate(17deg);
+  box-shadow:
+    0 0 10px #fff,
+    0 0 30px #ff4fa8,
+    0 0 70px #ff0080;
+  clip-path:polygon(
+    50% 0,100% 0,65% 38%,100% 38%,
+    38% 100%,50% 53%,0 53%
+  );
+}
+
+#logoGlow{
+  position:fixed;
+  inset:0;
+  z-index:15;
+  pointer-events:none;
+  opacity:0;
+  background:
+    radial-gradient(
+      circle at 50% 27%,
+      rgba(255,255,255,.95) 0%,
+      rgba(255,50,155,.6) 8%,
+      rgba(255,0,100,.18) 23%,
+      transparent 43%
+    );
+}
+
+#logoGlow.go{
+  animation:logoGlow .8s ease-out;
+}
+
+@keyframes logoGlow{
+  0%{opacity:0}
+  30%{opacity:1}
+  100%{opacity:0}
+}
+
+#question{
+  position:fixed;
+  z-index:140;
+  display:none;
+  left:50%;
+  top:58%;
+  transform:translate(-50%,-50%);
+  font-size:110px;
+  font-weight:1000;
+  color:#fff;
+  -webkit-text-stroke:5px #ff4b9d;
+  text-shadow:0 0 25px #ff1493;
+}
+
+/* =========================
+   STARS
+========================= */
+
+.star{
+  position:fixed;
+  z-index:12;
+  pointer-events:none;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:
+    0 0 8px #fff,
+    0 0 18px #fff;
+}
+
+.star::after{
+  content:"";
+  position:absolute;
+  right:5px;
+  top:5px;
+  width:220px;
+  height:3px;
+  transform-origin:right center;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.1),
+    #fff
+  );
+}
+
+.star.go{
+  animation:shoot .78s linear forwards;
+}
+
+@keyframes shoot{
+  from{
+    transform:translate(0,0) rotate(-28deg);
+    opacity:1;
+  }
+  to{
+    transform:translate(-65vw,55vh) rotate(-28deg);
+    opacity:0;
+  }
+}
+
+/* =========================
+   SLASH / HIT
+========================= */
+
+#slash{
+  position:fixed;
+  inset:0;
+  z-index:210;
+  display:none;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+#slash.go{
+  display:block;
+}
+
+.slashLine{
+  position:absolute;
+  left:-30%;
+  top:50%;
+  width:160%;
+  height:28px;
+
+  background:#fff;
+
+  box-shadow:
+    0 0 8px #fff,
+    0 0 22px #fff,
+    0 0 45px #ff58ad,
+    0 0 90px #ff007b;
+
+  transform:rotate(-18deg) scaleX(0);
+}
+
+#slash.go .slashLine{
+  animation:slashGo .24s ease-out forwards;
+}
+
+@keyframes slashGo{
+  to{
+    transform:rotate(-18deg) scaleX(1);
+  }
+}
+
+#flash{
+  position:fixed;
+  inset:0;
+  z-index:260;
+  pointer-events:none;
+  background:#fff;
+  opacity:0;
+}
+
+#flash.go{
+  animation:whiteFlash .55s ease-out;
+}
+
+@keyframes whiteFlash{
+  0%{opacity:0}
+  12%{opacity:1}
+  35%{opacity:.25}
+  48%{opacity:1}
+  100%{opacity:0}
+}
+
+body.hitShake{
+  animation:hitShake .08s linear 8;
+}
+
+@keyframes hitShake{
+  0%{transform:translate(0,0)}
+  25%{transform:translate(-9px,5px)}
+  50%{transform:translate(8px,-5px)}
+  75%{transform:translate(-6px,-4px)}
+  100%{transform:translate(5px,4px)}
+}
+
+#hitDark{
+  position:fixed;
+  inset:0;
+  z-index:180;
+  display:none;
+  background:rgba(0,0,0,.88);
+}
+
+#hitText{
+  position:fixed;
+  z-index:300;
+  display:none;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:180vw;
+  text-align:center;
+
+  font-size:min(43vw,220px);
+  line-height:1;
+  font-weight:1000;
+
+  color:#fff4a6;
+  -webkit-text-stroke:5px #ff245f;
+
+  text-shadow:
+    0 8px 0 #b0003c,
+    0 15px 0 #60001f,
+    0 0 20px #fff,
+    0 0 50px #ffca00,
+    0 0 100px #ff004c;
+}
+
+#hitText.go{
+  display:block;
+  animation:hitExplosion .9s cubic-bezier(.1,1.4,.15,1);
+}
+
+@keyframes hitExplosion{
+  0%{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(4.2);
+    filter:blur(12px);
+  }
+  25%{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(.72);
+    filter:blur(0);
+  }
+  45%{transform:translate(-50%,-50%) scale(1.22)}
+  62%{transform:translate(-50%,-50%) scale(.94)}
+  78%{transform:translate(-50%,-50%) scale(1.08)}
+  100%{transform:translate(-50%,-50%) scale(1)}
+}
+
+/* =========================
+   TREASURE
+========================= */
+
+#treasure{
+  position:fixed;
+  inset:0;
+  z-index:350;
   display:none;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  background:rgba(18,0,8,.84);
-  backdrop-filter:blur(3px);
-  color:#fff;
-  padding:20px;
-}
-#treasureTitle{
-  text-align:center;
-  font-size:24px;
-  line-height:1.55;
-  font-weight:900;
-  text-shadow:0 2px 10px #000;
-  margin-bottom:30px;
-}
-#chests{
-  display:flex;
-  width:100%;
-  max-width:520px;
-  justify-content:space-around;
-  align-items:center;
-  gap:8px;
-}
-.chest{
-  width:30%;
-  height:150px;
-  border:0;
-  padding:0;
-  background:transparent;
-  position:relative;
-  overflow:visible;
-  transition:opacity .35s ease,filter .35s ease;
+
+  background:
+    radial-gradient(circle at 50% 40%,#5e0a37,#1c0010 55%,#050003);
 }
 
-/* 箱本体 */
+#treasure.show{
+  display:flex;
+}
+
+#treasureTitle{
+  position:absolute;
+  top:max(8%,env(safe-area-inset-top));
+  width:100%;
+  text-align:center;
+  font-size:27px;
+  font-weight:1000;
+  text-shadow:0 3px 8px #000;
+}
+
+#treasureSub{
+  position:absolute;
+  top:15%;
+  width:100%;
+  text-align:center;
+  font-size:13px;
+  font-weight:800;
+  opacity:.8;
+}
+
+#chests{
+  width:min(96vw,650px);
+  display:flex;
+  justify-content:center;
+  gap:5px;
+  margin-top:10px;
+}
+
+.chest{
+  appearance:none;
+  border:0;
+  background:none;
+  color:#fff;
+  width:32%;
+  padding:0;
+  position:relative;
+  transition:
+    transform .2s,
+    opacity .3s,
+    filter .3s;
+}
+
+.chestWrap{
+  position:relative;
+  width:100%;
+  height:145px;
+}
+
 .chestBody{
   position:absolute;
-  left:4%;
-  bottom:5px;
-  width:92%;
-  height:74px;
-  border:4px solid #ffe8f3;
-  border-radius:8px 8px 18px 18px;
-  background:linear-gradient(
-    180deg,
-    #ff88bd 0%,
-    #df347f 45%,
-    #a90b58 100%
-  );
-  box-shadow:
-    inset 0 8px 8px rgba(255,255,255,.25),
-    inset 0 -10px 12px rgba(80,0,35,.28),
-    0 8px 0 #6b0035,
-    0 13px 17px rgba(0,0,0,.5);
   z-index:5;
-}
-.chestInside{
-  position:absolute;
   left:8%;
-  bottom:62px;
+  bottom:8px;
   width:84%;
-  height:31px;
-  border-radius:50%;
-  background:radial-gradient(
-    ellipse,
-    #6d123f 0%,
-    #340018 65%,
-    #170009 100%
-  );
-  border:3px solid #ffb9d8;
-  opacity:0;
-  z-index:4;
-  transition:opacity .15s;
-}
-.chest.open .chestInside{opacity:1}
-
-.chestBand{
-  position:absolute;
-  left:41%;
-  top:-4px;
-  width:18%;
-  height:calc(100% + 8px);
-  background:linear-gradient(90deg,#c77800,#fff0a0,#ffbd24,#a75c00);
-  border-left:2px solid #8b5200;
-  border-right:2px solid #8b5200;
-}
-
-/* フタ＋鍵 */
-.lidGroup{
-  position:absolute;
-  left:3%;
-  bottom:65px;
-  width:94%;
-  height:58px;
-  z-index:8;
-  transform-origin:50% 100%;
-  transform:translateY(0) rotate(0deg);
-  transition:
-    transform .48s cubic-bezier(.15,.8,.22,1.12),
-    filter .2s;
-  pointer-events:none;
-}
-.chestLid{
-  position:absolute;
-  inset:0;
-  border:4px solid #fff0f7;
-  border-radius:32px 32px 9px 9px;
-  background:linear-gradient(
-    180deg,
-    #ffc2dd 0%,
-    #f45c9e 43%,
-    #c81769 100%
-  );
+  height:72px;
+  border:4px solid #ffd0e5;
+  border-radius:8px 8px 18px 18px;
+  background:
+    linear-gradient(
+      90deg,
+      #b9005c,
+      #ff4e9d 22%,
+      #bd005e 52%,
+      #ff63ad 80%,
+      #a60051
+    );
   box-shadow:
-    inset 0 8px 8px rgba(255,255,255,.35),
-    0 5px 0 #8e0045,
-    0 8px 12px rgba(0,0,0,.4);
+    inset 0 0 16px rgba(80,0,35,.65),
+    0 10px 18px rgba(0,0,0,.65);
 }
-.chestLid::after{
-  content:"";
+
+/* 2-state lid */
+.closedLid{
   position:absolute;
-  left:40%;
-  top:-4px;
-  width:20%;
-  height:calc(100% + 8px);
-  background:linear-gradient(90deg,#c77800,#fff0a0,#ffbd24,#a75c00);
-  border-left:2px solid #8b5200;
-  border-right:2px solid #8b5200;
+  z-index:9;
+  left:5%;
+  bottom:73px;
+  width:90%;
+  height:55px;
+  border:4px solid #ffd0e5;
+  border-radius:50% 50% 7px 7px;
+  background:
+    linear-gradient(
+      90deg,
+      #ad0056,
+      #ff55a3 25%,
+      #bc005c 55%,
+      #ff6ab3 82%,
+      #a30050
+    );
+  transition:opacity .2s,transform .25s;
 }
-.chestLock{
+
+.openLid{
   position:absolute;
-  z-index:4;
-  left:50%;
-  bottom:-12px;
-  transform:translateX(-50%);
-  width:27%;
+  z-index:3;
+  left:8%;
+  bottom:70px;
+  width:84%;
+  height:43px;
+  border:4px solid #ffd0e5;
+  border-radius:50% 50% 8px 8px;
+  background:linear-gradient(#ff62ad,#a90053);
+  transform:translateY(12px) scaleY(.35);
+  opacity:0;
+  transition:.35s;
+}
+
+.hinge{
+  position:absolute;
+  z-index:10;
+  left:17%;
+  bottom:69px;
+  width:66%;
+  height:7px;
+  border-radius:10px;
+  background:#ffd0e5;
+}
+
+.lock{
+  position:absolute;
+  z-index:12;
+  left:41%;
+  bottom:60px;
+  width:18%;
   height:28px;
   border-radius:6px;
-  background:linear-gradient(
-    145deg,
-    #fff5ae,
-    #ffca35 48%,
-    #b86c00
-  );
-  border:3px solid #8b5200;
-  box-shadow:
-    inset 0 3px 4px rgba(255,255,255,.65),
-    0 3px 5px rgba(0,0,0,.45);
-}
-.chest.unlocking .lidGroup{
-  filter:brightness(1.3)
-    drop-shadow(0 0 8px rgba(255,225,100,.8));
-}
-.chest.unlocking .chestLock{
-  animation:lockPulse .5s ease-in-out infinite alternate;
-}
-@keyframes lockPulse{
-  from{filter:brightness(1)}
-  to{
-    filter:
-      brightness(2.1)
-      drop-shadow(0 0 8px #fff)
-      drop-shadow(0 0 15px #ffd850);
-  }
-}
-.chest.open .lidGroup{
-  transform:translateY(-42px) rotate(-13deg);
-  filter:brightness(1.12);
-}
-.chest.open .chestLid{
-  border-radius:28px 28px 12px 12px;
+  border:2px solid #fff;
+  background:linear-gradient(#fff2a0,#ffbd00);
+  box-shadow:0 0 7px rgba(255,255,255,.6);
 }
 
-/* 箱の光 */
-.chestGlow{
-  position:absolute;
-  z-index:7;
-  left:50%;
-  bottom:38px;
-  width:105%;
-  height:105px;
-  transform:translateX(-50%) scale(.15);
-  transform-origin:50% 100%;
-  border-radius:50%;
+.chest.open .closedLid{
   opacity:0;
-  pointer-events:none;
-  background:radial-gradient(
-    ellipse at center bottom,
-    rgba(255,255,255,1) 0%,
-    rgba(255,248,183,.98) 17%,
-    rgba(255,135,193,.72) 44%,
-    rgba(255,0,115,0) 74%
-  );
-  filter:blur(6px);
-}
-.chest.open .chestGlow{
-  animation:chestGlowBurst .9s ease-out forwards;
-}
-@keyframes chestGlowBurst{
-  0%{
-    opacity:0;
-    transform:translateX(-50%) scale(.15);
-  }
-  22%{
-    opacity:1;
-    transform:translateX(-50%) scale(1.35);
-  }
-  55%{
-    opacity:1;
-    transform:translateX(-50%) scale(1.1);
-  }
-  100%{
-    opacity:.55;
-    transform:translateX(-50%) scale(1);
-  }
+  transform:scale(.9);
 }
 
-/* 箱シェイク */
-.chest.shake{animation:chestShake .62s linear}
+.chest.open .openLid{
+  opacity:1;
+  transform:translateY(0) scaleY(1);
+}
+
+.chest.open .lock{
+  opacity:0;
+}
+
+.chestLight{
+  position:absolute;
+  z-index:4;
+  left:27%;
+  bottom:55px;
+  width:46%;
+  height:20px;
+  opacity:0;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:
+    0 0 20px #fff,
+    0 0 45px #ff77bb,
+    0 0 90px #ff0080;
+}
+
+.chest.open .chestLight{
+  animation:chestBurst .8s ease-out;
+}
+
+@keyframes chestBurst{
+  0%{opacity:1;transform:scale(.4)}
+  100%{opacity:0;transform:scale(5)}
+}
+
+.chest.shaking .chestWrap{
+  animation:chestShake .09s linear infinite;
+}
+
 @keyframes chestShake{
-  0%,100%{transform:translateX(0)}
-  12%{transform:translateX(-8px)}
-  24%{transform:translateX(8px)}
-  36%{transform:translateX(-7px)}
-  48%{transform:translateX(7px)}
-  60%{transform:translateX(-5px)}
-  72%{transform:translateX(5px)}
-  84%{transform:translateX(-2px)}
+  0%{transform:translateX(-4px) rotate(-1deg)}
+  50%{transform:translateX(4px) rotate(1deg)}
+  100%{transform:translateX(-4px) rotate(-1deg)}
 }
 
-/* 選んだ箱 */
+.rankLabel{
+  min-height:38px;
+  margin-top:3px;
+  font-size:25px;
+  font-weight:1000;
+  text-shadow:0 2px 5px #000;
+}
+
+.rank1{color:#ffe04f}
+.rank2{color:#eef5ff}
+.rank3{color:#ff9d56}
+
 .chest.selectedChest{
   z-index:25;
   filter:
@@ -603,6 +711,7 @@ button{font:inherit}
     drop-shadow(0 0 17px #ff4fa1)
     drop-shadow(0 0 30px rgba(255,0,118,.9));
 }
+
 .chest.selectedChest::before{
   content:"あなたが選んだ箱";
   position:absolute;
@@ -623,36 +732,16 @@ button{font:inherit}
     0 0 15px rgba(255,73,160,.8);
   text-shadow:0 1px 3px rgba(0,0,0,.5);
 }
+
 .chest.otherChest{
   opacity:.48;
   filter:brightness(.72) saturate(.7);
 }
 
-/* 等級 */
-.rankLabel{
-  position:absolute;
-  z-index:20;
-  left:50%;
-  bottom:-33px;
-  transform:translateX(-50%);
-  white-space:nowrap;
-  font-size:25px;
-  font-weight:1000;
-  text-shadow:0 2px 5px #000;
-  display:none;
-}
 .selectedChest .rankLabel{
   font-size:31px;
-  text-shadow:
-    0 2px 5px #000,
-    0 0 9px currentColor,
-    0 0 18px currentColor;
 }
-.rank1{color:#ffd84e}
-.rank2{color:#e9eef7}
-.rank3{color:#e99a4c}
 
-/* RESULT */
 #prizeResult{
   margin-top:55px;
   min-height:96px;
@@ -663,6 +752,7 @@ button{font:inherit}
   justify-content:center;
   align-items:center;
 }
+
 #resultSmall{
   display:none;
   margin-bottom:2px;
@@ -672,6 +762,7 @@ button{font:inherit}
   letter-spacing:.08em;
   text-shadow:0 2px 6px #000;
 }
+
 #resultBig{
   display:none;
   font-size:46px;
@@ -684,51 +775,34 @@ button{font:inherit}
     0 7px 10px rgba(0,0,0,.7),
     0 0 14px currentColor;
 }
+
 .resultPop{
-  animation:resultPop .65s cubic-bezier(.12,.9,.18,1.15);
+  animation:resultPop .6s cubic-bezier(.1,1.5,.2,1);
 }
+
 @keyframes resultPop{
-  0%{
-    opacity:0;
-    transform:scale(2.2);
-    filter:brightness(3);
-  }
-  35%{
-    opacity:1;
-    transform:scale(.88);
-  }
-  60%{transform:scale(1.12)}
-  78%{transform:scale(.97)}
-  100%{
-    opacity:1;
-    transform:scale(1);
-    filter:brightness(1);
-  }
+  from{transform:scale(.2);opacity:0}
+  70%{transform:scale(1.18);opacity:1}
+  to{transform:scale(1)}
 }
 
-#nextButton{
-  margin-top:18px;
-  padding:14px 50px;
-  border:0;
-  border-radius:999px;
-  background:#fff;
-  color:#b00055;
-  font-size:20px;
-  font-weight:900;
+#next{
   display:none;
-  box-shadow:0 6px 16px rgba(0,0,0,.3);
+  margin-top:18px;
+  padding:14px 45px;
+  border:2px solid #fff;
+  border-radius:999px;
+  background:linear-gradient(#ff70b4,#c90060);
+  color:#fff;
+  font-size:18px;
+  font-weight:1000;
 }
 
-@media(max-height:700px){
-  #treasureTitle{
-    font-size:21px;
-    margin-bottom:20px;
-  }
-  #prizeResult{
-    margin-top:42px;
-  }
-  #resultBig{
-    font-size:40px;
+/* accessibility */
+@media (prefers-reduced-motion:reduce){
+  *{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
   }
 }
 </style>
@@ -736,186 +810,119 @@ button{font:inherit}
 
 <body>
 
-<div id="game">
+<div id="stage">
+  <div id="number">3</div>
+  <div id="dots">…</div>
 
-  <div id="starLayer"></div>
-
-  <div id="number"></div>
-  <div id="message"></div>
-
-  <div id="blackout"></div>
-  <div id="hitDark"></div>
-  <div id="slashLayer"></div>
-  <div id="flash"></div>
-  <div id="hitText">当たり</div>
-
-  <div id="startScreen">
-    <button id="startButton">START</button>
-    <div id="probability">
-      完全抽選 1/30<br>
-      毎回独立抽選
-    </div>
+  <div id="info">
+    完全抽選 1/30<br>
+    毎回独立抽選
   </div>
 
-  <div id="treasure">
+  <button id="start">START</button>
+</div>
 
-    <div id="treasureTitle">
-      ここからが本番。<br>
-      運命の宝箱を選べ！<br>
-      この一箱が、結果を決める。
-    </div>
+<div id="noise"></div>
+<div id="lightning"><div class="bolt"></div></div>
+<div id="logoGlow"></div>
+<div id="question">？</div>
 
-    <div id="chests">
+<div id="black"></div>
+<div id="hitDark"></div>
 
-      <button class="chest" data-index="0">
-        <div class="chestInside"></div>
-        <div class="chestGlow"></div>
+<div id="slash">
+  <div class="slashLine"></div>
+</div>
 
-        <div class="chestBody">
-          <div class="chestBand"></div>
-        </div>
+<div id="flash"></div>
+<div id="hitText">当たり</div>
 
-        <div class="lidGroup">
-          <div class="chestLid"></div>
-          <div class="chestLock"></div>
-        </div>
+<div id="treasure">
+  <div id="treasureTitle">宝箱を1つ選べ！</div>
+  <div id="treasureSub">好きな宝箱をタップ</div>
 
-        <div class="rankLabel"></div>
-      </button>
+  <div id="chests"></div>
 
-      <button class="chest" data-index="1">
-        <div class="chestInside"></div>
-        <div class="chestGlow"></div>
-
-        <div class="chestBody">
-          <div class="chestBand"></div>
-        </div>
-
-        <div class="lidGroup">
-          <div class="chestLid"></div>
-          <div class="chestLock"></div>
-        </div>
-
-        <div class="rankLabel"></div>
-      </button>
-
-      <button class="chest" data-index="2">
-        <div class="chestInside"></div>
-        <div class="chestGlow"></div>
-
-        <div class="chestBody">
-          <div class="chestBand"></div>
-        </div>
-
-        <div class="lidGroup">
-          <div class="chestLid"></div>
-          <div class="chestLock"></div>
-        </div>
-
-        <div class="rankLabel"></div>
-      </button>
-
-    </div>
-
-    <div id="prizeResult">
-      <div id="resultSmall">あなたの結果</div>
-      <div id="resultBig"></div>
-    </div>
-
-    <button id="nextButton">NEXT</button>
-
+  <div id="prizeResult">
+    <div id="resultSmall">あなたの結果</div>
+    <div id="resultBig"></div>
   </div>
+
+  <button id="next">NEXT</button>
 </div>
 
 <script>
-const game=document.getElementById("game");
-const startScreen=document.getElementById("startScreen");
-const startButton=document.getElementById("startButton");
-const number=document.getElementById("number");
-const message=document.getElementById("message");
-const blackout=document.getElementById("blackout");
-const hitDark=document.getElementById("hitDark");
-const flash=document.getElementById("flash");
-const slashLayer=document.getElementById("slashLayer");
-const hitText=document.getElementById("hitText");
-const starLayer=document.getElementById("starLayer");
-
-const treasure=document.getElementById("treasure");
-const treasureTitle=document.getElementById("treasureTitle");
-const nextButton=document.getElementById("nextButton");
-const resultSmall=document.getElementById("resultSmall");
-const resultBig=document.getElementById("resultBig");
-
-const chests=[...document.querySelectorAll(".chest")];
-
+const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 
-let playing=false;
-let playToken=0;
-let starTimers=[];
+let busy=false;
+let chestBusy=false;
+let selectedRank=null;
+let selectedIndex=-1;
 
-/* AUDIO */
 let audioCtx=null;
 let tensionBuffer=null;
 let hitBuffer=null;
 let tensionSource=null;
-let tensionGain=null;
 let hitSource=null;
-let audioPreparing=null;
+
+let playToken=0;
+let starTimers=[];
+
+/* ========================================
+   AUDIO
+   MP3再生のみ。合成音なし
+======================================== */
 
 function ensureAudioContext(){
   if(!audioCtx){
-    const AC=window.AudioContext||window.webkitAudioContext;
-    if(AC)audioCtx=new AC();
+    audioCtx=new (window.AudioContext||window.webkitAudioContext)();
   }
+  return audioCtx;
+}
+
+async function loadBuffer(url){
+  const res=await fetch(url,{cache:"force-cache"});
+  if(!res.ok) throw new Error(url+" load failed");
+  const arr=await res.arrayBuffer();
+  return await audioCtx.decodeAudioData(arr);
 }
 
 async function prepareAudio(){
   ensureAudioContext();
 
-  if(!audioCtx)return;
-  if(tensionBuffer&&hitBuffer)return;
-
-  if(audioPreparing){
-    await audioPreparing;
-    return;
+  if(!tensionBuffer){
+    try{
+      tensionBuffer=await loadBuffer("./Tension.mp3");
+    }catch(e){
+      console.log("Tension load error",e);
+    }
   }
 
-  audioPreparing=(async()=>{
+  if(!hitBuffer){
     try{
-      const [a,b]=await Promise.all([
-        fetch("./Tension.mp3"),
-        fetch("./hit_music_final.mp3")
-      ]);
-
-      const [aa,bb]=await Promise.all([
-        a.arrayBuffer(),
-        b.arrayBuffer()
-      ]);
-
-      [tensionBuffer,hitBuffer]=await Promise.all([
-        audioCtx.decodeAudioData(aa),
-        audioCtx.decodeAudioData(bb)
-      ]);
+      hitBuffer=await loadBuffer("./hit_music_final.mp3");
     }catch(e){
-      console.log("audio load error",e);
+      console.log("Hit music load error",e);
     }
-  })();
-
-  await audioPreparing;
+  }
 }
 
 async function unlockAudio(){
   ensureAudioContext();
-  if(!audioCtx)return;
 
   const resumePromise=audioCtx.resume();
 
-  try{
-    await resumePromise;
-  }catch(e){}
+  await Promise.all([
+    resumePromise,
+    prepareAudio()
+  ]);
+}
 
-  await prepareAudio();
+function stopTension(){
+  try{tensionSource?.stop()}catch(e){}
+  tensionSource=null;
 }
 
 function startTension(){
@@ -923,38 +930,24 @@ function startTension(){
 
   stopTension();
 
-  tensionSource=audioCtx.createBufferSource();
-  tensionGain=audioCtx.createGain();
+  const source=audioCtx.createBufferSource();
+  const gain=audioCtx.createGain();
 
-  tensionSource.buffer=tensionBuffer;
-  tensionSource.loop=true;
-  tensionGain.gain.value=.72;
+  source.buffer=tensionBuffer;
+  source.loop=true;
+  gain.gain.value=.72;
 
-  tensionSource.connect(tensionGain);
-  tensionGain.connect(audioCtx.destination);
+  source.connect(gain);
+  gain.connect(audioCtx.destination);
 
-  tensionSource.start(0);
-}
+  source.start(0);
 
-function stopTension(){
-  if(tensionSource){
-    try{tensionSource.stop()}catch(e){}
-    try{tensionSource.disconnect()}catch(e){}
-    tensionSource=null;
-  }
-
-  if(tensionGain){
-    try{tensionGain.disconnect()}catch(e){}
-    tensionGain=null;
-  }
+  tensionSource=source;
 }
 
 function stopHitMusic(){
-  if(hitSource){
-    try{hitSource.stop()}catch(e){}
-    try{hitSource.disconnect()}catch(e){}
-    hitSource=null;
-  }
+  try{hitSource?.stop()}catch(e){}
+  hitSource=null;
 }
 
 function playHitMusic(){
@@ -962,501 +955,643 @@ function playHitMusic(){
 
   stopHitMusic();
 
-  hitSource=audioCtx.createBufferSource();
+  const source=audioCtx.createBufferSource();
   const gain=audioCtx.createGain();
 
-  hitSource.buffer=hitBuffer;
+  source.buffer=hitBuffer;
   gain.gain.value=1;
 
-  hitSource.connect(gain);
+  source.connect(gain);
   gain.connect(audioCtx.destination);
 
-  hitSource.start(0);
+  source.start(0);
+  hitSource=source;
 }
 
-/* NUMBER */
+/* ========================================
+   BASIC
+======================================== */
+
+function clearNumberClasses(){
+  $("#number").className="";
+  $("#number").style.opacity="";
+  $("#number").style.filter="";
+}
+
 function showNumber(n){
-  message.style.display="none";
+  const el=$("#number");
 
-  number.classList.remove(
-    "numberPop",
-    "goldNumber",
-    "redNumber"
-  );
+  $("#dots").style.display="none";
 
-  number.textContent=n;
-  number.style.display="block";
+  clearNumberClasses();
 
-  void number.offsetWidth;
-  number.classList.add("numberPop");
+  el.style.display="block";
+  el.textContent=n;
+
+  void el.offsetWidth;
+  el.classList.add("show");
 }
 
 function hideNumber(){
-  number.style.display="none";
+  $("#number").style.display="none";
 }
 
-async function showDots(duration=1200){
+function showDots(){
   hideNumber();
-
-  message.textContent="…";
-  message.style.fontSize="90px";
-  message.style.display="block";
-
-  await sleep(duration);
-
-  message.style.display="none";
+  $("#dots").style.display="block";
 }
 
-async function normalCount(){
-  showNumber("3");
-  await sleep(1800);
-
-  showNumber("2");
-  await sleep(1900);
-
-  showNumber("1");
-  await sleep(2100);
+function hideDots(){
+  $("#dots").style.display="none";
 }
 
-/* STARS */
-function clearStarTimers(){
+function flash(){
+  const f=$("#flash");
+  f.className="";
+  void f.offsetWidth;
+  f.className="go";
+}
+
+async function blackout(ms=1000){
+  $("#black").style.display="block";
+  await sleep(ms);
+  $("#black").style.display="none";
+}
+
+/* ========================================
+   STARS
+======================================== */
+
+function clearStars(){
   starTimers.forEach(clearTimeout);
   starTimers=[];
-  starLayer.innerHTML="";
+
+  $$(".star").forEach(x=>x.remove());
 }
 
-function makeStar(){
-  const star=document.createElement("div");
-  star.className="shootingStar";
+function shootStar(){
+  const s=document.createElement("div");
+  s.className="star";
 
-  const startX=5+Math.random()*65;
-  const startY=7+Math.random()*38;
-  const angle=14+Math.random()*24;
-  const travelX=160+Math.random()*180;
-  const travelY=55+Math.random()*125;
-  const tail=135+Math.random()*165;
-  const duration=.58+Math.random()*.4;
-  const size=10+Math.random()*7;
+  s.style.left=(45+Math.random()*55)+"vw";
+  s.style.top=(5+Math.random()*35)+"vh";
 
-  star.style.left=startX+"vw";
-  star.style.top=startY+"vh";
-  star.style.width=size+"px";
-  star.style.height=size+"px";
+  const scale=.75+Math.random()*.55;
+  s.style.transform=`scale(${scale})`;
 
-  star.style.setProperty("--angle",angle+"deg");
-  star.style.setProperty("--travelX",travelX+"px");
-  star.style.setProperty("--travelY",travelY+"px");
-  star.style.setProperty("--tail",tail+"px");
-  star.style.setProperty("--duration",duration+"s");
+  document.body.appendChild(s);
 
-  starLayer.appendChild(star);
+  requestAnimationFrame(()=>{
+    s.classList.add("go");
+  });
 
-  setTimeout(()=>star.remove(),1700);
+  setTimeout(()=>s.remove(),1200);
 }
 
-function meteorBurst(count){
-  const token=playToken;
-
+function starBurst(count){
   for(let i=0;i<count;i++){
-    const delay=
-      i*(120+Math.random()*230)+
-      Math.random()*160;
-
-    const timer=setTimeout(()=>{
-      if(!playing||token!==playToken)return;
-      makeStar();
-    },delay);
-
-    starTimers.push(timer);
+    const t=setTimeout(shootStar,i*(60+Math.random()*100));
+    starTimers.push(t);
   }
 }
 
-function randomMeteorCount(){
+function scheduleStars(token){
+  /* 約73%は星なし */
+  if(Math.random()>=.27)return;
+
   const r=Math.random();
 
-  if(r<.75)return 1+Math.floor(Math.random()*3);
-  if(r<.95)return 4+Math.floor(Math.random()*3);
+  let count;
 
-  return 7+Math.floor(Math.random()*4);
+  if(r<.75){
+    count=1+Math.floor(Math.random()*3);
+  }else if(r<.95){
+    count=4+Math.floor(Math.random()*3);
+  }else{
+    count=7+Math.floor(Math.random()*4);
+  }
+
+  const delay=600+Math.random()*3000;
+
+  starTimers.push(setTimeout(()=>{
+    if(token!==playToken)return;
+
+    starBurst(count);
+
+    if(Math.random()<.15){
+      starTimers.push(setTimeout(()=>{
+        if(token===playToken){
+          starBurst(1+Math.floor(Math.random()*4));
+        }
+      },700+Math.random()*1000));
+    }
+  },delay));
 }
 
-function scheduleStars(){
-  const token=playToken;
+/* ========================================
+   NEW COMMON CHANCE EFFECTS
+   当たり/ハズレ両方に使用
+======================================== */
 
-  /* 約73%は星なし */
-  if(Math.random()>.27)return;
+/* 1 数字巨大化 */
+async function fxBigNumber(){
+  const n=$("#number");
+  n.classList.add("bigChance");
+  await sleep(750);
+  n.classList.remove("bigChance");
+}
 
-  let timer=setTimeout(()=>{
-    if(!playing||token!==playToken)return;
-    meteorBurst(randomMeteorCount());
-  },550+Math.random()*4800);
+/* 2 ヒビ割れ風 */
+async function fxCrack(){
+  const n=$("#number");
+  n.classList.add("cracked");
+  await sleep(850);
+  n.classList.remove("cracked");
+}
 
-  starTimers.push(timer);
-
-  if(Math.random()<.15){
-    timer=setTimeout(()=>{
-      if(!playing||token!==playToken)return;
-      meteorBurst(randomMeteorCount());
-    },3300+Math.random()*4300);
-
-    starTimers.push(timer);
+/* 3 ピンク雷 */
+async function fxLightning(times=1){
+  for(let i=0;i<times;i++){
+    $("#lightning").className="go";
+    flash();
+    await sleep(120);
+    $("#lightning").className="";
+    await sleep(170);
   }
 }
 
-/* EFFECT */
-async function doBlackout(duration=250){
-  blackout.style.opacity="1";
-  await sleep(duration);
-  blackout.style.opacity="0";
+/* 4 ノイズ */
+async function fxNoise(ms=650){
+  $("#noise").className="go";
+  await sleep(ms);
+  $("#noise").className="";
 }
 
-function doFlash(){
-  flash.classList.remove("flashExplosion");
-  void flash.offsetWidth;
-  flash.classList.add("flashExplosion");
+/* 5 白→ピンク→赤→金 */
+async function fxColorStep(){
+  const n=$("#number");
+
+  n.classList.add("pink");
+  await sleep(430);
+
+  n.classList.remove("pink");
+  n.classList.add("red");
+  await sleep(430);
+
+  n.classList.remove("red");
+  n.classList.add("gold");
+  await sleep(700);
+
+  n.classList.remove("gold");
 }
 
-function createSlash(doubleSlash=false){
-  slashLayer.innerHTML="";
-
-  const s1=document.createElement("div");
-  s1.className="slash";
-  slashLayer.appendChild(s1);
-
-  if(doubleSlash){
-    const s2=document.createElement("div");
-    s2.className="slash second";
-    slashLayer.appendChild(s2);
-  }
-
-  setTimeout(()=>{
-    slashLayer.innerHTML="";
-  },1000);
+/* 6 超ロング1 */
+async function fxSuperLongOne(){
+  showNumber(1);
+  await sleep(5600+Math.random()*1400);
 }
 
-function doHitShake(){
-  game.classList.remove("hitShake");
-  void game.offsetWidth;
-  game.classList.add("hitShake");
-
-  setTimeout(()=>{
-    game.classList.remove("hitShake");
-  },520);
+/* 7 ?割り込み */
+async function fxQuestion(){
+  $("#question").style.display="block";
+  await sleep(220);
+  $("#question").style.display="none";
 }
 
-function doHitZoom(){
-  game.classList.remove("hitZoom");
-  void game.offsetWidth;
-  game.classList.add("hitZoom");
-
-  setTimeout(()=>{
-    game.classList.remove("hitZoom");
-  },700);
+/* 8 背景だけ暗くなる */
+async function fxBackgroundDark(){
+  $("#stage").classList.add("bgDark");
+  await sleep(1500);
+  $("#stage").classList.remove("bgDark");
 }
 
-/* HIT */
-async function HIT(options={}){
-  hideNumber();
-  message.style.display="none";
+/* 9 停止→再始動 */
+async function fxStopRestart(){
+  showNumber(3);
+  await sleep(1600);
+
+  showNumber(2);
+  await sleep(3300);
+
+  showNumber(2);
+  await sleep(650);
+
+  showNumber(1);
+  await sleep(1700);
+}
+
+/* 10 1消失＋完全無音 */
+async function fxSilentDisappear(){
+  showNumber(1);
+  await sleep(900);
 
   stopTension();
+  hideNumber();
 
-  await sleep(options.silence ?? 700);
+  await sleep(2600+Math.random()*1400);
+}
 
-  blackout.style.opacity="1";
-  hitDark.style.opacity="1";
+/* 11 偽終了 */
+async function fxFakeFinish(){
+  showNumber(3);
+  await sleep(1500);
 
+  showNumber(2);
+  await sleep(1600);
+
+  showNumber(1);
+  await sleep(1700);
+
+  hideNumber();
+  stopTension();
+
+  await sleep(2300);
+}
+
+/* 12 RPロゴ発光 */
+async function fxLogoGlow(){
+  const g=$("#logoGlow");
+
+  g.className="";
+  void g.offsetWidth;
+  g.className="go";
+
+  await sleep(850);
+  g.className="";
+}
+
+const commonFx=[
+  fxBigNumber,
+  fxCrack,
+  fxLightning,
+  fxNoise,
+  fxColorStep,
+  fxSuperLongOne,
+  fxQuestion,
+  fxBackgroundDark,
+  fxStopRestart,
+  fxSilentDisappear,
+  fxFakeFinish,
+  fxLogoGlow
+];
+
+/* ========================================
+   NORMAL COUNT
+======================================== */
+
+async function normalCount(){
+  showNumber(3);
+  await sleep(1750);
+
+  showNumber(2);
+  await sleep(1900);
+
+  showNumber(1);
+  await sleep(2050);
+}
+
+/* ========================================
+   REAL HIT
+======================================== */
+
+async function realHit(options={}){
+  stopTension();
+
+  /* 無音の間 */
+  await sleep(options.silence??700);
+
+  $("#hitDark").style.display="block";
   await sleep(300);
 
-  blackout.style.opacity="0";
-
+  $("#hitDark").style.display="none";
   await sleep(70);
 
-  createSlash(options.doubleSlash===true);
-
+  /* 斬撃 */
+  $("#slash").className="go";
   await sleep(230);
 
-  doHitShake();
+  if(options.double){
+    $("#slash").className="";
+    await sleep(120);
+    $("#slash").className="go";
+    await sleep(200);
+  }
+
+  document.body.classList.add("hitShake");
 
   await sleep(120);
 
-  doFlash();
+  flash();
 
   await sleep(170);
 
-  hitDark.style.opacity="0";
+  document.body.classList.remove("hitShake");
+  $("#slash").className="";
 
-  hitText.classList.remove(
-    "hitTextImpact",
-    "hitTextPulse"
-  );
+  const hit=$("#hitText");
+  hit.className="";
+  void hit.offsetWidth;
+  hit.className="go";
 
-  hitText.style.opacity="0";
-
-  void hitText.offsetWidth;
-  hitText.classList.add("hitTextImpact");
-
-  doHitZoom();
   playHitMusic();
 
   await sleep(900);
 
-  hitText.classList.remove("hitTextImpact");
-  hitText.style.opacity="1";
-
-  void hitText.offsetWidth;
-  hitText.classList.add("hitTextPulse");
+  /* 追いフラッシュ */
+  flash();
 
   await sleep(1300);
 
-  hitText.classList.remove("hitTextPulse");
-  hitText.style.opacity="0";
+  hit.className="";
 
-  await showTreasure();
+  showTreasure();
 }
 
-/* 32 HIT ROUTES */
-async function normalHitAt(stage){
-  showNumber("3");
+/* ========================================
+   ORIGINAL HIT ROUTES
+======================================== */
 
-  if(stage===3){
-    await sleep(1450);
-    return HIT();
+async function normalHitAt(point){
+  showNumber(3);
+
+  if(point===3){
+    await sleep(1300);
+    return realHit();
   }
 
-  await sleep(1800);
-  showNumber("2");
+  await sleep(1750);
+  showNumber(2);
 
-  if(stage===2){
-    await sleep(1550);
-    return HIT();
+  if(point===2){
+    await sleep(1400);
+    return realHit();
   }
 
   await sleep(1900);
-  showNumber("1");
+  showNumber(1);
 
-  if(stage===1){
-    await sleep(1750);
-    return HIT();
+  if(point===1){
+    await sleep(1550);
+    return realHit();
   }
 
-  await sleep(2100);
+  await sleep(2050);
   hideNumber();
   await sleep(700);
 
-  return HIT();
+  return realHit();
 }
 
 async function normalBlackout(){
   await normalCount();
+
+  stopTension();
   hideNumber();
-  await sleep(500);
-  await doBlackout(850);
-  await sleep(650);
-  return HIT();
+
+  await blackout(1500);
+
+  return realHit();
 }
 
 async function freezeTwo(){
-  showNumber("3");await sleep(1700);
-  showNumber("2");await sleep(3900);
-  return HIT();
+  showNumber(3);
+  await sleep(1850);
+
+  showNumber(2);
+
+  /* 2でフリーズ */
+  await sleep(3900);
+
+  return realHit();
 }
 
 async function reverseCountdown(){
-  showNumber("3");await sleep(1500);
-  showNumber("2");await sleep(1500);
-  showNumber("3");await sleep(1200);
-  showNumber("2");await sleep(1200);
-  showNumber("1");await sleep(1500);
-  return HIT();
+  showNumber(3);await sleep(1700);
+  showNumber(2);await sleep(1700);
+  showNumber(1);await sleep(1600);
+  showNumber(2);await sleep(1450);
+  showNumber(1);await sleep(1500);
+
+  return realHit();
 }
 
 async function zeroPremium(){
   await normalCount();
-  showNumber("0");
-  number.classList.add("goldNumber");
-  await sleep(1700);
-  return HIT({doubleSlash:true});
+
+  showNumber(0);
+  $("#number").classList.add("gold");
+
+  await sleep(900);
+
+  return realHit();
 }
 
 async function numberDisappear(){
-  showNumber("3");await sleep(1700);
-  showNumber("2");await sleep(1700);
+  showNumber(3);await sleep(1700);
+  showNumber(2);await sleep(1700);
+
   hideNumber();
-  await sleep(1700);
-  return HIT();
+  stopTension();
+
+  await sleep(2200);
+
+  return realHit();
 }
 
 async function soundStopPattern(){
-  showNumber("3");await sleep(1600);
-  showNumber("2");await sleep(1700);
+  await normalCount();
+
   stopTension();
-  showNumber("1");await sleep(3000);
-  return HIT();
+
+  await sleep(2200);
+
+  return realHit();
 }
 
 async function longOne(){
-  showNumber("3");await sleep(1700);
-  showNumber("2");await sleep(1800);
-  showNumber("1");await sleep(4300);
-  return HIT();
+  showNumber(3);await sleep(1750);
+  showNumber(2);await sleep(1850);
+  showNumber(1);
+
+  await sleep(3900);
+
+  return realHit();
 }
 
 async function recountSequence(){
   await normalCount();
+
   hideNumber();
-  await sleep(700);
-  showNumber("3");await sleep(800);
-  showNumber("2");await sleep(800);
-  showNumber("1");await sleep(1000);
-  return HIT({doubleSlash:true});
+  await sleep(1000);
+
+  startTension();
+
+  showNumber(3);await sleep(1400);
+  showNumber(2);await sleep(1500);
+  showNumber(1);await sleep(1600);
+
+  return realHit();
 }
 
 async function doubleCountdown(){
-  showNumber("3");await sleep(1000);
-  showNumber("2");await sleep(1000);
-  showNumber("1");await sleep(1100);
-  showNumber("3");await sleep(900);
-  showNumber("2");await sleep(900);
-  showNumber("1");await sleep(1200);
-  return HIT();
+  await normalCount();
+
+  hideNumber();
+  await sleep(1200);
+
+  showNumber(3);await sleep(1400);
+  showNumber(2);await sleep(1500);
+  showNumber(1);await sleep(1600);
+
+  return realHit();
 }
 
 async function puchunDirect(){
-  showNumber("3");await sleep(1600);
-  showNumber("2");await sleep(1700);
-  showNumber("1");await sleep(1600);
+  showNumber(3);await sleep(1600);
+  showNumber(2);await sleep(1700);
+  showNumber(1);await sleep(800);
 
   stopTension();
+  hideNumber();
 
-  blackout.style.opacity="1";
-  await sleep(2100);
-  blackout.style.opacity="0";
+  await blackout(2000+Math.random()*900);
 
-  return HIT({
-    silence:250,
-    doubleSlash:true
-  });
+  return realHit();
 }
 
 async function puchunRecount(){
   await normalCount();
 
   stopTension();
+  hideNumber();
 
-  blackout.style.opacity="1";
-  await sleep(1600);
-  blackout.style.opacity="0";
+  await blackout(1900);
 
-  showNumber("3");await sleep(750);
-  showNumber("2");await sleep(750);
-  showNumber("1");await sleep(1100);
+  await sleep(500);
 
-  return HIT({doubleSlash:true});
+  startTension();
+
+  showNumber(3);await sleep(1300);
+  showNumber(2);await sleep(1400);
+  showNumber(1);await sleep(1500);
+
+  return realHit();
 }
 
 async function fakeSlashPattern(){
-  await normalCount();
+  showNumber(3);await sleep(1700);
+  showNumber(2);await sleep(1700);
 
-  hideNumber();
-  await sleep(450);
+  $("#slash").className="go";
+  await sleep(180);
+  $("#slash").className="";
 
-  createSlash(false);
+  await sleep(700);
 
-  await sleep(1400);
+  showNumber(1);
+  await sleep(2100);
 
-  showNumber("1");
-  await sleep(1500);
-
-  return HIT({doubleSlash:true});
+  return realHit();
 }
 
 async function weirdCountdown(){
-  showNumber("3");await sleep(1500);
-  showNumber("1");await sleep(1500);
-  showNumber("2");await sleep(1500);
-  showNumber("1");await sleep(1600);
-  return HIT();
+  showNumber(3);await sleep(1300);
+
+  await fxQuestion();
+
+  showNumber(1);await sleep(1200);
+  showNumber(2);await sleep(1300);
+  showNumber(1);await sleep(1500);
+
+  return realHit();
 }
 
 async function silentStart(){
   stopTension();
 
-  showNumber("3");await sleep(1900);
-  showNumber("2");await sleep(2000);
-  showNumber("1");await sleep(2500);
+  showNumber(3);
+  await sleep(1800);
 
-  return HIT({silence:800});
+  startTension();
+
+  showNumber(2);await sleep(1800);
+  showNumber(1);await sleep(1800);
+
+  return realHit();
 }
 
 async function classicRevival(){
   await normalCount();
 
-  hideNumber();
+  showDots();
   stopTension();
 
-  await showDots(1700);
-  await sleep(900);
+  await sleep(2200);
 
-  showNumber("1");
-  await sleep(1500);
+  hideDots();
+  showNumber(1);
 
-  return HIT({doubleSlash:true});
+  await sleep(1700);
+
+  return realHit();
 }
 
 async function skipCountHit(){
-  showNumber("3");await sleep(1700);
-  showNumber("1");await sleep(1700);
-  return HIT();
+  showNumber(3);
+  await sleep(1700);
+
+  showNumber(1);
+  await sleep(2000);
+
+  return realHit();
 }
 
 async function oneVanishHit(){
-  showNumber("3");await sleep(1600);
-  showNumber("2");await sleep(1700);
-  showNumber("1");await sleep(1300);
+  await normalCount();
 
   hideNumber();
-  await sleep(1800);
+  stopTension();
 
-  return HIT();
+  await sleep(3000);
+
+  return realHit();
 }
 
 async function oneBackToTwoHit(){
-  showNumber("3");await sleep(1500);
-  showNumber("2");await sleep(1500);
-  showNumber("1");await sleep(1700);
-  showNumber("2");await sleep(1000);
-  showNumber("1");await sleep(1200);
-  return HIT();
+  await normalCount();
+
+  await sleep(600);
+  showNumber(2);
+  await sleep(1200);
+  showNumber(1);
+  await sleep(1500);
+
+  return realHit();
 }
 
 async function speedCountHit(){
-  showNumber("3");await sleep(500);
-  showNumber("2");await sleep(500);
-  showNumber("1");await sleep(700);
+  showNumber(3);await sleep(430);
+  showNumber(2);await sleep(430);
+  showNumber(1);await sleep(600);
 
-  await sleep(1000);
-
-  return HIT({doubleSlash:true});
+  return realHit();
 }
 
 async function doubleSlashHit(){
   await normalCount();
-  hideNumber();
-  await sleep(650);
-  return HIT({doubleSlash:true});
+
+  return realHit({double:true});
 }
 
 async function silentOddityHit(){
-  showNumber("3");await sleep(1500);
+  showNumber(3);await sleep(1500);
 
   stopTension();
-  await sleep(1000);
 
-  showNumber("2");await sleep(1900);
-  showNumber("1");await sleep(2400);
+  showNumber(2);await sleep(1900);
+  showNumber(1);await sleep(2600);
 
-  return HIT({silence:900});
+  return realHit();
 }
 
 async function questionHit(){
@@ -1464,343 +1599,483 @@ async function questionHit(){
 
   hideNumber();
 
-  message.textContent="？";
-  message.style.fontSize="90px";
-  message.style.display="block";
+  $("#question").style.display="block";
+  await sleep(1500);
+  $("#question").style.display="none";
 
-  await sleep(1600);
-
-  message.style.display="none";
-
-  return HIT();
+  return realHit();
 }
 
 async function blackoutReturnHit(){
   await normalCount();
 
-  hideNumber();
   stopTension();
+  hideNumber();
 
-  await doBlackout(1000);
+  await blackout(1400);
 
-  showNumber("1");
-  await sleep(2200);
+  showNumber(1);
+  await sleep(1600);
 
-  return HIT({doubleSlash:true});
+  return realHit();
 }
 
 async function dotsDirectHit(){
   await normalCount();
-  hideNumber();
 
-  await showDots(1700);
-  await sleep(900);
+  showDots();
+  await sleep(2100);
 
-  return HIT();
+  return realHit();
 }
 
 async function dotsOneRevival(){
   await normalCount();
-  hideNumber();
 
-  await showDots(1600);
-  await sleep(600);
-
-  showNumber("1");
+  showDots();
   await sleep(1800);
 
-  return HIT({doubleSlash:true});
+  hideDots();
+  showNumber(1);
+
+  await sleep(1500);
+
+  return realHit();
 }
 
 async function dotsBlackoutHit(){
   await normalCount();
 
   stopTension();
+  showDots();
 
-  await showDots(1500);
-  await doBlackout(1000);
-  await sleep(500);
+  await sleep(1200);
 
-  return HIT({
-    silence:750,
-    doubleSlash:true
-  });
+  hideDots();
+  await blackout(1500);
+
+  return realHit();
 }
 
 async function dotsStarHit(){
   await normalCount();
 
-  await showDots(1500);
+  showDots();
 
-  meteorBurst(randomMeteorCount());
+  starBurst(3+Math.floor(Math.random()*4));
 
-  await sleep(1400);
+  await sleep(2000);
 
-  return HIT();
+  return realHit();
 }
 
 async function dotsLongSilenceHit(){
   await normalCount();
 
   stopTension();
+  showDots();
 
-  await showDots(1700);
-  await sleep(2200);
+  await sleep(3300);
 
-  return HIT({
-    silence:900,
-    doubleSlash:true
-  });
+  return realHit({double:true});
 }
 
-const hitRoutes=[
-  ()=>normalHitAt(3),
-  ()=>normalHitAt(2),
-  ()=>normalHitAt(1),
-  ()=>normalHitAt(0),
-  normalBlackout,
-  freezeTwo,
-  reverseCountdown,
-  zeroPremium,
-  numberDisappear,
-  soundStopPattern,
-  longOne,
-  recountSequence,
-  doubleCountdown,
-  puchunDirect,
-  puchunRecount,
-  fakeSlashPattern,
-  weirdCountdown,
-  silentStart,
-  classicRevival,
-  skipCountHit,
-  oneVanishHit,
-  oneBackToTwoHit,
-  speedCountHit,
-  doubleSlashHit,
-  silentOddityHit,
-  questionHit,
-  blackoutReturnHit,
-  dotsDirectHit,
-  dotsOneRevival,
-  dotsBlackoutHit,
-  dotsStarHit,
-  dotsLongSilenceHit
-];
+/* ========================================
+   12 NEW HIT ROUTES
+======================================== */
 
-/* MISS */
+async function commonFxHit(index){
+  switch(index){
+
+    /* 巨大化 */
+    case 0:
+      showNumber(3);await sleep(1500);
+      showNumber(2);await sleep(1200);
+      showNumber(1);await fxBigNumber();
+      await sleep(900);
+      return realHit();
+
+    /* ヒビ */
+    case 1:
+      await normalCount();
+      await fxCrack();
+      return realHit();
+
+    /* 雷 */
+    case 2:
+      await normalCount();
+      await fxLightning(
+        Math.random()<.25 ? 3 : 1
+      );
+      await sleep(600);
+      return realHit();
+
+    /* ノイズ */
+    case 3:
+      showNumber(3);await sleep(1500);
+      showNumber(2);await fxNoise(750);
+      showNumber(1);await sleep(1600);
+      return realHit();
+
+    /* 色段階 */
+    case 4:
+      await normalCount();
+      await fxColorStep();
+      await sleep(1000);
+      return realHit();
+
+    /* 超ロング1 */
+    case 5:
+      showNumber(3);await sleep(1600);
+      showNumber(2);await sleep(1700);
+      await fxSuperLongOne();
+      return realHit();
+
+    /* ? */
+    case 6:
+      showNumber(3);await sleep(1400);
+      await fxQuestion();
+      showNumber(2);await sleep(1500);
+      showNumber(1);await sleep(1700);
+      return realHit();
+
+    /* 背景暗転 */
+    case 7:
+      await normalCount();
+      await fxBackgroundDark();
+      return realHit();
+
+    /* 停止再始動 */
+    case 8:
+      await fxStopRestart();
+      return realHit();
+
+    /* 1消失無音 */
+    case 9:
+      showNumber(3);await sleep(1500);
+      showNumber(2);await sleep(1600);
+      await fxSilentDisappear();
+      return realHit();
+
+    /* 偽終了 */
+    case 10:
+      await fxFakeFinish();
+      return realHit();
+
+    /* RPロゴ */
+    case 11:
+      await normalCount();
+      await fxLogoGlow();
+      await sleep(700);
+      return realHit();
+  }
+}
+
+/* ========================================
+   MISS
+======================================== */
+
 async function normalMiss(){
   await normalCount();
-  hideNumber();
-  stopTension();
-  await sleep(1600);
-  resetGame();
-}
 
-async function finishWeakFake(){
   hideNumber();
   stopTension();
 
-  await sleep(500);
-  await showDots(1500);
-  await sleep(850);
+  await sleep(1400);
 
-  resetGame();
+  return finishMiss();
 }
 
-async function weakFake1(){
-  showNumber("3");await sleep(1700);
-  showNumber("2");await sleep(3100);
-  showNumber("1");await sleep(1900);
-  return finishWeakFake();
-}
-async function weakFake2(){
-  showNumber("3");await sleep(1700);
-  showNumber("2");await sleep(1800);
-  showNumber("1");await sleep(3500);
-  return finishWeakFake();
-}
-async function weakFake3(){
-  await normalCount();
-  number.classList.add("redNumber");
-  await sleep(500);
-  number.classList.remove("redNumber");
-  await sleep(700);
-  return finishWeakFake();
-}
-async function weakFake4(){
-  showNumber("3");await sleep(1700);
-  showNumber("2");await sleep(1800);
-  stopTension();
-  showNumber("1");await sleep(2600);
-  return finishWeakFake();
-}
-async function weakFake5(){
-  await normalCount();
-  hideNumber();
-  await doBlackout(450);
-  showNumber("1");
-  await sleep(1500);
-  return finishWeakFake();
-}
-async function weakFake6(){
-  showNumber("3");await sleep(3600);
-  showNumber("2");await sleep(1700);
-  showNumber("1");await sleep(1800);
-  return finishWeakFake();
-}
-async function weakFake7(){
-  showNumber("3");await sleep(1700);
+/* ---------- weak fake 10 ---------- */
 
-  showNumber("2");
-  number.classList.add("redNumber");
+async function weakFake(type){
+  switch(type){
 
-  await sleep(550);
+    case 0:
+      showNumber(3);await sleep(1600);
+      showNumber(2);await sleep(3100);
+      showNumber(1);await sleep(1600);
+      break;
 
-  number.classList.remove("redNumber");
+    case 1:
+      showNumber(3);await sleep(1600);
+      showNumber(2);await sleep(1700);
+      showNumber(1);await sleep(3500);
+      break;
 
-  await sleep(1500);
+    case 2:
+      await normalCount();
+      $("#number").classList.add("red");
+      await sleep(500);
+      $("#number").classList.remove("red");
+      break;
 
-  showNumber("1");
-  await sleep(1900);
+    case 3:
+      showNumber(3);await sleep(1500);
+      showNumber(2);await sleep(1500);
+      stopTension();
+      showNumber(1);
+      await sleep(2500);
+      break;
 
-  return finishWeakFake();
-}
-async function weakFake8(){
-  showNumber("3");await sleep(1600);
-  showNumber("2");await sleep(1700);
-  showNumber("0");await sleep(450);
-  showNumber("1");await sleep(2000);
-  return finishWeakFake();
-}
-async function weakFake9(){
-  await normalCount();
+    case 4:
+      await normalCount();
+      hideNumber();
+      await blackout(650);
+      showNumber(1);
+      await sleep(1400);
+      break;
 
-  number.style.fontSize="min(43vw,210px)";
+    case 5:
+      showNumber(3);await sleep(3400);
+      showNumber(2);await sleep(1500);
+      showNumber(1);await sleep(1600);
+      break;
 
-  await sleep(1300);
+    case 6:
+      showNumber(3);await sleep(1500);
+      showNumber(2);
+      $("#number").classList.add("red");
+      await sleep(500);
+      $("#number").classList.remove("red");
+      await sleep(1100);
+      showNumber(1);await sleep(1500);
+      break;
 
-  number.style.fontSize="";
+    case 7:
+      showNumber(3);await sleep(1400);
+      showNumber(2);await sleep(1400);
+      showNumber(0);await sleep(280);
+      showNumber(1);await sleep(1700);
+      break;
 
-  return finishWeakFake();
-}
-async function weakFake10(){
-  showNumber("3");await sleep(600);
-  showNumber("2");await sleep(650);
-  showNumber("1");await sleep(2300);
-  return finishWeakFake();
-}
+    case 8:
+      await normalCount();
+      $("#number").style.transform=
+        "translate(-50%,-50%) scale(.78)";
+      await sleep(900);
+      break;
 
-const weakFakes=[
-  weakFake1,
-  weakFake2,
-  weakFake3,
-  weakFake4,
-  weakFake5,
-  weakFake6,
-  weakFake7,
-  weakFake8,
-  weakFake9,
-  weakFake10
-];
-
-async function finishStrongFake(){
-  hideNumber();
-  stopTension();
-
-  blackout.style.opacity="1";
-  await sleep(700);
-  blackout.style.opacity="0";
-
-  await sleep(350);
-  await showDots(1700);
-  await sleep(950);
-
-  resetGame();
-}
-
-async function strongFake1(){
-  await normalCount();
-  hideNumber();
-  createSlash(false);
-  await sleep(1700);
-  return finishStrongFake();
-}
-async function strongFake2(){
-  await normalCount();
-  hideNumber();
-  stopTension();
-  await doBlackout(1500);
-  await sleep(900);
-  return finishStrongFake();
-}
-async function strongFake3(){
-  await normalCount();
-  number.classList.add("goldNumber");
-  await sleep(2900);
-  number.classList.remove("goldNumber");
-  return finishStrongFake();
-}
-async function strongFake4(){
-  await normalCount();
-  hideNumber();
-  createSlash(false);
-  await sleep(100);
-  doFlash();
-  await sleep(1900);
-  return finishStrongFake();
-}
-async function strongFake5(){
-  await normalCount();
-  hideNumber();
-  await doBlackout(1100);
-  showNumber("1");
-  await sleep(2600);
-  return finishStrongFake();
-}
-async function strongFake6(){
-  await normalCount();
-  number.classList.add("goldNumber");
-  await sleep(650);
-  stopTension();
-  await sleep(3300);
-  number.classList.remove("goldNumber");
-  return finishStrongFake();
-}
-
-const strongFakes=[
-  strongFake1,
-  strongFake2,
-  strongFake3,
-  strongFake4,
-  strongFake5,
-  strongFake6
-];
-
-async function playMiss(){
-  const r=Math.random();
-
-  if(r<.50){
-    return normalMiss();
+    case 9:
+      showNumber(3);await sleep(400);
+      showNumber(2);await sleep(500);
+      showNumber(1);await sleep(1900);
+      break;
   }
 
-  if(r<.75){
-    return weakFakes[
-      Math.floor(Math.random()*weakFakes.length)
-    ]();
-  }
+  stopTension();
+  showDots();
 
-  return strongFakes[
-    Math.floor(Math.random()*strongFakes.length)
-  ]();
+  await sleep(1400);
+
+  return finishMiss();
 }
 
-/* PRIZE
-   当たり後の抽選
-   1等 2%
-   2等 20%
-   3等 78%
-*/
+/* ---------- strong fake 6 ---------- */
+
+async function strongFake(type){
+  switch(type){
+
+    /* fake slash */
+    case 0:
+      await normalCount();
+      stopTension();
+
+      $("#slash").className="go";
+      await sleep(230);
+      $("#slash").className="";
+
+      await sleep(1800);
+      break;
+
+    /* blackout */
+    case 1:
+      await normalCount();
+      stopTension();
+      hideNumber();
+
+      await blackout(2200);
+      break;
+
+    /* gold */
+    case 2:
+      await normalCount();
+
+      $("#number").classList.add("gold");
+      await sleep(3000);
+      $("#number").classList.remove("gold");
+      break;
+
+    /* fake slash + white flash */
+    case 3:
+      await normalCount();
+
+      stopTension();
+
+      $("#slash").className="go";
+      await sleep(220);
+
+      flash();
+
+      await sleep(250);
+
+      $("#slash").className="";
+
+      await sleep(1800);
+      break;
+
+    /* blackout return 1 */
+    case 4:
+      await normalCount();
+
+      stopTension();
+      hideNumber();
+
+      await blackout(1500);
+
+      showNumber(1);
+      await sleep(2300);
+      break;
+
+    /* gold + silence */
+    case 5:
+      await normalCount();
+
+      $("#number").classList.add("gold");
+
+      await sleep(700);
+
+      stopTension();
+
+      await sleep(3300);
+
+      $("#number").classList.remove("gold");
+      break;
+  }
+
+  showDots();
+
+  await sleep(1500);
+
+  return finishMiss();
+}
+
+/* ========================================
+   NEW COMMON FX MISS
+======================================== */
+
+async function commonFxMiss(index){
+  switch(index){
+
+    case 0:
+      await normalCount();
+      await fxBigNumber();
+      break;
+
+    case 1:
+      await normalCount();
+      await fxCrack();
+      break;
+
+    case 2:
+      await normalCount();
+      await fxLightning(
+        Math.random()<.25 ? 3 : 1
+      );
+      break;
+
+    case 3:
+      showNumber(3);await sleep(1400);
+      showNumber(2);await fxNoise(700);
+      showNumber(1);await sleep(1700);
+      break;
+
+    case 4:
+      await normalCount();
+      await fxColorStep();
+      await sleep(1000);
+      break;
+
+    case 5:
+      showNumber(3);await sleep(1500);
+      showNumber(2);await sleep(1600);
+      await fxSuperLongOne();
+      break;
+
+    case 6:
+      showNumber(3);await sleep(1400);
+      await fxQuestion();
+      showNumber(2);await sleep(1500);
+      showNumber(1);await sleep(1600);
+      break;
+
+    case 7:
+      await normalCount();
+      await fxBackgroundDark();
+      break;
+
+    case 8:
+      await fxStopRestart();
+      break;
+
+    case 9:
+      showNumber(3);await sleep(1500);
+      showNumber(2);await sleep(1600);
+      await fxSilentDisappear();
+      break;
+
+    case 10:
+      await fxFakeFinish();
+      break;
+
+    case 11:
+      await normalCount();
+      await fxLogoGlow();
+      await sleep(1000);
+      break;
+  }
+
+  stopTension();
+
+  /* 新演出も結果を読ませないため
+     ときどき…を出す */
+  if(Math.random()<.55){
+    showDots();
+    await sleep(1200+Math.random()*700);
+  }else{
+    hideNumber();
+    hideDots();
+    await sleep(1300);
+  }
+
+  return finishMiss();
+}
+
+/* ========================================
+   MISS RESET
+======================================== */
+
+async function finishMiss(){
+  stopTension();
+
+  hideNumber();
+  hideDots();
+
+  $("#stage").classList.remove("bgDark");
+  $("#noise").className="";
+  $("#lightning").className="";
+  $("#question").style.display="none";
+
+  await sleep(800);
+
+  resetMain();
+}
+
+/* ========================================
+   PRIZE
+======================================== */
+
+/* 1等2% / 2等20% / 3等78% */
 function drawPrize(){
   const r=Math.random();
 
@@ -1810,307 +2085,360 @@ function drawPrize(){
   return 3;
 }
 
-function rankText(rank){
-  return rank+"等";
-}
-
 function rankClass(rank){
   return "rank"+rank;
 }
 
-function resetChests(){
-  chests.forEach(chest=>{
-    chest.classList.remove(
-      "open",
-      "shake",
-      "unlocking",
-      "selectedChest",
-      "otherChest"
-    );
+function createChests(){
+  const area=$("#chests");
+  area.innerHTML="";
 
-    const label=chest.querySelector(".rankLabel");
+  for(let i=0;i<3;i++){
+    const b=document.createElement("button");
+    b.className="chest";
 
-    label.style.display="none";
-    label.textContent="";
-    label.className="rankLabel";
-  });
+    b.innerHTML=`
+      <div class="chestWrap">
+        <div class="chestLight"></div>
+        <div class="openLid"></div>
+        <div class="closedLid"></div>
+        <div class="hinge"></div>
+        <div class="chestBody"></div>
+        <div class="lock"></div>
+      </div>
+      <div class="rankLabel"></div>
+    `;
 
-  resultSmall.style.display="none";
-  resultSmall.textContent="あなたの結果";
+    b.addEventListener("click",()=>{
+      chooseChest(i);
+    });
 
-  resultBig.style.display="none";
-  resultBig.textContent="";
-  resultBig.className="";
+    area.appendChild(b);
+  }
+}
+
+function showTreasure(){
+  selectedRank=drawPrize();
+  selectedIndex=-1;
+  chestBusy=false;
+
+  createChests();
+
+  $("#treasureTitle").textContent="宝箱を1つ選べ！";
+  $("#treasureSub").textContent="好きな宝箱をタップ";
+
+  $("#resultSmall").style.display="none";
+  $("#resultBig").style.display="none";
+  $("#next").style.display="none";
+
+  $("#treasure").className="show";
 }
 
 function showSelectedResult(rank){
-  resultSmall.textContent="あなたの結果";
-  resultSmall.style.display="block";
+  const small=$("#resultSmall");
+  const big=$("#resultBig");
 
-  resultBig.textContent=rank+"等 当選！";
-  resultBig.className=rankClass(rank);
-  resultBig.style.display="block";
+  small.textContent="あなたの結果";
+  small.style.display="block";
 
-  void resultBig.offsetWidth;
-  resultBig.classList.add("resultPop");
+  big.textContent=rank+"等 当選！";
+  big.className=rankClass(rank);
+  big.style.display="block";
+
+  void big.offsetWidth;
+  big.classList.add("resultPop");
 }
 
-/* TREASURE */
-async function showTreasure(){
-  clearStarTimers();
+async function chooseChest(index){
+  if(chestBusy)return;
 
-  treasure.style.display="flex";
+  chestBusy=true;
+  selectedIndex=index;
 
-  treasureTitle.innerHTML=
-    "ここからが本番。<br>"+
-    "運命の宝箱を選べ！<br>"+
-    "この一箱が、結果を決める。";
+  const chests=$$(".chest");
+  const chosen=chests[index];
 
-  nextButton.style.display="none";
+  chests.forEach(c=>{
+    c.style.pointerEvents="none";
+  });
 
-  resetChests();
+  chosen.classList.add("shaking");
+
+  await sleep(950);
+
+  chosen.classList.remove("shaking");
+  chosen.classList.add("open","selectedChest");
+
+  await sleep(450);
+
+  flash();
+
+  await sleep(500);
+
+  const label=chosen.querySelector(".rankLabel");
+
+  label.textContent=selectedRank+"等";
+  label.className="rankLabel "+rankClass(selectedRank);
+
+  showSelectedResult(selectedRank);
+
+  await sleep(1300);
+
+  /* 残りは他の2等級 */
+  const remainingRanks=[1,2,3]
+    .filter(r=>r!==selectedRank)
+    .sort(()=>Math.random()-.5);
+
+  const otherIndexes=[0,1,2]
+    .filter(i=>i!==index)
+    .sort(()=>Math.random()-.5);
+
+  for(let i=0;i<otherIndexes.length;i++){
+    const idx=otherIndexes[i];
+    const c=chests[idx];
+
+    c.classList.add("otherChest","shaking");
+
+    await sleep(500);
+
+    c.classList.remove("shaking");
+    c.classList.add("open");
+
+    const l=c.querySelector(".rankLabel");
+    const rank=remainingRanks[i];
+
+    l.textContent=rank+"等";
+    l.className="rankLabel "+rankClass(rank);
+
+    await sleep(750);
+  }
+
+  $("#treasureTitle").textContent="あなたが選んだ宝箱";
+  $("#treasureSub").textContent="選んだ結果はこちら";
+
+  /* 選んだ結果を最後まで残す */
+  showSelectedResult(selectedRank);
+
+  await sleep(600);
+
+  $("#next").style.display="block";
+}
+
+/* ========================================
+   HIT ROUTE SELECTOR
+======================================== */
+
+async function runHit(){
+  /*
+    既存32 + 新12 = 44系統
+  */
+
+  const p=Math.floor(Math.random()*44);
+
+  switch(p){
+    case 0:return normalHitAt(3);
+    case 1:return normalHitAt(2);
+    case 2:return normalHitAt(1);
+    case 3:return normalHitAt(0);
+    case 4:return normalBlackout();
+    case 5:return freezeTwo();
+    case 6:return reverseCountdown();
+    case 7:return zeroPremium();
+    case 8:return numberDisappear();
+    case 9:return soundStopPattern();
+    case 10:return longOne();
+    case 11:return recountSequence();
+    case 12:return doubleCountdown();
+    case 13:return puchunDirect();
+    case 14:return puchunRecount();
+    case 15:return fakeSlashPattern();
+    case 16:return weirdCountdown();
+    case 17:return silentStart();
+    case 18:return classicRevival();
+    case 19:return skipCountHit();
+    case 20:return oneVanishHit();
+    case 21:return oneBackToTwoHit();
+    case 22:return speedCountHit();
+    case 23:return doubleSlashHit();
+    case 24:return silentOddityHit();
+    case 25:return questionHit();
+    case 26:return blackoutReturnHit();
+    case 27:return dotsDirectHit();
+    case 28:return dotsOneRevival();
+    case 29:return dotsBlackoutHit();
+    case 30:return dotsStarHit();
+    case 31:return dotsLongSilenceHit();
+
+    /* 新12 */
+    case 32:return commonFxHit(0);
+    case 33:return commonFxHit(1);
+    case 34:return commonFxHit(2);
+    case 35:return commonFxHit(3);
+    case 36:return commonFxHit(4);
+    case 37:return commonFxHit(5);
+    case 38:return commonFxHit(6);
+    case 39:return commonFxHit(7);
+    case 40:return commonFxHit(8);
+    case 41:return commonFxHit(9);
+    case 42:return commonFxHit(10);
+    case 43:return commonFxHit(11);
+  }
+}
+
+/* ========================================
+   MISS SELECTOR
+======================================== */
+
+async function runMiss(){
+  /*
+    ハズレの基本振り分けを維持しつつ
+    一部を新12共通演出へ差し替える。
+
+    新演出が出ても当たり確定にならない。
+  */
+
+  if(Math.random()<.36){
+    return commonFxMiss(
+      Math.floor(Math.random()*12)
+    );
+  }
+
+  const r=Math.random();
+
+  if(r<.50){
+    return normalMiss();
+  }
+
+  if(r<.75){
+    return weakFake(
+      Math.floor(Math.random()*10)
+    );
+  }
+
+  return strongFake(
+    Math.floor(Math.random()*6)
+  );
+}
+
+/* ========================================
+   START
+======================================== */
+
+async function play(){
+  if(busy)return;
+
+  busy=true;
+
+  $("#start").style.display="none";
+  $("#info").style.display="none";
+
+  playToken++;
+  clearStars();
+
+  resetVisuals();
 
   /*
-    当たり後に景品ランクを1回だけ抽選
+    iPhone Safari対策：
+    ユーザーのタップ中にAudioContextをresume開始
   */
-  const selectedRank=drawPrize();
+  ensureAudioContext();
 
-  let chosen=false;
+  const resumePromise=audioCtx.resume();
 
-  const chooseHandler=async e=>{
-    if(chosen)return;
-
-    chosen=true;
-
-    chests.forEach(c=>{
-      c.removeEventListener("click",chooseHandler);
-    });
-
-    const chest=e.currentTarget;
-    const chosenIndex=Number(chest.dataset.index);
-
-    /* 選んだ箱を強調 */
-    chest.classList.add("selectedChest");
-
-    const otherIndexes=
-      [0,1,2].filter(i=>i!==chosenIndex);
-
-    const otherRanks=
-      [1,2,3].filter(r=>r!==selectedRank);
-
-    if(Math.random()<.5){
-      otherRanks.reverse();
-    }
-
-    const assignments=new Array(3);
-
-    assignments[chosenIndex]=selectedRank;
-    assignments[otherIndexes[0]]=otherRanks[0];
-    assignments[otherIndexes[1]]=otherRanks[1];
-
-    /* 選択した箱 */
-    chest.classList.add("shake");
-    await sleep(650);
-    chest.classList.remove("shake");
-
-    chest.classList.add("unlocking");
-    await sleep(550);
-
-    await sleep(250);
-
-    chest.classList.add("open");
-
-    await sleep(480);
-
-    doFlash();
-
-    await sleep(320);
-
-    const label=chest.querySelector(".rankLabel");
-
-    label.textContent=rankText(selectedRank);
-    label.classList.add(rankClass(selectedRank));
-    label.style.display="block";
-
-    /* 当選結果を大きく表示 */
-    showSelectedResult(selectedRank);
-
-    await sleep(2400);
-
-    treasureTitle.innerHTML=
-      "残りの宝箱は…<br>"+
-      "選ばなかった箱もオープン";
-
-    /* 残りは脇役表示 */
-    otherIndexes.forEach(idx=>{
-      chests[idx].classList.add("otherChest");
-    });
-
-    if(Math.random()<.5){
-      otherIndexes.reverse();
-    }
-
-    /* 残り2箱を開ける */
-    for(const idx of otherIndexes){
-      const c=chests[idx];
-
-      c.classList.add("shake");
-      await sleep(380);
-      c.classList.remove("shake");
-
-      c.classList.add("unlocking");
-      await sleep(320);
-
-      c.classList.add("open");
-
-      await sleep(500);
-
-      const l=c.querySelector(".rankLabel");
-      const rank=assignments[idx];
-
-      l.textContent=rankText(rank);
-      l.classList.add(rankClass(rank));
-      l.style.display="block";
-
-      await sleep(700);
-    }
-
-    /* 最終画面 */
-    treasureTitle.innerHTML=
-      "あなたが選んだ宝箱";
-
-    resultSmall.textContent=
-      "あなたの結果";
-
-    resultSmall.style.display=
-      "block";
-
-    resultBig.textContent=
-      selectedRank+"等 当選！";
-
-    resultBig.style.display=
-      "block";
-
-    await sleep(450);
-
-    nextButton.style.display="block";
-  };
-
-  chests.forEach(chest=>{
-    chest.addEventListener("click",chooseHandler);
-  });
-}
-
-/* RESET */
-function resetGame(){
-  playToken++;
-
-  clearStarTimers();
-  stopTension();
-
-  hideNumber();
-
-  message.style.display="none";
-  message.style.fontSize="";
-
-  number.style.fontSize="";
-  number.classList.remove(
-    "goldNumber",
-    "redNumber",
-    "numberPop"
-  );
-
-  blackout.style.opacity="0";
-  hitDark.style.opacity="0";
-
-  slashLayer.innerHTML="";
-
-  flash.classList.remove("flashExplosion");
-
-  hitText.classList.remove(
-    "hitTextImpact",
-    "hitTextPulse"
-  );
-  hitText.style.opacity="0";
-
-  game.classList.remove(
-    "hitShake",
-    "hitZoom"
-  );
-
-  playing=false;
-  startScreen.style.display="flex";
-}
-
-/* ==================================================
-   START
-
-   ★★★★★ 本番仕様 ★★★★★
-
-   STARTを押すたびに
-   1回だけ完全独立抽選。
-
-   当たり確率 = 1/30
-
-   前回までの結果は一切影響しない。
-   30回目確定などもなし。
-================================================== */
-startButton.addEventListener("click",async()=>{
-  if(playing)return;
-
-  playing=true;
-  playToken++;
-
-  clearStarTimers();
-
-  startScreen.style.display="none";
-
-  await unlockAudio();
+  try{
+    await Promise.all([
+      resumePromise,
+      prepareAudio()
+    ]);
+  }catch(e){
+    console.log("audio prepare",e);
+  }
 
   startTension();
 
-  scheduleStars();
+  scheduleStars(playToken);
 
   /*
-    ★ 本番抽選 ★
-    毎回完全独立 1/30
+    ★ 本番抽選
+    START 1回につき1回だけ
+    完全独立 1/30
   */
-  const win = Math.random() < (1/30);
+  const win=Math.random() < (1/30);
 
   if(win){
-    /*
-      当たりが決まった後に
-      演出を1つ選ぶだけ。
-      演出選択は当選確率に影響しない。
-    */
-    const route=
-      hitRoutes[
-        Math.floor(Math.random()*hitRoutes.length)
-      ];
-
-    await route();
-
-  }else{
-    /*
-      29/30側。
-      ハズレ後に見せ方だけ選ぶ。
-    */
-    await playMiss();
+    return runHit();
   }
-});
 
-/* NEXT */
-nextButton.addEventListener("click",()=>{
-  treasure.style.display="none";
+  return runMiss();
+}
 
+/* ========================================
+   RESET
+======================================== */
+
+function resetVisuals(){
+  $("#black").style.display="none";
+  $("#hitDark").style.display="none";
+  $("#slash").className="";
+  $("#flash").className="";
+  $("#hitText").className="";
+  $("#noise").className="";
+  $("#lightning").className="";
+  $("#logoGlow").className="";
+  $("#question").style.display="none";
+
+  $("#stage").classList.remove("bgDark");
+
+  hideDots();
+
+  clearNumberClasses();
+
+  $("#number").style.display="block";
+  $("#number").textContent="3";
+}
+
+function resetMain(){
+  playToken++;
+
+  clearStars();
+
+  stopTension();
   stopHitMusic();
 
-  resetGame();
+  resetVisuals();
+
+  $("#treasure").className="";
+
+  $("#resultSmall").style.display="none";
+  $("#resultBig").style.display="none";
+  $("#next").style.display="none";
+
+  $("#start").style.display="block";
+  $("#info").style.display="block";
+
+  selectedRank=null;
+  selectedIndex=-1;
+
+  chestBusy=false;
+  busy=false;
+}
+
+/* ========================================
+   EVENTS
+======================================== */
+
+$("#start").addEventListener("click",play);
+
+$("#next").addEventListener("click",()=>{
+  resetMain();
 });
 
-/* 音源先読み */
-prepareAudio();
-
+/* audio preload */
+window.addEventListener("load",()=>{
+  ensureAudioContext();
+  prepareAudio().catch(()=>{});
+});
 </script>
+
 </body>
 </html>
