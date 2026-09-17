@@ -10,6 +10,7 @@
   box-sizing:border-box;
   -webkit-tap-highlight-color:transparent;
 }
+
 html,body{
   margin:0;
   width:100%;
@@ -18,16 +19,14 @@ html,body{
   background:#120008;
   color:#fff;
   font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",
-    "Hiragino Kaku Gothic ProN",sans-serif;
+  "Hiragino Kaku Gothic ProN",sans-serif;
 }
-body{
-  user-select:none;
-}
+
+body{user-select:none}
 
 /* =========================
    MAIN
 ========================= */
-
 #stage{
   position:fixed;
   inset:0;
@@ -53,6 +52,9 @@ body{
   background:rgba(0,0,0,.76);
 }
 
+/* =========================
+   COUNT NUMBER
+========================= */
 #number{
   position:absolute;
   z-index:20;
@@ -142,10 +144,13 @@ body{
   left:50%;
   top:61%;
   transform:translate(-50%,-50%);
+
   font-size:90px;
   font-weight:1000;
   color:#fff7fb;
+
   -webkit-text-stroke:4px #ff4b9d;
+
   text-shadow:
     0 5px 0 #d82779,
     0 10px 0 #970049;
@@ -154,13 +159,13 @@ body{
 /* =========================
    START
 ========================= */
-
 #start{
   position:absolute;
   z-index:100;
   left:50%;
   bottom:max(7%,env(safe-area-inset-bottom));
   transform:translateX(-50%);
+
   width:min(72vw,330px);
   padding:17px 20px;
 
@@ -188,18 +193,20 @@ body{
   z-index:100;
   left:0;
   right:0;
+
   bottom:calc(max(7%,env(safe-area-inset-bottom)) + 75px);
+
   text-align:center;
   font-size:11px;
   font-weight:800;
   line-height:1.6;
+
   text-shadow:0 2px 5px #000;
 }
 
 /* =========================
-   COMMON EFFECTS
+   COMMON FX
 ========================= */
-
 #black{
   position:fixed;
   inset:0;
@@ -214,14 +221,15 @@ body{
   z-index:125;
   display:none;
   pointer-events:none;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      rgba(255,255,255,.13) 0px,
-      rgba(255,255,255,.13) 1px,
-      rgba(0,0,0,.2) 2px,
-      rgba(0,0,0,.2) 4px
-    );
+
+  background:repeating-linear-gradient(
+    0deg,
+    rgba(255,255,255,.13) 0px,
+    rgba(255,255,255,.13) 1px,
+    rgba(0,0,0,.2) 2px,
+    rgba(0,0,0,.2) 4px
+  );
+
   mix-blend-mode:screen;
 }
 
@@ -256,15 +264,23 @@ body{
   top:-10%;
   width:10px;
   height:125%;
+
   background:#fff;
   transform:rotate(17deg);
+
   box-shadow:
     0 0 10px #fff,
     0 0 30px #ff4fa8,
     0 0 70px #ff0080;
+
   clip-path:polygon(
-    50% 0,100% 0,65% 38%,100% 38%,
-    38% 100%,50% 53%,0 53%
+    50% 0,
+    100% 0,
+    65% 38%,
+    100% 38%,
+    38% 100%,
+    50% 53%,
+    0 53%
   );
 }
 
@@ -274,14 +290,14 @@ body{
   z-index:15;
   pointer-events:none;
   opacity:0;
-  background:
-    radial-gradient(
-      circle at 50% 27%,
-      rgba(255,255,255,.95) 0%,
-      rgba(255,50,155,.6) 8%,
-      rgba(255,0,100,.18) 23%,
-      transparent 43%
-    );
+
+  background:radial-gradient(
+    circle at 50% 27%,
+    rgba(255,255,255,.95) 0%,
+    rgba(255,50,155,.6) 8%,
+    rgba(255,0,100,.18) 23%,
+    transparent 43%
+  );
 }
 
 #logoGlow.go{
@@ -298,72 +314,99 @@ body{
   position:fixed;
   z-index:140;
   display:none;
+
   left:50%;
   top:58%;
   transform:translate(-50%,-50%);
+
   font-size:110px;
   font-weight:1000;
   color:#fff;
+
   -webkit-text-stroke:5px #ff4b9d;
   text-shadow:0 0 25px #ff1493;
 }
 
 /* =========================
-   STARS
+   SHOOTING STARS
+   左上・上 → 右下のみ
 ========================= */
-
 .star{
   position:fixed;
   z-index:12;
   pointer-events:none;
-  width:14px;
-  height:14px;
+
+  width:10px;
+  height:10px;
   border-radius:50%;
+
   background:#fff;
+
   box-shadow:
-    0 0 8px #fff,
-    0 0 18px #fff;
+    0 0 5px #fff,
+    0 0 12px rgba(255,255,255,.95),
+    0 0 22px rgba(255,190,225,.7);
 }
 
+/* 尾は進行方向の後ろ側 */
 .star::after{
   content:"";
+
   position:absolute;
-  right:5px;
-  top:5px;
-  width:220px;
-  height:3px;
+
+  right:4px;
+  top:4px;
+
+  width:var(--tail,150px);
+  height:2px;
+
   transform-origin:right center;
+  transform:rotate(32deg);
+
   background:linear-gradient(
     90deg,
-    transparent,
-    rgba(255,255,255,.1),
-    #fff
+    transparent 0%,
+    rgba(255,255,255,.04) 18%,
+    rgba(255,255,255,.18) 45%,
+    rgba(255,255,255,.55) 76%,
+    #fff 100%
   );
+
+  filter:blur(.3px);
 }
 
 .star.go{
-  animation:shoot .78s linear forwards;
+  animation:shootNatural var(--speed,.85s) linear forwards;
 }
 
-@keyframes shoot{
-  from{
-    transform:translate(0,0) rotate(-28deg);
+@keyframes shootNatural{
+  0%{
+    transform:translate3d(0,0,0);
+    opacity:0;
+  }
+
+  7%{
     opacity:1;
   }
-  to{
-    transform:translate(-65vw,55vh) rotate(-28deg);
+
+  75%{
+    opacity:1;
+  }
+
+  100%{
+    transform:translate3d(78vw,48vh,0);
     opacity:0;
   }
 }
 
 /* =========================
-   SLASH / HIT
+   HIT
 ========================= */
-
 #slash{
   position:fixed;
   inset:0;
   z-index:210;
+
   display:none;
   pointer-events:none;
   overflow:hidden;
@@ -375,8 +418,10 @@ body{
 
 .slashLine{
   position:absolute;
+
   left:-30%;
   top:50%;
+
   width:160%;
   height:28px;
 
@@ -405,6 +450,7 @@ body{
   position:fixed;
   inset:0;
   z-index:260;
+
   pointer-events:none;
   background:#fff;
   opacity:0;
@@ -445,10 +491,13 @@ body.hitShake{
 #hitText{
   position:fixed;
   z-index:300;
+
   display:none;
+
   left:50%;
   top:50%;
   transform:translate(-50%,-50%);
+
   width:180vw;
   text-align:center;
 
@@ -478,25 +527,38 @@ body.hitShake{
     transform:translate(-50%,-50%) scale(4.2);
     filter:blur(12px);
   }
+
   25%{
     opacity:1;
     transform:translate(-50%,-50%) scale(.72);
     filter:blur(0);
   }
-  45%{transform:translate(-50%,-50%) scale(1.22)}
-  62%{transform:translate(-50%,-50%) scale(.94)}
-  78%{transform:translate(-50%,-50%) scale(1.08)}
-  100%{transform:translate(-50%,-50%) scale(1)}
+
+  45%{
+    transform:translate(-50%,-50%) scale(1.22);
+  }
+
+  62%{
+    transform:translate(-50%,-50%) scale(.94);
+  }
+
+  78%{
+    transform:translate(-50%,-50%) scale(1.08);
+  }
+
+  100%{
+    transform:translate(-50%,-50%) scale(1);
+  }
 }
 
 /* =========================
    TREASURE
 ========================= */
-
 #treasure{
   position:fixed;
   inset:0;
   z-index:350;
+
   display:none;
   flex-direction:column;
   align-items:center;
@@ -513,18 +575,23 @@ body.hitShake{
 #treasureTitle{
   position:absolute;
   top:max(8%,env(safe-area-inset-top));
+
   width:100%;
   text-align:center;
+
   font-size:27px;
   font-weight:1000;
+
   text-shadow:0 3px 8px #000;
 }
 
 #treasureSub{
   position:absolute;
   top:15%;
+
   width:100%;
   text-align:center;
+
   font-size:13px;
   font-weight:800;
   opacity:.8;
@@ -532,20 +599,26 @@ body.hitShake{
 
 #chests{
   width:min(96vw,650px);
+
   display:flex;
   justify-content:center;
   gap:5px;
+
   margin-top:10px;
 }
 
 .chest{
   appearance:none;
+
   border:0;
   background:none;
   color:#fff;
+
   width:32%;
   padding:0;
+
   position:relative;
+
   transition:
     transform .2s,
     opacity .3s,
@@ -561,12 +634,16 @@ body.hitShake{
 .chestBody{
   position:absolute;
   z-index:5;
+
   left:8%;
   bottom:8px;
+
   width:84%;
   height:72px;
+
   border:4px solid #ffd0e5;
   border-radius:8px 8px 18px 18px;
+
   background:
     linear-gradient(
       90deg,
@@ -576,21 +653,25 @@ body.hitShake{
       #ff63ad 80%,
       #a60051
     );
+
   box-shadow:
     inset 0 0 16px rgba(80,0,35,.65),
     0 10px 18px rgba(0,0,0,.65);
 }
 
-/* 2-state lid */
 .closedLid{
   position:absolute;
   z-index:9;
+
   left:5%;
   bottom:73px;
+
   width:90%;
   height:55px;
+
   border:4px solid #ffd0e5;
   border-radius:50% 50% 7px 7px;
+
   background:
     linear-gradient(
       90deg,
@@ -600,31 +681,43 @@ body.hitShake{
       #ff6ab3 82%,
       #a30050
     );
-  transition:opacity .2s,transform .25s;
+
+  transition:
+    opacity .2s,
+    transform .25s;
 }
 
 .openLid{
   position:absolute;
   z-index:3;
+
   left:8%;
   bottom:70px;
+
   width:84%;
   height:43px;
+
   border:4px solid #ffd0e5;
   border-radius:50% 50% 8px 8px;
+
   background:linear-gradient(#ff62ad,#a90053);
+
   transform:translateY(12px) scaleY(.35);
   opacity:0;
+
   transition:.35s;
 }
 
 .hinge{
   position:absolute;
   z-index:10;
+
   left:17%;
   bottom:69px;
+
   width:66%;
   height:7px;
+
   border-radius:10px;
   background:#ffd0e5;
 }
@@ -632,13 +725,18 @@ body.hitShake{
 .lock{
   position:absolute;
   z-index:12;
+
   left:41%;
   bottom:60px;
+
   width:18%;
   height:28px;
+
   border-radius:6px;
   border:2px solid #fff;
+
   background:linear-gradient(#fff2a0,#ffbd00);
+
   box-shadow:0 0 7px rgba(255,255,255,.6);
 }
 
@@ -659,13 +757,18 @@ body.hitShake{
 .chestLight{
   position:absolute;
   z-index:4;
+
   left:27%;
   bottom:55px;
+
   width:46%;
   height:20px;
+
   opacity:0;
   border-radius:50%;
+
   background:#fff;
+
   box-shadow:
     0 0 20px #fff,
     0 0 45px #ff77bb,
@@ -677,8 +780,15 @@ body.hitShake{
 }
 
 @keyframes chestBurst{
-  0%{opacity:1;transform:scale(.4)}
-  100%{opacity:0;transform:scale(5)}
+  0%{
+    opacity:1;
+    transform:scale(.4);
+  }
+
+  100%{
+    opacity:0;
+    transform:scale(5);
+  }
 }
 
 .chest.shaking .chestWrap{
@@ -694,8 +804,10 @@ body.hitShake{
 .rankLabel{
   min-height:38px;
   margin-top:3px;
+
   font-size:25px;
   font-weight:1000;
+
   text-shadow:0 2px 5px #000;
 }
 
@@ -705,6 +817,7 @@ body.hitShake{
 
 .chest.selectedChest{
   z-index:25;
+
   filter:
     brightness(1.18)
     drop-shadow(0 0 7px #fff)
@@ -714,22 +827,32 @@ body.hitShake{
 
 .chest.selectedChest::before{
   content:"あなたが選んだ箱";
+
   position:absolute;
   z-index:40;
+
   left:50%;
   top:-48px;
   transform:translateX(-50%);
+
   width:max-content;
+
   padding:6px 11px;
+
   border-radius:999px;
-  background:linear-gradient(180deg,#ff6bb0,#c90060);
   border:2px solid #fff;
+
+  background:linear-gradient(180deg,#ff6bb0,#c90060);
+
   color:#fff;
+
   font-size:12px;
   font-weight:1000;
+
   box-shadow:
     0 3px 0 #750038,
     0 0 15px rgba(255,73,160,.8);
+
   text-shadow:0 1px 3px rgba(0,0,0,.5);
 }
 
@@ -746,7 +869,9 @@ body.hitShake{
   margin-top:55px;
   min-height:96px;
   width:100%;
+
   text-align:center;
+
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -755,21 +880,29 @@ body.hitShake{
 
 #resultSmall{
   display:none;
+
   margin-bottom:2px;
+
   color:#fff;
+
   font-size:16px;
   font-weight:900;
   letter-spacing:.08em;
+
   text-shadow:0 2px 6px #000;
 }
 
 #resultBig{
   display:none;
+
   font-size:46px;
   line-height:1.1;
   font-weight:1000;
+
   white-space:nowrap;
+
   -webkit-text-stroke:2px rgba(90,0,40,.45);
+
   text-shadow:
     0 4px 0 rgba(80,0,35,.65),
     0 7px 10px rgba(0,0,0,.7),
@@ -781,29 +914,36 @@ body.hitShake{
 }
 
 @keyframes resultPop{
-  from{transform:scale(.2);opacity:0}
-  70%{transform:scale(1.18);opacity:1}
-  to{transform:scale(1)}
+  from{
+    transform:scale(.2);
+    opacity:0;
+  }
+
+  70%{
+    transform:scale(1.18);
+    opacity:1;
+  }
+
+  to{
+    transform:scale(1);
+  }
 }
 
 #next{
   display:none;
+
   margin-top:18px;
   padding:14px 45px;
+
   border:2px solid #fff;
   border-radius:999px;
+
   background:linear-gradient(#ff70b4,#c90060);
+
   color:#fff;
+
   font-size:18px;
   font-weight:1000;
-}
-
-/* accessibility */
-@media (prefers-reduced-motion:reduce){
-  *{
-    animation-duration:.001ms !important;
-    animation-iteration-count:1 !important;
-  }
 }
 </style>
 </head>
@@ -823,11 +963,17 @@ body.hitShake{
 </div>
 
 <div id="noise"></div>
-<div id="lightning"><div class="bolt"></div></div>
+
+<div id="lightning">
+  <div class="bolt"></div>
+</div>
+
 <div id="logoGlow"></div>
+
 <div id="question">？</div>
 
 <div id="black"></div>
+
 <div id="hitDark"></div>
 
 <div id="slash">
@@ -835,20 +981,33 @@ body.hitShake{
 </div>
 
 <div id="flash"></div>
+
 <div id="hitText">当たり</div>
 
 <div id="treasure">
-  <div id="treasureTitle">宝箱を1つ選べ！</div>
-  <div id="treasureSub">好きな宝箱をタップ</div>
+
+  <div id="treasureTitle">
+    宝箱を1つ選べ！
+  </div>
+
+  <div id="treasureSub">
+    好きな宝箱をタップ
+  </div>
 
   <div id="chests"></div>
 
   <div id="prizeResult">
-    <div id="resultSmall">あなたの結果</div>
+    <div id="resultSmall">
+      あなたの結果
+    </div>
+
     <div id="resultBig"></div>
   </div>
 
-  <button id="next">NEXT</button>
+  <button id="next">
+    NEXT
+  </button>
+
 </div>
 
 <script>
@@ -858,127 +1017,221 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 
 let busy=false;
 let chestBusy=false;
+
 let selectedRank=null;
 let selectedIndex=-1;
 
 let audioCtx=null;
+
 let tensionBuffer=null;
 let hitBuffer=null;
+
 let tensionSource=null;
 let hitSource=null;
 
 let playToken=0;
 let starTimers=[];
 
-/* ========================================
+
+/* =========================
    AUDIO
-   MP3再生のみ。合成音なし
-======================================== */
+========================= */
 
 function ensureAudioContext(){
+
   if(!audioCtx){
-    audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+
+    audioCtx=
+      new (
+        window.AudioContext ||
+        window.webkitAudioContext
+      )();
+
   }
+
   return audioCtx;
 }
 
+
 async function loadBuffer(url){
-  const res=await fetch(url,{cache:"force-cache"});
-  if(!res.ok) throw new Error(url+" load failed");
-  const arr=await res.arrayBuffer();
-  return await audioCtx.decodeAudioData(arr);
+
+  const res=
+    await fetch(
+      url,
+      {cache:"force-cache"}
+    );
+
+  if(!res.ok){
+    throw new Error(
+      url+" load failed"
+    );
+  }
+
+  const arr=
+    await res.arrayBuffer();
+
+  return await
+    audioCtx.decodeAudioData(arr);
 }
 
+
 async function prepareAudio(){
+
   ensureAudioContext();
 
   if(!tensionBuffer){
+
     try{
-      tensionBuffer=await loadBuffer("./Tension.mp3");
+
+      tensionBuffer=
+        await loadBuffer(
+          "./Tension.mp3"
+        );
+
     }catch(e){
-      console.log("Tension load error",e);
+
+      console.log(
+        "Tension load error",
+        e
+      );
+
     }
+
   }
+
 
   if(!hitBuffer){
+
     try{
-      hitBuffer=await loadBuffer("./hit_music_final.mp3");
+
+      hitBuffer=
+        await loadBuffer(
+          "./hit_music_final.mp3"
+        );
+
     }catch(e){
-      console.log("Hit music load error",e);
+
+      console.log(
+        "Hit music load error",
+        e
+      );
+
     }
+
   }
+
 }
 
-async function unlockAudio(){
-  ensureAudioContext();
-
-  const resumePromise=audioCtx.resume();
-
-  await Promise.all([
-    resumePromise,
-    prepareAudio()
-  ]);
-}
 
 function stopTension(){
-  try{tensionSource?.stop()}catch(e){}
+
+  try{
+    tensionSource?.stop();
+  }catch(e){}
+
   tensionSource=null;
+
 }
 
+
 function startTension(){
-  if(!audioCtx||!tensionBuffer)return;
+
+  if(
+    !audioCtx ||
+    !tensionBuffer
+  )return;
 
   stopTension();
 
-  const source=audioCtx.createBufferSource();
-  const gain=audioCtx.createGain();
+  const source=
+    audioCtx.createBufferSource();
 
-  source.buffer=tensionBuffer;
+  const gain=
+    audioCtx.createGain();
+
+  source.buffer=
+    tensionBuffer;
+
   source.loop=true;
+
   gain.gain.value=.72;
 
   source.connect(gain);
-  gain.connect(audioCtx.destination);
+
+  gain.connect(
+    audioCtx.destination
+  );
 
   source.start(0);
 
   tensionSource=source;
+
 }
+
 
 function stopHitMusic(){
-  try{hitSource?.stop()}catch(e){}
+
+  try{
+    hitSource?.stop();
+  }catch(e){}
+
   hitSource=null;
+
 }
 
+
 function playHitMusic(){
-  if(!audioCtx||!hitBuffer)return;
+
+  if(
+    !audioCtx ||
+    !hitBuffer
+  )return;
 
   stopHitMusic();
 
-  const source=audioCtx.createBufferSource();
-  const gain=audioCtx.createGain();
+  const source=
+    audioCtx.createBufferSource();
 
-  source.buffer=hitBuffer;
+  const gain=
+    audioCtx.createGain();
+
+  source.buffer=
+    hitBuffer;
+
   gain.gain.value=1;
 
   source.connect(gain);
-  gain.connect(audioCtx.destination);
+
+  gain.connect(
+    audioCtx.destination
+  );
 
   source.start(0);
+
   hitSource=source;
+
 }
 
-/* ========================================
-   BASIC
-======================================== */
+
+/* =========================
+   NUMBER
+========================= */
 
 function clearNumberClasses(){
-  $("#number").className="";
-  $("#number").style.opacity="";
-  $("#number").style.filter="";
+
+  const n=$("#number");
+
+  n.className="";
+
+  n.style.opacity="";
+  n.style.filter="";
+  n.style.transform="";
+
 }
 
-function showNumber(n){
+
+function showNumber(value){
+
   const el=$("#number");
 
   $("#dots").style.display="none";
@@ -986,419 +1239,854 @@ function showNumber(n){
   clearNumberClasses();
 
   el.style.display="block";
-  el.textContent=n;
+  el.textContent=value;
 
   void el.offsetWidth;
+
   el.classList.add("show");
+
 }
+
 
 function hideNumber(){
+
   $("#number").style.display="none";
+
 }
+
 
 function showDots(){
+
   hideNumber();
+
   $("#dots").style.display="block";
+
 }
+
 
 function hideDots(){
+
   $("#dots").style.display="none";
+
 }
+
 
 function flash(){
+
   const f=$("#flash");
+
   f.className="";
+
   void f.offsetWidth;
+
   f.className="go";
+
 }
+
 
 async function blackout(ms=1000){
+
   $("#black").style.display="block";
+
   await sleep(ms);
+
   $("#black").style.display="none";
+
 }
 
-/* ========================================
-   STARS
-======================================== */
+
+/* =========================
+   SHOOTING STARS
+   左上・上 → 右下のみ
+========================= */
 
 function clearStars(){
-  starTimers.forEach(clearTimeout);
+
+  starTimers.forEach(
+    clearTimeout
+  );
+
   starTimers=[];
 
-  $$(".star").forEach(x=>x.remove());
+  $$(".star").forEach(
+    star=>star.remove()
+  );
+
 }
+
 
 function shootStar(){
-  const s=document.createElement("div");
-  s.className="star";
 
-  s.style.left=(45+Math.random()*55)+"vw";
-  s.style.top=(5+Math.random()*35)+"vh";
+  const star=
+    document.createElement("div");
 
-  const scale=.75+Math.random()*.55;
-  s.style.transform=`scale(${scale})`;
+  star.className="star";
 
-  document.body.appendChild(s);
+  /*
+    右側から左へ飛ぶ星は
+    一切作らない。
+
+    出発地点は
+    左側の画面外 or 上側の画面外。
+  */
+
+  const fromTop=
+    Math.random()<.55;
+
+
+  if(fromTop){
+
+    /*
+      上から出現。
+      画面の左半分寄り。
+    */
+
+    star.style.left=
+      (-12+Math.random()*52)+"vw";
+
+    star.style.top=
+      (-5-Math.random()*8)+"vh";
+
+  }else{
+
+    /*
+      左画面外から出現。
+    */
+
+    star.style.left=
+      (-12-Math.random()*8)+"vw";
+
+    star.style.top=
+      (2+Math.random()*28)+"vh";
+
+  }
+
+
+  /*
+    尾の長さ
+  */
+
+  star.style.setProperty(
+    "--tail",
+    (110+Math.random()*130)+"px"
+  );
+
+
+  /*
+    流れる速さ
+  */
+
+  star.style.setProperty(
+    "--speed",
+    (.62+Math.random()*.38)+"s"
+  );
+
+
+  /*
+    星の大きさに少し個体差
+  */
+
+  const size=
+    .75+Math.random()*.65;
+
+  star.style.width=
+    (10*size)+"px";
+
+  star.style.height=
+    (10*size)+"px";
+
+
+  document.body.appendChild(
+    star
+  );
+
 
   requestAnimationFrame(()=>{
-    s.classList.add("go");
+
+    star.classList.add("go");
+
   });
 
-  setTimeout(()=>s.remove(),1200);
+
+  setTimeout(()=>{
+
+    star.remove();
+
+  },1400);
+
 }
+
 
 function starBurst(count){
-  for(let i=0;i<count;i++){
-    const t=setTimeout(shootStar,i*(60+Math.random()*100));
-    starTimers.push(t);
+
+  for(
+    let i=0;
+    i<count;
+    i++
+  ){
+
+    const timer=
+      setTimeout(
+        shootStar,
+        i*(
+          60+
+          Math.random()*100
+        )
+      );
+
+    starTimers.push(
+      timer
+    );
+
   }
+
 }
 
-function scheduleStars(token){
-  /* 約73%は星なし */
-  if(Math.random()>=.27)return;
 
-  const r=Math.random();
+function scheduleStars(token){
+
+  /*
+    約73%は星なし
+  */
+
+  if(
+    Math.random()>=.27
+  )return;
+
+
+  const r=
+    Math.random();
 
   let count;
 
+
+  /*
+    星が出る回の内訳
+
+    75% → 1〜3
+    20% → 4〜6
+     5% → 7〜10
+  */
+
   if(r<.75){
-    count=1+Math.floor(Math.random()*3);
+
+    count=
+      1+
+      Math.floor(
+        Math.random()*3
+      );
+
   }else if(r<.95){
-    count=4+Math.floor(Math.random()*3);
+
+    count=
+      4+
+      Math.floor(
+        Math.random()*3
+      );
+
   }else{
-    count=7+Math.floor(Math.random()*4);
+
+    count=
+      7+
+      Math.floor(
+        Math.random()*4
+      );
+
   }
 
-  const delay=600+Math.random()*3000;
 
-  starTimers.push(setTimeout(()=>{
-    if(token!==playToken)return;
+  const delay=
+    600+
+    Math.random()*3000;
 
-    starBurst(count);
 
-    if(Math.random()<.15){
-      starTimers.push(setTimeout(()=>{
-        if(token===playToken){
-          starBurst(1+Math.floor(Math.random()*4));
-        }
-      },700+Math.random()*1000));
-    }
-  },delay));
+  starTimers.push(
+
+    setTimeout(()=>{
+
+      if(
+        token!==playToken
+      )return;
+
+      starBurst(count);
+
+
+      /*
+        星が出た回の15%で
+        追加の流星
+      */
+
+      if(
+        Math.random()<.15
+      ){
+
+        starTimers.push(
+
+          setTimeout(()=>{
+
+            if(
+              token===playToken
+            ){
+
+              starBurst(
+                1+
+                Math.floor(
+                  Math.random()*4
+                )
+              );
+
+            }
+
+          },
+          700+
+          Math.random()*1000)
+
+        );
+
+      }
+
+    },delay)
+
+  );
+
 }
 
-/* ========================================
-   NEW COMMON CHANCE EFFECTS
-   当たり/ハズレ両方に使用
-======================================== */
 
-/* 1 数字巨大化 */
+/* =========================
+   SHARED EFFECTS
+========================= */
+
 async function fxBigNumber(){
+
   const n=$("#number");
-  n.classList.add("bigChance");
+
+  n.classList.add(
+    "bigChance"
+  );
+
   await sleep(750);
-  n.classList.remove("bigChance");
+
+  n.classList.remove(
+    "bigChance"
+  );
+
 }
 
-/* 2 ヒビ割れ風 */
+
 async function fxCrack(){
+
   const n=$("#number");
-  n.classList.add("cracked");
+
+  n.classList.add(
+    "cracked"
+  );
+
   await sleep(850);
-  n.classList.remove("cracked");
+
+  n.classList.remove(
+    "cracked"
+  );
+
 }
 
-/* 3 ピンク雷 */
-async function fxLightning(times=1){
-  for(let i=0;i<times;i++){
-    $("#lightning").className="go";
+
+async function fxLightning(
+  times=1
+){
+
+  for(
+    let i=0;
+    i<times;
+    i++
+  ){
+
+    $("#lightning")
+      .className="go";
+
     flash();
+
     await sleep(120);
-    $("#lightning").className="";
+
+    $("#lightning")
+      .className="";
+
     await sleep(170);
+
   }
+
 }
 
-/* 4 ノイズ */
-async function fxNoise(ms=650){
-  $("#noise").className="go";
+
+async function fxNoise(
+  ms=650
+){
+
+  $("#noise")
+    .className="go";
+
   await sleep(ms);
-  $("#noise").className="";
+
+  $("#noise")
+    .className="";
+
 }
 
-/* 5 白→ピンク→赤→金 */
+
 async function fxColorStep(){
+
   const n=$("#number");
 
   n.classList.add("pink");
+
   await sleep(430);
 
   n.classList.remove("pink");
   n.classList.add("red");
+
   await sleep(430);
 
   n.classList.remove("red");
   n.classList.add("gold");
+
   await sleep(700);
 
   n.classList.remove("gold");
+
 }
 
-/* 6 超ロング1 */
+
 async function fxSuperLongOne(){
+
   showNumber(1);
-  await sleep(5600+Math.random()*1400);
+
+  await sleep(
+    5600+
+    Math.random()*1400
+  );
+
 }
 
-/* 7 ?割り込み */
+
 async function fxQuestion(){
-  $("#question").style.display="block";
+
+  $("#question")
+    .style.display="block";
+
   await sleep(220);
-  $("#question").style.display="none";
+
+  $("#question")
+    .style.display="none";
+
 }
 
-/* 8 背景だけ暗くなる */
+
 async function fxBackgroundDark(){
-  $("#stage").classList.add("bgDark");
+
+  $("#stage")
+    .classList.add(
+      "bgDark"
+    );
+
   await sleep(1500);
-  $("#stage").classList.remove("bgDark");
+
+  $("#stage")
+    .classList.remove(
+      "bgDark"
+    );
+
 }
 
-/* 9 停止→再始動 */
+
 async function fxStopRestart(){
+
   showNumber(3);
+
   await sleep(1600);
 
   showNumber(2);
+
   await sleep(3300);
 
   showNumber(2);
+
   await sleep(650);
 
   showNumber(1);
+
   await sleep(1700);
+
 }
 
-/* 10 1消失＋完全無音 */
+
 async function fxSilentDisappear(){
+
   showNumber(1);
+
   await sleep(900);
 
   stopTension();
+
   hideNumber();
 
-  await sleep(2600+Math.random()*1400);
+  await sleep(
+    2600+
+    Math.random()*1400
+  );
+
 }
 
-/* 11 偽終了 */
+
 async function fxFakeFinish(){
+
   showNumber(3);
+
   await sleep(1500);
 
   showNumber(2);
+
   await sleep(1600);
 
   showNumber(1);
+
   await sleep(1700);
 
   hideNumber();
+
   stopTension();
 
   await sleep(2300);
+
 }
 
-/* 12 RPロゴ発光 */
+
 async function fxLogoGlow(){
+
   const g=$("#logoGlow");
 
   g.className="";
+
   void g.offsetWidth;
+
   g.className="go";
 
   await sleep(850);
+
   g.className="";
+
 }
 
-const commonFx=[
-  fxBigNumber,
-  fxCrack,
-  fxLightning,
-  fxNoise,
-  fxColorStep,
-  fxSuperLongOne,
-  fxQuestion,
-  fxBackgroundDark,
-  fxStopRestart,
-  fxSilentDisappear,
-  fxFakeFinish,
-  fxLogoGlow
-];
 
-/* ========================================
+/* =========================
    NORMAL COUNT
-======================================== */
+========================= */
 
 async function normalCount(){
+
   showNumber(3);
+
   await sleep(1750);
 
   showNumber(2);
+
   await sleep(1900);
 
   showNumber(1);
+
   await sleep(2050);
+
 }
 
-/* ========================================
-   REAL HIT
-======================================== */
 
-async function realHit(options={}){
+/* =========================
+   REAL HIT
+========================= */
+
+async function realHit(
+  options={}
+){
+
+  /*
+    当たり確定時に
+    Tensionをブツ切り
+  */
+
   stopTension();
 
-  /* 無音の間 */
-  await sleep(options.silence??700);
 
-  $("#hitDark").style.display="block";
+  /*
+    完全無音
+  */
+
+  await sleep(
+    options.silence ?? 700
+  );
+
+
+  /*
+    暗くなる
+  */
+
+  $("#hitDark")
+    .style.display="block";
+
   await sleep(300);
 
-  $("#hitDark").style.display="none";
+  $("#hitDark")
+    .style.display="none";
+
   await sleep(70);
 
-  /* 斬撃 */
-  $("#slash").className="go";
+
+  /*
+    切り裂き
+  */
+
+  $("#slash")
+    .className="go";
+
   await sleep(230);
 
+
+  /*
+    ダブル切り裂き
+  */
+
   if(options.double){
-    $("#slash").className="";
+
+    $("#slash")
+      .className="";
+
     await sleep(120);
-    $("#slash").className="go";
+
+    $("#slash")
+      .className="go";
+
     await sleep(200);
+
   }
 
-  document.body.classList.add("hitShake");
+
+  /*
+    強い画面振動
+  */
+
+  document.body
+    .classList.add(
+      "hitShake"
+    );
 
   await sleep(120);
+
+
+  /*
+    白フラッシュ
+  */
 
   flash();
 
   await sleep(170);
 
-  document.body.classList.remove("hitShake");
-  $("#slash").className="";
 
-  const hit=$("#hitText");
+  document.body
+    .classList.remove(
+      "hitShake"
+    );
+
+  $("#slash")
+    .className="";
+
+
+  /*
+    巨大「当たり」
+  */
+
+  const hit=
+    $("#hitText");
+
   hit.className="";
+
   void hit.offsetWidth;
+
   hit.className="go";
+
+
+  /*
+    本当たりだけ
+    当たりBGM
+  */
 
   playHitMusic();
 
+
   await sleep(900);
 
-  /* 追いフラッシュ */
   flash();
 
   await sleep(1300);
 
+
   hit.className="";
 
+
+  /*
+    宝箱へ
+  */
+
   showTreasure();
+
 }
 
-/* ========================================
-   ORIGINAL HIT ROUTES
-======================================== */
 
-async function normalHitAt(point){
+/* =========================
+   HIT ROUTES
+========================= */
+
+async function normalHitAt(
+  point
+){
+
   showNumber(3);
 
+
   if(point===3){
+
     await sleep(1300);
+
     return realHit();
+
   }
+
 
   await sleep(1750);
+
   showNumber(2);
 
+
   if(point===2){
+
     await sleep(1400);
+
     return realHit();
+
   }
+
 
   await sleep(1900);
+
   showNumber(1);
 
+
   if(point===1){
+
     await sleep(1550);
+
     return realHit();
+
   }
 
+
   await sleep(2050);
+
   hideNumber();
+
   await sleep(700);
 
   return realHit();
+
 }
 
+
 async function normalBlackout(){
+
   await normalCount();
 
   stopTension();
+
   hideNumber();
 
   await blackout(1500);
 
   return realHit();
+
 }
 
+
 async function freezeTwo(){
+
   showNumber(3);
+
   await sleep(1850);
 
   showNumber(2);
 
-  /* 2でフリーズ */
   await sleep(3900);
 
   return realHit();
+
 }
+
 
 async function reverseCountdown(){
-  showNumber(3);await sleep(1700);
-  showNumber(2);await sleep(1700);
-  showNumber(1);await sleep(1600);
-  showNumber(2);await sleep(1450);
-  showNumber(1);await sleep(1500);
+
+  showNumber(3);
+  await sleep(1700);
+
+  showNumber(2);
+  await sleep(1700);
+
+  showNumber(1);
+  await sleep(1600);
+
+  showNumber(2);
+  await sleep(1450);
+
+  showNumber(1);
+  await sleep(1500);
 
   return realHit();
+
 }
 
+
 async function zeroPremium(){
+
   await normalCount();
 
   showNumber(0);
-  $("#number").classList.add("gold");
+
+  $("#number")
+    .classList.add(
+      "gold"
+    );
 
   await sleep(900);
 
   return realHit();
+
 }
 
+
 async function numberDisappear(){
-  showNumber(3);await sleep(1700);
-  showNumber(2);await sleep(1700);
+
+  showNumber(3);
+  await sleep(1700);
+
+  showNumber(2);
+  await sleep(1700);
 
   hideNumber();
+
   stopTension();
 
   await sleep(2200);
 
   return realHit();
+
 }
 
+
 async function soundStopPattern(){
+
   await normalCount();
 
   stopTension();
@@ -1406,542 +2094,1011 @@ async function soundStopPattern(){
   await sleep(2200);
 
   return realHit();
+
 }
 
-async function longOne(){
-  showNumber(3);await sleep(1750);
-  showNumber(2);await sleep(1850);
-  showNumber(1);
 
+async function longOne(){
+
+  showNumber(3);
+  await sleep(1750);
+
+  showNumber(2);
+  await sleep(1850);
+
+  showNumber(1);
   await sleep(3900);
 
   return realHit();
+
 }
 
+
 async function recountSequence(){
+
   await normalCount();
 
   hideNumber();
+
   await sleep(1000);
 
   startTension();
 
-  showNumber(3);await sleep(1400);
-  showNumber(2);await sleep(1500);
-  showNumber(1);await sleep(1600);
-
-  return realHit();
-}
-
-async function doubleCountdown(){
-  await normalCount();
-
-  hideNumber();
-  await sleep(1200);
-
-  showNumber(3);await sleep(1400);
-  showNumber(2);await sleep(1500);
-  showNumber(1);await sleep(1600);
-
-  return realHit();
-}
-
-async function puchunDirect(){
-  showNumber(3);await sleep(1600);
-  showNumber(2);await sleep(1700);
-  showNumber(1);await sleep(800);
-
-  stopTension();
-  hideNumber();
-
-  await blackout(2000+Math.random()*900);
-
-  return realHit();
-}
-
-async function puchunRecount(){
-  await normalCount();
-
-  stopTension();
-  hideNumber();
-
-  await blackout(1900);
-
-  await sleep(500);
-
-  startTension();
-
-  showNumber(3);await sleep(1300);
-  showNumber(2);await sleep(1400);
-  showNumber(1);await sleep(1500);
-
-  return realHit();
-}
-
-async function fakeSlashPattern(){
-  showNumber(3);await sleep(1700);
-  showNumber(2);await sleep(1700);
-
-  $("#slash").className="go";
-  await sleep(180);
-  $("#slash").className="";
-
-  await sleep(700);
-
-  showNumber(1);
-  await sleep(2100);
-
-  return realHit();
-}
-
-async function weirdCountdown(){
-  showNumber(3);await sleep(1300);
-
-  await fxQuestion();
-
-  showNumber(1);await sleep(1200);
-  showNumber(2);await sleep(1300);
-  showNumber(1);await sleep(1500);
-
-  return realHit();
-}
-
-async function silentStart(){
-  stopTension();
-
   showNumber(3);
-  await sleep(1800);
+  await sleep(1400);
 
-  startTension();
-
-  showNumber(2);await sleep(1800);
-  showNumber(1);await sleep(1800);
-
-  return realHit();
-}
-
-async function classicRevival(){
-  await normalCount();
-
-  showDots();
-  stopTension();
-
-  await sleep(2200);
-
-  hideDots();
-  showNumber(1);
-
-  await sleep(1700);
-
-  return realHit();
-}
-
-async function skipCountHit(){
-  showNumber(3);
-  await sleep(1700);
-
-  showNumber(1);
-  await sleep(2000);
-
-  return realHit();
-}
-
-async function oneVanishHit(){
-  await normalCount();
-
-  hideNumber();
-  stopTension();
-
-  await sleep(3000);
-
-  return realHit();
-}
-
-async function oneBackToTwoHit(){
-  await normalCount();
-
-  await sleep(600);
   showNumber(2);
-  await sleep(1200);
-  showNumber(1);
   await sleep(1500);
-
-  return realHit();
-}
-
-async function speedCountHit(){
-  showNumber(3);await sleep(430);
-  showNumber(2);await sleep(430);
-  showNumber(1);await sleep(600);
-
-  return realHit();
-}
-
-async function doubleSlashHit(){
-  await normalCount();
-
-  return realHit({double:true});
-}
-
-async function silentOddityHit(){
-  showNumber(3);await sleep(1500);
-
-  stopTension();
-
-  showNumber(2);await sleep(1900);
-  showNumber(1);await sleep(2600);
-
-  return realHit();
-}
-
-async function questionHit(){
-  await normalCount();
-
-  hideNumber();
-
-  $("#question").style.display="block";
-  await sleep(1500);
-  $("#question").style.display="none";
-
-  return realHit();
-}
-
-async function blackoutReturnHit(){
-  await normalCount();
-
-  stopTension();
-  hideNumber();
-
-  await blackout(1400);
 
   showNumber(1);
   await sleep(1600);
 
   return realHit();
+
 }
 
-async function dotsDirectHit(){
+
+async function doubleCountdown(){
+
   await normalCount();
 
-  showDots();
+  hideNumber();
+
+  await sleep(1200);
+
+  showNumber(3);
+  await sleep(1400);
+
+  showNumber(2);
+  await sleep(1500);
+
+  showNumber(1);
+  await sleep(1600);
+
+  return realHit();
+
+}
+
+
+/* =========================
+   プチューン①
+   直撃
+========================= */
+
+async function puchunDirect(){
+
+  showNumber(3);
+  await sleep(1600);
+
+  showNumber(2);
+  await sleep(1700);
+
+  showNumber(1);
+  await sleep(800);
+
+
+  /*
+    突然BGM停止
+  */
+
+  stopTension();
+
+  hideNumber();
+
+
+  /*
+    完全黒画面＋無音
+  */
+
+  $("#black")
+    .style.display="block";
+
+  await sleep(
+    2400+
+    Math.random()*900
+  );
+
+
+  $("#black")
+    .style.display="none";
+
+
+  /*
+    黒画面解除後も
+    一瞬無音
+  */
+
+  await sleep(500);
+
+
+  return realHit({
+    silence:450
+  });
+
+}
+
+
+/* =========================
+   プチューン②
+   暗転 → 復活 → 再始動
+========================= */
+
+async function puchunRecount(){
+
+  await normalCount();
+
+
+  /*
+    BGMブツ切り
+  */
+
+  stopTension();
+
+  hideNumber();
+
+
+  /*
+    黒画面
+  */
+
+  $("#black")
+    .style.display="block";
+
+  await sleep(
+    2200+
+    Math.random()*700
+  );
+
+
+  $("#black")
+    .style.display="none";
+
+
+  /*
+    まだ無音
+  */
+
+  await sleep(700);
+
+
+  /*
+    復活
+  */
+
+  startTension();
+
+  showNumber(3);
+
+  await sleep(1400);
+
+  showNumber(2);
+
+  await sleep(1500);
+
+  showNumber(1);
+
+  await sleep(1700);
+
+
+  return realHit();
+
+}
+
+
+async function fakeSlashPattern(){
+
+  showNumber(3);
+  await sleep(1700);
+
+  showNumber(2);
+  await sleep(1700);
+
+  $("#slash")
+    .className="go";
+
+  await sleep(180);
+
+  $("#slash")
+    .className="";
+
+  await sleep(700);
+
+  showNumber(1);
+
   await sleep(2100);
 
   return realHit();
+
 }
 
-async function dotsOneRevival(){
+
+async function weirdCountdown(){
+
+  showNumber(3);
+  await sleep(1300);
+
+  await fxQuestion();
+
+  showNumber(1);
+  await sleep(1200);
+
+  showNumber(2);
+  await sleep(1300);
+
+  showNumber(1);
+  await sleep(1500);
+
+  return realHit();
+
+}
+
+
+async function silentStart(){
+
+  stopTension();
+
+  showNumber(3);
+
+  await sleep(1800);
+
+  startTension();
+
+  showNumber(2);
+  await sleep(1800);
+
+  showNumber(1);
+  await sleep(1800);
+
+  return realHit();
+
+}
+
+
+async function classicRevival(){
+
   await normalCount();
 
   showDots();
-  await sleep(1800);
+
+  stopTension();
+
+  await sleep(2200);
 
   hideDots();
+
+  showNumber(1);
+
+  await sleep(1700);
+
+  return realHit();
+
+}
+
+
+async function skipCountHit(){
+
+  showNumber(3);
+  await sleep(1700);
+
+  showNumber(1);
+  await sleep(2000);
+
+  return realHit();
+
+}
+
+
+async function oneVanishHit(){
+
+  await normalCount();
+
+  hideNumber();
+
+  stopTension();
+
+  await sleep(3000);
+
+  return realHit();
+
+}
+
+
+async function oneBackToTwoHit(){
+
+  await normalCount();
+
+  await sleep(600);
+
+  showNumber(2);
+
+  await sleep(1200);
+
   showNumber(1);
 
   await sleep(1500);
 
   return realHit();
+
 }
 
-async function dotsBlackoutHit(){
+
+async function speedCountHit(){
+
+  showNumber(3);
+  await sleep(430);
+
+  showNumber(2);
+  await sleep(430);
+
+  showNumber(1);
+  await sleep(600);
+
+  return realHit();
+
+}
+
+
+async function doubleSlashHit(){
+
+  await normalCount();
+
+  return realHit({
+    double:true
+  });
+
+}
+
+
+async function silentOddityHit(){
+
+  showNumber(3);
+
+  await sleep(1500);
+
+  stopTension();
+
+  showNumber(2);
+
+  await sleep(1900);
+
+  showNumber(1);
+
+  await sleep(2600);
+
+  return realHit();
+
+}
+
+
+async function questionHit(){
+
+  await normalCount();
+
+  hideNumber();
+
+  $("#question")
+    .style.display="block";
+
+  await sleep(1500);
+
+  $("#question")
+    .style.display="none";
+
+  return realHit();
+
+}
+
+
+async function blackoutReturnHit(){
+
   await normalCount();
 
   stopTension();
+
+  hideNumber();
+
+  await blackout(1400);
+
+  showNumber(1);
+
+  await sleep(1600);
+
+  return realHit();
+
+}
+
+
+async function dotsDirectHit(){
+
+  await normalCount();
+
+  showDots();
+
+  await sleep(2100);
+
+  return realHit();
+
+}
+
+
+async function dotsOneRevival(){
+
+  await normalCount();
+
+  showDots();
+
+  await sleep(1800);
+
+  hideDots();
+
+  showNumber(1);
+
+  await sleep(1500);
+
+  return realHit();
+
+}
+
+
+async function dotsBlackoutHit(){
+
+  await normalCount();
+
+  stopTension();
+
   showDots();
 
   await sleep(1200);
 
   hideDots();
+
   await blackout(1500);
 
   return realHit();
+
 }
 
+
 async function dotsStarHit(){
+
   await normalCount();
 
   showDots();
 
-  starBurst(3+Math.floor(Math.random()*4));
+  starBurst(
+    3+
+    Math.floor(
+      Math.random()*4
+    )
+  );
 
   await sleep(2000);
 
   return realHit();
+
 }
 
+
 async function dotsLongSilenceHit(){
+
   await normalCount();
 
   stopTension();
+
   showDots();
 
   await sleep(3300);
 
-  return realHit({double:true});
+  return realHit({
+    double:true
+  });
+
 }
 
-/* ========================================
-   12 NEW HIT ROUTES
-======================================== */
 
-async function commonFxHit(index){
+/* =========================
+   NEW 12 HIT ROUTES
+========================= */
+
+async function commonFxHit(
+  index
+){
+
   switch(index){
 
-    /* 巨大化 */
     case 0:
-      showNumber(3);await sleep(1500);
-      showNumber(2);await sleep(1200);
-      showNumber(1);await fxBigNumber();
+
+      showNumber(3);
+      await sleep(1500);
+
+      showNumber(2);
+      await sleep(1200);
+
+      showNumber(1);
+
+      await fxBigNumber();
+
       await sleep(900);
+
       return realHit();
 
-    /* ヒビ */
+
     case 1:
+
       await normalCount();
+
       await fxCrack();
+
       return realHit();
 
-    /* 雷 */
+
     case 2:
+
       await normalCount();
+
       await fxLightning(
-        Math.random()<.25 ? 3 : 1
+        Math.random()<.25
+          ? 3
+          : 1
       );
+
       await sleep(600);
+
       return realHit();
 
-    /* ノイズ */
+
     case 3:
-      showNumber(3);await sleep(1500);
-      showNumber(2);await fxNoise(750);
-      showNumber(1);await sleep(1600);
+
+      showNumber(3);
+      await sleep(1500);
+
+      showNumber(2);
+
+      await fxNoise(750);
+
+      showNumber(1);
+
+      await sleep(1600);
+
       return realHit();
 
-    /* 色段階 */
+
     case 4:
+
       await normalCount();
+
       await fxColorStep();
+
       await sleep(1000);
+
       return realHit();
 
-    /* 超ロング1 */
+
     case 5:
-      showNumber(3);await sleep(1600);
-      showNumber(2);await sleep(1700);
+
+      showNumber(3);
+      await sleep(1600);
+
+      showNumber(2);
+      await sleep(1700);
+
       await fxSuperLongOne();
+
       return realHit();
 
-    /* ? */
+
     case 6:
-      showNumber(3);await sleep(1400);
+
+      showNumber(3);
+      await sleep(1400);
+
       await fxQuestion();
-      showNumber(2);await sleep(1500);
-      showNumber(1);await sleep(1700);
+
+      showNumber(2);
+      await sleep(1500);
+
+      showNumber(1);
+      await sleep(1700);
+
       return realHit();
 
-    /* 背景暗転 */
+
     case 7:
+
       await normalCount();
+
       await fxBackgroundDark();
+
       return realHit();
 
-    /* 停止再始動 */
+
     case 8:
+
       await fxStopRestart();
+
       return realHit();
 
-    /* 1消失無音 */
+
     case 9:
-      showNumber(3);await sleep(1500);
-      showNumber(2);await sleep(1600);
+
+      showNumber(3);
+      await sleep(1500);
+
+      showNumber(2);
+      await sleep(1600);
+
       await fxSilentDisappear();
+
       return realHit();
 
-    /* 偽終了 */
+
     case 10:
+
       await fxFakeFinish();
+
       return realHit();
 
-    /* RPロゴ */
+
     case 11:
+
       await normalCount();
+
       await fxLogoGlow();
+
       await sleep(700);
+
       return realHit();
+
   }
+
 }
 
-/* ========================================
+
+/* =========================
    MISS
-======================================== */
+========================= */
 
 async function normalMiss(){
+
   await normalCount();
 
   hideNumber();
+
   stopTension();
 
   await sleep(1400);
 
   return finishMiss();
+
 }
 
-/* ---------- weak fake 10 ---------- */
 
-async function weakFake(type){
+/* =========================
+   WEAK FAKE ×10
+========================= */
+
+async function weakFake(
+  type
+){
+
   switch(type){
 
+    /* 2が長い */
     case 0:
-      showNumber(3);await sleep(1600);
-      showNumber(2);await sleep(3100);
-      showNumber(1);await sleep(1600);
-      break;
 
-    case 1:
-      showNumber(3);await sleep(1600);
-      showNumber(2);await sleep(1700);
-      showNumber(1);await sleep(3500);
-      break;
+      showNumber(3);
+      await sleep(1600);
 
-    case 2:
-      await normalCount();
-      $("#number").classList.add("red");
-      await sleep(500);
-      $("#number").classList.remove("red");
-      break;
-
-    case 3:
-      showNumber(3);await sleep(1500);
-      showNumber(2);await sleep(1500);
-      stopTension();
-      showNumber(1);
-      await sleep(2500);
-      break;
-
-    case 4:
-      await normalCount();
-      hideNumber();
-      await blackout(650);
-      showNumber(1);
-      await sleep(1400);
-      break;
-
-    case 5:
-      showNumber(3);await sleep(3400);
-      showNumber(2);await sleep(1500);
-      showNumber(1);await sleep(1600);
-      break;
-
-    case 6:
-      showNumber(3);await sleep(1500);
       showNumber(2);
-      $("#number").classList.add("red");
-      await sleep(500);
-      $("#number").classList.remove("red");
-      await sleep(1100);
-      showNumber(1);await sleep(1500);
+      await sleep(3100);
+
+      showNumber(1);
+      await sleep(1600);
+
       break;
 
-    case 7:
-      showNumber(3);await sleep(1400);
-      showNumber(2);await sleep(1400);
-      showNumber(0);await sleep(280);
-      showNumber(1);await sleep(1700);
+
+    /* 1が長い */
+    case 1:
+
+      showNumber(3);
+      await sleep(1600);
+
+      showNumber(2);
+      await sleep(1700);
+
+      showNumber(1);
+      await sleep(3500);
+
       break;
 
-    case 8:
+
+    /* 1が一瞬赤 */
+    case 2:
+
       await normalCount();
-      $("#number").style.transform=
-        "translate(-50%,-50%) scale(.78)";
-      await sleep(900);
+
+      $("#number")
+        .classList.add(
+          "red"
+        );
+
+      await sleep(500);
+
+      $("#number")
+        .classList.remove(
+          "red"
+        );
+
       break;
 
-    case 9:
-      showNumber(3);await sleep(400);
-      showNumber(2);await sleep(500);
-      showNumber(1);await sleep(1900);
+
+    /* BGMだけ突然停止 */
+    case 3:
+
+      showNumber(3);
+      await sleep(1500);
+
+      showNumber(2);
+      await sleep(1500);
+
+      stopTension();
+
+      showNumber(1);
+
+      await sleep(2500);
+
       break;
+
+
+    /* 一瞬暗転 */
+    case 4:
+
+      await normalCount();
+
+      hideNumber();
+
+      await blackout(650);
+
+      showNumber(1);
+
+      await sleep(1400);
+
+      break;
+
+
+    /* 3が異常に長い */
+    case 5:
+
+      showNumber(3);
+      await sleep(3400);
+
+      showNumber(2);
+      await sleep(1500);
+
+      showNumber(1);
+      await sleep(1600);
+
+      break;
+
+
+    /* 2が一瞬赤 */
+    case 6:
+
+      showNumber(3);
+      await sleep(1500);
+
+      showNumber(2);
+
+      $("#number")
+        .classList.add(
+          "red"
+        );
+
+      await sleep(500);
+
+      $("#number")
+        .classList.remove(
+          "red"
+        );
+
+      await sleep(1100);
+
+      showNumber(1);
+
+      await sleep(1500);
+
+      break;
+
+
+    /* 0が一瞬出る */
+    case 7:
+
+      showNumber(3);
+      await sleep(1400);
+
+      showNumber(2);
+      await sleep(1400);
+
+      showNumber(0);
+      await sleep(280);
+
+      showNumber(1);
+      await sleep(1700);
+
+      break;
+
+
+    /* 1が小さくなる */
+    case 8:
+
+      await normalCount();
+
+      $("#number")
+        .style.transform=
+          "translate(-50%,-50%) scale(.78)";
+
+      await sleep(900);
+
+      break;
+
+
+    /* 3→2だけ速い */
+    case 9:
+
+      showNumber(3);
+      await sleep(400);
+
+      showNumber(2);
+      await sleep(500);
+
+      showNumber(1);
+      await sleep(1900);
+
+      break;
+
   }
 
+
   stopTension();
+
   showDots();
 
   await sleep(1400);
 
   return finishMiss();
+
 }
 
-/* ---------- strong fake 6 ---------- */
 
-async function strongFake(type){
+/* =========================
+   STRONG FAKE ×6
+========================= */
+
+async function strongFake(
+  type
+){
+
   switch(type){
 
-    /* fake slash */
+    /*
+      偽切り裂き
+      ※当たりBGMは鳴らさない
+    */
     case 0:
+
       await normalCount();
+
       stopTension();
 
-      $("#slash").className="go";
+      $("#slash")
+        .className="go";
+
       await sleep(230);
-      $("#slash").className="";
+
+      $("#slash")
+        .className="";
 
       await sleep(1800);
+
       break;
 
-    /* blackout */
+
+    /*
+      長い暗転
+    */
     case 1:
+
       await normalCount();
+
       stopTension();
+
       hideNumber();
 
       await blackout(2200);
+
       break;
 
-    /* gold */
+
+    /*
+      1が金
+    */
     case 2:
+
       await normalCount();
 
-      $("#number").classList.add("gold");
+      $("#number")
+        .classList.add(
+          "gold"
+        );
+
       await sleep(3000);
-      $("#number").classList.remove("gold");
+
+      $("#number")
+        .classList.remove(
+          "gold"
+        );
+
       break;
 
-    /* fake slash + white flash */
+
+    /*
+      偽切り裂き＋白フラッシュ
+    */
     case 3:
+
       await normalCount();
 
       stopTension();
 
-      $("#slash").className="go";
+      $("#slash")
+        .className="go";
+
       await sleep(220);
 
       flash();
 
       await sleep(250);
 
-      $("#slash").className="";
+      $("#slash")
+        .className="";
 
       await sleep(1800);
+
       break;
 
-    /* blackout return 1 */
+
+    /*
+      暗転 → 1復帰
+    */
     case 4:
+
       await normalCount();
 
       stopTension();
+
       hideNumber();
 
       await blackout(1500);
 
       showNumber(1);
+
       await sleep(2300);
+
       break;
 
-    /* gold + silence */
+
+    /*
+      金 → BGM停止 → 長い間
+    */
     case 5:
+
       await normalCount();
 
-      $("#number").classList.add("gold");
+      $("#number")
+        .classList.add(
+          "gold"
+        );
 
       await sleep(700);
 
@@ -1949,225 +3106,470 @@ async function strongFake(type){
 
       await sleep(3300);
 
-      $("#number").classList.remove("gold");
+      $("#number")
+        .classList.remove(
+          "gold"
+        );
+
       break;
+
   }
+
 
   showDots();
 
   await sleep(1500);
 
   return finishMiss();
+
 }
 
-/* ========================================
-   NEW COMMON FX MISS
-======================================== */
 
-async function commonFxMiss(index){
+/* =========================
+   NEW 12 FX
+   MISS VERSION
+========================= */
+
+async function commonFxMiss(
+  index
+){
+
   switch(index){
 
     case 0:
+
       await normalCount();
+
       await fxBigNumber();
+
       break;
+
 
     case 1:
+
       await normalCount();
+
       await fxCrack();
+
       break;
+
 
     case 2:
+
       await normalCount();
+
       await fxLightning(
-        Math.random()<.25 ? 3 : 1
+        Math.random()<.25
+          ? 3
+          : 1
       );
+
       break;
+
 
     case 3:
-      showNumber(3);await sleep(1400);
-      showNumber(2);await fxNoise(700);
-      showNumber(1);await sleep(1700);
+
+      showNumber(3);
+      await sleep(1400);
+
+      showNumber(2);
+
+      await fxNoise(700);
+
+      showNumber(1);
+
+      await sleep(1700);
+
       break;
+
 
     case 4:
+
       await normalCount();
+
       await fxColorStep();
+
       await sleep(1000);
+
       break;
+
 
     case 5:
-      showNumber(3);await sleep(1500);
-      showNumber(2);await sleep(1600);
+
+      showNumber(3);
+      await sleep(1500);
+
+      showNumber(2);
+      await sleep(1600);
+
       await fxSuperLongOne();
+
       break;
+
 
     case 6:
-      showNumber(3);await sleep(1400);
+
+      showNumber(3);
+      await sleep(1400);
+
       await fxQuestion();
-      showNumber(2);await sleep(1500);
-      showNumber(1);await sleep(1600);
+
+      showNumber(2);
+      await sleep(1500);
+
+      showNumber(1);
+      await sleep(1600);
+
       break;
+
 
     case 7:
+
       await normalCount();
+
       await fxBackgroundDark();
+
       break;
+
 
     case 8:
+
       await fxStopRestart();
+
       break;
+
 
     case 9:
-      showNumber(3);await sleep(1500);
-      showNumber(2);await sleep(1600);
+
+      showNumber(3);
+      await sleep(1500);
+
+      showNumber(2);
+      await sleep(1600);
+
       await fxSilentDisappear();
+
       break;
+
 
     case 10:
+
       await fxFakeFinish();
+
       break;
 
+
     case 11:
+
       await normalCount();
+
       await fxLogoGlow();
+
       await sleep(1000);
+
       break;
+
   }
+
 
   stopTension();
 
-  /* 新演出も結果を読ませないため
-     ときどき…を出す */
-  if(Math.random()<.55){
+
+  /*
+    新演出も
+    「出た＝ハズレ」にならないよう
+    終わり方を2種類にする
+  */
+
+  if(
+    Math.random()<.55
+  ){
+
     showDots();
-    await sleep(1200+Math.random()*700);
+
+    await sleep(
+      1200+
+      Math.random()*700
+    );
+
   }else{
+
     hideNumber();
+
     hideDots();
+
     await sleep(1300);
+
   }
 
+
   return finishMiss();
+
 }
 
-/* ========================================
-   MISS RESET
-======================================== */
+
+/* =========================
+   MISS FINISH
+========================= */
 
 async function finishMiss(){
+
   stopTension();
 
   hideNumber();
+
   hideDots();
 
-  $("#stage").classList.remove("bgDark");
-  $("#noise").className="";
-  $("#lightning").className="";
-  $("#question").style.display="none";
+  $("#stage")
+    .classList.remove(
+      "bgDark"
+    );
+
+  $("#noise")
+    .className="";
+
+  $("#lightning")
+    .className="";
+
+  $("#question")
+    .style.display="none";
+
+  $("#black")
+    .style.display="none";
+
+  $("#slash")
+    .className="";
 
   await sleep(800);
 
   resetMain();
+
 }
 
-/* ========================================
+
+/* =========================
    PRIZE
-======================================== */
+========================= */
 
-/* 1等2% / 2等20% / 3等78% */
+/*
+  当たり後の抽選
+
+  1等 2%
+  2等 20%
+  3等 78%
+*/
+
 function drawPrize(){
-  const r=Math.random();
 
-  if(r<.02)return 1;
-  if(r<.22)return 2;
+  const r=
+    Math.random();
+
+  if(r<.02){
+    return 1;
+  }
+
+  if(r<.22){
+    return 2;
+  }
 
   return 3;
+
 }
+
 
 function rankClass(rank){
+
   return "rank"+rank;
+
 }
+
 
 function createChests(){
-  const area=$("#chests");
+
+  const area=
+    $("#chests");
+
   area.innerHTML="";
 
-  for(let i=0;i<3;i++){
-    const b=document.createElement("button");
-    b.className="chest";
 
-    b.innerHTML=`
+  for(
+    let i=0;
+    i<3;
+    i++
+  ){
+
+    const button=
+      document.createElement(
+        "button"
+      );
+
+    button.className="chest";
+
+
+    button.innerHTML=`
+
       <div class="chestWrap">
+
         <div class="chestLight"></div>
+
         <div class="openLid"></div>
+
         <div class="closedLid"></div>
+
         <div class="hinge"></div>
+
         <div class="chestBody"></div>
+
         <div class="lock"></div>
+
       </div>
+
       <div class="rankLabel"></div>
+
     `;
 
-    b.addEventListener("click",()=>{
-      chooseChest(i);
-    });
 
-    area.appendChild(b);
+    button.addEventListener(
+      "click",
+      ()=>chooseChest(i)
+    );
+
+
+    area.appendChild(
+      button
+    );
+
   }
+
 }
 
+
 function showTreasure(){
-  selectedRank=drawPrize();
+
+  selectedRank=
+    drawPrize();
+
   selectedIndex=-1;
+
   chestBusy=false;
+
 
   createChests();
 
-  $("#treasureTitle").textContent="宝箱を1つ選べ！";
-  $("#treasureSub").textContent="好きな宝箱をタップ";
 
-  $("#resultSmall").style.display="none";
-  $("#resultBig").style.display="none";
-  $("#next").style.display="none";
+  $("#treasureTitle")
+    .textContent=
+      "宝箱を1つ選べ！";
 
-  $("#treasure").className="show";
+  $("#treasureSub")
+    .textContent=
+      "好きな宝箱をタップ";
+
+
+  $("#resultSmall")
+    .style.display="none";
+
+  $("#resultBig")
+    .style.display="none";
+
+  $("#next")
+    .style.display="none";
+
+
+  $("#treasure")
+    .className="show";
+
 }
 
-function showSelectedResult(rank){
-  const small=$("#resultSmall");
-  const big=$("#resultBig");
 
-  small.textContent="あなたの結果";
-  small.style.display="block";
+function showSelectedResult(
+  rank
+){
 
-  big.textContent=rank+"等 当選！";
-  big.className=rankClass(rank);
-  big.style.display="block";
+  const small=
+    $("#resultSmall");
+
+  const big=
+    $("#resultBig");
+
+
+  small.textContent=
+    "あなたの結果";
+
+  small.style.display=
+    "block";
+
+
+  big.textContent=
+    rank+"等 当選！";
+
+  big.className=
+    rankClass(rank);
+
+  big.style.display=
+    "block";
+
 
   void big.offsetWidth;
-  big.classList.add("resultPop");
+
+  big.classList.add(
+    "resultPop"
+  );
+
 }
 
-async function chooseChest(index){
+
+async function chooseChest(
+  index
+){
+
   if(chestBusy)return;
 
   chestBusy=true;
+
   selectedIndex=index;
 
-  const chests=$$(".chest");
-  const chosen=chests[index];
 
-  chests.forEach(c=>{
-    c.style.pointerEvents="none";
-  });
+  const chests=
+    $$(".chest");
 
-  chosen.classList.add("shaking");
+  const chosen=
+    chests[index];
+
+
+  chests.forEach(
+    chest=>{
+      chest.style.pointerEvents=
+        "none";
+    }
+  );
+
+
+  /*
+    選んだ箱が震える
+  */
+
+  chosen.classList.add(
+    "shaking"
+  );
 
   await sleep(950);
 
-  chosen.classList.remove("shaking");
-  chosen.classList.add("open","selectedChest");
+
+  chosen.classList.remove(
+    "shaking"
+  );
+
+
+  /*
+    選択箱OPEN
+  */
+
+  chosen.classList.add(
+    "open",
+    "selectedChest"
+  );
+
 
   await sleep(450);
 
@@ -2175,269 +3577,622 @@ async function chooseChest(index){
 
   await sleep(500);
 
-  const label=chosen.querySelector(".rankLabel");
 
-  label.textContent=selectedRank+"等";
-  label.className="rankLabel "+rankClass(selectedRank);
+  const label=
+    chosen.querySelector(
+      ".rankLabel"
+    );
 
-  showSelectedResult(selectedRank);
+
+  label.textContent=
+    selectedRank+"等";
+
+  label.className=
+    "rankLabel "+
+    rankClass(
+      selectedRank
+    );
+
+
+  /*
+    選んだ結果を
+    ずっと表示
+  */
+
+  showSelectedResult(
+    selectedRank
+  );
+
 
   await sleep(1300);
 
-  /* 残りは他の2等級 */
-  const remainingRanks=[1,2,3]
-    .filter(r=>r!==selectedRank)
-    .sort(()=>Math.random()-.5);
 
-  const otherIndexes=[0,1,2]
-    .filter(i=>i!==index)
-    .sort(()=>Math.random()-.5);
+  /*
+    残りの2等級
+  */
 
-  for(let i=0;i<otherIndexes.length;i++){
-    const idx=otherIndexes[i];
-    const c=chests[idx];
+  const remainingRanks=
+    [1,2,3]
+      .filter(
+        rank=>
+          rank!==selectedRank
+      )
+      .sort(
+        ()=>Math.random()-.5
+      );
 
-    c.classList.add("otherChest","shaking");
+
+  const otherIndexes=
+    [0,1,2]
+      .filter(
+        i=>i!==index
+      )
+      .sort(
+        ()=>Math.random()-.5
+      );
+
+
+  /*
+    残りの箱を順番にOPEN
+  */
+
+  for(
+    let i=0;
+    i<otherIndexes.length;
+    i++
+  ){
+
+    const idx=
+      otherIndexes[i];
+
+    const chest=
+      chests[idx];
+
+
+    chest.classList.add(
+      "otherChest",
+      "shaking"
+    );
+
 
     await sleep(500);
 
-    c.classList.remove("shaking");
-    c.classList.add("open");
 
-    const l=c.querySelector(".rankLabel");
-    const rank=remainingRanks[i];
+    chest.classList.remove(
+      "shaking"
+    );
 
-    l.textContent=rank+"等";
-    l.className="rankLabel "+rankClass(rank);
+    chest.classList.add(
+      "open"
+    );
+
+
+    const label=
+      chest.querySelector(
+        ".rankLabel"
+      );
+
+    const rank=
+      remainingRanks[i];
+
+
+    label.textContent=
+      rank+"等";
+
+    label.className=
+      "rankLabel "+
+      rankClass(rank);
+
 
     await sleep(750);
+
   }
 
-  $("#treasureTitle").textContent="あなたが選んだ宝箱";
-  $("#treasureSub").textContent="選んだ結果はこちら";
 
-  /* 選んだ結果を最後まで残す */
-  showSelectedResult(selectedRank);
+  $("#treasureTitle")
+    .textContent=
+      "あなたが選んだ宝箱";
+
+  $("#treasureSub")
+    .textContent=
+      "選んだ結果はこちら";
+
+
+  /*
+    最後まで選択結果を強調
+  */
+
+  showSelectedResult(
+    selectedRank
+  );
+
 
   await sleep(600);
 
-  $("#next").style.display="block";
+
+  $("#next")
+    .style.display="block";
+
 }
 
-/* ========================================
-   HIT ROUTE SELECTOR
-======================================== */
+
+/* =========================
+   HIT SELECTOR
+========================= */
 
 async function runHit(){
+
   /*
-    既存32 + 新12 = 44系統
+    当たり演出
+
+    既存32
+    ＋
+    新12
+
+    合計44種類
   */
 
-  const p=Math.floor(Math.random()*44);
+  const pattern=
+    Math.floor(
+      Math.random()*44
+    );
 
-  switch(p){
-    case 0:return normalHitAt(3);
-    case 1:return normalHitAt(2);
-    case 2:return normalHitAt(1);
-    case 3:return normalHitAt(0);
-    case 4:return normalBlackout();
-    case 5:return freezeTwo();
-    case 6:return reverseCountdown();
-    case 7:return zeroPremium();
-    case 8:return numberDisappear();
-    case 9:return soundStopPattern();
-    case 10:return longOne();
-    case 11:return recountSequence();
-    case 12:return doubleCountdown();
-    case 13:return puchunDirect();
-    case 14:return puchunRecount();
-    case 15:return fakeSlashPattern();
-    case 16:return weirdCountdown();
-    case 17:return silentStart();
-    case 18:return classicRevival();
-    case 19:return skipCountHit();
-    case 20:return oneVanishHit();
-    case 21:return oneBackToTwoHit();
-    case 22:return speedCountHit();
-    case 23:return doubleSlashHit();
-    case 24:return silentOddityHit();
-    case 25:return questionHit();
-    case 26:return blackoutReturnHit();
-    case 27:return dotsDirectHit();
-    case 28:return dotsOneRevival();
-    case 29:return dotsBlackoutHit();
-    case 30:return dotsStarHit();
-    case 31:return dotsLongSilenceHit();
 
-    /* 新12 */
-    case 32:return commonFxHit(0);
-    case 33:return commonFxHit(1);
-    case 34:return commonFxHit(2);
-    case 35:return commonFxHit(3);
-    case 36:return commonFxHit(4);
-    case 37:return commonFxHit(5);
-    case 38:return commonFxHit(6);
-    case 39:return commonFxHit(7);
-    case 40:return commonFxHit(8);
-    case 41:return commonFxHit(9);
-    case 42:return commonFxHit(10);
-    case 43:return commonFxHit(11);
+  switch(pattern){
+
+    case 0:
+      return normalHitAt(3);
+
+    case 1:
+      return normalHitAt(2);
+
+    case 2:
+      return normalHitAt(1);
+
+    case 3:
+      return normalHitAt(0);
+
+    case 4:
+      return normalBlackout();
+
+    case 5:
+      return freezeTwo();
+
+    case 6:
+      return reverseCountdown();
+
+    case 7:
+      return zeroPremium();
+
+    case 8:
+      return numberDisappear();
+
+    case 9:
+      return soundStopPattern();
+
+    case 10:
+      return longOne();
+
+    case 11:
+      return recountSequence();
+
+    case 12:
+      return doubleCountdown();
+
+    /*
+      プチューン直撃
+    */
+    case 13:
+      return puchunDirect();
+
+    /*
+      プチューン再始動
+    */
+    case 14:
+      return puchunRecount();
+
+    case 15:
+      return fakeSlashPattern();
+
+    case 16:
+      return weirdCountdown();
+
+    case 17:
+      return silentStart();
+
+    case 18:
+      return classicRevival();
+
+    case 19:
+      return skipCountHit();
+
+    case 20:
+      return oneVanishHit();
+
+    case 21:
+      return oneBackToTwoHit();
+
+    case 22:
+      return speedCountHit();
+
+    case 23:
+      return doubleSlashHit();
+
+    case 24:
+      return silentOddityHit();
+
+    case 25:
+      return questionHit();
+
+    case 26:
+      return blackoutReturnHit();
+
+    case 27:
+      return dotsDirectHit();
+
+    case 28:
+      return dotsOneRevival();
+
+    case 29:
+      return dotsBlackoutHit();
+
+    case 30:
+      return dotsStarHit();
+
+    case 31:
+      return dotsLongSilenceHit();
+
+
+    /*
+      新12演出
+    */
+
+    case 32:
+      return commonFxHit(0);
+
+    case 33:
+      return commonFxHit(1);
+
+    case 34:
+      return commonFxHit(2);
+
+    case 35:
+      return commonFxHit(3);
+
+    case 36:
+      return commonFxHit(4);
+
+    case 37:
+      return commonFxHit(5);
+
+    case 38:
+      return commonFxHit(6);
+
+    case 39:
+      return commonFxHit(7);
+
+    case 40:
+      return commonFxHit(8);
+
+    case 41:
+      return commonFxHit(9);
+
+    case 42:
+      return commonFxHit(10);
+
+    case 43:
+      return commonFxHit(11);
+
   }
+
 }
 
-/* ========================================
+
+/* =========================
    MISS SELECTOR
-======================================== */
+========================= */
 
 async function runMiss(){
-  /*
-    ハズレの基本振り分けを維持しつつ
-    一部を新12共通演出へ差し替える。
 
-    新演出が出ても当たり確定にならない。
+  /*
+    新12演出も
+    ハズレ側で出現
   */
 
-  if(Math.random()<.36){
+  if(
+    Math.random()<.36
+  ){
+
     return commonFxMiss(
-      Math.floor(Math.random()*12)
+
+      Math.floor(
+        Math.random()*12
+      )
+
     );
+
   }
 
-  const r=Math.random();
+
+  /*
+    残りは
+
+    50% 通常
+    25% 弱フェイク
+    25% 強フェイク
+  */
+
+  const r=
+    Math.random();
+
 
   if(r<.50){
+
     return normalMiss();
+
   }
+
 
   if(r<.75){
+
     return weakFake(
-      Math.floor(Math.random()*10)
+
+      Math.floor(
+        Math.random()*10
+      )
+
     );
+
   }
+
 
   return strongFake(
-    Math.floor(Math.random()*6)
+
+    Math.floor(
+      Math.random()*6
+    )
+
   );
+
 }
 
-/* ========================================
-   START
-======================================== */
 
-async function play(){
-  if(busy)return;
-
-  busy=true;
-
-  $("#start").style.display="none";
-  $("#info").style.display="none";
-
-  playToken++;
-  clearStars();
-
-  resetVisuals();
-
-  /*
-    iPhone Safari対策：
-    ユーザーのタップ中にAudioContextをresume開始
-  */
-  ensureAudioContext();
-
-  const resumePromise=audioCtx.resume();
-
-  try{
-    await Promise.all([
-      resumePromise,
-      prepareAudio()
-    ]);
-  }catch(e){
-    console.log("audio prepare",e);
-  }
-
-  startTension();
-
-  scheduleStars(playToken);
-
-  /*
-    ★ 本番抽選
-    START 1回につき1回だけ
-    完全独立 1/30
-  */
-  const win=Math.random() < (1/30);
-
-  if(win){
-    return runHit();
-  }
-
-  return runMiss();
-}
-
-/* ========================================
-   RESET
-======================================== */
+/* =========================
+   RESET VISUALS
+========================= */
 
 function resetVisuals(){
-  $("#black").style.display="none";
-  $("#hitDark").style.display="none";
-  $("#slash").className="";
-  $("#flash").className="";
-  $("#hitText").className="";
-  $("#noise").className="";
-  $("#lightning").className="";
-  $("#logoGlow").className="";
-  $("#question").style.display="none";
 
-  $("#stage").classList.remove("bgDark");
+  $("#black")
+    .style.display="none";
+
+  $("#hitDark")
+    .style.display="none";
+
+  $("#slash")
+    .className="";
+
+  $("#flash")
+    .className="";
+
+  $("#hitText")
+    .className="";
+
+  $("#noise")
+    .className="";
+
+  $("#lightning")
+    .className="";
+
+  $("#logoGlow")
+    .className="";
+
+  $("#question")
+    .style.display="none";
+
+  $("#stage")
+    .classList.remove(
+      "bgDark"
+    );
 
   hideDots();
 
   clearNumberClasses();
 
-  $("#number").style.display="block";
-  $("#number").textContent="3";
 }
 
+
+/* =========================
+   MAIN RESET
+========================= */
+
 function resetMain(){
+
+  stopTension();
+
+  clearStars();
+
+  resetVisuals();
+
+  $("#treasure")
+    .className="";
+
+  $("#next")
+    .style.display="none";
+
+  $("#resultSmall")
+    .style.display="none";
+
+  $("#resultBig")
+    .style.display="none";
+
+
+  showNumber(3);
+
+
+  $("#start")
+    .style.display="block";
+
+  $("#info")
+    .style.display="block";
+
+
+  busy=false;
+  chestBusy=false;
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+async function play(){
+
+  if(busy)return;
+
+  busy=true;
+
+
+  $("#start")
+    .style.display="none";
+
+  $("#info")
+    .style.display="none";
+
+
   playToken++;
 
   clearStars();
 
-  stopTension();
-  stopHitMusic();
-
   resetVisuals();
 
-  $("#treasure").className="";
 
-  $("#resultSmall").style.display="none";
-  $("#resultBig").style.display="none";
-  $("#next").style.display="none";
+  /*
+    iPhone Safari用
 
-  $("#start").style.display="block";
-  $("#info").style.display="block";
+    STARTタップ中に
+    AudioContextを作成して
+    resumeを開始
+  */
 
-  selectedRank=null;
-  selectedIndex=-1;
+  ensureAudioContext();
 
-  chestBusy=false;
-  busy=false;
+  const resumePromise=
+    audioCtx.resume();
+
+
+  try{
+
+    await Promise.all([
+      resumePromise,
+      prepareAudio()
+    ]);
+
+  }catch(e){
+
+    console.log(
+      "audio preparation error",
+      e
+    );
+
+  }
+
+
+  /*
+    カウントダウンBGM開始
+  */
+
+  startTension();
+
+
+  /*
+    流れ星スケジュール
+
+    当たり/ハズレとは
+    完全に別抽選
+  */
+
+  const token=
+    playToken;
+
+  scheduleStars(token);
+
+
+  /*
+    ★ 本番抽選 ★
+
+    STARTを押すたび
+    独立して1回だけ抽選。
+
+    1/30
+  */
+
+  const win=
+    Math.random() < (1/30);
+
+
+  if(win){
+
+    await runHit();
+
+  }else{
+
+    await runMiss();
+
+  }
+
 }
 
-/* ========================================
+
+/* =========================
    EVENTS
-======================================== */
+========================= */
 
-$("#start").addEventListener("click",play);
+$("#start")
+  .addEventListener(
+    "click",
+    play
+  );
 
-$("#next").addEventListener("click",()=>{
-  resetMain();
-});
 
-/* audio preload */
-window.addEventListener("load",()=>{
-  ensureAudioContext();
-  prepareAudio().catch(()=>{});
-});
+$("#next")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      stopHitMusic();
+
+      playToken++;
+
+      resetMain();
+
+    }
+  );
+
+
+/* =========================
+   PRELOAD
+========================= */
+
+window.addEventListener(
+  "load",
+  ()=>{
+
+    /*
+      fetch/decodeは先に試す。
+      実際の音声再生unlockは
+      STARTタップ時。
+    */
+
+    ensureAudioContext();
+
+    prepareAudio()
+      .catch(()=>{});
+
+  }
+);
+
 </script>
 
 </body>
