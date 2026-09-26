@@ -26,21 +26,18 @@ body{
   user-select:none;
 }
 
-/* =========================================================
+/* =========================
    MAIN
-========================================================= */
-
+========================= */
 #stage{
   position:fixed;
   inset:0;
   overflow:hidden;
-
   background-color:#120008;
   background-image:url("./9E28B31B-C619-4F41-AB55-91C025168D02.png");
   background-size:auto 100%;
   background-position:center top;
   background-repeat:no-repeat;
-
   transform-origin:center center;
 }
 
@@ -70,37 +67,26 @@ body{
   100%{transform:scale(1)}
 }
 
-/* =========================================================
+/* =========================
    COUNT NUMBER
-========================================================= */
-
+========================= */
 #number{
   position:absolute;
   z-index:20;
-
   left:50%;
   top:61%;
-
   transform:translate(-50%,-50%);
-
   width:100%;
   text-align:center;
-
   font-size:min(52vw,255px);
   line-height:1;
   font-weight:1000;
-
   color:#fff7fb;
-
-  -webkit-text-stroke:
-    clamp(5px,1.6vw,9px)
-    #ff4b9d;
-
+  -webkit-text-stroke:clamp(5px,1.6vw,9px) #ff4b9d;
   text-shadow:
     0 6px 0 #d82779,
     0 12px 0 #a80052,
     0 18px 8px rgba(60,0,28,.72);
-
   transition:
     color .18s,
     transform .18s,
@@ -115,50 +101,23 @@ body{
 @keyframes numberPop{
   0%{
     opacity:0;
-    transform:
-      translate(-50%,-50%)
-      scale(1.16);
+    transform:translate(-50%,-50%) scale(1.16);
   }
-
   100%{
     opacity:1;
-    transform:
-      translate(-50%,-50%)
-      scale(1);
+    transform:translate(-50%,-50%) scale(1);
   }
 }
 
 #number.bigChance{
-  animation:
-    bigChance
-    .7s
-    cubic-bezier(.1,1.4,.2,1);
+  animation:bigChance .7s cubic-bezier(.1,1.4,.2,1);
 }
 
 @keyframes bigChance{
-  0%{
-    transform:
-      translate(-50%,-50%)
-      scale(1);
-  }
-
-  35%{
-    transform:
-      translate(-50%,-50%)
-      scale(1.55);
-  }
-
-  65%{
-    transform:
-      translate(-50%,-50%)
-      scale(.92);
-  }
-
-  100%{
-    transform:
-      translate(-50%,-50%)
-      scale(1);
-  }
+  0%{transform:translate(-50%,-50%) scale(1)}
+  35%{transform:translate(-50%,-50%) scale(1.55)}
+  65%{transform:translate(-50%,-50%) scale(.92)}
+  100%{transform:translate(-50%,-50%) scale(1)}
 }
 
 #number.red{
@@ -169,7 +128,6 @@ body{
 #number.gold{
   color:#fff0a0;
   -webkit-text-stroke-color:#ffb300;
-
   text-shadow:
     0 6px 0 #d78c00,
     0 12px 0 #8c5200,
@@ -183,7 +141,6 @@ body{
 
 #number.cracked{
   filter:contrast(1.5);
-
   text-shadow:
     -4px -2px 0 rgba(255,255,255,.5),
     4px 3px 0 #8b003d,
@@ -194,149 +151,89 @@ body{
 #dots{
   position:absolute;
   z-index:22;
-
   display:none;
-
   left:50%;
   top:61%;
-
   transform:translate(-50%,-50%);
-
   font-size:90px;
   font-weight:1000;
-
   color:#fff7fb;
-
   -webkit-text-stroke:4px #ff4b9d;
-
   text-shadow:
     0 5px 0 #d82779,
     0 10px 0 #970049;
 }
 
-/* =========================================================
+/* =========================
    START
-========================================================= */
-
+========================= */
 #start{
   position:absolute;
   z-index:100;
-
   left:50%;
-
-  bottom:
-    max(
-      7%,
-      env(safe-area-inset-bottom)
-    );
-
+  bottom:max(7%,env(safe-area-inset-bottom));
   transform:translateX(-50%);
-
   width:min(72vw,330px);
-
   padding:17px 20px;
-
-  border:
-    2px solid
-    rgba(255,255,255,.9);
-
+  border:2px solid rgba(255,255,255,.9);
   border-radius:999px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #ff73b9,
-      #d00064
-    );
-
+  background:linear-gradient(180deg,#ff73b9,#d00064);
   color:#fff;
-
   font-size:21px;
   font-weight:1000;
-
   letter-spacing:.12em;
-
   box-shadow:
     0 5px 0 #79003a,
     0 0 25px rgba(255,40,140,.7);
 }
 
 #start:active{
-  transform:
-    translateX(-50%)
-    translateY(4px);
+  transform:translateX(-50%) translateY(4px);
 }
 
 #info{
   position:absolute;
   z-index:100;
-
   left:0;
   right:0;
-
-  bottom:
-    calc(
-      max(
-        7%,
-        env(safe-area-inset-bottom)
-      )
-      + 75px
-    );
-
+  bottom:calc(max(7%,env(safe-area-inset-bottom)) + 75px);
   text-align:center;
-
   font-size:11px;
   font-weight:800;
   line-height:1.6;
-
-  text-shadow:
-    0 2px 5px #000;
+  text-shadow:0 2px 5px #000;
 }
 
-/* =========================================================
+/* =========================
    COMMON FX
-========================================================= */
-
+========================= */
 #black{
   position:fixed;
   inset:0;
-
   z-index:150;
-
   display:none;
-
   background:#000;
 }
 
 #noise{
   position:fixed;
   inset:0;
-
   z-index:125;
-
   display:none;
-
   pointer-events:none;
-
-  background:
-    repeating-linear-gradient(
-      0deg,
-      rgba(255,255,255,.13) 0px,
-      rgba(255,255,255,.13) 1px,
-      rgba(0,0,0,.2) 2px,
-      rgba(0,0,0,.2) 4px
-    );
-
+  background:repeating-linear-gradient(
+    0deg,
+    rgba(255,255,255,.13) 0px,
+    rgba(255,255,255,.13) 1px,
+    rgba(0,0,0,.2) 2px,
+    rgba(0,0,0,.2) 4px
+  );
   mix-blend-mode:screen;
 }
 
 #noise.go{
   display:block;
-  animation:
-    noiseMove
-    .07s
-    steps(2)
-    infinite;
+  animation:noiseMove .07s steps(2) infinite;
 }
 
 @keyframes noiseMove{
@@ -350,11 +247,8 @@ body{
 #lightning{
   position:fixed;
   inset:0;
-
   z-index:130;
-
   display:none;
-
   pointer-events:none;
 }
 
@@ -364,59 +258,44 @@ body{
 
 .bolt{
   position:absolute;
-
   left:48%;
   top:-10%;
-
   width:10px;
   height:125%;
-
   background:#fff;
-
   transform:rotate(17deg);
-
   box-shadow:
     0 0 10px #fff,
     0 0 30px #ff4fa8,
     0 0 70px #ff0080;
-
-  clip-path:
-    polygon(
-      50% 0,
-      100% 0,
-      65% 38%,
-      100% 38%,
-      38% 100%,
-      50% 53%,
-      0 53%
-    );
+  clip-path:polygon(
+    50% 0,
+    100% 0,
+    65% 38%,
+    100% 38%,
+    38% 100%,
+    50% 53%,
+    0 53%
+  );
 }
 
 #logoGlow{
   position:fixed;
   inset:0;
-
   z-index:15;
-
   pointer-events:none;
-
   opacity:0;
-
-  background:
-    radial-gradient(
-      circle at 50% 27%,
-      rgba(255,255,255,.95) 0%,
-      rgba(255,50,155,.6) 8%,
-      rgba(255,0,100,.18) 23%,
-      transparent 43%
-    );
+  background:radial-gradient(
+    circle at 50% 27%,
+    rgba(255,255,255,.95) 0%,
+    rgba(255,50,155,.6) 8%,
+    rgba(255,0,100,.18) 23%,
+    transparent 43%
+  );
 }
 
 #logoGlow.go{
-  animation:
-    logoGlow
-    .8s
-    ease-out;
+  animation:logoGlow .8s ease-out;
 }
 
 @keyframes logoGlow{
@@ -428,44 +307,28 @@ body{
 #question{
   position:fixed;
   z-index:140;
-
   display:none;
-
   left:50%;
   top:58%;
-
   transform:translate(-50%,-50%);
-
   font-size:110px;
   font-weight:1000;
-
   color:#fff;
-
-  -webkit-text-stroke:
-    5px #ff4b9d;
-
-  text-shadow:
-    0 0 25px #ff1493;
+  -webkit-text-stroke:5px #ff4b9d;
+  text-shadow:0 0 25px #ff1493;
 }
 
-/* =========================================================
+/* =========================
    SHOOTING STARS
-========================================================= */
-
+========================= */
 .star{
   position:fixed;
-
   z-index:12;
-
   pointer-events:none;
-
   width:10px;
   height:10px;
-
   border-radius:50%;
-
   background:#fff;
-
   box-shadow:
     0 0 5px #fff,
     0 0 12px rgba(255,255,255,.95),
@@ -474,87 +337,57 @@ body{
 
 .star::after{
   content:"";
-
   position:absolute;
-
   right:4px;
   top:4px;
-
   width:var(--tail,150px);
   height:2px;
-
   transform-origin:right center;
   transform:rotate(32deg);
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255,255,255,.04) 18%,
-      rgba(255,255,255,.18) 45%,
-      rgba(255,255,255,.55) 76%,
-      #fff 100%
-    );
+  background:linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,.04) 18%,
+    rgba(255,255,255,.18) 45%,
+    rgba(255,255,255,.55) 76%,
+    #fff 100%
+  );
 }
 
 .star.go{
-  animation:
-    shootNatural
-    var(--speed,.85s)
-    linear
-    forwards;
+  animation:shootNatural var(--speed,.85s) linear forwards;
 }
 
 @keyframes shootNatural{
   0%{
-    transform:
-      translate3d(0,0,0);
-
+    transform:translate3d(0,0,0);
     opacity:0;
   }
-
-  7%{
-    opacity:1;
-  }
-
-  75%{
-    opacity:1;
-  }
-
+  7%{opacity:1}
+  75%{opacity:1}
   100%{
-    transform:
-      translate3d(78vw,48vh,0);
-
+    transform:translate3d(78vw,48vh,0);
     opacity:0;
   }
 }
 
-/* =========================================================
-   HIT IMPACT
-========================================================= */
-
+/* =========================
+   HIT
+========================= */
 #hitDark{
   position:fixed;
   inset:0;
-
   z-index:180;
-
   display:none;
-
-  background:
-    rgba(0,0,0,.92);
+  background:rgba(0,0,0,.92);
 }
 
 #slash{
   position:fixed;
   inset:0;
-
   z-index:210;
-
   display:none;
-
   pointer-events:none;
-
   overflow:hidden;
 }
 
@@ -564,60 +397,38 @@ body{
 
 .slashLine{
   position:absolute;
-
   left:-30%;
   top:50%;
-
   width:160%;
   height:31px;
-
   background:#fff;
-
   box-shadow:
     0 0 8px #fff,
     0 0 22px #fff,
     0 0 50px #ff58ad,
     0 0 110px #ff007b;
-
-  transform:
-    rotate(-18deg)
-    scaleX(0);
+  transform:rotate(-18deg) scaleX(0);
 }
 
 #slash.go .slashLine{
-  animation:
-    slashGo
-    .22s
-    ease-out
-    forwards;
+  animation:slashGo .22s ease-out forwards;
 }
 
 @keyframes slashGo{
-  to{
-    transform:
-      rotate(-18deg)
-      scaleX(1);
-  }
+  to{transform:rotate(-18deg) scaleX(1)}
 }
 
 #flash{
   position:fixed;
   inset:0;
-
   z-index:460;
-
   pointer-events:none;
-
   background:#fff;
-
   opacity:0;
 }
 
 #flash.go{
-  animation:
-    whiteFlash
-    .55s
-    ease-out;
+  animation:whiteFlash .55s ease-out;
 }
 
 @keyframes whiteFlash{
@@ -632,24 +443,15 @@ body{
 #impactWhite{
   position:fixed;
   inset:0;
-
   z-index:280;
-
   pointer-events:none;
-
   display:none;
-
   background:#fff;
 }
 
 #impactWhite.go{
   display:block;
-
-  animation:
-    impactWhite
-    .24s
-    linear
-    forwards;
+  animation:impactWhite .24s linear forwards;
 }
 
 @keyframes impactWhite{
@@ -659,11 +461,7 @@ body{
 }
 
 body.hitShake{
-  animation:
-    hitShake
-    .065s
-    linear
-    10;
+  animation:hitShake .065s linear 10;
 }
 
 @keyframes hitShake{
@@ -682,33 +480,18 @@ body.hitShake{
 
 #hitText{
   position:fixed;
-
   z-index:300;
-
   display:none;
-
   left:50%;
   top:50%;
-
-  transform:
-    translate(-50%,-50%);
-
+  transform:translate(-50%,-50%);
   width:180vw;
-
   text-align:center;
-
-  font-size:
-    min(43vw,220px);
-
+  font-size:min(43vw,220px);
   line-height:1;
-
   font-weight:1000;
-
   color:#fff4a6;
-
-  -webkit-text-stroke:
-    5px #ff245f;
-
+  -webkit-text-stroke:5px #ff245f;
   text-shadow:
     0 8px 0 #b0003c,
     0 15px 0 #60001f,
@@ -719,83 +502,36 @@ body.hitShake{
 
 #hitText.go{
   display:block;
-
-  animation:
-    hitExplosion
-    1.05s
-    cubic-bezier(.08,1.45,.12,1);
+  animation:hitExplosion 1.05s cubic-bezier(.08,1.45,.12,1);
 }
 
 @keyframes hitExplosion{
   0%{
     opacity:0;
-
-    transform:
-      translate(-50%,-50%)
-      scale(6.5)
-      rotate(-7deg);
-
+    transform:translate(-50%,-50%) scale(6.5) rotate(-7deg);
     filter:blur(20px);
   }
-
   17%{
     opacity:1;
-
-    transform:
-      translate(-50%,-50%)
-      scale(.55)
-      rotate(2deg);
-
+    transform:translate(-50%,-50%) scale(.55) rotate(2deg);
     filter:blur(0);
   }
-
-  31%{
-    transform:
-      translate(-50%,-50%)
-      scale(1.45)
-      rotate(-1deg);
-  }
-
-  46%{
-    transform:
-      translate(-50%,-50%)
-      scale(.88);
-  }
-
-  61%{
-    transform:
-      translate(-50%,-50%)
-      scale(1.18);
-  }
-
-  76%{
-    transform:
-      translate(-50%,-50%)
-      scale(.96);
-  }
-
-  100%{
-    transform:
-      translate(-50%,-50%)
-      scale(1);
-  }
+  31%{transform:translate(-50%,-50%) scale(1.45) rotate(-1deg)}
+  46%{transform:translate(-50%,-50%) scale(.88)}
+  61%{transform:translate(-50%,-50%) scale(1.18)}
+  76%{transform:translate(-50%,-50%) scale(.96)}
+  100%{transform:translate(-50%,-50%) scale(1)}
 }
 
 /* =========================================================
-   NEW TREASURE SCREEN
-   画像そのものを宝箱画面として使用
+   TREASURE IMAGE SCREEN
 ========================================================= */
-
 #treasure{
   position:fixed;
   inset:0;
-
   z-index:350;
-
   display:none;
-
   overflow:hidden;
-
   background:#100006;
 }
 
@@ -803,209 +539,102 @@ body.hitShake{
   display:block;
 }
 
-/*
-  元画像は縦長。
-  画面いっぱいに表示して、
-  iPhoneでは縦方向を優先。
-*/
 #treasureBg{
   position:absolute;
-
   inset:0;
-
   width:100%;
   height:100%;
-
   object-fit:cover;
   object-position:center center;
-
   pointer-events:none;
-
   user-select:none;
 }
 
-/*
-  タップ判定。
-  画像の宝箱の上に透明ボタンを重ねる。
-*/
+/* 宝箱タップ領域 */
 .treasureTap{
   position:absolute;
-
   z-index:365;
-
   top:44%;
-
   width:31%;
   height:23%;
-
   appearance:none;
-
   border:0;
   padding:0;
-
   background:transparent;
-
-  cursor:pointer;
-
   border-radius:20px;
 }
 
-#tapLeft{
-  left:1%;
-}
-
-#tapCenter{
-  left:34.5%;
-}
-
-#tapRight{
-  right:1%;
-}
+#tapLeft{left:1%}
+#tapCenter{left:34.5%}
+#tapRight{right:1%}
 
 .treasureTap:active{
   transform:scale(.96);
 }
 
-/*
-  選んだ宝箱の発光
-*/
+/* 選択箱発光 */
 #selectedGlow{
   position:absolute;
-
   z-index:360;
-
   display:none;
-
   top:43%;
-
   width:31%;
   height:24%;
-
   border-radius:35%;
-
   pointer-events:none;
-
-  background:
-    radial-gradient(
-      ellipse at center,
-      rgba(255,255,255,.85) 0%,
-      rgba(255,236,110,.55) 18%,
-      rgba(255,42,150,.35) 45%,
-      transparent 72%
-    );
-
+  background:radial-gradient(
+    ellipse at center,
+    rgba(255,255,255,.85) 0%,
+    rgba(255,236,110,.55) 18%,
+    rgba(255,42,150,.35) 45%,
+    transparent 72%
+  );
   box-shadow:
     0 0 30px rgba(255,255,255,.9),
     0 0 65px rgba(255,210,50,.8),
     0 0 120px rgba(255,0,120,.75);
-
-  animation:
-    treasureGlowPulse
-    .35s
-    ease-in-out
-    infinite alternate;
+  animation:treasureGlowPulse .35s ease-in-out infinite alternate;
 }
 
 @keyframes treasureGlowPulse{
-  from{
-    transform:scale(.9);
-    opacity:.65;
-  }
-
-  to{
-    transform:scale(1.18);
-    opacity:1;
-  }
+  from{transform:scale(.9);opacity:.65}
+  to{transform:scale(1.18);opacity:1}
 }
 
-/*
-  選んだ宝箱を揺らしているように見せる
-*/
 #treasureShake{
   position:absolute;
-
   z-index:361;
-
   display:none;
-
   top:44%;
-
   width:31%;
   height:23%;
-
-  border-radius:25px;
-
   pointer-events:none;
-
-  border:
-    4px solid
-    rgba(255,255,255,.0);
 }
 
 #treasureShake.go{
   display:block;
-
-  animation:
-    treasureShake
-    .075s
-    linear
-    infinite;
+  animation:treasureShake .075s linear infinite;
 }
 
 @keyframes treasureShake{
-  0%{
-    transform:
-      translate(-5px,1px)
-      rotate(-1deg);
-  }
-
-  25%{
-    transform:
-      translate(5px,-2px)
-      rotate(1deg);
-  }
-
-  50%{
-    transform:
-      translate(-4px,2px)
-      rotate(-.8deg);
-  }
-
-  75%{
-    transform:
-      translate(5px,1px)
-      rotate(.8deg);
-  }
-
-  100%{
-    transform:
-      translate(-5px,1px)
-      rotate(-1deg);
-  }
+  0%{transform:translate(-5px,1px) rotate(-1deg)}
+  25%{transform:translate(5px,-2px) rotate(1deg)}
+  50%{transform:translate(-4px,2px) rotate(-.8deg)}
+  75%{transform:translate(5px,1px) rotate(.8deg)}
+  100%{transform:translate(-5px,1px) rotate(-1deg)}
 }
 
-/*
-  開封時の光
-*/
 #treasureBurst{
   position:absolute;
-
   z-index:375;
-
   display:none;
-
   width:22vw;
   height:22vw;
-
   max-width:150px;
   max-height:150px;
-
   border-radius:50%;
-
   pointer-events:none;
-
   background:#fff;
-
   box-shadow:
     0 0 20px #fff,
     0 0 55px #fff6a0,
@@ -1015,12 +644,7 @@ body.hitShake{
 
 #treasureBurst.go{
   display:block;
-
-  animation:
-    treasureBurst
-    .9s
-    cubic-bezier(.05,.8,.15,1)
-    forwards;
+  animation:treasureBurst .9s cubic-bezier(.05,.8,.15,1) forwards;
 }
 
 @keyframes treasureBurst{
@@ -1028,320 +652,212 @@ body.hitShake{
     opacity:0;
     transform:translate(-50%,-50%) scale(.15);
   }
-
-  15%{
-    opacity:1;
-  }
-
+  15%{opacity:1}
   50%{
     opacity:1;
     transform:translate(-50%,-50%) scale(2.3);
   }
-
   100%{
     opacity:0;
     transform:translate(-50%,-50%) scale(5);
   }
 }
 
-/*
-  宝箱から上に伸びる光
-*/
 #treasureBeam{
   position:absolute;
-
   z-index:370;
-
   display:none;
-
   bottom:42%;
-
   width:23%;
-
   height:55%;
-
   pointer-events:none;
-
   transform-origin:center bottom;
-
-  background:
-    linear-gradient(
-      to top,
-      rgba(255,255,255,.95),
-      rgba(255,235,120,.55) 20%,
-      rgba(255,80,180,.20) 55%,
-      transparent 100%
-    );
-
+  background:linear-gradient(
+    to top,
+    rgba(255,255,255,.95),
+    rgba(255,235,120,.55) 20%,
+    rgba(255,80,180,.20) 55%,
+    transparent 100%
+  );
   filter:blur(8px);
-
-  clip-path:
-    polygon(
-      38% 100%,
-      62% 100%,
-      100% 0,
-      0 0
-    );
+  clip-path:polygon(38% 100%,62% 100%,100% 0,0 0);
 }
 
 #treasureBeam.go{
   display:block;
-
-  animation:
-    beamAppear
-    1.1s
-    ease-out
-    forwards;
+  animation:beamAppear 1.1s ease-out forwards;
 }
 
 @keyframes beamAppear{
-  0%{
-    opacity:0;
-    transform:scaleY(.05);
-  }
-
-  20%{
-    opacity:1;
-    transform:scaleY(1);
-  }
-
-  70%{
-    opacity:.9;
-  }
-
-  100%{
-    opacity:0;
-  }
+  0%{opacity:0;transform:scaleY(.05)}
+  20%{opacity:1;transform:scaleY(1)}
+  70%{opacity:.9}
+  100%{opacity:0}
 }
 
-/*
-  あなたが選んだ箱
-*/
 #chosenBadge{
   position:absolute;
-
   z-index:390;
-
   display:none;
-
   top:35%;
-
   transform:translateX(-50%);
-
   width:max-content;
-
   padding:7px 14px;
-
-  border:
-    2px solid #fff;
-
+  border:2px solid #fff;
   border-radius:999px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #ff75b9,
-      #c7005e
-    );
-
+  background:linear-gradient(180deg,#ff75b9,#c7005e);
   color:#fff;
-
   font-size:13px;
   font-weight:1000;
-
-  text-shadow:
-    0 2px 4px #730034;
-
+  text-shadow:0 2px 4px #730034;
   box-shadow:
     0 4px 0 #760038,
     0 0 20px #ff4fa8;
 }
 
-/*
-  結果表示
-*/
+/* =========================
+   各宝箱の等級表示
+========================= */
+.chestRank{
+  position:absolute;
+  z-index:405;
+  display:none;
+  top:65%;
+  width:31%;
+  text-align:center;
+  font-size:min(8.5vw,43px);
+  line-height:1;
+  font-weight:1000;
+  pointer-events:none;
+  -webkit-text-stroke:1.5px rgba(70,0,30,.75);
+  text-shadow:
+    0 3px 0 rgba(70,0,30,.8),
+    0 6px 10px rgba(0,0,0,.9),
+    0 0 15px currentColor;
+}
+
+#rankLeft{left:1%}
+#rankCenter{left:34.5%}
+#rankRight{right:1%}
+
+.chestRank.reveal{
+  display:block;
+  animation:rankReveal .55s cubic-bezier(.1,1.5,.2,1);
+}
+
+@keyframes rankReveal{
+  0%{
+    opacity:0;
+    transform:scale(.15) translateY(-20px);
+  }
+  65%{
+    opacity:1;
+    transform:scale(1.25) translateY(0);
+  }
+  100%{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+.rank1{color:#ffe55e}
+.rank2{color:#f0f5ff}
+.rank3{color:#ff9b52}
+
+/* =========================
+   選ばなかった箱を暗く
+========================= */
+.treasureDim{
+  position:absolute;
+  z-index:355;
+  top:43%;
+  width:32%;
+  height:26%;
+  display:none;
+  pointer-events:none;
+  border-radius:30px;
+  background:rgba(15,0,8,.48);
+}
+
+#dimLeft{left:0}
+#dimCenter{left:34%}
+#dimRight{right:0}
+
+/* =========================
+   自分の結果
+========================= */
 #treasureResult{
   position:absolute;
-
-  z-index:400;
-
+  z-index:420;
   display:none;
-
   left:50%;
-  top:69%;
-
-  transform:
-    translate(-50%,-50%);
-
+  top:76%;
+  transform:translate(-50%,-50%);
   width:100%;
-
   text-align:center;
-
   pointer-events:none;
 }
 
 #resultSmall{
-  font-size:17px;
+  font-size:16px;
   font-weight:1000;
-
   color:#fff;
-
-  text-shadow:
-    0 3px 8px #000;
+  text-shadow:0 3px 8px #000;
 }
 
 #resultBig{
-  margin-top:5px;
-
-  font-size:
-    min(14vw,72px);
-
+  margin-top:4px;
+  font-size:min(12vw,62px);
   line-height:1.05;
-
   font-weight:1000;
-
   white-space:nowrap;
-
-  -webkit-text-stroke:
-    2px rgba(80,0,20,.6);
-
+  -webkit-text-stroke:2px rgba(80,0,20,.6);
   text-shadow:
     0 5px 0 rgba(80,0,35,.7),
     0 10px 18px rgba(0,0,0,.8),
     0 0 20px currentColor;
 }
 
-.rank1{
-  color:#ffe55e;
-}
-
-.rank2{
-  color:#f0f5ff;
-}
-
-.rank3{
-  color:#ff9b52;
-}
-
 #treasureResult.go{
   display:block;
-
-  animation:
-    resultExplosion
-    .8s
-    cubic-bezier(.08,1.5,.15,1);
+  animation:resultExplosion .8s cubic-bezier(.08,1.5,.15,1);
 }
 
 @keyframes resultExplosion{
   0%{
     opacity:0;
-    transform:
-      translate(-50%,-50%)
-      scale(.1);
+    transform:translate(-50%,-50%) scale(.1);
   }
-
   60%{
     opacity:1;
-    transform:
-      translate(-50%,-50%)
-      scale(1.25);
+    transform:translate(-50%,-50%) scale(1.25);
   }
-
   100%{
-    transform:
-      translate(-50%,-50%)
-      scale(1);
+    transform:translate(-50%,-50%) scale(1);
   }
 }
 
-/*
-  NEXT
-*/
 #next{
   position:absolute;
-
-  z-index:410;
-
+  z-index:430;
   display:none;
-
   left:50%;
-
-  bottom:
-    max(
-      5%,
-      env(safe-area-inset-bottom)
-    );
-
+  bottom:max(4%,env(safe-area-inset-bottom));
   transform:translateX(-50%);
-
   width:min(68vw,300px);
-
   padding:14px 30px;
-
-  border:
-    2px solid #fff;
-
+  border:2px solid #fff;
   border-radius:999px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #ff70b4,
-      #c90060
-    );
-
+  background:linear-gradient(180deg,#ff70b4,#c90060);
   color:#fff;
-
   font-size:18px;
   font-weight:1000;
-
   box-shadow:
     0 5px 0 #710035,
     0 0 25px rgba(255,0,120,.65);
 }
 
-/*
-  結果が出たあと、
-  選ばなかった箱を暗くする
-*/
-.treasureDim{
-  position:absolute;
-
-  z-index:355;
-
-  top:43%;
-
-  width:32%;
-  height:26%;
-
-  display:none;
-
-  pointer-events:none;
-
-  border-radius:30px;
-
-  background:
-    rgba(15,0,8,.58);
-}
-
-#dimLeft{
-  left:0;
-}
-
-#dimCenter{
-  left:34%;
-}
-
-#dimRight{
-  right:0;
-}
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
 @media(max-width:500px){
-
   .treasureTap{
     top:43%;
     height:24%;
@@ -1361,20 +877,21 @@ body.hitShake{
     top:34%;
   }
 
+  .chestRank{
+    top:64%;
+  }
+
   #treasureResult{
-    top:70%;
+    top:76%;
   }
 }
-
 </style>
 </head>
 
 <body>
 
 <div id="stage">
-
   <div id="number">3</div>
-
   <div id="dots">…</div>
 
   <div id="info">
@@ -1382,10 +899,7 @@ body.hitShake{
     毎回独立抽選
   </div>
 
-  <button id="start">
-    START
-  </button>
-
+  <button id="start">START</button>
 </div>
 
 <div id="noise"></div>
@@ -1395,13 +909,8 @@ body.hitShake{
 </div>
 
 <div id="logoGlow"></div>
-
-<div id="question">
-  ？
-</div>
-
+<div id="question">？</div>
 <div id="black"></div>
-
 <div id="hitDark"></div>
 
 <div id="slash">
@@ -1409,17 +918,12 @@ body.hitShake{
 </div>
 
 <div id="flash"></div>
-
 <div id="impactWhite"></div>
+<div id="hitText">当たり</div>
 
-<div id="hitText">
-  当たり
-</div>
-
-<!-- =====================================================
-     NEW TREASURE
-===================================================== -->
-
+<!-- =========================
+     TREASURE
+========================= -->
 <div id="treasure">
 
   <img
@@ -1428,36 +932,19 @@ body.hitShake{
     alt=""
   >
 
-  <!-- 暗くするレイヤー -->
-  <div
-    id="dimLeft"
-    class="treasureDim">
-  </div>
+  <div id="dimLeft" class="treasureDim"></div>
+  <div id="dimCenter" class="treasureDim"></div>
+  <div id="dimRight" class="treasureDim"></div>
 
-  <div
-    id="dimCenter"
-    class="treasureDim">
-  </div>
-
-  <div
-    id="dimRight"
-    class="treasureDim">
-  </div>
-
-  <!-- 選択演出 -->
   <div id="selectedGlow"></div>
-
   <div id="treasureShake"></div>
-
   <div id="treasureBeam"></div>
-
   <div id="treasureBurst"></div>
 
   <div id="chosenBadge">
     あなたが選んだ箱
   </div>
 
-  <!-- 透明タップ領域 -->
   <button
     id="tapLeft"
     class="treasureTap"
@@ -1476,696 +963,388 @@ body.hitShake{
     aria-label="右の宝箱">
   </button>
 
-  <!-- 結果 -->
-  <div id="treasureResult">
+  <!-- 3箱それぞれの結果 -->
+  <div id="rankLeft" class="chestRank"></div>
+  <div id="rankCenter" class="chestRank"></div>
+  <div id="rankRight" class="chestRank"></div>
 
+  <div id="treasureResult">
     <div id="resultSmall">
       あなたの結果
     </div>
-
-    <div id="resultBig">
-    </div>
-
+    <div id="resultBig"></div>
   </div>
 
-  <button id="next">
-    NEXT
-  </button>
+  <button id="next">NEXT</button>
 
 </div>
 
 <script>
-
-/* =========================================================
-   BASIC
-========================================================= */
-
-const $=s=>
-  document.querySelector(s);
-
-const $$=s=>
-  [...document.querySelectorAll(s)];
-
-const sleep=ms=>
-  new Promise(
-    resolve=>setTimeout(resolve,ms)
-  );
+const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 
 let busy=false;
-
 let chestBusy=false;
-
 let selectedRank=null;
-
 let selectedIndex=-1;
 
 let audioCtx=null;
-
 let tensionBuffer=null;
-
 let hitBuffer=null;
-
 let tensionSource=null;
-
 let hitSource=null;
 
 let playToken=0;
-
 let starTimers=[];
 
-/* =========================================================
+/* =========================
    AUDIO
-========================================================= */
-
+========================= */
 function ensureAudioContext(){
-
   if(!audioCtx){
-
-    audioCtx=
-      new(
-        window.AudioContext ||
-        window.webkitAudioContext
-      )();
-
+    audioCtx=new (window.AudioContext||window.webkitAudioContext)();
   }
-
   return audioCtx;
 }
 
 async function loadBuffer(url){
+  const res=await fetch(url,{cache:"force-cache"});
+  if(!res.ok)throw new Error(url+" load failed");
 
-  const res=
-    await fetch(
-      url,
-      {
-        cache:"force-cache"
-      }
-    );
-
-  if(!res.ok){
-
-    throw new Error(
-      url+" load failed"
-    );
-
-  }
-
-  const arr=
-    await res.arrayBuffer();
-
-  return await
-    audioCtx.decodeAudioData(arr);
+  const arr=await res.arrayBuffer();
+  return await audioCtx.decodeAudioData(arr);
 }
 
 async function prepareAudio(){
-
   ensureAudioContext();
 
   if(!tensionBuffer){
-
     try{
-
-      tensionBuffer=
-        await loadBuffer(
-          "./Tension.mp3"
-        );
-
+      tensionBuffer=await loadBuffer("./Tension.mp3");
     }catch(e){
-
-      console.log(
-        "Tension load error",
-        e
-      );
-
+      console.log("Tension load error",e);
     }
-
   }
 
   if(!hitBuffer){
-
     try{
-
-      hitBuffer=
-        await loadBuffer(
-          "./hit_music_final.mp3"
-        );
-
+      hitBuffer=await loadBuffer("./hit_music_final.mp3");
     }catch(e){
-
-      console.log(
-        "Hit music load error",
-        e
-      );
-
+      console.log("Hit music load error",e);
     }
-
   }
-
 }
 
 function stopTension(){
-
-  try{
-    tensionSource?.stop();
-  }catch(e){}
-
+  try{tensionSource?.stop()}catch(e){}
   tensionSource=null;
 }
 
 function startTension(){
-
-  if(
-    !audioCtx ||
-    !tensionBuffer
-  )return;
+  if(!audioCtx||!tensionBuffer)return;
 
   stopTension();
 
-  const source=
-    audioCtx.createBufferSource();
+  const source=audioCtx.createBufferSource();
+  const gain=audioCtx.createGain();
 
-  const gain=
-    audioCtx.createGain();
-
-  source.buffer=
-    tensionBuffer;
-
+  source.buffer=tensionBuffer;
   source.loop=true;
-
   gain.gain.value=.72;
 
   source.connect(gain);
-
-  gain.connect(
-    audioCtx.destination
-  );
+  gain.connect(audioCtx.destination);
 
   source.start(0);
-
   tensionSource=source;
 }
 
 function stopHitMusic(){
-
-  try{
-    hitSource?.stop();
-  }catch(e){}
-
+  try{hitSource?.stop()}catch(e){}
   hitSource=null;
 }
 
 function playHitMusic(){
-
-  if(
-    !audioCtx ||
-    !hitBuffer
-  )return;
+  if(!audioCtx||!hitBuffer)return;
 
   stopHitMusic();
 
-  const source=
-    audioCtx.createBufferSource();
+  const source=audioCtx.createBufferSource();
+  const gain=audioCtx.createGain();
 
-  const gain=
-    audioCtx.createGain();
-
-  source.buffer=
-    hitBuffer;
-
+  source.buffer=hitBuffer;
   gain.gain.value=1;
 
   source.connect(gain);
-
-  gain.connect(
-    audioCtx.destination
-  );
+  gain.connect(audioCtx.destination);
 
   source.start(0);
-
   hitSource=source;
 }
 
-/* =========================================================
-   BASIC VISUALS
-========================================================= */
-
+/* =========================
+   BASIC
+========================= */
 function clearNumberClasses(){
-
   const n=$("#number");
 
   n.className="";
-
   n.style.opacity="";
-
   n.style.filter="";
-
   n.style.transform="";
 }
 
 function showNumber(value){
-
   const el=$("#number");
 
   $("#dots").style.display="none";
-
   clearNumberClasses();
 
   el.style.display="block";
-
   el.textContent=value;
 
   void el.offsetWidth;
-
   el.classList.add("show");
 }
 
 function hideNumber(){
-
   $("#number").style.display="none";
 }
 
 function showDots(){
-
   hideNumber();
-
   $("#dots").style.display="block";
 }
 
 function hideDots(){
-
   $("#dots").style.display="none";
 }
 
 function flash(){
-
   const f=$("#flash");
 
   f.className="";
-
   void f.offsetWidth;
-
   f.className="go";
 }
 
 function impactWhite(){
-
   const w=$("#impactWhite");
 
   w.className="";
-
   void w.offsetWidth;
-
   w.className="go";
 }
 
 async function blackout(ms=1000){
-
   $("#black").style.display="block";
-
   await sleep(ms);
-
   $("#black").style.display="none";
 }
 
-/* =========================================================
-   SHOOTING STARS
-========================================================= */
-
+/* =========================
+   STARS
+========================= */
 function clearStars(){
-
-  starTimers.forEach(
-    clearTimeout
-  );
-
+  starTimers.forEach(clearTimeout);
   starTimers=[];
 
-  $$(".star").forEach(
-    star=>star.remove()
-  );
+  $$(".star").forEach(s=>s.remove());
 }
 
 function shootStar(){
-
-  const star=
-    document.createElement("div");
-
+  const star=document.createElement("div");
   star.className="star";
 
-  const fromTop=
-    Math.random()<.55;
+  const fromTop=Math.random()<.55;
 
   if(fromTop){
-
-    star.style.left=
-      (-12+Math.random()*52)
-      +"vw";
-
-    star.style.top=
-      (-5-Math.random()*8)
-      +"vh";
-
+    star.style.left=(-12+Math.random()*52)+"vw";
+    star.style.top=(-5-Math.random()*8)+"vh";
   }else{
-
-    star.style.left=
-      (-12-Math.random()*8)
-      +"vw";
-
-    star.style.top=
-      (2+Math.random()*28)
-      +"vh";
-
+    star.style.left=(-12-Math.random()*8)+"vw";
+    star.style.top=(2+Math.random()*28)+"vh";
   }
 
-  star.style.setProperty(
-    "--tail",
-    (110+Math.random()*130)
-    +"px"
-  );
+  star.style.setProperty("--tail",(110+Math.random()*130)+"px");
+  star.style.setProperty("--speed",(.62+Math.random()*.38)+"s");
 
-  star.style.setProperty(
-    "--speed",
-    (.62+Math.random()*.38)
-    +"s"
-  );
+  const size=.75+Math.random()*.65;
 
-  const size=
-    .75+Math.random()*.65;
-
-  star.style.width=
-    (10*size)+"px";
-
-  star.style.height=
-    (10*size)+"px";
+  star.style.width=(10*size)+"px";
+  star.style.height=(10*size)+"px";
 
   document.body.appendChild(star);
 
-  requestAnimationFrame(
-    ()=>star.classList.add("go")
-  );
+  requestAnimationFrame(()=>{
+    star.classList.add("go");
+  });
 
-  setTimeout(
-    ()=>star.remove(),
-    1400
-  );
+  setTimeout(()=>{
+    star.remove();
+  },1400);
 }
 
 function starBurst(count){
-
-  for(
-    let i=0;
-    i<count;
-    i++
-  ){
-
-    const timer=
-      setTimeout(
-        shootStar,
-        i*(
-          60+
-          Math.random()*100
-        )
-      );
+  for(let i=0;i<count;i++){
+    const timer=setTimeout(
+      shootStar,
+      i*(60+Math.random()*100)
+    );
 
     starTimers.push(timer);
   }
 }
 
 function scheduleStars(token){
-
-  if(
-    Math.random()>=.27
-  )return;
+  if(Math.random()>=.27)return;
 
   const r=Math.random();
-
   let count;
 
   if(r<.75){
-
-    count=
-      1+
-      Math.floor(
-        Math.random()*3
-      );
-
+    count=1+Math.floor(Math.random()*3);
   }else if(r<.95){
-
-    count=
-      4+
-      Math.floor(
-        Math.random()*3
-      );
-
+    count=4+Math.floor(Math.random()*3);
   }else{
-
-    count=
-      7+
-      Math.floor(
-        Math.random()*4
-      );
-
+    count=7+Math.floor(Math.random()*4);
   }
 
-  const delay=
-    600+
-    Math.random()*3000;
+  const delay=600+Math.random()*3000;
 
-  starTimers.push(
+  starTimers.push(setTimeout(()=>{
+    if(token!==playToken)return;
 
-    setTimeout(()=>{
+    starBurst(count);
 
-      if(
-        token!==playToken
-      )return;
-
-      starBurst(count);
-
-      if(
-        Math.random()<.15
-      ){
-
-        starTimers.push(
-
-          setTimeout(()=>{
-
-            if(
-              token===playToken
-            ){
-
-              starBurst(
-                1+
-                Math.floor(
-                  Math.random()*4
-                )
-              );
-
-            }
-
-          },
-          700+
-          Math.random()*1000)
-
-        );
-
-      }
-
-    },delay)
-
-  );
+    if(Math.random()<.15){
+      starTimers.push(setTimeout(()=>{
+        if(token===playToken){
+          starBurst(1+Math.floor(Math.random()*4));
+        }
+      },700+Math.random()*1000));
+    }
+  },delay));
 }
 
-/* =========================================================
-   SHARED EFFECTS
-========================================================= */
-
+/* =========================
+   SHARED FX
+========================= */
 async function fxBigNumber(){
-
   const n=$("#number");
 
-  n.classList.add(
-    "bigChance"
-  );
-
+  n.classList.add("bigChance");
   await sleep(750);
-
-  n.classList.remove(
-    "bigChance"
-  );
+  n.classList.remove("bigChance");
 }
 
 async function fxCrack(){
-
   const n=$("#number");
 
-  n.classList.add(
-    "cracked"
-  );
-
+  n.classList.add("cracked");
   await sleep(850);
-
-  n.classList.remove(
-    "cracked"
-  );
+  n.classList.remove("cracked");
 }
 
-async function fxLightning(
-  times=1
-){
-
-  for(
-    let i=0;
-    i<times;
-    i++
-  ){
-
-    $("#lightning").className=
-      "go";
-
+async function fxLightning(times=1){
+  for(let i=0;i<times;i++){
+    $("#lightning").className="go";
     flash();
 
     await sleep(120);
 
-    $("#lightning").className=
-      "";
+    $("#lightning").className="";
 
     await sleep(170);
   }
 }
 
-async function fxNoise(
-  ms=650
-){
-
-  $("#noise").className=
-    "go";
-
+async function fxNoise(ms=650){
+  $("#noise").className="go";
   await sleep(ms);
-
-  $("#noise").className=
-    "";
+  $("#noise").className="";
 }
 
 async function fxColorStep(){
-
   const n=$("#number");
 
   n.classList.add("pink");
-
   await sleep(430);
 
   n.classList.remove("pink");
-
   n.classList.add("red");
-
   await sleep(430);
 
   n.classList.remove("red");
-
   n.classList.add("gold");
-
   await sleep(700);
 
   n.classList.remove("gold");
 }
 
 async function fxSuperLongOne(){
-
   showNumber(1);
-
-  await sleep(
-    5600+
-    Math.random()*1400
-  );
+  await sleep(5600+Math.random()*1400);
 }
 
 async function fxQuestion(){
-
-  $("#question").style.display=
-    "block";
-
+  $("#question").style.display="block";
   await sleep(220);
-
-  $("#question").style.display=
-    "none";
+  $("#question").style.display="none";
 }
 
 async function fxBackgroundDark(){
-
-  $("#stage").classList.add(
-    "bgDark"
-  );
-
+  $("#stage").classList.add("bgDark");
   await sleep(1500);
-
-  $("#stage").classList.remove(
-    "bgDark"
-  );
+  $("#stage").classList.remove("bgDark");
 }
 
 async function fxStopRestart(){
-
   showNumber(3);
-
   await sleep(1600);
 
   showNumber(2);
-
   await sleep(3300);
 
   showNumber(2);
-
   await sleep(650);
 
   showNumber(1);
-
   await sleep(1700);
 }
 
 async function fxSilentDisappear(){
-
   showNumber(1);
-
   await sleep(900);
 
   stopTension();
-
   hideNumber();
 
-  await sleep(
-    2600+
-    Math.random()*1400
-  );
+  await sleep(2600+Math.random()*1400);
 }
 
 async function fxFakeFinish(){
-
   showNumber(3);
-
   await sleep(1500);
 
   showNumber(2);
-
   await sleep(1600);
 
   showNumber(1);
-
   await sleep(1700);
 
   hideNumber();
-
   stopTension();
 
   await sleep(2300);
 }
 
 async function fxLogoGlow(){
-
   const g=$("#logoGlow");
 
   g.className="";
-
   void g.offsetWidth;
-
   g.className="go";
 
   await sleep(850);
@@ -2173,46 +1352,31 @@ async function fxLogoGlow(){
   g.className="";
 }
 
-/* =========================================================
+/* =========================
    NORMAL COUNT
-========================================================= */
-
+========================= */
 async function normalCount(){
-
   showNumber(3);
-
   await sleep(1750);
 
   showNumber(2);
-
   await sleep(1900);
 
   showNumber(1);
-
   await sleep(2050);
 }
 
-/* =========================================================
+/* =========================
    REAL HIT
-========================================================= */
-
-async function realHit(
-  options={}
-){
-
+========================= */
+async function realHit(options={}){
   stopTension();
 
-  await sleep(
-    options.silence ?? 700
-  );
+  await sleep(options.silence ?? 700);
 
-  $("#hitDark").style.display=
-    "block";
-
+  $("#hitDark").style.display="block";
   await sleep(310);
-
-  $("#hitDark").style.display=
-    "none";
+  $("#hitDark").style.display="none";
 
   await sleep(70);
 
@@ -2220,19 +1384,11 @@ async function realHit(
 
   const stage=$("#stage");
 
-  stage.classList.remove(
-    "hitZoom"
-  );
-
+  stage.classList.remove("hitZoom");
   void stage.offsetWidth;
+  stage.classList.add("hitZoom");
 
-  stage.classList.add(
-    "hitZoom"
-  );
-
-  document.body.classList.add(
-    "hitShake"
-  );
+  document.body.classList.add("hitShake");
 
   await sleep(150);
 
@@ -2241,13 +1397,10 @@ async function realHit(
   await sleep(115);
 
   if(options.double){
-
     $("#slash").className="";
-
     await sleep(65);
 
     $("#slash").className="go";
-
     flash();
 
     await sleep(135);
@@ -2262,38 +1415,26 @@ async function realHit(
   const hit=$("#hitText");
 
   hit.className="";
-
   void hit.offsetWidth;
-
   hit.className="go";
 
   playHitMusic();
 
   await sleep(230);
 
-  document.body.classList.remove(
-    "hitShake"
-  );
-
+  document.body.classList.remove("hitShake");
   void document.body.offsetWidth;
-
-  document.body.classList.add(
-    "hitShake"
-  );
+  document.body.classList.add("hitShake");
 
   await sleep(340);
 
-  document.body.classList.remove(
-    "hitShake"
-  );
+  document.body.classList.remove("hitShake");
 
   flash();
 
   await sleep(650);
 
-  stage.classList.remove(
-    "hitZoom"
-  );
+  stage.classList.remove("hitZoom");
 
   await sleep(700);
 
@@ -2302,58 +1443,44 @@ async function realHit(
   showTreasure();
 }
 
-/* =========================================================
-   ORIGINAL HIT ROUTES
-========================================================= */
-
+/* =========================
+   32 HIT ROUTES
+========================= */
 async function normalHitAt(point){
-
   showNumber(3);
 
   if(point===3){
-
     await sleep(1300);
-
     return realHit();
   }
 
   await sleep(1750);
-
   showNumber(2);
 
   if(point===2){
-
     await sleep(1400);
-
     return realHit();
   }
 
   await sleep(1900);
-
   showNumber(1);
 
   if(point===1){
-
     await sleep(1550);
-
     return realHit();
   }
 
   await sleep(2050);
-
   hideNumber();
 
   await sleep(700);
-
   return realHit();
 }
 
 async function normalBlackout(){
-
   await normalCount();
 
   stopTension();
-
   hideNumber();
 
   await blackout(1500);
@@ -2362,52 +1489,39 @@ async function normalBlackout(){
 }
 
 async function freezeTwo(){
-
   showNumber(3);
-
   await sleep(1850);
 
   showNumber(2);
-
   await sleep(3900);
 
   return realHit();
 }
 
 async function reverseCountdown(){
-
   showNumber(3);
-
   await sleep(1700);
 
   showNumber(2);
-
   await sleep(1700);
 
   showNumber(1);
-
   await sleep(1600);
 
   showNumber(2);
-
   await sleep(1450);
 
   showNumber(1);
-
   await sleep(1500);
 
   return realHit();
 }
 
 async function zeroPremium(){
-
   await normalCount();
 
   showNumber(0);
-
-  $("#number")
-    .classList
-    .add("gold");
+  $("#number").classList.add("gold");
 
   await sleep(900);
 
@@ -2415,17 +1529,13 @@ async function zeroPremium(){
 }
 
 async function numberDisappear(){
-
   showNumber(3);
-
   await sleep(1700);
 
   showNumber(2);
-
   await sleep(1700);
 
   hideNumber();
-
   stopTension();
 
   await sleep(2200);
@@ -2434,7 +1544,6 @@ async function numberDisappear(){
 }
 
 async function soundStopPattern(){
-
   await normalCount();
 
   stopTension();
@@ -2445,24 +1554,19 @@ async function soundStopPattern(){
 }
 
 async function longOne(){
-
   showNumber(3);
-
   await sleep(1750);
 
   showNumber(2);
-
   await sleep(1850);
 
   showNumber(1);
-
   await sleep(3900);
 
   return realHit();
 }
 
 async function recountSequence(){
-
   await normalCount();
 
   hideNumber();
@@ -2472,22 +1576,18 @@ async function recountSequence(){
   startTension();
 
   showNumber(3);
-
   await sleep(1400);
 
   showNumber(2);
-
   await sleep(1500);
 
   showNumber(1);
-
   await sleep(1600);
 
   return realHit();
 }
 
 async function doubleCountdown(){
-
   await normalCount();
 
   hideNumber();
@@ -2495,183 +1595,132 @@ async function doubleCountdown(){
   await sleep(1200);
 
   showNumber(3);
-
   await sleep(1400);
 
   showNumber(2);
-
   await sleep(1500);
 
   showNumber(1);
-
   await sleep(1600);
 
   return realHit();
 }
 
-/* =========================================================
-   PUCHUN DIRECT
-========================================================= */
-
 async function puchunDirect(){
-
   showNumber(3);
-
   await sleep(1600);
 
   showNumber(2);
-
   await sleep(1700);
 
   showNumber(1);
-
   await sleep(800);
 
   stopTension();
-
   hideNumber();
 
-  $("#black").style.display=
-    "block";
+  $("#black").style.display="block";
 
-  await sleep(
-    2400+
-    Math.random()*900
-  );
+  await sleep(2400+Math.random()*900);
 
-  $("#black").style.display=
-    "none";
+  $("#black").style.display="none";
 
   await sleep(500);
 
-  return realHit({
-    silence:450
-  });
+  return realHit({silence:450});
 }
 
-/* =========================================================
-   PUCHUN RECOUNT
-========================================================= */
-
 async function puchunRecount(){
-
   await normalCount();
 
   stopTension();
-
   hideNumber();
 
-  $("#black").style.display=
-    "block";
+  $("#black").style.display="block";
 
-  await sleep(
-    2200+
-    Math.random()*700
-  );
+  await sleep(2200+Math.random()*700);
 
-  $("#black").style.display=
-    "none";
+  $("#black").style.display="none";
 
   await sleep(700);
 
   startTension();
 
   showNumber(3);
-
   await sleep(1400);
 
   showNumber(2);
-
   await sleep(1500);
 
   showNumber(1);
-
   await sleep(1700);
 
   return realHit();
 }
 
 async function fakeSlashPattern(){
-
   showNumber(3);
-
   await sleep(1700);
 
   showNumber(2);
-
   await sleep(1700);
 
   $("#slash").className="go";
-
   await sleep(180);
-
   $("#slash").className="";
 
   await sleep(700);
 
   showNumber(1);
-
   await sleep(2100);
 
   return realHit();
 }
 
 async function weirdCountdown(){
-
   showNumber(3);
-
   await sleep(1300);
 
   await fxQuestion();
 
   showNumber(1);
-
   await sleep(1200);
 
   showNumber(2);
-
   await sleep(1300);
 
   showNumber(1);
-
   await sleep(1500);
 
   return realHit();
 }
 
 async function silentStart(){
-
   stopTension();
 
   showNumber(3);
-
   await sleep(1800);
 
   startTension();
 
   showNumber(2);
-
   await sleep(1800);
 
   showNumber(1);
-
   await sleep(1800);
 
   return realHit();
 }
 
 async function classicRevival(){
-
   await normalCount();
 
   showDots();
-
   stopTension();
 
   await sleep(2200);
 
   hideDots();
-
   showNumber(1);
 
   await sleep(1700);
@@ -2680,24 +1729,19 @@ async function classicRevival(){
 }
 
 async function skipCountHit(){
-
   showNumber(3);
-
   await sleep(1700);
 
   showNumber(1);
-
   await sleep(2000);
 
   return realHit();
 }
 
 async function oneVanishHit(){
-
   await normalCount();
 
   hideNumber();
-
   stopTension();
 
   await sleep(3000);
@@ -2706,122 +1750,95 @@ async function oneVanishHit(){
 }
 
 async function oneBackToTwoHit(){
-
   await normalCount();
 
   await sleep(600);
 
   showNumber(2);
-
   await sleep(1200);
 
   showNumber(1);
-
   await sleep(1500);
 
   return realHit();
 }
 
 async function speedCountHit(){
-
   showNumber(3);
-
   await sleep(430);
 
   showNumber(2);
-
   await sleep(430);
 
   showNumber(1);
-
   await sleep(600);
 
   return realHit();
 }
 
 async function doubleSlashHit(){
-
   await normalCount();
-
-  return realHit({
-    double:true
-  });
+  return realHit({double:true});
 }
 
 async function silentOddityHit(){
-
   showNumber(3);
-
   await sleep(1500);
 
   stopTension();
 
   showNumber(2);
-
   await sleep(1900);
 
   showNumber(1);
-
   await sleep(2600);
 
   return realHit();
 }
 
 async function questionHit(){
-
   await normalCount();
 
   hideNumber();
-
-  $("#question").style.display=
-    "block";
+  $("#question").style.display="block";
 
   await sleep(1500);
 
-  $("#question").style.display=
-    "none";
+  $("#question").style.display="none";
 
   return realHit();
 }
 
 async function blackoutReturnHit(){
-
   await normalCount();
 
   stopTension();
-
   hideNumber();
 
   await blackout(1400);
 
   showNumber(1);
-
   await sleep(1600);
 
   return realHit();
 }
 
 async function dotsDirectHit(){
-
   await normalCount();
 
   showDots();
-
   await sleep(2100);
 
   return realHit();
 }
 
 async function dotsOneRevival(){
-
   await normalCount();
 
   showDots();
-
   await sleep(1800);
 
   hideDots();
-
   showNumber(1);
 
   await sleep(1500);
@@ -2830,34 +1847,25 @@ async function dotsOneRevival(){
 }
 
 async function dotsBlackoutHit(){
-
   await normalCount();
 
   stopTension();
-
   showDots();
 
   await sleep(1200);
 
   hideDots();
-
   await blackout(1500);
 
   return realHit();
 }
 
 async function dotsStarHit(){
-
   await normalCount();
 
   showDots();
 
-  starBurst(
-    3+
-    Math.floor(
-      Math.random()*4
-    )
-  );
+  starBurst(3+Math.floor(Math.random()*4));
 
   await sleep(2000);
 
@@ -2865,175 +1873,117 @@ async function dotsStarHit(){
 }
 
 async function dotsLongSilenceHit(){
-
   await normalCount();
 
   stopTension();
-
   showDots();
 
   await sleep(3300);
 
-  return realHit({
-    double:true
-  });
+  return realHit({double:true});
 }
 
-/* =========================================================
+/* =========================
    12 EXTRA HIT ROUTES
-========================================================= */
-
+========================= */
 async function commonFxHit(index){
-
   switch(index){
-
     case 0:
-
       showNumber(3);
-
       await sleep(1500);
 
       showNumber(2);
-
       await sleep(1200);
 
       showNumber(1);
-
       await fxBigNumber();
 
       await sleep(900);
 
       return realHit();
 
-
     case 1:
-
       await normalCount();
-
       await fxCrack();
-
       return realHit();
-
 
     case 2:
-
       await normalCount();
-
-      await fxLightning(
-        Math.random()<.25
-        ? 3
-        : 1
-      );
-
+      await fxLightning(Math.random()<.25?3:1);
       await sleep(600);
-
       return realHit();
 
-
     case 3:
-
       showNumber(3);
-
       await sleep(1500);
 
       showNumber(2);
-
       await fxNoise(750);
 
       showNumber(1);
-
       await sleep(1600);
 
       return realHit();
 
-
     case 4:
-
       await normalCount();
-
       await fxColorStep();
 
       await sleep(1000);
 
       return realHit();
 
-
     case 5:
-
       showNumber(3);
-
       await sleep(1600);
 
       showNumber(2);
-
       await sleep(1700);
 
       await fxSuperLongOne();
 
       return realHit();
 
-
     case 6:
-
       showNumber(3);
-
       await sleep(1400);
 
       await fxQuestion();
 
       showNumber(2);
-
       await sleep(1500);
 
       showNumber(1);
-
       await sleep(1700);
 
       return realHit();
 
-
     case 7:
-
       await normalCount();
-
       await fxBackgroundDark();
-
       return realHit();
-
 
     case 8:
-
       await fxStopRestart();
-
       return realHit();
 
-
     case 9:
-
       showNumber(3);
-
       await sleep(1500);
 
       showNumber(2);
-
       await sleep(1600);
 
       await fxSilentDisappear();
 
       return realHit();
 
-
     case 10:
-
       await fxFakeFinish();
-
       return realHit();
 
-
     case 11:
-
       await normalCount();
-
       await fxLogoGlow();
 
       await sleep(700);
@@ -3042,16 +1992,13 @@ async function commonFxHit(index){
   }
 }
 
-/* =========================================================
+/* =========================
    MISS
-========================================================= */
-
+========================= */
 async function normalMiss(){
-
   await normalCount();
 
   hideNumber();
-
   stopTension();
 
   await sleep(1400);
@@ -3060,81 +2007,53 @@ async function normalMiss(){
 }
 
 async function weakFake(type){
-
   switch(type){
-
     case 0:
-
       showNumber(3);
-
       await sleep(1600);
 
       showNumber(2);
-
       await sleep(3100);
 
       showNumber(1);
-
       await sleep(1600);
-
       break;
 
-
     case 1:
-
       showNumber(3);
-
       await sleep(1600);
 
       showNumber(2);
-
       await sleep(1700);
 
       showNumber(1);
-
       await sleep(3500);
-
       break;
 
-
     case 2:
-
       await normalCount();
 
-      $("#number")
-        .classList
-        .add("red");
+      $("#number").classList.add("red");
 
       await sleep(500);
 
-      $("#number")
-        .classList
-        .remove("red");
-
+      $("#number").classList.remove("red");
       break;
 
-
     case 3:
-
       showNumber(3);
-
       await sleep(1500);
 
       showNumber(2);
-
       await sleep(1500);
 
       stopTension();
 
       showNumber(1);
-
       await sleep(2500);
-
       break;
 
-
     case 4:
-
       await normalCount();
 
       hideNumber();
@@ -3142,110 +2061,73 @@ async function weakFake(type){
       await blackout(650);
 
       showNumber(1);
-
       await sleep(1400);
-
       break;
 
-
     case 5:
-
       showNumber(3);
-
       await sleep(3400);
 
       showNumber(2);
-
       await sleep(1500);
 
       showNumber(1);
-
       await sleep(1600);
-
       break;
 
-
     case 6:
-
       showNumber(3);
-
       await sleep(1500);
 
       showNumber(2);
-
-      $("#number")
-        .classList
-        .add("red");
+      $("#number").classList.add("red");
 
       await sleep(500);
 
-      $("#number")
-        .classList
-        .remove("red");
+      $("#number").classList.remove("red");
 
       await sleep(1100);
 
       showNumber(1);
-
       await sleep(1500);
-
       break;
 
-
     case 7:
-
       showNumber(3);
-
       await sleep(1400);
 
       showNumber(2);
-
       await sleep(1400);
 
       showNumber(0);
-
       await sleep(280);
 
       showNumber(1);
-
       await sleep(1700);
-
       break;
-
 
     case 8:
-
       await normalCount();
 
-      $("#number")
-        .style
-        .transform=
-          "translate(-50%,-50%) scale(.78)";
+      $("#number").style.transform=
+        "translate(-50%,-50%) scale(.78)";
 
       await sleep(900);
-
       break;
 
-
     case 9:
-
       showNumber(3);
-
       await sleep(400);
 
       showNumber(2);
-
       await sleep(500);
 
       showNumber(1);
-
       await sleep(1900);
-
       break;
   }
 
   stopTension();
-
   showDots();
 
   await sleep(1400);
@@ -3254,66 +2136,46 @@ async function weakFake(type){
 }
 
 async function strongFake(type){
-
   switch(type){
-
     case 0:
-
       await normalCount();
 
       stopTension();
 
-      $("#slash").className=
-        "go";
+      $("#slash").className="go";
 
       await sleep(230);
 
-      $("#slash").className=
-        "";
+      $("#slash").className="";
 
       await sleep(1800);
-
       break;
 
-
     case 1:
-
       await normalCount();
 
       stopTension();
-
       hideNumber();
 
       await blackout(2200);
-
       break;
 
-
     case 2:
-
       await normalCount();
 
-      $("#number")
-        .classList
-        .add("gold");
+      $("#number").classList.add("gold");
 
       await sleep(3000);
 
-      $("#number")
-        .classList
-        .remove("gold");
-
+      $("#number").classList.remove("gold");
       break;
 
-
     case 3:
-
       await normalCount();
 
       stopTension();
 
-      $("#slash").className=
-        "go";
+      $("#slash").className="go";
 
       await sleep(220);
 
@@ -3321,20 +2183,15 @@ async function strongFake(type){
 
       await sleep(250);
 
-      $("#slash").className=
-        "";
+      $("#slash").className="";
 
       await sleep(1800);
-
       break;
 
-
     case 4:
-
       await normalCount();
 
       stopTension();
-
       hideNumber();
 
       await blackout(1500);
@@ -3342,17 +2199,12 @@ async function strongFake(type){
       showNumber(1);
 
       await sleep(2300);
-
       break;
 
-
     case 5:
-
       await normalCount();
 
-      $("#number")
-        .classList
-        .add("gold");
+      $("#number").classList.add("gold");
 
       await sleep(700);
 
@@ -3360,10 +2212,7 @@ async function strongFake(type){
 
       await sleep(3300);
 
-      $("#number")
-        .classList
-        .remove("gold");
-
+      $("#number").classList.remove("gold");
       break;
   }
 
@@ -3374,173 +2223,105 @@ async function strongFake(type){
   return finishMiss();
 }
 
-/* =========================================================
+/* =========================
    COMMON FX MISS
-========================================================= */
-
+========================= */
 async function commonFxMiss(index){
-
   switch(index){
-
     case 0:
-
       await normalCount();
-
       await fxBigNumber();
-
       break;
-
 
     case 1:
-
       await normalCount();
-
       await fxCrack();
-
       break;
-
 
     case 2:
-
       await normalCount();
-
-      await fxLightning(
-        Math.random()<.25
-        ? 3
-        : 1
-      );
-
+      await fxLightning(Math.random()<.25?3:1);
       break;
 
-
     case 3:
-
       showNumber(3);
-
       await sleep(1400);
 
       showNumber(2);
-
       await fxNoise(700);
 
       showNumber(1);
-
       await sleep(1700);
-
       break;
 
-
     case 4:
-
       await normalCount();
-
       await fxColorStep();
 
       await sleep(1000);
-
       break;
 
-
     case 5:
-
       showNumber(3);
-
       await sleep(1500);
 
       showNumber(2);
-
       await sleep(1600);
 
       await fxSuperLongOne();
-
       break;
 
-
     case 6:
-
       showNumber(3);
-
       await sleep(1400);
 
       await fxQuestion();
 
       showNumber(2);
-
       await sleep(1500);
 
       showNumber(1);
-
       await sleep(1600);
-
       break;
-
 
     case 7:
-
       await normalCount();
-
       await fxBackgroundDark();
-
       break;
-
 
     case 8:
-
       await fxStopRestart();
-
       break;
 
-
     case 9:
-
       showNumber(3);
-
       await sleep(1500);
 
       showNumber(2);
-
       await sleep(1600);
 
       await fxSilentDisappear();
-
       break;
-
 
     case 10:
-
       await fxFakeFinish();
-
       break;
 
-
     case 11:
-
       await normalCount();
-
       await fxLogoGlow();
 
       await sleep(1000);
-
       break;
   }
 
   stopTension();
 
-  if(
-    Math.random()<.55
-  ){
-
+  if(Math.random()<.55){
     showDots();
-
-    await sleep(
-      1200+
-      Math.random()*700
-    );
-
+    await sleep(1200+Math.random()*700);
   }else{
-
     hideNumber();
-
     hideDots();
 
     await sleep(1300);
@@ -3550,282 +2331,184 @@ async function commonFxMiss(index){
 }
 
 async function finishMiss(){
-
   stopTension();
 
   hideNumber();
-
   hideDots();
 
-  $("#stage")
-    .classList
-    .remove(
-      "bgDark",
-      "hitZoom"
-    );
-
+  $("#stage").classList.remove("bgDark","hitZoom");
   $("#noise").className="";
-
   $("#lightning").className="";
-
-  $("#question").style.display=
-    "none";
-
-  $("#black").style.display=
-    "none";
-
+  $("#question").style.display="none";
+  $("#black").style.display="none";
   $("#slash").className="";
-
   $("#impactWhite").className="";
 
-  document.body.classList.remove(
-    "hitShake"
-  );
+  document.body.classList.remove("hitShake");
 
   await sleep(800);
 
   resetMain();
 }
 
-/* =========================================================
+/* =========================
    PRIZE
    1等 2%
    2等 20%
    3等 78%
-========================================================= */
-
+========================= */
 function drawPrize(){
-
   const r=Math.random();
 
-  if(r<.02){
-    return 1;
-  }
-
-  if(r<.22){
-    return 2;
-  }
+  if(r<.02)return 1;
+  if(r<.22)return 2;
 
   return 3;
 }
 
 function rankClass(rank){
-
   return "rank"+rank;
 }
 
-/* =========================================================
-   NEW TREASURE FUNCTIONS
-========================================================= */
-
+/* =========================
+   TREASURE
+========================= */
 function resetTreasure(){
+  $("#selectedGlow").style.display="none";
 
-  $("#selectedGlow")
-    .style
-    .display="none";
+  $("#treasureShake").className="";
+  $("#treasureBeam").className="";
+  $("#treasureBurst").className="";
 
-  $("#treasureShake")
-    .className="";
+  $("#chosenBadge").style.display="none";
 
-  $("#treasureBeam")
-    .className="";
+  $("#treasureResult").className="";
 
-  $("#treasureBurst")
-    .className="";
+  $("#resultBig").className="";
+  $("#resultBig").textContent="";
 
-  $("#chosenBadge")
-    .style
-    .display="none";
+  $("#next").style.display="none";
 
-  $("#treasureResult")
-    .className="";
+  $$(".treasureDim").forEach(dim=>{
+    dim.style.display="none";
+  });
 
-  $("#resultBig")
-    .className="";
+  $$(".treasureTap").forEach(button=>{
+    button.disabled=false;
+    button.style.display="block";
+  });
 
-  $("#resultBig")
-    .textContent="";
-
-  $("#next")
-    .style
-    .display="none";
-
-  $$(".treasureDim")
-    .forEach(
-      dim=>
-        dim.style.display="none"
-    );
-
-  $$(".treasureTap")
-    .forEach(button=>{
-
-      button.disabled=false;
-
-      button.style.display=
-        "block";
-
-    });
+  $$(".chestRank").forEach(label=>{
+    label.className="chestRank";
+    label.textContent="";
+  });
 }
 
 function showTreasure(){
-
-  selectedRank=
-    drawPrize();
-
+  selectedRank=drawPrize();
   selectedIndex=-1;
-
   chestBusy=false;
 
   resetTreasure();
 
-  $("#treasure")
-    .className="show";
+  $("#treasure").className="show";
 }
 
-/*
-  各宝箱の中心位置
-*/
 function chestCenter(index){
-
-  if(index===0){
-    return 16.5;
-  }
-
-  if(index===1){
-    return 50;
-  }
-
+  if(index===0)return 16.5;
+  if(index===1)return 50;
   return 83.5;
 }
 
 function setSelectedPosition(index){
+  const x=chestCenter(index);
 
-  const x=
-    chestCenter(index);
-
-  const glow=
-    $("#selectedGlow");
-
-  const shake=
-    $("#treasureShake");
-
-  const beam=
-    $("#treasureBeam");
-
-  const burst=
-    $("#treasureBurst");
-
-  const badge=
-    $("#chosenBadge");
-
-  glow.style.left=
+  $("#selectedGlow").style.left=
     `calc(${x}% - 15.5%)`;
 
-  shake.style.left=
+  $("#treasureShake").style.left=
     `calc(${x}% - 15.5%)`;
 
-  beam.style.left=
+  $("#treasureBeam").style.left=
     `calc(${x}% - 11.5%)`;
 
-  burst.style.left=
-    x+"%";
+  $("#treasureBurst").style.left=x+"%";
+  $("#treasureBurst").style.top="55%";
 
-  burst.style.top=
-    "55%";
-
-  badge.style.left=
-    x+"%";
+  $("#chosenBadge").style.left=x+"%";
 }
 
 function dimOtherChests(index){
-
   const dims=[
     $("#dimLeft"),
     $("#dimCenter"),
     $("#dimRight")
   ];
 
-  dims.forEach(
-    (dim,i)=>{
-
-      dim.style.display=
-        i===index
+  dims.forEach((dim,i)=>{
+    dim.style.display=
+      i===index
         ? "none"
         : "block";
+  });
+}
 
-    }
-  );
+function getRankLabel(index){
+  if(index===0)return $("#rankLeft");
+  if(index===1)return $("#rankCenter");
+  return $("#rankRight");
+}
+
+function revealChestRank(index,rank){
+  const label=getRankLabel(index);
+
+  label.textContent=rank+"等";
+  label.className="chestRank "+rankClass(rank);
+
+  void label.offsetWidth;
+
+  label.classList.add("reveal");
 }
 
 async function chooseTreasure(index){
-
-  if(chestBusy){
-    return;
-  }
+  if(chestBusy)return;
 
   chestBusy=true;
-
   selectedIndex=index;
 
-  $$(".treasureTap")
-    .forEach(button=>{
-      button.disabled=true;
-    });
+  $$(".treasureTap").forEach(button=>{
+    button.disabled=true;
+  });
 
   setSelectedPosition(index);
 
-  /*
-    まず選んだ箱を発光
-  */
-  $("#selectedGlow")
-    .style
-    .display="block";
+  /* 選んだ箱を光らせる */
+  $("#selectedGlow").style.display="block";
+  $("#chosenBadge").style.display="block";
 
-  $("#chosenBadge")
-    .style
-    .display="block";
-
-  /*
-    ブルブル
-  */
-  $("#treasureShake")
-    .className="go";
+  /* 揺れ */
+  $("#treasureShake").className="go";
 
   await sleep(1000);
 
-  $("#treasureShake")
-    .className="";
+  $("#treasureShake").className="";
 
-  /*
-    一瞬静止
-  */
   await sleep(250);
 
-  /*
-    開封光
-  */
-  const beam=
-    $("#treasureBeam");
+  /* 光の柱 */
+  const beam=$("#treasureBeam");
 
   beam.className="";
-
   void beam.offsetWidth;
-
   beam.className="go";
 
-
-  const burst=
-    $("#treasureBurst");
+  /* 爆発光 */
+  const burst=$("#treasureBurst");
 
   burst.className="";
-
   void burst.offsetWidth;
-
   burst.className="go";
 
-  /*
-    白フラッシュ
-  */
   await sleep(170);
 
   flash();
@@ -3833,283 +2516,222 @@ async function chooseTreasure(index){
   await sleep(350);
 
   /*
-    選ばなかった箱を暗くする
+    選んだ箱の等級を先に表示
   */
-  dimOtherChests(index);
+  revealChestRank(index,selectedRank);
 
   /*
-    結果発表
+    下にも自分の結果を表示
   */
-  const big=
-    $("#resultBig");
+  const big=$("#resultBig");
 
-  big.textContent=
-    selectedRank+
-    "等 当選！";
+  big.textContent=selectedRank+"等 当選！";
+  big.className=rankClass(selectedRank);
 
-  big.className=
-    rankClass(
-      selectedRank
-    );
-
-  const result=
-    $("#treasureResult");
+  const result=$("#treasureResult");
 
   result.className="";
-
   void result.offsetWidth;
-
   result.className="go";
 
-  /*
-    結果の瞬間もう一回フラッシュ
-  */
   await sleep(180);
 
   flash();
 
-  await sleep(1200);
+  /*
+    選んだ結果をしっかり見せる
+  */
+  await sleep(1500);
 
   /*
-    選択した箱は最後まで光らせる
+    残りの等級
+    選んだ等級以外の2つを使用
   */
-  $("#selectedGlow")
-    .style
-    .display="block";
+  const remainingRanks=[1,2,3]
+    .filter(rank=>rank!==selectedRank)
+    .sort(()=>Math.random()-.5);
 
-  $("#next")
-    .style
-    .display="block";
+  /*
+    残りの箱
+  */
+  const otherIndexes=[0,1,2]
+    .filter(i=>i!==index)
+    .sort(()=>Math.random()-.5);
+
+  /*
+    1個目の残り箱
+  */
+  let otherIndex=otherIndexes[0];
+
+  let x=chestCenter(otherIndex);
+
+  burst.style.left=x+"%";
+  burst.style.top="55%";
+
+  burst.className="";
+  void burst.offsetWidth;
+  burst.className="go";
+
+  await sleep(250);
+
+  revealChestRank(
+    otherIndex,
+    remainingRanks[0]
+  );
+
+  await sleep(850);
+
+  /*
+    2個目の残り箱
+  */
+  otherIndex=otherIndexes[1];
+
+  x=chestCenter(otherIndex);
+
+  burst.style.left=x+"%";
+  burst.style.top="55%";
+
+  burst.className="";
+  void burst.offsetWidth;
+  burst.className="go";
+
+  await sleep(250);
+
+  revealChestRank(
+    otherIndex,
+    remainingRanks[1]
+  );
+
+  await sleep(850);
+
+  /*
+    最後に選ばなかった箱だけ暗くする
+    等級文字はその上なのでちゃんと読める
+  */
+  dimOtherChests(index);
+
+  /*
+    選んだ箱の光は残す
+  */
+  $("#selectedGlow").style.display="block";
+
+  /*
+    自分の結果も残す
+  */
+  result.className="go";
+
+  /*
+    NEXT
+  */
+  await sleep(500);
+
+  $("#next").style.display="block";
 }
 
-/* =========================================================
+/* =========================
    HIT SELECTOR
-   32 + 12 = 44
-========================================================= */
-
+========================= */
 async function runHit(){
-
-  const pattern=
-    Math.floor(
-      Math.random()*44
-    );
+  const pattern=Math.floor(Math.random()*44);
 
   switch(pattern){
+    case 0:return normalHitAt(3);
+    case 1:return normalHitAt(2);
+    case 2:return normalHitAt(1);
+    case 3:return normalHitAt(0);
+    case 4:return normalBlackout();
+    case 5:return freezeTwo();
+    case 6:return reverseCountdown();
+    case 7:return zeroPremium();
+    case 8:return numberDisappear();
+    case 9:return soundStopPattern();
+    case 10:return longOne();
+    case 11:return recountSequence();
+    case 12:return doubleCountdown();
 
-    case 0:
-      return normalHitAt(3);
+    case 13:return puchunDirect();
+    case 14:return puchunRecount();
 
-    case 1:
-      return normalHitAt(2);
+    case 15:return fakeSlashPattern();
+    case 16:return weirdCountdown();
+    case 17:return silentStart();
+    case 18:return classicRevival();
+    case 19:return skipCountHit();
+    case 20:return oneVanishHit();
+    case 21:return oneBackToTwoHit();
+    case 22:return speedCountHit();
+    case 23:return doubleSlashHit();
+    case 24:return silentOddityHit();
+    case 25:return questionHit();
+    case 26:return blackoutReturnHit();
+    case 27:return dotsDirectHit();
+    case 28:return dotsOneRevival();
+    case 29:return dotsBlackoutHit();
+    case 30:return dotsStarHit();
+    case 31:return dotsLongSilenceHit();
 
-    case 2:
-      return normalHitAt(1);
-
-    case 3:
-      return normalHitAt(0);
-
-    case 4:
-      return normalBlackout();
-
-    case 5:
-      return freezeTwo();
-
-    case 6:
-      return reverseCountdown();
-
-    case 7:
-      return zeroPremium();
-
-    case 8:
-      return numberDisappear();
-
-    case 9:
-      return soundStopPattern();
-
-    case 10:
-      return longOne();
-
-    case 11:
-      return recountSequence();
-
-    case 12:
-      return doubleCountdown();
-
-    case 13:
-      return puchunDirect();
-
-    case 14:
-      return puchunRecount();
-
-    case 15:
-      return fakeSlashPattern();
-
-    case 16:
-      return weirdCountdown();
-
-    case 17:
-      return silentStart();
-
-    case 18:
-      return classicRevival();
-
-    case 19:
-      return skipCountHit();
-
-    case 20:
-      return oneVanishHit();
-
-    case 21:
-      return oneBackToTwoHit();
-
-    case 22:
-      return speedCountHit();
-
-    case 23:
-      return doubleSlashHit();
-
-    case 24:
-      return silentOddityHit();
-
-    case 25:
-      return questionHit();
-
-    case 26:
-      return blackoutReturnHit();
-
-    case 27:
-      return dotsDirectHit();
-
-    case 28:
-      return dotsOneRevival();
-
-    case 29:
-      return dotsBlackoutHit();
-
-    case 30:
-      return dotsStarHit();
-
-    case 31:
-      return dotsLongSilenceHit();
-
-    case 32:
-      return commonFxHit(0);
-
-    case 33:
-      return commonFxHit(1);
-
-    case 34:
-      return commonFxHit(2);
-
-    case 35:
-      return commonFxHit(3);
-
-    case 36:
-      return commonFxHit(4);
-
-    case 37:
-      return commonFxHit(5);
-
-    case 38:
-      return commonFxHit(6);
-
-    case 39:
-      return commonFxHit(7);
-
-    case 40:
-      return commonFxHit(8);
-
-    case 41:
-      return commonFxHit(9);
-
-    case 42:
-      return commonFxHit(10);
-
-    case 43:
-      return commonFxHit(11);
+    case 32:return commonFxHit(0);
+    case 33:return commonFxHit(1);
+    case 34:return commonFxHit(2);
+    case 35:return commonFxHit(3);
+    case 36:return commonFxHit(4);
+    case 37:return commonFxHit(5);
+    case 38:return commonFxHit(6);
+    case 39:return commonFxHit(7);
+    case 40:return commonFxHit(8);
+    case 41:return commonFxHit(9);
+    case 42:return commonFxHit(10);
+    case 43:return commonFxHit(11);
   }
 }
 
-/* =========================================================
+/* =========================
    MISS SELECTOR
-========================================================= */
-
+========================= */
 async function runMiss(){
-
-  if(
-    Math.random()<.36
-  ){
-
+  if(Math.random()<.36){
     return commonFxMiss(
-      Math.floor(
-        Math.random()*12
-      )
+      Math.floor(Math.random()*12)
     );
   }
 
-  const r=
-    Math.random();
+  const r=Math.random();
 
   if(r<.50){
-
     return normalMiss();
   }
 
   if(r<.75){
-
     return weakFake(
-      Math.floor(
-        Math.random()*10
-      )
+      Math.floor(Math.random()*10)
     );
   }
 
   return strongFake(
-    Math.floor(
-      Math.random()*6
-    )
+    Math.floor(Math.random()*6)
   );
 }
 
-/* =========================================================
+/* =========================
    RESET
-========================================================= */
-
+========================= */
 function resetVisuals(){
-
-  $("#black").style.display=
-    "none";
-
-  $("#hitDark").style.display=
-    "none";
+  $("#black").style.display="none";
+  $("#hitDark").style.display="none";
 
   $("#slash").className="";
-
   $("#flash").className="";
-
   $("#impactWhite").className="";
-
   $("#hitText").className="";
-
   $("#noise").className="";
-
   $("#lightning").className="";
-
   $("#logoGlow").className="";
 
-  $("#question").style.display=
-    "none";
+  $("#question").style.display="none";
 
-  $("#stage")
-    .classList
-    .remove(
-      "bgDark",
-      "hitZoom"
-    );
+  $("#stage").classList.remove("bgDark","hitZoom");
 
-  document.body.classList.remove(
-    "hitShake"
-  );
+  document.body.classList.remove("hitShake");
 
   hideDots();
 
@@ -4117,170 +2739,121 @@ function resetVisuals(){
 }
 
 function resetMain(){
-
   stopTension();
-
   clearStars();
 
   resetVisuals();
-
   resetTreasure();
 
   $("#treasure").className="";
 
   showNumber(3);
 
-  $("#start").style.display=
-    "block";
-
-  $("#info").style.display=
-    "block";
+  $("#start").style.display="block";
+  $("#info").style.display="block";
 
   busy=false;
-
   chestBusy=false;
-
   selectedRank=null;
-
   selectedIndex=-1;
 }
 
-/* =========================================================
+/* =========================
    PLAY
-========================================================= */
-
+========================= */
 async function play(){
-
-  if(busy){
-    return;
-  }
+  if(busy)return;
 
   busy=true;
 
-  $("#start").style.display=
-    "none";
-
-  $("#info").style.display=
-    "none";
+  $("#start").style.display="none";
+  $("#info").style.display="none";
 
   playToken++;
 
   clearStars();
-
   resetVisuals();
 
   ensureAudioContext();
 
-  const resumePromise=
-    audioCtx.resume();
+  const resumePromise=audioCtx.resume();
 
   try{
-
     await Promise.all([
       resumePromise,
       prepareAudio()
     ]);
-
   }catch(e){
-
     console.log(
       "audio preparation error",
       e
     );
-
   }
 
   startTension();
 
-  const token=
-    playToken;
+  const token=playToken;
 
-  /*
-    流れ星は当落と独立
-  */
   scheduleStars(token);
 
   /*
-    本番抽選
-
-    STARTごとに1回だけ。
-
-    1 / 30
-
-    完全独立抽選。
+    STARTごとに1回だけ
+    完全独立 1/30
   */
-  const win=
-    Math.random() < (1/30);
+  const win=Math.random() < (1/30);
 
   if(win){
-
     await runHit();
-
   }else{
-
     await runMiss();
-
   }
 }
 
-/* =========================================================
+/* =========================
    EVENTS
-========================================================= */
+========================= */
+$("#start").addEventListener(
+  "click",
+  play
+);
 
-$("#start")
-  .addEventListener(
-    "click",
-    play
-  );
+$("#tapLeft").addEventListener(
+  "click",
+  ()=>chooseTreasure(0)
+);
 
-$("#tapLeft")
-  .addEventListener(
-    "click",
-    ()=>chooseTreasure(0)
-  );
+$("#tapCenter").addEventListener(
+  "click",
+  ()=>chooseTreasure(1)
+);
 
-$("#tapCenter")
-  .addEventListener(
-    "click",
-    ()=>chooseTreasure(1)
-  );
+$("#tapRight").addEventListener(
+  "click",
+  ()=>chooseTreasure(2)
+);
 
-$("#tapRight")
-  .addEventListener(
-    "click",
-    ()=>chooseTreasure(2)
-  );
-
-$("#next")
-  .addEventListener(
-    "click",
-    ()=>{
-
-      stopHitMusic();
-
-      playToken++;
-
-      resetMain();
-
-    }
-  );
-
-/* =========================================================
-   PRELOAD
-========================================================= */
-
-window.addEventListener(
-  "load",
+$("#next").addEventListener(
+  "click",
   ()=>{
+    stopHitMusic();
 
-    ensureAudioContext();
+    playToken++;
 
-    prepareAudio()
-      .catch(()=>{});
-
+    resetMain();
   }
 );
 
+/* =========================
+   PRELOAD
+========================= */
+window.addEventListener(
+  "load",
+  ()=>{
+    ensureAudioContext();
+
+    prepareAudio().catch(()=>{});
+  }
+);
 </script>
 
 </body>
