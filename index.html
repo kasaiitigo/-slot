@@ -11,6 +11,7 @@
   box-sizing:border-box;
   -webkit-tap-highlight-color:transparent;
 }
+
 html,body{
   margin:0;
   width:100%;
@@ -19,7 +20,10 @@ html,body{
   background:#120008;
   font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
 }
-body{touch-action:manipulation;}
+
+body{
+  touch-action:manipulation;
+}
 
 #stage{
   position:fixed;
@@ -33,17 +37,49 @@ body{touch-action:manipulation;}
   transform-origin:center center;
 }
 
-#darkOverlay,#hitDark,#impactWhite,#flash,#noise,#bgDark,#lightning,#logoGlow{
+/* =========================
+   OVERLAYS
+========================= */
+
+#darkOverlay,
+#hitDark,
+#impactWhite,
+#flash,
+#noise,
+#bgDark,
+#lightning,
+#logoGlow{
   position:absolute;
   inset:0;
   pointer-events:none;
   opacity:0;
 }
-#darkOverlay{z-index:30;background:#000;}
-#hitDark{z-index:31;background:rgba(0,0,0,.92);}
-#impactWhite{z-index:60;background:#fff;}
-#flash{z-index:61;background:rgba(255,255,255,.95);}
-#bgDark{z-index:15;background:rgba(0,0,0,.72);}
+
+#darkOverlay{
+  z-index:30;
+  background:#000;
+}
+
+#hitDark{
+  z-index:31;
+  background:rgba(0,0,0,.92);
+}
+
+#impactWhite{
+  z-index:60;
+  background:#fff;
+}
+
+#flash{
+  z-index:61;
+  background:rgba(255,255,255,.95);
+}
+
+#bgDark{
+  z-index:15;
+  background:rgba(0,0,0,.72);
+}
+
 #noise{
   z-index:45;
   background:repeating-linear-gradient(
@@ -55,6 +91,7 @@ body{touch-action:manipulation;}
   );
   mix-blend-mode:screen;
 }
+
 #lightning{
   z-index:46;
   background:linear-gradient(
@@ -66,6 +103,7 @@ body{touch-action:manipulation;}
   );
   filter:drop-shadow(0 0 14px #ff1b8d);
 }
+
 #logoGlow{
   z-index:20;
   inset:0 0 auto 0;
@@ -79,13 +117,16 @@ body{touch-action:manipulation;}
   );
 }
 
-/* START */
+/* =========================
+   START
+========================= */
 
 #startScreen{
   position:absolute;
   inset:0;
   z-index:10;
 }
+
 #startButton{
   position:absolute;
   left:50%;
@@ -95,7 +136,11 @@ body{touch-action:manipulation;}
   height:72px;
   border:2px solid rgba(255,255,255,.9);
   border-radius:40px;
-  background:linear-gradient(180deg,rgba(255,85,171,.97),rgba(215,0,103,.97));
+  background:linear-gradient(
+    180deg,
+    rgba(255,85,171,.97),
+    rgba(215,0,103,.97)
+  );
   box-shadow:
     0 0 12px rgba(255,255,255,.75),
     0 0 26px rgba(255,0,125,.85),
@@ -104,20 +149,52 @@ body{touch-action:manipulation;}
   font-size:28px;
   font-weight:800;
   letter-spacing:3px;
+  cursor:pointer;
 }
+
+/* 確率表示をSTARTより上へ */
+
 #probability{
   position:absolute;
+  z-index:12;
   width:100%;
-  bottom:18.5%;
+  bottom:23%;
+  left:0;
   text-align:center;
   color:#fff;
   font-weight:800;
-  font-size:15px;
-  line-height:1.55;
-  text-shadow:0 2px 4px #000,0 0 8px #ff278c;
+  pointer-events:none;
+  text-shadow:
+    0 2px 4px #000,
+    0 0 8px #ff278c;
 }
 
-/* COUNTDOWN */
+.lottery-title{
+  font-size:15px;
+  line-height:1.15;
+}
+
+.lottery-rate{
+  margin:2px 0;
+  font-size:27px;
+  line-height:1.05;
+  font-weight:1000;
+  color:#fff3a5;
+  letter-spacing:2px;
+  text-shadow:
+    0 2px 3px #000,
+    0 0 8px #ffca28,
+    0 0 15px #ff278c;
+}
+
+.lottery-sub{
+  font-size:14px;
+  line-height:1.15;
+}
+
+/* =========================
+   COUNTDOWN
+========================= */
 
 #number{
   position:absolute;
@@ -139,13 +216,16 @@ body{touch-action:manipulation;}
     0 18px 8px rgba(60,0,28,.72);
   opacity:0;
 }
+
 #number.show{
   opacity:1;
   animation:numberPop .20s ease-out;
 }
+
 #number.big{
   transform:translate(-50%,-50%) scale(1.28);
 }
+
 #number.crack{
   text-shadow:
     -5px -3px 0 rgba(255,255,255,.7),
@@ -153,8 +233,10 @@ body{touch-action:manipulation;}
     0 9px 0 #8b003e,
     0 18px 8px rgba(60,0,28,.75);
 }
+
 #number.pink{color:#ffb5dc;}
 #number.red{color:#ff315f;}
+
 #number.gold{
   color:#fff0a8;
   -webkit-text-stroke:clamp(5px,1.6vw,9px) #ffb400;
@@ -163,8 +245,14 @@ body{touch-action:manipulation;}
     0 12px 0 #9d5700,
     0 18px 8px rgba(60,25,0,.72);
 }
-#number.dots{font-size:90px;}
-#number.question{font-size:min(35vw,175px);}
+
+#number.dots{
+  font-size:90px;
+}
+
+#number.question{
+  font-size:min(35vw,175px);
+}
 
 @keyframes numberPop{
   0%{transform:translate(-50%,-50%) scale(.78);}
@@ -172,9 +260,12 @@ body{touch-action:manipulation;}
   100%{transform:translate(-50%,-50%) scale(1);}
 }
 
-/* SLASH */
+/* =========================
+   SLASH
+========================= */
 
-#slash1,#slash2{
+#slash1,
+#slash2{
   position:absolute;
   z-index:55;
   left:-30%;
@@ -198,12 +289,19 @@ body{touch-action:manipulation;}
     0 0 40px #ff1687,
     0 0 70px #ff1687;
 }
+
 #slash2{
   top:54%;
   transform:rotate(17deg) scaleX(0);
 }
-.slashGo{animation:slashGo .32s cubic-bezier(.1,.7,.2,1);}
-#slash2.slashGo{animation:slashGo2 .32s cubic-bezier(.1,.7,.2,1);}
+
+.slashGo{
+  animation:slashGo .32s cubic-bezier(.1,.7,.2,1);
+}
+
+#slash2.slashGo{
+  animation:slashGo2 .32s cubic-bezier(.1,.7,.2,1);
+}
 
 @keyframes slashGo{
   0%{opacity:0;transform:rotate(-19deg) scaleX(0);}
@@ -211,6 +309,7 @@ body{touch-action:manipulation;}
   72%{opacity:1;transform:rotate(-19deg) scaleX(1);}
   100%{opacity:0;transform:rotate(-19deg) scaleX(1.06);}
 }
+
 @keyframes slashGo2{
   0%{opacity:0;transform:rotate(17deg) scaleX(0);}
   12%{opacity:1;}
@@ -218,7 +317,9 @@ body{touch-action:manipulation;}
   100%{opacity:0;transform:rotate(17deg) scaleX(1.06);}
 }
 
-/* HIT */
+/* =========================
+   HIT
+========================= */
 
 #hitText{
   position:absolute;
@@ -240,16 +341,33 @@ body{touch-action:manipulation;}
     0 0 75px #ff9a00;
   opacity:0;
 }
+
 #hitText.go{
   animation:hitPop .68s cubic-bezier(.15,.75,.2,1.4) forwards;
 }
+
 @keyframes hitPop{
-  0%{opacity:0;transform:translate(-50%,-50%) scale(.08);}
-  48%{opacity:1;transform:translate(-50%,-50%) scale(1.30);}
-  72%{transform:translate(-50%,-50%) scale(.92);}
-  100%{opacity:1;transform:translate(-50%,-50%) scale(1);}
+  0%{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(.08);
+  }
+  48%{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1.30);
+  }
+  72%{
+    transform:translate(-50%,-50%) scale(.92);
+  }
+  100%{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1);
+  }
 }
-.hitShake{animation:hitShake .48s linear;}
+
+.hitShake{
+  animation:hitShake .48s linear;
+}
+
 @keyframes hitShake{
   0%{transform:translate(0,0)}
   10%{transform:translate(-14px,8px)}
@@ -262,14 +380,20 @@ body{touch-action:manipulation;}
   80%{transform:translate(5px,-2px)}
   100%{transform:translate(0,0)}
 }
-.hitZoom{animation:hitZoom .55s ease-out;}
+
+.hitZoom{
+  animation:hitZoom .55s ease-out;
+}
+
 @keyframes hitZoom{
   0%{transform:scale(1)}
   45%{transform:scale(1.07)}
   100%{transform:scale(1)}
 }
 
-/* STARS */
+/* =========================
+   STARS
+========================= */
 
 .star{
   position:absolute;
@@ -284,6 +408,7 @@ body{touch-action:manipulation;}
     0 0 26px #ff1687;
   pointer-events:none;
 }
+
 .star::after{
   content:"";
   position:absolute;
@@ -293,17 +418,33 @@ body{touch-action:manipulation;}
   height:2px;
   transform:translateY(-50%) rotate(45deg);
   transform-origin:right center;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.92));
-}
-.star.fly{animation:starFly var(--dur) linear forwards;}
-@keyframes starFly{
-  from{opacity:0;transform:translate(0,0);}
-  8%{opacity:1;}
-  85%{opacity:1;}
-  to{opacity:0;transform:translate(var(--dx),var(--dy));}
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.92)
+  );
 }
 
-/* TREASURE */
+.star.fly{
+  animation:starFly var(--dur) linear forwards;
+}
+
+@keyframes starFly{
+  from{
+    opacity:0;
+    transform:translate(0,0);
+  }
+  8%{opacity:1;}
+  85%{opacity:1;}
+  to{
+    opacity:0;
+    transform:translate(var(--dx),var(--dy));
+  }
+}
+
+/* =========================
+   TREASURE
+========================= */
 
 #treasureScreen{
   position:fixed;
@@ -316,7 +457,11 @@ body{touch-action:manipulation;}
   background-repeat:no-repeat;
   overflow:hidden;
 }
-#treasureScreen.show{display:block;}
+
+#treasureScreen.show{
+  display:block;
+}
+
 #treasureShade{
   position:absolute;
   inset:0;
@@ -328,6 +473,7 @@ body{touch-action:manipulation;}
   );
   pointer-events:none;
 }
+
 #treasureTitle{
   position:absolute;
   top:8.5%;
@@ -337,8 +483,12 @@ body{touch-action:manipulation;}
   color:#fff;
   font-size:clamp(24px,7vw,40px);
   font-weight:1000;
-  text-shadow:0 0 8px #ff268e,0 0 18px #ff268e,0 3px 4px #000;
+  text-shadow:
+    0 0 8px #ff268e,
+    0 0 18px #ff268e,
+    0 3px 4px #000;
 }
+
 #treasureSub{
   position:absolute;
   top:14.3%;
@@ -348,8 +498,11 @@ body{touch-action:manipulation;}
   color:#fff6c8;
   font-size:clamp(15px,4vw,22px);
   font-weight:800;
-  text-shadow:0 2px 5px #000,0 0 9px #ff2a8e;
+  text-shadow:
+    0 2px 5px #000,
+    0 0 9px #ff2a8e;
 }
+
 .chestTap{
   position:absolute;
   z-index:105;
@@ -357,7 +510,9 @@ body{touch-action:manipulation;}
   height:33%;
   border:0;
   background:transparent;
+  cursor:pointer;
 }
+
 #chest0{left:2%;width:31%;}
 #chest1{left:34.5%;width:31%;}
 #chest2{right:2%;width:31%;}
@@ -378,15 +533,28 @@ body{touch-action:manipulation;}
     rgba(255,80,168,.28) 45%,
     transparent 70%
   );
-  filter:drop-shadow(0 0 16px #fff) drop-shadow(0 0 28px #ffcf36);
+  filter:
+    drop-shadow(0 0 16px #fff)
+    drop-shadow(0 0 28px #ffcf36);
 }
-#glow0{left:2%}
-#glow1{left:34.5%}
-#glow2{right:2%}
-.chestGlow.on{animation:chestGlow .65s ease-in-out infinite alternate;}
+
+#glow0{left:2%;}
+#glow1{left:34.5%;}
+#glow2{right:2%;}
+
+.chestGlow.on{
+  animation:chestGlow .65s ease-in-out infinite alternate;
+}
+
 @keyframes chestGlow{
-  from{opacity:.45;transform:scale(.92);}
-  to{opacity:1;transform:scale(1.09);}
+  from{
+    opacity:.45;
+    transform:scale(.92);
+  }
+  to{
+    opacity:1;
+    transform:scale(1.09);
+  }
 }
 
 #treasureBeam{
@@ -407,11 +575,21 @@ body{touch-action:manipulation;}
   );
   filter:blur(8px);
 }
-#treasureBeam.go{animation:beamGo .75s ease-out;}
+
+#treasureBeam.go{
+  animation:beamGo .75s ease-out;
+}
+
 @keyframes beamGo{
-  0%{opacity:0;transform:translateX(-50%) scaleY(0);}
+  0%{
+    opacity:0;
+    transform:translateX(-50%) scaleY(0);
+  }
   35%{opacity:1;}
-  100%{opacity:0;transform:translateX(-50%) scaleY(1);}
+  100%{
+    opacity:0;
+    transform:translateX(-50%) scaleY(1);
+  }
 }
 
 #treasureBurst{
@@ -425,16 +603,31 @@ body{touch-action:manipulation;}
   transform:translate(-50%,-50%) scale(.1);
   opacity:0;
   background:#fff;
-  box-shadow:0 0 25px #fff,0 0 55px #ffdd55,0 0 90px #ff228b;
-}
-#treasureBurst.go{animation:burstGo .7s ease-out;}
-@keyframes burstGo{
-  0%{opacity:1;transform:translate(-50%,-50%) scale(.1);}
-  55%{opacity:1;}
-  100%{opacity:0;transform:translate(-50%,-50%) scale(13);}
+  box-shadow:
+    0 0 25px #fff,
+    0 0 55px #ffdd55,
+    0 0 90px #ff228b;
 }
 
-/* RANK */
+#treasureBurst.go{
+  animation:burstGo .7s ease-out;
+}
+
+@keyframes burstGo{
+  0%{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(.1);
+  }
+  55%{opacity:1;}
+  100%{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(13);
+  }
+}
+
+/* =========================
+   RANK
+========================= */
 
 .rankLabel{
   position:absolute;
@@ -446,20 +639,40 @@ body{touch-action:manipulation;}
   font-size:clamp(27px,8vw,44px);
   opacity:0;
   transform:scale(.4);
-  text-shadow:0 3px 4px #000,0 0 9px #000;
+  text-shadow:
+    0 3px 4px #000,
+    0 0 9px #000;
 }
+
 .rankLabel.show{
   animation:rankShow .42s cubic-bezier(.15,.8,.25,1.3) forwards;
 }
+
 @keyframes rankShow{
-  to{opacity:1;transform:scale(1);}
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
 }
-#rank0{left:3%}
-#rank1{left:35.5%}
-#rank2{right:3%}
-.rank1{color:#ffe26b;-webkit-text-stroke:2px #a66300;}
-.rank2{color:#f2f2f2;-webkit-text-stroke:2px #777;}
-.rank3{color:#ffb26d;-webkit-text-stroke:2px #9d4100;}
+
+#rank0{left:3%;}
+#rank1{left:35.5%;}
+#rank2{right:3%;}
+
+.rank1{
+  color:#ffe26b;
+  -webkit-text-stroke:2px #a66300;
+}
+
+.rank2{
+  color:#f2f2f2;
+  -webkit-text-stroke:2px #777;
+}
+
+.rank3{
+  color:#ffb26d;
+  -webkit-text-stroke:2px #9d4100;
+}
 
 #selectedBadge{
   position:absolute;
@@ -471,11 +684,16 @@ body{touch-action:manipulation;}
   color:#7b2900;
   font-size:12px;
   font-weight:1000;
-  box-shadow:0 0 9px #fff,0 0 20px #ffca36;
+  box-shadow:
+    0 0 9px #fff,
+    0 0 20px #ffca36;
   opacity:0;
   transform:translateX(-50%);
 }
-#selectedBadge.show{opacity:1;}
+
+#selectedBadge.show{
+  opacity:1;
+}
 
 #resultBox{
   position:absolute;
@@ -488,10 +706,16 @@ body{touch-action:manipulation;}
   color:#fff;
   font-size:clamp(18px,5vw,28px);
   font-weight:900;
-  text-shadow:0 2px 4px #000,0 0 12px #ff2c91;
+  text-shadow:
+    0 2px 4px #000,
+    0 0 12px #ff2c91;
   opacity:0;
 }
-#resultBox.show{opacity:1;}
+
+#resultBox.show{
+  opacity:1;
+}
+
 #resultMain{
   display:block;
   margin-top:5px;
@@ -503,6 +727,7 @@ body{touch-action:manipulation;}
     0 0 14px #fff,
     0 0 26px #ff2c91;
 }
+
 #nextButton{
   position:absolute;
   z-index:125;
@@ -532,75 +757,114 @@ body{touch-action:manipulation;}
   pointer-events:none;
   border-radius:24px;
 }
-#dim0{left:2%}
-#dim1{left:34.5%}
-#dim2{right:2%}
-.chestDim.on{opacity:1;}
 
-.fadeWhite{animation:fadeWhite .23s ease-out;}
+#dim0{left:2%;}
+#dim1{left:34.5%;}
+#dim2{right:2%;}
+
+.chestDim.on{
+  opacity:1;
+}
+
+.fadeWhite{
+  animation:fadeWhite .23s ease-out;
+}
+
 @keyframes fadeWhite{
-  0%{opacity:0}
-  40%{opacity:1}
-  100%{opacity:0}
+  0%{opacity:0;}
+  40%{opacity:1;}
+  100%{opacity:0;}
 }
-.noiseGo{animation:noiseGo .55s steps(2,end);}
+
+.noiseGo{
+  animation:noiseGo .55s steps(2,end);
+}
+
 @keyframes noiseGo{
-  0%{opacity:0}
-  20%{opacity:.75}
-  38%{opacity:.18}
-  55%{opacity:.85}
-  70%{opacity:.25}
-  100%{opacity:0}
+  0%{opacity:0;}
+  20%{opacity:.75;}
+  38%{opacity:.18;}
+  55%{opacity:.85;}
+  70%{opacity:.25;}
+  100%{opacity:0;}
 }
-.lightningGo{animation:lightningGo .4s ease-out;}
+
+.lightningGo{
+  animation:lightningGo .4s ease-out;
+}
+
 @keyframes lightningGo{
-  0%{opacity:0}
-  15%{opacity:1}
-  35%{opacity:.1}
-  52%{opacity:.9}
-  100%{opacity:0}
+  0%{opacity:0;}
+  15%{opacity:1;}
+  35%{opacity:.1;}
+  52%{opacity:.9;}
+  100%{opacity:0;}
 }
-.logoGlowGo{animation:logoGlowGo .85s ease-out;}
+
+.logoGlowGo{
+  animation:logoGlowGo .85s ease-out;
+}
+
 @keyframes logoGlowGo{
-  0%{opacity:0}
-  30%{opacity:1}
-  100%{opacity:0}
+  0%{opacity:0;}
+  30%{opacity:1;}
+  100%{opacity:0;}
 }
-.bgDarkGo{opacity:1!important;}
+
+.bgDarkGo{
+  opacity:1!important;
+}
 </style>
 </head>
 
 <body>
 
 <div id="stage">
+
   <div id="bgDark"></div>
   <div id="logoGlow"></div>
 
   <div id="startScreen">
+
     <div id="probability">
-      完全抽選 1/20<br>
-      毎回独立抽選
+      <div class="lottery-title">完全抽選</div>
+      <div class="lottery-rate">1 / 20</div>
+      <div class="lottery-sub">毎回独立抽選</div>
     </div>
 
     <button id="startButton">START</button>
+
   </div>
 
   <div id="number"></div>
+
   <div id="darkOverlay"></div>
   <div id="hitDark"></div>
+
   <div id="noise"></div>
   <div id="lightning"></div>
+
   <div id="slash1"></div>
   <div id="slash2"></div>
+
   <div id="impactWhite"></div>
   <div id="flash"></div>
+
   <div id="hitText">当たり</div>
+
 </div>
 
 <div id="treasureScreen">
+
   <div id="treasureShade"></div>
-  <div id="treasureTitle">宝箱を1つ選べ！</div>
-  <div id="treasureSub">好きな宝箱をタップ！</div>
+
+  <div id="treasureTitle">
+    宝箱を1つ選べ！
+  </div>
+
+  <div id="treasureSub">
+    好きな宝箱をタップ！
+  </div>
 
   <div class="chestGlow" id="glow0"></div>
   <div class="chestGlow" id="glow1"></div>
@@ -621,26 +885,38 @@ body{touch-action:manipulation;}
   <div class="rankLabel" id="rank1"></div>
   <div class="rankLabel" id="rank2"></div>
 
-  <div id="selectedBadge">あなたが選んだ箱</div>
+  <div id="selectedBadge">
+    あなたが選んだ箱
+  </div>
 
   <div id="resultBox">
     あなたの結果
     <span id="resultMain"></span>
   </div>
 
-  <button id="nextButton">NEXT</button>
+  <button id="nextButton">
+    NEXT
+  </button>
+
 </div>
 
 <script>
-const $ = id => document.getElementById(id);
-const sleep = ms => new Promise(r => setTimeout(r,ms));
-const rand = (min,max) => Math.floor(Math.random()*(max-min+1))+min;
-const chance = p => Math.random()<p;
+const $=id=>document.getElementById(id);
+const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+
+function rand(min,max){
+  return Math.floor(Math.random()*(max-min+1))+min;
+}
+
+function chance(p){
+  return Math.random()<p;
+}
 
 const stage=$("stage");
 const startScreen=$("startScreen");
 const startButton=$("startButton");
 const number=$("number");
+
 const darkOverlay=$("darkOverlay");
 const hitDark=$("hitDark");
 const slash1=$("slash1");
@@ -648,10 +924,12 @@ const slash2=$("slash2");
 const impactWhite=$("impactWhite");
 const flash=$("flash");
 const hitText=$("hitText");
+
 const noise=$("noise");
 const lightning=$("lightning");
 const bgDark=$("bgDark");
 const logoGlow=$("logoGlow");
+
 const treasureScreen=$("treasureScreen");
 
 let playing=false;
@@ -671,7 +949,9 @@ function resetNumberStyle(){
   number.style.transform="";
 }
 
-/* AUDIO */
+/* =========================
+   AUDIO
+========================= */
 
 let audioCtx=null;
 let tensionBuffer=null;
@@ -681,224 +961,366 @@ let hitSource=null;
 let audioLoaded=false;
 
 function ensureAudioContext(){
+
   if(!audioCtx){
-    const AC=window.AudioContext||window.webkitAudioContext;
+
+    const AC=
+      window.AudioContext ||
+      window.webkitAudioContext;
+
     audioCtx=new AC();
   }
+
   return audioCtx;
 }
 
 async function prepareAudio(){
+
   if(audioLoaded)return;
 
   ensureAudioContext();
 
-  const [tensionRes,hitRes]=await Promise.all([
-    fetch("./Tension.mp3"),
-    fetch("./hit_music_final.mp3")
-  ]);
+  const [tensionRes,hitRes]=
+    await Promise.all([
+      fetch("./Tension.mp3"),
+      fetch("./hit_music_final.mp3")
+    ]);
 
-  const [tensionData,hitData]=await Promise.all([
-    tensionRes.arrayBuffer(),
-    hitRes.arrayBuffer()
-  ]);
+  const [tensionData,hitData]=
+    await Promise.all([
+      tensionRes.arrayBuffer(),
+      hitRes.arrayBuffer()
+    ]);
 
-  tensionBuffer=await audioCtx.decodeAudioData(tensionData);
-  hitBuffer=await audioCtx.decodeAudioData(hitData);
+  tensionBuffer=
+    await audioCtx.decodeAudioData(tensionData);
+
+  hitBuffer=
+    await audioCtx.decodeAudioData(hitData);
+
   audioLoaded=true;
 }
 
 function stopTension(){
+
   if(tensionSource){
-    try{tensionSource.stop();}catch(e){}
+
+    try{
+      tensionSource.stop();
+    }catch(e){}
+
     tensionSource=null;
   }
 }
 
 function startTension(){
-  stopTension();
-  if(!audioCtx||!tensionBuffer)return;
 
-  const source=audioCtx.createBufferSource();
-  const gain=audioCtx.createGain();
+  stopTension();
+
+  if(!audioCtx || !tensionBuffer){
+    return;
+  }
+
+  const source=
+    audioCtx.createBufferSource();
+
+  const gain=
+    audioCtx.createGain();
 
   source.buffer=tensionBuffer;
   source.loop=true;
+
   gain.gain.value=.72;
 
   source.connect(gain);
   gain.connect(audioCtx.destination);
+
   source.start(0);
 
   tensionSource=source;
 }
 
 function stopHitMusic(){
+
   if(hitSource){
-    try{hitSource.stop();}catch(e){}
+
+    try{
+      hitSource.stop();
+    }catch(e){}
+
     hitSource=null;
   }
 }
 
 function playHitMusic(){
-  stopHitMusic();
-  if(!audioCtx||!hitBuffer)return;
 
-  const source=audioCtx.createBufferSource();
-  const gain=audioCtx.createGain();
+  stopHitMusic();
+
+  if(!audioCtx || !hitBuffer){
+    return;
+  }
+
+  const source=
+    audioCtx.createBufferSource();
+
+  const gain=
+    audioCtx.createGain();
 
   source.buffer=hitBuffer;
   gain.gain.value=1;
 
   source.connect(gain);
   gain.connect(audioCtx.destination);
+
   source.start(0);
 
   hitSource=source;
 }
 
-/* COUNTDOWN */
+/* =========================
+   COUNTDOWN
+========================= */
 
 async function showNumber(value,ms=1250){
+
   resetNumberStyle();
+
   number.textContent=value;
   number.classList.add("show");
+
   await sleep(ms);
+
   number.classList.remove("show");
 }
 
 async function normalCount(){
+
   await showNumber("3",1250);
   await sleep(190);
+
   await showNumber("2",1250);
   await sleep(190);
+
   await showNumber("1",1450);
 }
 
 async function quickCount(){
+
   await showNumber("3",550);
   await showNumber("2",550);
   await showNumber("1",700);
 }
 
 async function showDots(ms=1800){
+
   resetNumberStyle();
+
   number.textContent="…";
   number.classList.add("show","dots");
+
   await sleep(ms);
+
   number.classList.remove("show","dots");
 }
 
-/* STARS */
+/* =========================
+   STARS
+========================= */
 
 function clearStars(){
+
   starTimers.forEach(t=>clearTimeout(t));
   starTimers=[];
-  document.querySelectorAll(".star").forEach(el=>el.remove());
+
+  document
+    .querySelectorAll(".star")
+    .forEach(el=>el.remove());
 }
 
 function makeStar(){
+
   const s=document.createElement("div");
+
   s.className="star";
 
   if(chance(.55)){
+
     s.style.left=rand(-8,55)+"%";
     s.style.top=rand(-5,28)+"%";
+
   }else{
+
     s.style.left=rand(-8,12)+"%";
     s.style.top=rand(4,48)+"%";
   }
 
-  s.style.setProperty("--dx",rand(220,520)+"px");
-  s.style.setProperty("--dy",rand(260,620)+"px");
-  s.style.setProperty("--dur",rand(700,1250)+"ms");
+  s.style.setProperty(
+    "--dx",
+    rand(220,520)+"px"
+  );
+
+  s.style.setProperty(
+    "--dy",
+    rand(260,620)+"px"
+  );
+
+  s.style.setProperty(
+    "--dur",
+    rand(700,1250)+"ms"
+  );
 
   stage.appendChild(s);
 
-  requestAnimationFrame(()=>s.classList.add("fly"));
-  setTimeout(()=>s.remove(),1500);
+  requestAnimationFrame(()=>{
+    s.classList.add("fly");
+  });
+
+  setTimeout(()=>{
+    s.remove();
+  },1500);
 }
 
 function starBurst(){
+
   let count;
   const r=Math.random();
 
-  if(r<.75) count=rand(1,3);
-  else if(r<.95) count=rand(4,6);
-  else count=rand(7,10);
+  if(r<.75){
+    count=rand(1,3);
+  }else if(r<.95){
+    count=rand(4,6);
+  }else{
+    count=rand(7,10);
+  }
 
   for(let i=0;i<count;i++){
-    setTimeout(makeStar,i*rand(80,170));
+
+    setTimeout(
+      makeStar,
+      i*rand(80,170)
+    );
   }
 }
 
 function scheduleStars(token){
-  if(!chance(.27))return;
+
+  if(!chance(.27)){
+    return;
+  }
 
   const t1=setTimeout(()=>{
-    if(token!==playToken)return;
+
+    if(token!==playToken){
+      return;
+    }
+
     starBurst();
+
   },rand(850,3900));
 
   starTimers.push(t1);
 
   if(chance(.15)){
+
     const t2=setTimeout(()=>{
-      if(token!==playToken)return;
+
+      if(token!==playToken){
+        return;
+      }
+
       starBurst();
+
     },rand(4200,6800));
 
     starTimers.push(t2);
   }
 }
 
-/* EFFECTS */
+/* =========================
+   EFFECTS
+========================= */
 
 async function pinkLightning(){
-  restartAnimation(lightning,"lightningGo");
+
+  restartAnimation(
+    lightning,
+    "lightningGo"
+  );
+
   await sleep(420);
 }
 
 async function screenNoise(){
-  restartAnimation(noise,"noiseGo");
+
+  restartAnimation(
+    noise,
+    "noiseGo"
+  );
+
   await sleep(580);
 }
 
 async function logoFlash(){
-  restartAnimation(logoGlow,"logoGlowGo");
+
+  restartAnimation(
+    logoGlow,
+    "logoGlowGo"
+  );
+
   await sleep(870);
 }
 
 async function blackout(ms=1400){
+
   darkOverlay.style.opacity="1";
+
   await sleep(ms);
+
   darkOverlay.style.opacity="0";
 }
 
 async function slash(doubleSlash=false){
-  restartAnimation(slash1,"slashGo");
+
+  restartAnimation(
+    slash1,
+    "slashGo"
+  );
 
   if(doubleSlash){
+
     await sleep(115);
-    restartAnimation(slash2,"slashGo");
+
+    restartAnimation(
+      slash2,
+      "slashGo"
+    );
   }
 
   await sleep(360);
 }
 
-/* REAL HIT */
+/* =========================
+   REAL HIT
+========================= */
 
 async function realHit(options={}){
-  const silence=options.silence??700;
-  const doubleSlash=options.doubleSlash??chance(.25);
+
+  const silence=
+    options.silence ?? 700;
+
+  const doubleSlash=
+    options.doubleSlash ?? chance(.25);
 
   stopTension();
+
   number.classList.remove("show");
 
   await sleep(silence);
 
   hitDark.style.opacity="1";
+
   await sleep(310);
+
   hitDark.style.opacity="0";
 
   await sleep(70);
@@ -906,14 +1328,22 @@ async function realHit(options={}){
   stage.classList.add("hitZoom");
   document.body.classList.add("hitShake");
 
-  restartAnimation(impactWhite,"fadeWhite");
+  restartAnimation(
+    impactWhite,
+    "fadeWhite"
+  );
 
   await slash(doubleSlash);
 
-  restartAnimation(flash,"fadeWhite");
+  restartAnimation(
+    flash,
+    "fadeWhite"
+  );
 
   hitText.classList.remove("go");
+
   void hitText.offsetWidth;
+
   hitText.classList.add("go");
 
   playHitMusic();
@@ -921,12 +1351,17 @@ async function realHit(options={}){
   await sleep(260);
 
   document.body.classList.remove("hitShake");
+
   void document.body.offsetWidth;
+
   document.body.classList.add("hitShake");
 
   await sleep(1000);
 
-  restartAnimation(flash,"fadeWhite");
+  restartAnimation(
+    flash,
+    "fadeWhite"
+  );
 
   await sleep(1150);
 
@@ -936,131 +1371,206 @@ async function realHit(options={}){
   await showTreasure();
 }
 
-/* HIT ROUTES */
+/* =========================
+   HIT ROUTES
+========================= */
 
 async function normalHitAt(n){
+
   if(n===3){
+
     await showNumber("3",900);
+
   }else if(n===2){
+
     await showNumber("3",1100);
     await showNumber("2",900);
+
   }else if(n===1){
+
     await showNumber("3",1100);
     await showNumber("2",1100);
     await showNumber("1",850);
+
   }else{
+
     await normalCount();
     await sleep(550);
   }
+
   await realHit();
 }
 
 async function normalBlackout(){
+
   await normalCount();
-  await blackout(rand(1500,2300));
+
+  await blackout(
+    rand(1500,2300)
+  );
+
   await realHit();
 }
 
 async function freezeTwo(){
+
   await showNumber("3",1150);
-  await showNumber("2",rand(2600,3400));
+
+  await showNumber(
+    "2",
+    rand(2600,3400)
+  );
+
   await realHit();
 }
 
 async function reverseCountdown(){
+
   await showNumber("3",1000);
   await showNumber("2",1000);
   await showNumber("1",950);
+
   await sleep(350);
+
   await showNumber("2",750);
+
   await sleep(400);
+
   await realHit();
 }
 
 async function zeroPremium(){
+
   await normalCount();
+
   await sleep(350);
+
   await showNumber("0",800);
-  await realHit({doubleSlash:true});
+
+  await realHit({
+    doubleSlash:true
+  });
 }
 
 async function numberDisappear(){
+
   await showNumber("3",1100);
   await showNumber("2",1100);
 
   resetNumberStyle();
+
   number.textContent="1";
   number.classList.add("show");
 
   await sleep(700);
+
   number.classList.remove("show");
+
   await sleep(1800);
 
   await realHit();
 }
 
 async function soundStopPattern(){
+
   await showNumber("3",1100);
   await showNumber("2",1100);
+
   stopTension();
+
   await showNumber("1",1600);
+
   await sleep(1800);
-  await realHit({silence:350});
+
+  await realHit({
+    silence:350
+  });
 }
 
 async function longOne(){
+
   await showNumber("3",1100);
   await showNumber("2",1100);
-  await showNumber("1",rand(3300,4300));
+
+  await showNumber(
+    "1",
+    rand(3300,4300)
+  );
+
   await realHit();
 }
 
 async function recountSequence(){
+
   await normalCount();
+
   await sleep(700);
+
   await showNumber("3",650);
   await showNumber("2",650);
   await showNumber("1",800);
+
   await realHit();
 }
 
 async function doubleCountdown(){
+
   await quickCount();
+
   await sleep(500);
+
   await quickCount();
-  await realHit({doubleSlash:true});
+
+  await realHit({
+    doubleSlash:true
+  });
 }
 
 async function puchunDirect(){
+
   await showNumber("3",1150);
   await showNumber("2",1150);
 
   resetNumberStyle();
+
   number.textContent="1";
   number.classList.add("show");
 
   await sleep(800);
 
   stopTension();
+
   number.classList.remove("show");
 
   darkOverlay.style.opacity="1";
-  await sleep(rand(2400,3300));
+
+  await sleep(
+    rand(2400,3300)
+  );
+
   darkOverlay.style.opacity="0";
 
   await sleep(500);
 
-  await realHit({silence:450});
+  await realHit({
+    silence:450
+  });
 }
 
 async function puchunRecount(){
+
   await normalCount();
 
   stopTension();
+
   number.classList.remove("show");
 
   darkOverlay.style.opacity="1";
-  await sleep(rand(2200,2900));
+
+  await sleep(
+    rand(2200,2900)
+  );
+
   darkOverlay.style.opacity="0";
 
   await sleep(700);
@@ -1075,62 +1585,91 @@ async function puchunRecount(){
 }
 
 async function fakeSlashPattern(){
+
   await normalCount();
 
   stopTension();
 
   await sleep(650);
+
   await slash(false);
+
   await sleep(1300);
 
   startTension();
 
   await showNumber("1",1000);
+
   await realHit();
 }
 
 async function weirdCountdown(){
+
   await showNumber("3",900);
   await showNumber("1",900);
+
   await sleep(400);
+
   await showNumber("2",1000);
+
   await sleep(500);
+
   await realHit();
 }
 
 async function silentStart(){
+
   stopTension();
+
   await showNumber("3",1200);
   await showNumber("2",1200);
   await showNumber("1",1500);
+
   await sleep(900);
-  await realHit({silence:350});
+
+  await realHit({
+    silence:350
+  });
 }
 
 async function classicRevival(){
+
   await normalCount();
-  await showDots(rand(1700,2300));
+
+  await showDots(
+    rand(1700,2300)
+  );
+
   await sleep(800);
+
   await showNumber("1",900);
+
   await realHit();
 }
 
 async function skipCountHit(){
+
   await showNumber("3",1050);
+
   await sleep(450);
+
   await showNumber("1",1100);
+
   await realHit();
 }
 
 async function oneVanishHit(){
+
   await showNumber("3",1050);
   await showNumber("2",1050);
 
   resetNumberStyle();
+
   number.textContent="1";
   number.classList.add("show");
 
   await sleep(900);
+
   number.style.opacity="0";
 
   await sleep(1800);
@@ -1142,211 +1681,333 @@ async function oneVanishHit(){
 }
 
 async function oneBackToTwoHit(){
+
   await normalCount();
+
   await sleep(500);
+
   await showNumber("2",950);
+
   await realHit();
 }
 
 async function speedCountHit(){
+
   await showNumber("3",450);
   await showNumber("2",450);
   await showNumber("1",550);
+
   await realHit();
 }
 
 async function doubleSlashHit(){
+
   await normalCount();
-  await realHit({doubleSlash:true});
+
+  await realHit({
+    doubleSlash:true
+  });
 }
 
 async function silentOddityHit(){
+
   await showNumber("3",1100);
+
   stopTension();
+
   await sleep(1100);
+
   await showNumber("2",1000);
+
   await sleep(900);
+
   await showNumber("1",1200);
-  await realHit({silence:500});
+
+  await realHit({
+    silence:500
+  });
 }
 
 async function questionHit(){
+
   await normalCount();
 
   resetNumberStyle();
+
   number.textContent="?";
-  number.classList.add("show","question");
+
+  number.classList.add(
+    "show",
+    "question"
+  );
 
   await sleep(1200);
 
-  number.classList.remove("show","question");
+  number.classList.remove(
+    "show",
+    "question"
+  );
 
   await realHit();
 }
 
 async function blackoutReturnHit(){
+
   await normalCount();
+
   await blackout(1500);
+
   await showNumber("1",900);
+
   await realHit();
 }
 
 async function dotsDirectHit(){
+
   await normalCount();
+
   await showDots(1800);
+
   await sleep(700);
+
   await realHit();
 }
 
 async function dotsOneRevival(){
+
   await normalCount();
+
   await showDots(1800);
+
   await showNumber("1",900);
+
   await realHit();
 }
 
 async function dotsBlackoutHit(){
+
   await normalCount();
+
   stopTension();
+
   await showDots(1400);
+
   await blackout(1600);
-  await realHit({silence:450});
+
+  await realHit({
+    silence:450
+  });
 }
 
 async function dotsStarHit(){
+
   await normalCount();
+
   await showDots(1300);
+
   starBurst();
+
   await sleep(1000);
+
   await realHit();
 }
 
 async function dotsLongSilenceHit(){
+
   await normalCount();
+
   stopTension();
+
   await showDots(1400);
+
   await sleep(2300);
+
   await realHit({
     silence:450,
     doubleSlash:true
   });
 }
 
-/* SHARED EFFECTS */
+/* =========================
+   SHARED EFFECTS
+========================= */
 
 async function fxBigNumber(){
+
   await showNumber("3",950);
   await showNumber("2",950);
 
   resetNumberStyle();
+
   number.textContent="1";
-  number.classList.add("show","big");
+
+  number.classList.add(
+    "show",
+    "big"
+  );
 
   await sleep(1600);
 
-  number.classList.remove("show","big");
+  number.classList.remove(
+    "show",
+    "big"
+  );
 }
 
 async function fxCrack(){
+
   await showNumber("3",950);
   await showNumber("2",950);
 
   resetNumberStyle();
+
   number.textContent="1";
-  number.classList.add("show","crack");
+
+  number.classList.add(
+    "show",
+    "crack"
+  );
 
   await sleep(1500);
 
-  number.classList.remove("show","crack");
+  number.classList.remove(
+    "show",
+    "crack"
+  );
 }
 
 async function fxLightning(){
+
   await normalCount();
+
   await pinkLightning();
 }
 
 async function fxNoise(){
+
   await showNumber("3",950);
+
   await screenNoise();
+
   await showNumber("2",950);
   await showNumber("1",1100);
 }
 
 async function fxColorStep(){
+
   resetNumberStyle();
 
   number.textContent="3";
   number.classList.add("show");
 
   await sleep(700);
+
   number.classList.add("pink");
 
   await sleep(450);
+
   number.classList.remove("pink");
   number.classList.add("red");
 
   await sleep(450);
+
   number.classList.remove("red");
   number.classList.add("gold");
 
   await sleep(650);
 
-  number.classList.remove("show","gold");
+  number.classList.remove(
+    "show",
+    "gold"
+  );
 }
 
 async function fxSuperLongOne(){
+
   await showNumber("3",950);
   await showNumber("2",950);
-  await showNumber("1",rand(3800,4800));
+
+  await showNumber(
+    "1",
+    rand(3800,4800)
+  );
 }
 
 async function fxQuestion(){
+
   await normalCount();
 
   resetNumberStyle();
+
   number.textContent="?";
-  number.classList.add("show","question");
+
+  number.classList.add(
+    "show",
+    "question"
+  );
 
   await sleep(1100);
 
-  number.classList.remove("show","question");
+  number.classList.remove(
+    "show",
+    "question"
+  );
 }
 
 async function fxBackgroundDark(){
-  bgDark.classList.add("bgDarkGo");
+
+  bgDark.classList.add(
+    "bgDarkGo"
+  );
 
   await normalCount();
+
   await sleep(700);
 
-  bgDark.classList.remove("bgDarkGo");
+  bgDark.classList.remove(
+    "bgDarkGo"
+  );
 }
 
 async function fxStopRestart(){
+
   await showNumber("3",950);
   await showNumber("2",950);
+
   await sleep(1300);
+
   await showNumber("2",700);
   await showNumber("1",1100);
 }
 
 async function fxSilentDisappear(){
+
   await normalCount();
+
   stopTension();
+
   number.classList.remove("show");
+
   await sleep(2100);
 }
 
 async function fxFakeFinish(){
+
   await normalCount();
+
   await sleep(1700);
+
   await showNumber("3",650);
   await showNumber("2",650);
   await showNumber("1",800);
 }
 
 async function fxLogoGlow(){
+
   await showNumber("3",900);
+
   await logoFlash();
+
   await showNumber("2",900);
   await showNumber("1",1100);
 }
@@ -1367,16 +2028,22 @@ const commonFx=[
 ];
 
 async function commonFxHit(i){
+
   await commonFx[i]();
+
   await realHit();
 }
 
-/* MISS */
+/* =========================
+   MISS
+========================= */
 
 async function normalMiss(){
+
   await normalCount();
 
   stopTension();
+
   number.classList.remove("show");
 
   await sleep(1100);
@@ -1385,26 +2052,38 @@ async function normalMiss(){
 }
 
 async function weakFake(i){
+
   switch(i){
+
     case 0:
+
       await showNumber("3",1100);
       await showNumber("2",3100);
       await showNumber("1",1300);
+
       break;
 
     case 1:
+
       await showNumber("3",1050);
       await showNumber("2",1050);
       await showNumber("1",3500);
+
       break;
 
     case 2:
+
       await showNumber("3",1050);
       await showNumber("2",1050);
 
       resetNumberStyle();
+
       number.textContent="1";
-      number.classList.add("show","red");
+
+      number.classList.add(
+        "show",
+        "red"
+      );
 
       await sleep(700);
 
@@ -1413,36 +2092,52 @@ async function weakFake(i){
       await sleep(900);
 
       number.classList.remove("show");
+
       break;
 
     case 3:
+
       await showNumber("3",1050);
       await showNumber("2",1050);
 
       stopTension();
 
       await showNumber("1",1600);
+
       await sleep(1700);
+
       break;
 
     case 4:
+
       await normalCount();
+
       await blackout(550);
+
       await sleep(1000);
+
       break;
 
     case 5:
+
       await showNumber("3",3100);
       await showNumber("2",1000);
       await showNumber("1",1100);
+
       break;
 
     case 6:
+
       await showNumber("3",1050);
 
       resetNumberStyle();
+
       number.textContent="2";
-      number.classList.add("show","red");
+
+      number.classList.add(
+        "show",
+        "red"
+      );
 
       await sleep(650);
 
@@ -1453,100 +2148,150 @@ async function weakFake(i){
       number.classList.remove("show");
 
       await showNumber("1",1200);
+
       break;
 
     case 7:
+
       await showNumber("3",1000);
       await showNumber("2",1000);
       await showNumber("0",550);
       await showNumber("1",1200);
+
       break;
 
     case 8:
+
       await showNumber("3",1000);
       await showNumber("2",1000);
 
       resetNumberStyle();
+
       number.textContent="1";
       number.classList.add("show");
 
-      number.style.transform="translate(-50%,-50%) scale(.78)";
+      number.style.transform=
+        "translate(-50%,-50%) scale(.78)";
 
       await sleep(1700);
 
       number.style.transform="";
+
       number.classList.remove("show");
+
       break;
 
     case 9:
+
       await showNumber("3",450);
       await showNumber("2",450);
       await showNumber("1",1500);
+
       break;
   }
 
   stopTension();
 
   await showDots(1200);
+
   await sleep(500);
 
   finishMiss();
 }
 
 async function strongFake(i){
+
   switch(i){
+
     case 0:
+
       await normalCount();
+
       stopTension();
+
       await sleep(500);
+
       await slash(false);
+
       await sleep(1500);
+
       break;
 
     case 1:
+
       await normalCount();
+
       stopTension();
+
       await blackout(1900);
+
       break;
 
     case 2:
+
       await showNumber("3",1000);
       await showNumber("2",1000);
 
       resetNumberStyle();
+
       number.textContent="1";
-      number.classList.add("show","gold");
+
+      number.classList.add(
+        "show",
+        "gold"
+      );
 
       await sleep(3000);
 
-      number.classList.remove("show","gold");
+      number.classList.remove(
+        "show",
+        "gold"
+      );
+
       break;
 
     case 3:
+
       await normalCount();
+
       stopTension();
 
       await slash(false);
 
-      restartAnimation(flash,"fadeWhite");
+      restartAnimation(
+        flash,
+        "fadeWhite"
+      );
 
       await sleep(1500);
+
       break;
 
     case 4:
+
       await normalCount();
+
       stopTension();
+
       await blackout(1400);
+
       await showNumber("1",2100);
+
       break;
 
     case 5:
+
       await showNumber("3",1000);
       await showNumber("2",1000);
 
       resetNumberStyle();
+
       number.textContent="1";
-      number.classList.add("show","gold");
+
+      number.classList.add(
+        "show",
+        "gold"
+      );
 
       await sleep(800);
 
@@ -1554,32 +2299,47 @@ async function strongFake(i){
 
       await sleep(2600);
 
-      number.classList.remove("show","gold");
+      number.classList.remove(
+        "show",
+        "gold"
+      );
+
       break;
   }
 
   await blackout(650);
+
   await showDots(1200);
+
   await sleep(550);
 
   finishMiss();
 }
 
 async function commonFxMiss(i){
+
   await commonFx[i]();
 
   stopTension();
 
   if(chance(.45)){
-    await showDots(rand(900,1400));
+
+    await showDots(
+      rand(900,1400)
+    );
+
   }else{
-    await sleep(rand(800,1500));
+
+    await sleep(
+      rand(800,1500)
+    );
   }
 
   finishMiss();
 }
 
 function finishMiss(){
+
   stopTension();
 
   resetNumberStyle();
@@ -1590,22 +2350,36 @@ function finishMiss(){
   darkOverlay.style.opacity="0";
   hitDark.style.opacity="0";
 
-  bgDark.classList.remove("bgDarkGo");
+  bgDark.classList.remove(
+    "bgDarkGo"
+  );
 
   setTimeout(()=>{
-    if(!playing)return;
+
+    if(!playing){
+      return;
+    }
 
     playing=false;
+
     startScreen.style.display="block";
+
   },700);
 }
 
-/* HIT ROUTE SELECTOR */
+/* =========================
+   HIT ROUTE SELECTOR
+========================= */
 
 async function runHitRoute(){
-  const route=Math.floor(Math.random()*44);
+
+  const route=
+    Math.floor(
+      Math.random()*44
+    );
 
   switch(route){
+
     case 0:return normalHitAt(3);
     case 1:return normalHitAt(2);
     case 2:return normalHitAt(1);
@@ -1638,95 +2412,161 @@ async function runHitRoute(){
     case 29:return dotsBlackoutHit();
     case 30:return dotsStarHit();
     case 31:return dotsLongSilenceHit();
-    default:return commonFxHit(route-32);
+
+    default:
+
+      return commonFxHit(
+        route-32
+      );
   }
 }
 
-/* MISS SELECTOR */
+/* =========================
+   MISS SELECTOR
+========================= */
 
 async function runMissRoute(){
+
   if(Math.random()<.36){
+
     return commonFxMiss(
-      Math.floor(Math.random()*12)
+      Math.floor(
+        Math.random()*12
+      )
     );
   }
 
   const r=Math.random();
 
   if(r<.50){
+
     return normalMiss();
+
   }else if(r<.75){
+
     return weakFake(
-      Math.floor(Math.random()*10)
+      Math.floor(
+        Math.random()*10
+      )
     );
+
   }else{
+
     return strongFake(
-      Math.floor(Math.random()*6)
+      Math.floor(
+        Math.random()*6
+      )
     );
   }
 }
 
-/* PRIZE
-   当たった後
+/* =========================
+   PRIZE
    1等 2%
    2等 20%
    3等 78%
-*/
+========================= */
 
 function drawPrize(){
+
   const r=Math.random();
 
-  if(r<.02)return 1;
-  if(r<.22)return 2;
+  if(r<.02){
+    return 1;
+  }
+
+  if(r<.22){
+    return 2;
+  }
 
   return 3;
 }
 
 function shuffle(arr){
+
   const a=[...arr];
 
-  for(let i=a.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));
-    [a[i],a[j]]=[a[j],a[i]];
+  for(
+    let i=a.length-1;
+    i>0;
+    i--
+  ){
+
+    const j=
+      Math.floor(
+        Math.random()*(i+1)
+      );
+
+    [
+      a[i],
+      a[j]
+    ]=[
+      a[j],
+      a[i]
+    ];
   }
 
   return a;
 }
 
-/* TREASURE */
+/* =========================
+   TREASURE
+========================= */
 
 let treasureLocked=false;
 
 function resetTreasure(){
+
   treasureLocked=false;
 
   for(let i=0;i<3;i++){
-    const rank=$("rank"+i);
+
+    const rank=
+      $("rank"+i);
 
     rank.textContent="";
     rank.className="rankLabel";
 
-    $("glow"+i).classList.remove("on");
-    $("dim"+i).classList.remove("on");
-    $("chest"+i).disabled=false;
+    $("glow"+i)
+      .classList.remove("on");
+
+    $("dim"+i)
+      .classList.remove("on");
+
+    $("chest"+i)
+      .disabled=false;
   }
 
-  $("selectedBadge").classList.remove("show");
-  $("resultBox").classList.remove("show");
-  $("resultMain").textContent="";
-  $("nextButton").style.display="none";
+  $("selectedBadge")
+    .classList.remove("show");
 
-  $("treasureBeam").classList.remove("go");
-  $("treasureBurst").classList.remove("go");
+  $("resultBox")
+    .classList.remove("show");
+
+  $("resultMain")
+    .textContent="";
+
+  $("nextButton")
+    .style.display="none";
+
+  $("treasureBeam")
+    .classList.remove("go");
+
+  $("treasureBurst")
+    .classList.remove("go");
 }
 
 async function showTreasure(){
+
   hitText.classList.remove("go");
+
   hitText.style.opacity="0";
 
   resetTreasure();
 
-  treasureScreen.classList.add("show");
+  treasureScreen.classList.add(
+    "show"
+  );
 
   await sleep(250);
 
@@ -1734,70 +2574,111 @@ async function showTreasure(){
 }
 
 function setRankLabel(index,rank){
-  const el=$("rank"+index);
 
-  el.textContent=rank+"等";
-  el.classList.add("rank"+rank);
+  const el=
+    $("rank"+index);
 
-  restartAnimation(el,"show");
+  el.textContent=
+    rank+"等";
+
+  el.classList.add(
+    "rank"+rank
+  );
+
+  restartAnimation(
+    el,
+    "show"
+  );
 }
 
 async function chooseChest(selectedIndex){
-  if(treasureLocked)return;
+
+  if(treasureLocked){
+    return;
+  }
 
   treasureLocked=true;
 
   for(let i=0;i<3;i++){
-    $("chest"+i).disabled=true;
+
+    $("chest"+i)
+      .disabled=true;
   }
 
   /*
-    選んだ宝箱の賞をここで1回だけ抽選
+    選んだ宝箱の結果を1回だけ抽選
 
     1等 2%
     2等 20%
     3等 78%
   */
 
-  const selectedRank=drawPrize();
+  const selectedRank=
+    drawPrize();
 
-  /*
-    残り2箱には、
-    選ばれなかった残り2つの等級を配置
-  */
+  const remainingRanks=
+    shuffle(
+      [1,2,3].filter(
+        r=>r!==selectedRank
+      )
+    );
 
-  const remainingRanks=shuffle(
-    [1,2,3].filter(r=>r!==selectedRank)
+  const ranks=
+    [null,null,null];
+
+  ranks[selectedIndex]=
+    selectedRank;
+
+  const otherIndexes=
+    [0,1,2].filter(
+      i=>i!==selectedIndex
+    );
+
+  ranks[
+    otherIndexes[0]
+  ]=remainingRanks[0];
+
+  ranks[
+    otherIndexes[1]
+  ]=remainingRanks[1];
+
+  $("glow"+selectedIndex)
+    .classList.add("on");
+
+  const centers=
+    ["17.5%","50%","82.5%"];
+
+  const badge=
+    $("selectedBadge");
+
+  badge.style.left=
+    centers[selectedIndex];
+
+  badge.classList.add(
+    "show"
   );
 
-  const ranks=[null,null,null];
+  const beam=
+    $("treasureBeam");
 
-  ranks[selectedIndex]=selectedRank;
+  beam.style.left=
+    centers[selectedIndex];
 
-  const otherIndexes=[0,1,2].filter(
-    i=>i!==selectedIndex
+  restartAnimation(
+    beam,
+    "go"
   );
 
-  ranks[otherIndexes[0]]=remainingRanks[0];
-  ranks[otherIndexes[1]]=remainingRanks[1];
+  const burst=
+    $("treasureBurst");
 
-  /* 選択した宝箱を強調 */
+  burst.style.left=
+    centers[selectedIndex];
 
-  $("glow"+selectedIndex).classList.add("on");
-
-  const centers=["17.5%","50%","82.5%"];
-
-  const badge=$("selectedBadge");
-  badge.style.left=centers[selectedIndex];
-  badge.classList.add("show");
-
-  const beam=$("treasureBeam");
-  beam.style.left=centers[selectedIndex];
-  restartAnimation(beam,"go");
-
-  const burst=$("treasureBurst");
-  burst.style.left=centers[selectedIndex];
-  restartAnimation(burst,"go");
+  restartAnimation(
+    burst,
+    "go"
+  );
 
   await sleep(700);
 
@@ -1808,22 +2689,28 @@ async function chooseChest(selectedIndex){
     selectedRank
   );
 
-  $("resultMain").textContent=
-    selectedRank+"等 当選！";
+  $("resultMain")
+    .textContent=
+      selectedRank+
+      "等 当選！";
 
-  $("resultBox").classList.add("show");
+  $("resultBox")
+    .classList.add("show");
 
   await sleep(1500);
 
-  /* 残りの箱を暗くする */
+  /* 選ばなかった箱を暗くする */
 
   otherIndexes.forEach(i=>{
-    $("dim"+i).classList.add("on");
+
+    $("dim"+i)
+      .classList.add("on");
   });
 
-  /* 残り2箱も順番に公開 */
+  /* 残り2箱も公開 */
 
-  const revealOrder=shuffle(otherIndexes);
+  const revealOrder=
+    shuffle(otherIndexes);
 
   await sleep(450);
 
@@ -1841,19 +2728,25 @@ async function chooseChest(selectedIndex){
 
   await sleep(650);
 
-  $("nextButton").style.display="block";
+  $("nextButton")
+    .style.display="block";
 }
 
 for(let i=0;i<3;i++){
-  $("chest"+i).addEventListener(
-    "click",
-    ()=>chooseChest(i)
-  );
+
+  $("chest"+i)
+    .addEventListener(
+      "click",
+      ()=>chooseChest(i)
+    );
 }
 
-/* RESET */
+/* =========================
+   RESET
+========================= */
 
 function resetGame(){
+
   playToken++;
 
   clearStars();
@@ -1861,9 +2754,11 @@ function resetGame(){
   stopTension();
   stopHitMusic();
 
-  treasureScreen.classList.remove("show");
+  treasureScreen
+    .classList.remove("show");
 
   resetTreasure();
+
   resetNumberStyle();
 
   number.textContent="";
@@ -1874,72 +2769,99 @@ function resetGame(){
   darkOverlay.style.opacity="0";
   hitDark.style.opacity="0";
 
-  bgDark.classList.remove("bgDarkGo");
+  bgDark.classList.remove(
+    "bgDarkGo"
+  );
 
   playing=false;
+
   startScreen.style.display="block";
 }
 
-$("nextButton").addEventListener(
+$("nextButton")
+  .addEventListener(
+    "click",
+    resetGame
+  );
+
+/* =========================
+   START
+========================= */
+
+startButton.addEventListener(
   "click",
-  resetGame
+  async()=>{
+
+    if(playing){
+      return;
+    }
+
+    playing=true;
+
+    playToken++;
+
+    const thisPlay=
+      playToken;
+
+    clearStars();
+
+    startScreen.style.display=
+      "none";
+
+    /*
+      iPhone audio unlock
+    */
+
+    try{
+
+      ensureAudioContext();
+
+      const resumePromise=
+        audioCtx.resume();
+
+      await Promise.all([
+        resumePromise,
+        prepareAudio()
+      ]);
+
+    }catch(e){
+
+      console.log(
+        "Audio load error:",
+        e
+      );
+    }
+
+    startTension();
+
+    scheduleStars(
+      thisPlay
+    );
+
+    /*
+      =========================
+      本抽選
+
+      1 / 20 = 5%
+
+      STARTごとに1回だけ
+      完全独立抽選
+      =========================
+    */
+
+    const win=
+      Math.random() < (1/20);
+
+    if(win){
+
+      await runHitRoute();
+
+    }else{
+
+      await runMissRoute();
+    }
+  }
 );
-
-/* START */
-
-startButton.addEventListener("click",async()=>{
-  if(playing)return;
-
-  playing=true;
-  playToken++;
-
-  const thisPlay=playToken;
-
-  clearStars();
-
-  startScreen.style.display="none";
-
-  /*
-    iPhone用オーディオ解除
-  */
-
-  try{
-    ensureAudioContext();
-
-    const resumePromise=audioCtx.resume();
-
-    await Promise.all([
-      resumePromise,
-      prepareAudio()
-    ]);
-  }catch(e){
-    console.log("Audio load error:",e);
-  }
-
-  startTension();
-
-  scheduleStars(thisPlay);
-
-  /*
-    ==================================
-    本抽選
-
-    1 / 20
-    = 5%
-
-    STARTを押すたびに
-    1回だけ独立抽選
-    ==================================
-  */
-
-  const win=Math.random()<(1/20);
-
-  if(win){
-    await runHitRoute();
-  }else{
-    await runMissRoute();
-  }
-});
 </script>
 
 </body>
