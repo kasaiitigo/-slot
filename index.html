@@ -143,6 +143,7 @@ body{touch-action:manipulation;}
   z-index:12;
   width:100%;
   bottom:23%;
+  left:0;
   text-align:center;
   color:#fff;
   font-weight:800;
@@ -154,6 +155,7 @@ body{touch-action:manipulation;}
 
 .lottery-title{
   font-size:15px;
+  line-height:1.15;
 }
 
 .lottery-rate{
@@ -171,18 +173,17 @@ body{touch-action:manipulation;}
 
 .lottery-sub{
   font-size:14px;
+  line-height:1.15;
 }
 
-/* ===== EXPECTATION ===== */
+/* ===== 演出期待度ボタン ===== */
+/* 「完全抽選」のすぐ上 */
 
 #expectButton{
   position:absolute;
   z-index:13;
   left:50%;
-
-  /* ここだけ30.5%から35%へ変更 */
-  bottom:35%;
-
+  bottom:29%;
   transform:translateX(-50%);
   border:1.5px solid rgba(255,255,255,.9);
   border-radius:25px;
@@ -196,6 +197,8 @@ body{touch-action:manipulation;}
     0 0 16px rgba(255,28,137,.7);
   white-space:nowrap;
 }
+
+/* ===== EXPECTATION MODAL ===== */
 
 #expectModal{
   position:fixed;
@@ -469,7 +472,7 @@ body{touch-action:manipulation;}
   50%{opacity:1;}
 }
 
-/* ===== MISS RESULT ===== */
+/* ===== MISS ===== */
 
 #missResult{
   position:absolute;
@@ -674,9 +677,7 @@ body{touch-action:manipulation;}
 
   <div id="startScreen">
 
-    <button id="expectButton">
-      演出期待度を見る
-    </button>
+    <button id="expectButton">演出期待度を見る</button>
 
     <div id="probability">
       <div class="lottery-title">完全抽選</div>
@@ -1140,7 +1141,6 @@ async function realHit(options={}){
   stage.classList.remove("hitZoom");
 
   hitWaitingForTap=true;
-
   hitTapGuide.classList.add("show");
 }
 
@@ -1169,22 +1169,13 @@ async function normalHitAt(n){
 
 async function normalBlackout(){
   await normalCount();
-
-  await blackout(
-    rand(1500,2300)
-  );
-
+  await blackout(rand(1500,2300));
   await realHit();
 }
 
 async function freezeTwo(){
   await showNumber("3",1150);
-
-  await showNumber(
-    "2",
-    rand(2600,3400)
-  );
-
+  await showNumber("2",rand(2600,3400));
   await realHit();
 }
 
@@ -1194,17 +1185,14 @@ async function reverseCountdown(){
   await showNumber("1",950);
 
   await sleep(350);
-
   await showNumber("2",750);
 
   await sleep(400);
-
   await realHit();
 }
 
 async function zeroPremium(){
   await normalCount();
-
   await sleep(350);
 
   await showNumber("0",800);
@@ -1300,9 +1288,7 @@ async function puchunDirect(){
 
   darkOverlay.style.opacity="1";
 
-  await sleep(
-    rand(2400,3300)
-  );
+  await sleep(rand(2400,3300));
 
   darkOverlay.style.opacity="0";
 
@@ -1322,9 +1308,7 @@ async function puchunRecount(){
 
   darkOverlay.style.opacity="1";
 
-  await sleep(
-    rand(2200,2900)
-  );
+  await sleep(rand(2200,2900));
 
   darkOverlay.style.opacity="0";
 
@@ -1387,9 +1371,7 @@ async function silentStart(){
 async function classicRevival(){
   await normalCount();
 
-  await showDots(
-    rand(1700,2300)
-  );
+  await showDots(rand(1700,2300));
 
   await sleep(800);
 
@@ -1424,7 +1406,6 @@ async function oneVanishHit(){
   await sleep(1800);
 
   number.classList.remove("show");
-
   number.style.opacity="";
 
   await realHit();
@@ -1613,7 +1594,6 @@ async function fxCrack(){
 
 async function fxLightning(){
   await normalCount();
-
   await pinkLightning();
 }
 
@@ -1755,7 +1735,6 @@ const commonFx=[
 
 async function commonFxHit(i){
   await commonFx[i]();
-
   await realHit();
 }
 
@@ -1840,11 +1819,7 @@ async function weakFake(i){
       resetNumberStyle();
 
       number.textContent="1";
-
-      number.classList.add(
-        "show",
-        "red"
-      );
+      number.classList.add("show","red");
 
       await sleep(700);
 
@@ -1886,11 +1861,7 @@ async function weakFake(i){
       resetNumberStyle();
 
       number.textContent="2";
-
-      number.classList.add(
-        "show",
-        "red"
-      );
+      number.classList.add("show","red");
 
       await sleep(650);
 
@@ -1917,7 +1888,6 @@ async function weakFake(i){
       resetNumberStyle();
 
       number.textContent="1";
-
       number.classList.add("show");
 
       number.style.transform=
@@ -1974,18 +1944,11 @@ async function strongFake(i){
       resetNumberStyle();
 
       number.textContent="1";
-
-      number.classList.add(
-        "show",
-        "gold"
-      );
+      number.classList.add("show","gold");
 
       await sleep(3000);
 
-      number.classList.remove(
-        "show",
-        "gold"
-      );
+      number.classList.remove("show","gold");
       break;
 
     case 3:
@@ -2020,11 +1983,7 @@ async function strongFake(i){
       resetNumberStyle();
 
       number.textContent="1";
-
-      number.classList.add(
-        "show",
-        "gold"
-      );
+      number.classList.add("show","gold");
 
       await sleep(800);
 
@@ -2032,10 +1991,7 @@ async function strongFake(i){
 
       await sleep(2600);
 
-      number.classList.remove(
-        "show",
-        "gold"
-      );
+      number.classList.remove("show","gold");
       break;
   }
 
@@ -2198,7 +2154,7 @@ function resetToStart(){
   startScreen.style.display="block";
 }
 
-/* ===== HIT SCREEN TAP ===== */
+/* ===== HIT TAP ===== */
 
 stage.addEventListener("click",()=>{
   if(!hitWaitingForTap){
@@ -2261,8 +2217,8 @@ startButton.addEventListener(
 
       1 / 25 = 4%
 
-      STARTごとに1回だけ抽選
-      毎回完全独立
+      STARTごとに1回だけ
+      毎回完全独立抽選
       =========================
     */
 
