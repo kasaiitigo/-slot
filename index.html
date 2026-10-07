@@ -179,7 +179,10 @@ body{touch-action:manipulation;}
   position:absolute;
   z-index:13;
   left:50%;
-  bottom:30.5%;
+
+  /* ここだけ30.5%から35%へ変更 */
+  bottom:35%;
+
   transform:translateX(-50%);
   border:1.5px solid rgba(255,255,255,.9);
   border-radius:25px;
@@ -527,21 +530,10 @@ body{touch-action:manipulation;}
 }
 
 @keyframes missPop{
-  0%{
-    opacity:0;
-    transform:scale(.15);
-  }
-  55%{
-    opacity:1;
-    transform:scale(1.2);
-  }
-  78%{
-    transform:scale(.92);
-  }
-  100%{
-    opacity:1;
-    transform:scale(1);
-  }
+  0%{opacity:0;transform:scale(.15);}
+  55%{opacity:1;transform:scale(1.2);}
+  78%{transform:scale(.92);}
+  100%{opacity:1;transform:scale(1);}
 }
 
 /* ===== STARS ===== */
@@ -688,10 +680,7 @@ body{touch-action:manipulation;}
 
     <div id="probability">
       <div class="lottery-title">完全抽選</div>
-
-      <!-- 表示も1/25 -->
       <div class="lottery-rate">1 / 25</div>
-
       <div class="lottery-sub">毎回独立抽選</div>
     </div>
 
@@ -725,9 +714,7 @@ body{touch-action:manipulation;}
 <div id="expectModal">
   <div id="expectBox">
 
-    <div id="expectTitle">
-      ✨ 演出期待度 ✨
-    </div>
+    <div id="expectTitle">✨ 演出期待度 ✨</div>
 
     <div class="expectRow">
       ⚡ ピンク稲妻
@@ -759,9 +746,7 @@ body{touch-action:manipulation;}
       <span class="expectSure">当選確定！</span>
     </div>
 
-    <button id="expectClose">
-      閉じる
-    </button>
+    <button id="expectClose">閉じる</button>
 
   </div>
 </div>
@@ -851,9 +836,7 @@ let hitSource=null;
 let audioLoaded=false;
 
 function ensureAudioContext(){
-
   if(!audioCtx){
-
     const AC=
       window.AudioContext ||
       window.webkitAudioContext;
@@ -865,7 +848,6 @@ function ensureAudioContext(){
 }
 
 async function prepareAudio(){
-
   if(audioLoaded)return;
 
   ensureAudioContext();
@@ -890,9 +872,7 @@ async function prepareAudio(){
 }
 
 function stopTension(){
-
   if(tensionSource){
-
     try{
       tensionSource.stop();
     }catch(e){}
@@ -902,7 +882,6 @@ function stopTension(){
 }
 
 function startTension(){
-
   stopTension();
 
   if(!audioCtx || !tensionBuffer)return;
@@ -924,9 +903,7 @@ function startTension(){
 }
 
 function stopHitMusic(){
-
   if(hitSource){
-
     try{
       hitSource.stop();
     }catch(e){}
@@ -936,7 +913,6 @@ function stopHitMusic(){
 }
 
 function playHitMusic(){
-
   stopHitMusic();
 
   if(!audioCtx || !hitBuffer)return;
@@ -958,7 +934,6 @@ function playHitMusic(){
 /* ===== COUNTDOWN ===== */
 
 async function showNumber(value,ms=1250){
-
   resetNumberStyle();
 
   number.textContent=value;
@@ -970,7 +945,6 @@ async function showNumber(value,ms=1250){
 }
 
 async function normalCount(){
-
   await showNumber("3",1250);
   await sleep(190);
 
@@ -981,14 +955,12 @@ async function normalCount(){
 }
 
 async function quickCount(){
-
   await showNumber("3",550);
   await showNumber("2",550);
   await showNumber("1",700);
 }
 
 async function showDots(ms=1800){
-
   resetNumberStyle();
 
   number.textContent="…";
@@ -1002,7 +974,6 @@ async function showDots(ms=1800){
 /* ===== STARS ===== */
 
 function clearStars(){
-
   starTimers.forEach(t=>clearTimeout(t));
   starTimers=[];
 
@@ -1011,7 +982,6 @@ function clearStars(){
 }
 
 function makeStar(){
-
   const s=document.createElement("div");
 
   s.className="star";
@@ -1038,7 +1008,6 @@ function makeStar(){
 }
 
 function starBurst(){
-
   let count;
   const r=Math.random();
 
@@ -1056,27 +1025,19 @@ function starBurst(){
 }
 
 function scheduleStars(token){
-
   if(!chance(.27))return;
 
   const t1=setTimeout(()=>{
-
     if(token!==playToken)return;
-
     starBurst();
-
   },rand(850,3900));
 
   starTimers.push(t1);
 
   if(chance(.15)){
-
     const t2=setTimeout(()=>{
-
       if(token!==playToken)return;
-
       starBurst();
-
     },rand(4200,6800));
 
     starTimers.push(t2);
@@ -1086,28 +1047,21 @@ function scheduleStars(token){
 /* ===== EFFECTS ===== */
 
 async function pinkLightning(){
-
   restartAnimation(lightning,"lightningGo");
-
   await sleep(420);
 }
 
 async function screenNoise(){
-
   restartAnimation(noise,"noiseGo");
-
   await sleep(580);
 }
 
 async function logoFlash(){
-
   restartAnimation(logoGlow,"logoGlowGo");
-
   await sleep(870);
 }
 
 async function blackout(ms=1400){
-
   darkOverlay.style.opacity="1";
 
   await sleep(ms);
@@ -1116,13 +1070,10 @@ async function blackout(ms=1400){
 }
 
 async function slash(doubleSlash=false){
-
   restartAnimation(slash1,"slashGo");
 
   if(doubleSlash){
-
     await sleep(115);
-
     restartAnimation(slash2,"slashGo");
   }
 
@@ -1132,7 +1083,6 @@ async function slash(doubleSlash=false){
 /* ===== REAL HIT ===== */
 
 async function realHit(options={}){
-
   const silence=
     options.silence ?? 700;
 
@@ -1197,26 +1147,20 @@ async function realHit(options={}){
 /* ===== HIT ROUTES ===== */
 
 async function normalHitAt(n){
-
   if(n===3){
-
     await showNumber("3",900);
 
   }else if(n===2){
-
     await showNumber("3",1100);
     await showNumber("2",900);
 
   }else if(n===1){
-
     await showNumber("3",1100);
     await showNumber("2",1100);
     await showNumber("1",850);
 
   }else{
-
     await normalCount();
-
     await sleep(550);
   }
 
@@ -1224,7 +1168,6 @@ async function normalHitAt(n){
 }
 
 async function normalBlackout(){
-
   await normalCount();
 
   await blackout(
@@ -1235,7 +1178,6 @@ async function normalBlackout(){
 }
 
 async function freezeTwo(){
-
   await showNumber("3",1150);
 
   await showNumber(
@@ -1247,7 +1189,6 @@ async function freezeTwo(){
 }
 
 async function reverseCountdown(){
-
   await showNumber("3",1000);
   await showNumber("2",1000);
   await showNumber("1",950);
@@ -1262,7 +1203,6 @@ async function reverseCountdown(){
 }
 
 async function zeroPremium(){
-
   await normalCount();
 
   await sleep(350);
@@ -1275,7 +1215,6 @@ async function zeroPremium(){
 }
 
 async function numberDisappear(){
-
   await showNumber("3",1100);
   await showNumber("2",1100);
 
@@ -1294,7 +1233,6 @@ async function numberDisappear(){
 }
 
 async function soundStopPattern(){
-
   await showNumber("3",1100);
   await showNumber("2",1100);
 
@@ -1310,7 +1248,6 @@ async function soundStopPattern(){
 }
 
 async function longOne(){
-
   await showNumber("3",1100);
   await showNumber("2",1100);
 
@@ -1323,7 +1260,6 @@ async function longOne(){
 }
 
 async function recountSequence(){
-
   await normalCount();
 
   await sleep(700);
@@ -1336,7 +1272,6 @@ async function recountSequence(){
 }
 
 async function doubleCountdown(){
-
   await quickCount();
 
   await sleep(500);
@@ -1349,7 +1284,6 @@ async function doubleCountdown(){
 }
 
 async function puchunDirect(){
-
   await showNumber("3",1150);
   await showNumber("2",1150);
 
@@ -1380,7 +1314,6 @@ async function puchunDirect(){
 }
 
 async function puchunRecount(){
-
   await normalCount();
 
   stopTension();
@@ -1407,7 +1340,6 @@ async function puchunRecount(){
 }
 
 async function fakeSlashPattern(){
-
   await normalCount();
 
   stopTension();
@@ -1426,7 +1358,6 @@ async function fakeSlashPattern(){
 }
 
 async function weirdCountdown(){
-
   await showNumber("3",900);
   await showNumber("1",900);
 
@@ -1440,7 +1371,6 @@ async function weirdCountdown(){
 }
 
 async function silentStart(){
-
   stopTension();
 
   await showNumber("3",1200);
@@ -1455,7 +1385,6 @@ async function silentStart(){
 }
 
 async function classicRevival(){
-
   await normalCount();
 
   await showDots(
@@ -1470,7 +1399,6 @@ async function classicRevival(){
 }
 
 async function skipCountHit(){
-
   await showNumber("3",1050);
 
   await sleep(450);
@@ -1481,7 +1409,6 @@ async function skipCountHit(){
 }
 
 async function oneVanishHit(){
-
   await showNumber("3",1050);
   await showNumber("2",1050);
 
@@ -1504,7 +1431,6 @@ async function oneVanishHit(){
 }
 
 async function oneBackToTwoHit(){
-
   await normalCount();
 
   await sleep(500);
@@ -1515,7 +1441,6 @@ async function oneBackToTwoHit(){
 }
 
 async function speedCountHit(){
-
   await showNumber("3",450);
   await showNumber("2",450);
   await showNumber("1",550);
@@ -1524,7 +1449,6 @@ async function speedCountHit(){
 }
 
 async function doubleSlashHit(){
-
   await normalCount();
 
   await realHit({
@@ -1533,7 +1457,6 @@ async function doubleSlashHit(){
 }
 
 async function silentOddityHit(){
-
   await showNumber("3",1100);
 
   stopTension();
@@ -1552,7 +1475,6 @@ async function silentOddityHit(){
 }
 
 async function questionHit(){
-
   await normalCount();
 
   resetNumberStyle();
@@ -1575,7 +1497,6 @@ async function questionHit(){
 }
 
 async function blackoutReturnHit(){
-
   await normalCount();
 
   await blackout(1500);
@@ -1586,7 +1507,6 @@ async function blackoutReturnHit(){
 }
 
 async function dotsDirectHit(){
-
   await normalCount();
 
   await showDots(1800);
@@ -1597,7 +1517,6 @@ async function dotsDirectHit(){
 }
 
 async function dotsOneRevival(){
-
   await normalCount();
 
   await showDots(1800);
@@ -1608,7 +1527,6 @@ async function dotsOneRevival(){
 }
 
 async function dotsBlackoutHit(){
-
   await normalCount();
 
   stopTension();
@@ -1623,7 +1541,6 @@ async function dotsBlackoutHit(){
 }
 
 async function dotsStarHit(){
-
   await normalCount();
 
   await showDots(1300);
@@ -1636,7 +1553,6 @@ async function dotsStarHit(){
 }
 
 async function dotsLongSilenceHit(){
-
   await normalCount();
 
   stopTension();
@@ -1654,7 +1570,6 @@ async function dotsLongSilenceHit(){
 /* ===== SHARED EFFECTS ===== */
 
 async function fxBigNumber(){
-
   await showNumber("3",950);
   await showNumber("2",950);
 
@@ -1676,7 +1591,6 @@ async function fxBigNumber(){
 }
 
 async function fxCrack(){
-
   await showNumber("3",950);
   await showNumber("2",950);
 
@@ -1698,14 +1612,12 @@ async function fxCrack(){
 }
 
 async function fxLightning(){
-
   await normalCount();
 
   await pinkLightning();
 }
 
 async function fxNoise(){
-
   await showNumber("3",950);
 
   await screenNoise();
@@ -1715,7 +1627,6 @@ async function fxNoise(){
 }
 
 async function fxColorStep(){
-
   resetNumberStyle();
 
   number.textContent="3";
@@ -1745,7 +1656,6 @@ async function fxColorStep(){
 }
 
 async function fxSuperLongOne(){
-
   await showNumber("3",950);
   await showNumber("2",950);
 
@@ -1756,7 +1666,6 @@ async function fxSuperLongOne(){
 }
 
 async function fxQuestion(){
-
   await normalCount();
 
   resetNumberStyle();
@@ -1777,7 +1686,6 @@ async function fxQuestion(){
 }
 
 async function fxBackgroundDark(){
-
   bgDark.classList.add(
     "bgDarkGo"
   );
@@ -1792,7 +1700,6 @@ async function fxBackgroundDark(){
 }
 
 async function fxStopRestart(){
-
   await showNumber("3",950);
   await showNumber("2",950);
 
@@ -1803,7 +1710,6 @@ async function fxStopRestart(){
 }
 
 async function fxSilentDisappear(){
-
   await normalCount();
 
   stopTension();
@@ -1814,7 +1720,6 @@ async function fxSilentDisappear(){
 }
 
 async function fxFakeFinish(){
-
   await normalCount();
 
   await sleep(1700);
@@ -1825,7 +1730,6 @@ async function fxFakeFinish(){
 }
 
 async function fxLogoGlow(){
-
   await showNumber("3",900);
 
   await logoFlash();
@@ -1850,7 +1754,6 @@ const commonFx=[
 ];
 
 async function commonFxHit(i){
-
   await commonFx[i]();
 
   await realHit();
@@ -1859,7 +1762,6 @@ async function commonFxHit(i){
 /* ===== MISS RESULT ===== */
 
 async function showMissResult(close=false){
-
   stopTension();
 
   resetNumberStyle();
@@ -1882,7 +1784,6 @@ async function showMissResult(close=false){
   missResult.classList.add("show");
 
   if(close){
-
     void missSub.offsetWidth;
 
     missSub.classList.add("show");
@@ -1906,7 +1807,6 @@ async function showMissResult(close=false){
 /* ===== MISS ROUTES ===== */
 
 async function normalMiss(){
-
   await normalCount();
 
   stopTension();
@@ -1919,27 +1819,21 @@ async function normalMiss(){
 }
 
 async function weakFake(i){
-
   switch(i){
 
     case 0:
-
       await showNumber("3",1100);
       await showNumber("2",3100);
       await showNumber("1",1300);
-
       break;
 
     case 1:
-
       await showNumber("3",1050);
       await showNumber("2",1050);
       await showNumber("1",3500);
-
       break;
 
     case 2:
-
       await showNumber("3",1050);
       await showNumber("2",1050);
 
@@ -1959,11 +1853,9 @@ async function weakFake(i){
       await sleep(900);
 
       number.classList.remove("show");
-
       break;
 
     case 3:
-
       await showNumber("3",1050);
       await showNumber("2",1050);
 
@@ -1972,29 +1864,23 @@ async function weakFake(i){
       await showNumber("1",1600);
 
       await sleep(1700);
-
       break;
 
     case 4:
-
       await normalCount();
 
       await blackout(550);
 
       await sleep(1000);
-
       break;
 
     case 5:
-
       await showNumber("3",3100);
       await showNumber("2",1000);
       await showNumber("1",1100);
-
       break;
 
     case 6:
-
       await showNumber("3",1050);
 
       resetNumberStyle();
@@ -2015,20 +1901,16 @@ async function weakFake(i){
       number.classList.remove("show");
 
       await showNumber("1",1200);
-
       break;
 
     case 7:
-
       await showNumber("3",1000);
       await showNumber("2",1000);
       await showNumber("0",550);
       await showNumber("1",1200);
-
       break;
 
     case 8:
-
       await showNumber("3",1000);
       await showNumber("2",1000);
 
@@ -2046,15 +1928,12 @@ async function weakFake(i){
       number.style.transform="";
 
       number.classList.remove("show");
-
       break;
 
     case 9:
-
       await showNumber("3",450);
       await showNumber("2",450);
       await showNumber("1",1500);
-
       break;
   }
 
@@ -2066,11 +1945,9 @@ async function weakFake(i){
 }
 
 async function strongFake(i){
-
   switch(i){
 
     case 0:
-
       await normalCount();
 
       stopTension();
@@ -2080,21 +1957,17 @@ async function strongFake(i){
       await slash(false);
 
       await sleep(1200);
-
       break;
 
     case 1:
-
       await normalCount();
 
       stopTension();
 
       await blackout(1900);
-
       break;
 
     case 2:
-
       await showNumber("3",1000);
       await showNumber("2",1000);
 
@@ -2113,11 +1986,9 @@ async function strongFake(i){
         "show",
         "gold"
       );
-
       break;
 
     case 3:
-
       await normalCount();
 
       stopTension();
@@ -2130,11 +2001,9 @@ async function strongFake(i){
       );
 
       await sleep(1300);
-
       break;
 
     case 4:
-
       await normalCount();
 
       stopTension();
@@ -2142,11 +2011,9 @@ async function strongFake(i){
       await blackout(1400);
 
       await showNumber("1",2100);
-
       break;
 
     case 5:
-
       await showNumber("3",1000);
       await showNumber("2",1000);
 
@@ -2169,7 +2036,6 @@ async function strongFake(i){
         "show",
         "gold"
       );
-
       break;
   }
 
@@ -2181,19 +2047,16 @@ async function strongFake(i){
 }
 
 async function commonFxMiss(i){
-
   await commonFx[i]();
 
   stopTension();
 
   if(chance(.45)){
-
     await showDots(
       rand(900,1400)
     );
 
   }else{
-
     await sleep(
       rand(800,1500)
     );
@@ -2205,14 +2068,12 @@ async function commonFxMiss(i){
 /* ===== HIT SELECTOR ===== */
 
 async function runHitRoute(){
-
   const route=
     Math.floor(
       Math.random()*44
     );
 
   switch(route){
-
     case 0:return normalHitAt(3);
     case 1:return normalHitAt(2);
     case 2:return normalHitAt(1);
@@ -2247,7 +2108,6 @@ async function runHitRoute(){
     case 31:return dotsLongSilenceHit();
 
     default:
-
       return commonFxHit(
         route-32
       );
@@ -2257,9 +2117,7 @@ async function runHitRoute(){
 /* ===== MISS SELECTOR ===== */
 
 async function runMissRoute(){
-
   if(Math.random()<.36){
-
     return commonFxMiss(
       Math.floor(
         Math.random()*12
@@ -2270,11 +2128,9 @@ async function runMissRoute(){
   const r=Math.random();
 
   if(r<.50){
-
     return normalMiss();
 
   }else if(r<.75){
-
     return weakFake(
       Math.floor(
         Math.random()*10
@@ -2282,7 +2138,6 @@ async function runMissRoute(){
     );
 
   }else{
-
     return strongFake(
       Math.floor(
         Math.random()*6
@@ -2294,7 +2149,6 @@ async function runMissRoute(){
 /* ===== RESET ===== */
 
 function resetVisuals(){
-
   clearStars();
 
   resetNumberStyle();
@@ -2331,7 +2185,6 @@ function resetVisuals(){
 }
 
 function resetToStart(){
-
   playToken++;
 
   stopTension();
@@ -2348,7 +2201,6 @@ function resetToStart(){
 /* ===== HIT SCREEN TAP ===== */
 
 stage.addEventListener("click",()=>{
-
   if(!hitWaitingForTap){
     return;
   }
@@ -2380,7 +2232,6 @@ startButton.addEventListener(
       "none";
 
     try{
-
       ensureAudioContext();
 
       const resumePromise=
@@ -2392,7 +2243,6 @@ startButton.addEventListener(
       ]);
 
     }catch(e){
-
       console.log(
         "Audio load error:",
         e
@@ -2411,8 +2261,8 @@ startButton.addEventListener(
 
       1 / 25 = 4%
 
-      STARTを押すたびに
-      1回だけ完全独立抽選
+      STARTごとに1回だけ抽選
+      毎回完全独立
       =========================
     */
 
@@ -2420,11 +2270,9 @@ startButton.addEventListener(
       Math.random() < (1/25);
 
     if(win){
-
       await runHitRoute();
 
     }else{
-
       await runMissRoute();
     }
   }
