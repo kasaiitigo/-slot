@@ -3,735 +3,709 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="theme-color" content="#120008">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>Red Peanuts 4th Anniversary</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
-html,body{
+
+html,body {
   margin:0;
   width:100%;
   height:100%;
   overflow:hidden;
-  background:#120008;
-  font-family:-apple-system,BlinkMacSystemFont,
-    "Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  background:#170010;
+  color:#fff;
+  font-family:system-ui,"Hiragino Kaku Gothic ProN",sans-serif;
 }
-body{touch-action:manipulation;}
 
-#stage{
+button {
+  font:inherit;
+  cursor:pointer;
+}
+
+#stage {
   position:fixed;
   inset:0;
   overflow:hidden;
-  background-image:url("./9E28B31B-C619-4F41-AB55-91C025168D02.png");
-  background-size:auto 100%;
-  background-position:center top;
-  background-repeat:no-repeat;
-  background-color:#120008;
-  transform-origin:center;
+  background:#170010 url("./9E28B31B-C619-4F41-AB55-91C025168D02.png")
+    center top/auto 100% no-repeat;
 }
 
-/* ===== OVERLAYS：元コード ===== */
-
-#darkOverlay,#hitDark,#impactWhite,#flash,
-#noise,#bgDark,#lightning,#logoGlow{
+#start {
   position:absolute;
   inset:0;
-  pointer-events:none;
-  opacity:0;
-}
-#darkOverlay{
-  z-index:30;
-  background:#000;
-}
-#hitDark{
-  z-index:31;
-  background:rgba(0,0,0,.92);
-}
-#impactWhite{
-  z-index:60;
-  background:#fff;
-}
-#flash{
-  z-index:61;
-  background:rgba(255,255,255,.95);
-}
-#bgDark{
-  z-index:15;
-  background:rgba(0,0,0,.72);
-}
-#noise{
-  z-index:45;
-  background:repeating-linear-gradient(
-    0deg,
-    rgba(255,255,255,.13) 0,
-    rgba(255,255,255,.13) 1px,
-    rgba(0,0,0,.15) 2px,
-    rgba(0,0,0,.15) 4px
-  );
-  mix-blend-mode:screen;
-}
-#lightning{
-  z-index:46;
-  background:linear-gradient(
-    118deg,
-    transparent 42%,
-    rgba(255,255,255,.98) 46%,
-    #ff4fa7 48%,
-    transparent 52%
-  );
-  filter:drop-shadow(0 0 14px #ff1b8d);
-}
-#logoGlow{
-  z-index:20;
-  height:36%;
-  background:radial-gradient(
-    ellipse at 50% 25%,
-    rgba(255,255,255,.98) 0%,
-    rgba(255,88,176,.70) 13%,
-    rgba(255,0,115,.24) 31%,
-    transparent 58%
-  );
+  z-index:5;
 }
 
-/* ===== START：元コードのまま ===== */
-
-#startScreen{
+#startBtn {
   position:absolute;
-  inset:0;
-  z-index:10;
-}
-#startButton{
-  position:absolute;
-  left:50%;
   bottom:8.5%;
+  left:50%;
   transform:translateX(-50%);
-  width:min(78vw,390px);
-  height:72px;
-  border:2px solid rgba(255,255,255,.9);
-  border-radius:40px;
-  background:linear-gradient(
-    180deg,
-    rgba(255,85,171,.97),
-    rgba(215,0,103,.97)
-  );
-  box-shadow:
-    0 0 12px rgba(255,255,255,.75),
-    0 0 26px rgba(255,0,125,.85),
-    inset 0 2px 7px rgba(255,255,255,.55);
+  width:min(80vw,390px);
+  height:70px;
+  border:2px solid #fff;
+  border-radius:45px;
+  background:linear-gradient(#ff78c4,#d00068);
   color:#fff;
   font-size:28px;
-  font-weight:900;
-  letter-spacing:3px;
-}
-#probability{
-  position:absolute;
-  z-index:12;
-  width:100%;
-  bottom:23%;
-  text-align:center;
-  color:#fff;
-  font-weight:800;
-  pointer-events:none;
-  text-shadow:
-    0 2px 4px #000,
-    0 0 8px #ff278c;
-}
-.lottery-title{font-size:15px;}
-.lottery-rate{
-  margin:2px 0;
-  font-size:27px;
-  line-height:1.05;
   font-weight:1000;
-  color:#fff3a5;
-  letter-spacing:2px;
-  text-shadow:
-    0 2px 3px #000,
-    0 0 8px #ffca28,
-    0 0 15px #ff278c;
+  box-shadow:0 0 28px #ff008d;
 }
-.lottery-sub{font-size:14px;}
 
-/* ===== EXPECTATION：元の位置35% ===== */
-
-#expectButton{
+#rate {
   position:absolute;
-  z-index:13;
-  left:50%;
-  bottom:35%;
-  transform:translateX(-50%);
-  border:1.5px solid rgba(255,255,255,.9);
-  border-radius:25px;
-  padding:9px 20px;
-  background:rgba(85,0,48,.72);
-  color:#fff;
-  font-size:14px;
+  bottom:23%;
+  width:100%;
+  text-align:center;
   font-weight:900;
-  box-shadow:
-    0 0 8px rgba(255,255,255,.5),
-    0 0 16px rgba(255,28,137,.7);
-  white-space:nowrap;
+  text-shadow:0 2px 7px #000;
 }
-#expectModal{
+
+#rate b {
+  display:block;
+  color:#ffed9d;
+  font-size:30px;
+}
+
+#guideBtn {
+  position:absolute;
+  bottom:34%;
+  left:50%;
+  transform:translateX(-50%);
+  padding:11px 22px;
+  white-space:nowrap;
+  border:1px solid white;
+  border-radius:30px;
+  background:#580033d9;
+  color:white;
+  font-weight:900;
+  box-shadow:0 0 14px #ff3896;
+}
+
+#modal {
   position:fixed;
   inset:0;
-  z-index:200;
+  z-index:100;
   display:none;
   align-items:center;
   justify-content:center;
-  background:rgba(0,0,0,.82);
-  padding:20px;
+  background:#000d;
+  padding:15px;
 }
-#expectModal.show{display:flex;}
-#expectBox{
-  width:min(90vw,430px);
-  max-height:90dvh;
-  overflow-y:auto;
-  padding:28px 18px 22px;
-  border:2px solid #ff79bc;
-  border-radius:25px;
-  background:linear-gradient(
-    180deg,
-    rgba(86,0,48,.98),
-    rgba(27,0,17,.98)
-  );
-  box-shadow:
-    0 0 18px #ff2b91,
-    0 0 45px rgba(255,43,145,.55);
-  color:#fff;
+
+#modal.open {
+  display:flex;
+}
+
+#guide {
+  width:min(94vw,430px);
+  max-height:88dvh;
+  overflow:auto;
+  padding:20px 14px;
   text-align:center;
+  border:2px solid #ff8bc5;
+  border-radius:22px;
+  background:linear-gradient(#580031,#1b0013);
 }
-#expectTitle{
-  margin-bottom:20px;
-  color:#fff3a4;
-  font-size:27px;
-  font-weight:1000;
-  text-shadow:
-    0 0 8px #ff8a00,
-    0 0 15px #ff2b91;
+
+#guide h2 {
+  color:#ffe6a1;
 }
-.expectRow{
-  margin:12px 0;
-  padding:9px 5px;
-  border-bottom:1px solid rgba(255,255,255,.18);
-  font-size:17px;
+
+#guide p {
+  padding:8px 0;
+  border-bottom:1px solid #ffffff30;
   font-weight:800;
 }
-.expectChance{color:#ff9ed0;}
-.expectBig{
-  color:#ffe46e;
-  font-size:20px;
+
+#guide em {
+  color:#ffe58d;
+  font-style:normal;
 }
-.expectSure{
-  color:#fff36e;
-  font-size:20px;
-  text-shadow:
-    0 0 7px #ff7900,
-    0 0 12px #ff006e;
-}
-#expectClose{
-  margin-top:17px;
-  width:75%;
-  height:48px;
-  border:1.5px solid #fff;
+
+#closeGuide {
+  margin:12px;
+  padding:10px 50px;
+  background:#ed2c8d;
+  color:white;
+  border:1px solid white;
   border-radius:25px;
-  background:linear-gradient(180deg,#ff65b2,#d80068);
-  color:#fff;
-  font-size:17px;
-  font-weight:900;
 }
 
-/* ===== COUNTDOWN：元コードのまま ===== */
-
-#number{
+#dim,#black,#flash,#lightning,#noise {
   position:absolute;
-  z-index:25;
-  left:50%;
+  inset:0;
+  opacity:0;
+  pointer-events:none;
+}
+
+#dim {
+  z-index:9;
+  background:#0009;
+}
+
+#black {
+  z-index:24;
+  background:#000;
+}
+
+#noise {
+  z-index:27;
+  background:repeating-linear-gradient(
+    0deg,#fff6 0 2px,#0005 2px 5px
+  );
+}
+
+#lightning {
+  z-index:28;
+  background:linear-gradient(
+    120deg,
+    transparent 42%,
+    white 47%,
+    #ff5db6 49%,
+    transparent 54%
+  );
+  filter:drop-shadow(0 0 24px #ff1494);
+}
+
+#flash {
+  z-index:50;
+  background:#fff;
+}
+
+#num {
+  position:absolute;
+  z-index:15;
   top:61%;
-  transform:translate(-50%,-50%);
-  transform-origin:center;
+  left:50%;
   width:100%;
   text-align:center;
+  transform:translate(-50%,-50%);
   font-size:min(52vw,255px);
-  line-height:1;
+  line-height:1.1;
   font-weight:1000;
-  color:#fff7fb;
-  -webkit-text-stroke:clamp(5px,1.6vw,9px) #ff4b9d;
-  text-shadow:
-    0 6px 0 #d82779,
-    0 12px 0 #a80052,
-    0 18px 8px rgba(60,0,28,.72);
+  color:#fff;
+  -webkit-text-stroke:clamp(5px,1.5vw,9px) #ff4b9d;
+  text-shadow:0 7px #ae0054,0 14px 10px #370018;
   opacity:0;
+  pointer-events:none;
 }
-#number.show{
+
+#num.show {
   opacity:1;
-  animation:numberPop .20s ease-out;
-}
-#number.big{
-  transform:translate(-50%,-50%) scale(1.28);
-}
-#number.crack{
-  text-shadow:
-    -5px -3px 0 rgba(255,255,255,.7),
-    4px 4px 0 #b50059,
-    0 9px 0 #8b003e,
-    0 18px 8px rgba(60,0,28,.75);
-}
-#number.pink{color:#ffb5dc;}
-#number.red{color:#ff315f;}
-#number.gold{
-  color:#fff0a8;
-  -webkit-text-stroke:clamp(5px,1.6vw,9px) #ffb400;
-  text-shadow:
-    0 6px 0 #d48300,
-    0 12px 0 #9d5700,
-    0 18px 8px rgba(60,25,0,.72);
-}
-#number.dots{font-size:90px;}
-#number.question{font-size:min(35vw,175px);}
-@keyframes numberPop{
-  0%{transform:translate(-50%,-50%) scale(.78);}
-  70%{transform:translate(-50%,-50%) scale(1.06);}
-  100%{transform:translate(-50%,-50%) scale(1);}
+  animation:pop .25s ease-out;
 }
 
-/* ===== SLASH：元コード ===== */
+#num.gold {
+  color:#fff1a8;
+  -webkit-text-stroke:6px #f4a000;
+  text-shadow:0 0 30px #ffd100;
+}
 
-#slash1,#slash2{
+#num.dots {
+  font-size:min(34vw,155px);
+  color:#fff1a8;
+  -webkit-text-stroke:3px #f4a000;
+}
+
+#num.question {
+  font-size:min(40vw,190px);
+}
+
+#num.big {
+  font-size:min(65vw,300px);
+}
+
+#num.red {
+  color:#ff508b;
+}
+
+@keyframes pop {
+  from {
+    transform:translate(-50%,-50%) scale(.6);
+  }
+  75% {
+    transform:translate(-50%,-50%) scale(1.1);
+  }
+  to {
+    transform:translate(-50%,-50%) scale(1);
+  }
+}
+
+#result {
   position:absolute;
-  z-index:55;
-  left:-30%;
-  top:50%;
-  width:160%;
-  height:31px;
+  z-index:30;
+  inset:0;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:18px;
+  background:#000a;
+  text-align:center;
+  pointer-events:none;
+}
+
+#result.show {
+  display:flex;
+}
+
+#near {
+  font-size:clamp(26px,9vw,56px);
+  font-weight:1000;
+  color:#ffe18d;
+  text-shadow:0 0 18px #ff8a00;
+}
+
+#mainResult {
+  position:relative;
+  display:inline-block;
+  white-space:nowrap;
+  max-width:100%;
+  font-size:clamp(42px,15vw,82px);
+  line-height:1.2;
+  letter-spacing:-.05em;
+  font-weight:1000;
+  color:white;
+  -webkit-text-stroke:clamp(2px,.8vw,4px) #e00073;
+  text-shadow:0 5px #8e0044,0 0 18px #ff379a;
+}
+
+#mainResult.appear {
+  animation:resultPop .55s ease-out;
+}
+
+#message {
+  font-size:clamp(14px,4vw,20px);
+  font-weight:900;
+  color:#ffe5aa;
+  line-height:1.7;
+  margin-top:12px;
+  text-shadow:0 2px 5px #000;
+}
+
+#message:empty {
+  display:none;
+}
+
+@keyframes resultPop {
+  from {
+    opacity:0;
+    transform:scale(.3);
+  }
+  65% {
+    transform:scale(1.1);
+  }
+  to {
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+#cracks {
+  position:absolute;
+  inset:-7%;
+  width:114%;
+  height:114%;
   opacity:0;
-  transform:rotate(-19deg) scaleX(0);
+  pointer-events:none;
+  filter:drop-shadow(0 0 2px #000)
+    drop-shadow(0 0 5px white);
+}
+
+#cracks.show {
+  opacity:1;
+  animation:crack .55s steps(3,end);
+}
+
+@keyframes crack {
+  from {opacity:0}
+  to {opacity:1}
+}
+
+#result.shaking #mainResult {
+  animation:shake .12s linear infinite;
+}
+
+@keyframes shake {
+  0%,100% {transform:translate(0,0)}
+  25% {transform:translate(-8px,5px)}
+  50% {transform:translate(7px,-5px)}
+  75% {transform:translate(-5px,-7px)}
+}
+
+.slash {
+  position:absolute;
+  z-index:48;
+  left:-30%;
+  top:48%;
+  width:160%;
+  height:22px;
+  opacity:0;
+  pointer-events:none;
   transform-origin:left center;
   background:linear-gradient(
     90deg,
     transparent,
-    #fff 8%,
-    #fff 43%,
-    #ff4aa5 68%,
+    #ff87c9 10%,
+    white 30%,
+    white 75%,
+    #ff1785,
     transparent
   );
-  box-shadow:
-    0 0 9px #fff,
-    0 0 22px #fff,
-    0 0 40px #ff1687,
-    0 0 70px #ff1687;
-}
-#slash2{
-  top:54%;
-  transform:rotate(17deg) scaleX(0);
-}
-.slashGo{
-  animation:slashGo .32s cubic-bezier(.1,.7,.2,1);
-}
-#slash2.slashGo{
-  animation:slashGo2 .32s cubic-bezier(.1,.7,.2,1);
-}
-@keyframes slashGo{
-  0%{opacity:0;transform:rotate(-19deg) scaleX(0);}
-  12%{opacity:1;}
-  72%{opacity:1;transform:rotate(-19deg) scaleX(1);}
-  100%{opacity:0;transform:rotate(-19deg) scaleX(1.06);}
-}
-@keyframes slashGo2{
-  0%{opacity:0;transform:rotate(17deg) scaleX(0);}
-  12%{opacity:1;}
-  72%{opacity:1;transform:rotate(17deg) scaleX(1);}
-  100%{opacity:0;transform:rotate(17deg) scaleX(1.06);}
+  box-shadow:0 0 13px #fff,0 0 35px #ff0087;
 }
 
-/* ===== HIT：元コード ===== */
+#slash1 {
+  transform:rotate(-22deg) scaleX(0);
+}
 
-#hitText{
-  position:absolute;
-  z-index:70;
-  left:50%;
-  top:52%;
-  transform:translate(-50%,-50%) scale(.1);
-  width:180vw;
-  text-align:center;
-  color:#fff7bd;
-  font-size:min(43vw,220px);
-  font-weight:1000;
-  -webkit-text-stroke:clamp(5px,1.5vw,9px) #ff245f;
-  text-shadow:
-    0 5px 0 #ff9a00,
-    0 10px 0 #b50c22,
-    0 0 18px #fff,
-    0 0 42px #ff005d,
-    0 0 75px #ff9a00;
-  opacity:0;
-  pointer-events:none;
+#slash2 {
+  transform:rotate(19deg) scaleX(0);
 }
-#hitText.go{
-  animation:hitPop .68s cubic-bezier(.15,.75,.2,1.4) forwards;
+
+#slash1.go {
+  animation:slashA .4s ease-out;
 }
-@keyframes hitPop{
-  0%{
+
+#slash2.go {
+  animation:slashB .4s ease-out;
+}
+
+@keyframes slashA {
+  0% {
     opacity:0;
-    transform:translate(-50%,-50%) scale(.08);
+    transform:rotate(-22deg) scaleX(0);
   }
-  48%{
+  25%,75% {opacity:1}
+  100% {
+    opacity:0;
+    transform:rotate(-22deg) scaleX(1);
+  }
+}
+
+@keyframes slashB {
+  0% {
+    opacity:0;
+    transform:rotate(19deg) scaleX(0);
+  }
+  25%,75% {opacity:1}
+  100% {
+    opacity:0;
+    transform:rotate(19deg) scaleX(1);
+  }
+}
+
+#hit {
+  position:absolute;
+  z-index:60;
+  top:46%;
+  left:50%;
+  width:100%;
+  text-align:center;
+  white-space:nowrap;
+  opacity:0;
+  transform:translate(-50%,-50%) scale(.1);
+  pointer-events:none;
+  font-size:clamp(65px,23vw,155px);
+  line-height:1.2;
+  font-weight:1000;
+  color:#fff2a8;
+  -webkit-text-stroke:clamp(4px,1.2vw,7px) #ff266b;
+  text-shadow:
+    0 6px #ff9b00,
+    0 12px #a90043,
+    0 0 28px #fff;
+}
+
+#hit.go {
+  animation:hitPop .7s
+    cubic-bezier(.16,.7,.2,1.2) forwards;
+}
+
+@keyframes hitPop {
+  0% {
+    opacity:0;
+    transform:translate(-50%,-50%) scale(.1);
+  }
+  55% {
     opacity:1;
-    transform:translate(-50%,-50%) scale(1.30);
+    transform:translate(-50%,-50%) scale(1.18);
   }
-  72%{
-    transform:translate(-50%,-50%) scale(.92);
-  }
-  100%{
+  100% {
     opacity:1;
     transform:translate(-50%,-50%) scale(1);
   }
 }
-#hitTapGuide{
+
+#hitInfo {
   position:absolute;
-  z-index:72;
-  left:0;
-  bottom:10%;
-  width:100%;
+  z-index:61;
+  top:65%;
+  left:4%;
+  width:92%;
   text-align:center;
-  color:#fff;
-  font-size:17px;
-  font-weight:900;
-  letter-spacing:1px;
   opacity:0;
   pointer-events:none;
-  text-shadow:
-    0 2px 4px #000,
-    0 0 10px #ff278c;
-}
-#hitTapGuide.show{
-  animation:guideBlink 1.25s ease-in-out infinite;
-}
-@keyframes guideBlink{
-  0%,100%{opacity:.45;}
-  50%{opacity:1;}
-}
-
-/* ===== 当選演出名：追加 ===== */
-
-#hitInfo{
-  position:absolute;
-  z-index:73;
-  top:72%;
-  left:5%;
-  width:90%;
-  text-align:center;
-  color:#fff;
-  opacity:0;
-  pointer-events:none;
-}
-#hitInfo.show{
-  animation:infoAppear .6s ease-out forwards;
-}
-#hitInfoLabel{
-  font-size:15px;
   font-weight:900;
-  text-shadow:0 2px 6px #000;
+  text-shadow:0 2px 5px #000;
 }
-#hitRouteName{
+
+#hitInfo.show {
+  animation:info .6s forwards;
+}
+
+#hitName {
   display:inline-block;
   margin-top:9px;
+  padding:10px 18px;
   max-width:100%;
-  padding:9px 16px;
-  border:1.5px solid #ffe68a;
-  border-radius:13px;
-  background:rgba(65,0,37,.9);
-  color:#fff1aa;
-  font-size:clamp(15px,4.5vw,22px);
-  font-weight:1000;
-  box-shadow:0 0 17px #ff2b91;
-}
-@keyframes infoAppear{
-  from{opacity:0;transform:translateY(16px);}
-  to{opacity:1;transform:translateY(0);}
+  border:1px solid #ffe391;
+  border-radius:14px;
+  background:#530b33e8;
+  color:#ffec9c;
+  font-size:clamp(15px,4.8vw,24px);
 }
 
-/* ===== MISS：文字サイズのみ修正 ===== */
+@keyframes info {
+  from {
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to {
+    opacity:1;
+    transform:translateY(0);
+  }
+}
 
-#missResult{
+#tap {
   position:absolute;
-  z-index:90;
+  z-index:62;
+  bottom:9%;
+  width:100%;
+  text-align:center;
+  opacity:0;
+  pointer-events:none;
+  text-shadow:0 2px 5px black;
+}
+
+#tap.show {
+  animation:blink 1.2s infinite;
+}
+
+@keyframes blink {
+  0%,100% {opacity:.4}
+  50% {opacity:1}
+}
+
+.particle {
+  position:absolute;
+  z-index:47;
+  pointer-events:none;
+  color:#fff;
+  font-size:25px;
+  text-shadow:0 0 12px #fff,0 0 20px #ff2194;
+  animation:fly 1.1s ease-out forwards;
+}
+
+@keyframes fly {
+  from {
+    opacity:1;
+    transform:translate(0,0) rotate(0);
+  }
+  to {
+    opacity:0;
+    transform:translate(var(--dx),var(--dy))
+      rotate(var(--rot)) scale(.2);
+  }
+}
+
+.shooting {
+  position:absolute;
+  z-index:26;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 12px #fff,0 0 25px #ff62b9;
+  pointer-events:none;
+  animation:shoot .9s linear forwards;
+}
+
+.shooting:after {
+  content:"";
+  position:absolute;
+  right:0;
+  top:2px;
+  width:75px;
+  height:2px;
+  background:linear-gradient(90deg,transparent,#fff);
+}
+
+@keyframes shoot {
+  from {
+    opacity:0;
+    transform:translate(0,0);
+  }
+  20% {opacity:1}
+  to {
+    opacity:0;
+    transform:translate(240px,370px);
+  }
+}
+
+.flashGo {animation:fl .35s}
+.lightGo {animation:fl .55s}
+.noiseGo {animation:fl .6s}
+
+@keyframes fl {
+  0%,100% {opacity:0}
+  40% {opacity:1}
+}
+
+/* 追加演出 */
+
+#specialFX {
+  position:absolute;
   inset:0;
+  z-index:48;
   display:none;
   align-items:center;
   justify-content:center;
   flex-direction:column;
   text-align:center;
   pointer-events:none;
-  background:rgba(0,0,0,.52);
-}
-#missResult.show{display:flex;}
-#missSub{
-  margin-bottom:5px;
-  color:#ffe978;
-  font-size:min(13vw,68px);
-  line-height:1;
-  font-weight:1000;
-  opacity:0;
-  text-shadow:
-    0 3px 0 #b44c00,
-    0 0 10px #fff,
-    0 0 25px #ff7600;
-}
-#missSub.show{
-  animation:missSubPop .45s ease-out forwards;
-}
-#missMain{
-  position:relative;
+  overflow:hidden;
   color:#fff;
+  background:#080010;
+}
 
-  /* ハズレだけ小さく・横1行 */
-  font-size:clamp(46px,17vw,95px);
-  white-space:nowrap;
-  max-width:95vw;
+#specialFX.active {
+  display:flex;
+}
 
-  line-height:1.15;
+#specialFX .fxTitle {
+  font-size:clamp(38px,12vw,86px);
   font-weight:1000;
-  letter-spacing:-5px;
-  -webkit-text-stroke:clamp(3px,1.1vw,6px) #d90068;
-  text-shadow:
-    0 7px 0 #920046,
-    0 14px 8px rgba(0,0,0,.8),
-    0 0 18px #ff258b;
-  opacity:0;
-  transform:scale(.15);
+  line-height:1.16;
+  text-shadow:0 0 18px #ffbc33,0 4px 0 #6b1600;
 }
-#missMain.show{
-  animation:missPop .55s cubic-bezier(.15,.8,.25,1.35) forwards;
-}
-#missMessage{
-  max-width:90%;
-  margin-top:23px;
-  color:#fff1b0;
-  font-size:clamp(14px,4vw,19px);
+
+#specialFX .fxSub {
   font-weight:900;
-  line-height:1.65;
-  text-shadow:0 2px 5px #000;
-  opacity:0;
-}
-#missMessage.show{
-  animation:infoAppear .5s ease-out forwards;
-}
-@keyframes missSubPop{
-  from{opacity:0;transform:scale(.4);}
-  to{opacity:1;transform:scale(1);}
-}
-@keyframes missPop{
-  0%{opacity:0;transform:scale(.15);}
-  55%{opacity:1;transform:scale(1.2);}
-  78%{transform:scale(.92);}
-  100%{opacity:1;transform:scale(1);}
+  font-size:clamp(16px,5vw,29px);
+  margin-top:22px;
+  text-shadow:0 3px 8px #000;
 }
 
-/* ===== 復活③：ヒビ・粉砕 ===== */
+/* 画像1：金炎・激熱 */
 
-#missCracks{
-  position:absolute;
-  inset:-12%;
-  width:124%;
-  height:124%;
-  opacity:0;
-  pointer-events:none;
-  filter:drop-shadow(0 0 3px #000);
-}
-#missCracks.show{
-  animation:cracksAppear .65s steps(3,end) forwards;
-}
-@keyframes cracksAppear{
-  0%{opacity:0;}
-  35%{opacity:.4;}
-  70%{opacity:.8;}
-  100%{opacity:1;}
-}
-#missMain.shaking{
-  opacity:1;
-  animation:missCrackShake .12s linear infinite;
-}
-@keyframes missCrackShake{
-  0%,100%{transform:translate(0,0);}
-  25%{transform:translate(-5px,4px);}
-  50%{transform:translate(6px,-4px);}
-  75%{transform:translate(-4px,-6px);}
-}
-.fragment{
-  position:absolute;
-  z-index:95;
-  color:#fff;
-  font-size:24px;
-  pointer-events:none;
-  text-shadow:0 0 9px #fff,0 0 18px #ff258b;
-  animation:fragmentFly 1s ease-out forwards;
-}
-@keyframes fragmentFly{
-  from{
-    opacity:1;
-    transform:translate(0,0) rotate(0);
-  }
-  to{
-    opacity:0;
-    transform:translate(var(--fx),var(--fy))
-      rotate(var(--fr)) scale(.1);
-  }
+#specialFX.fire {
+  background:
+    url("./A1237DDA-95F5-4DD3-B2BD-BF33A829D07C.png")
+    center/cover no-repeat;
+  animation:fxPulse .32s infinite alternate;
 }
 
-/* ===== 復活②④：ノーカン ===== */
-
-#noCount{
-  position:absolute;
-  z-index:95;
-  left:50%;
-  top:50%;
-  width:100%;
-  transform:translate(-50%,-50%);
-  text-align:center;
-  color:#fff2a0;
-  font-size:clamp(44px,12vw,85px);
-  font-weight:1000;
-  white-space:nowrap;
-  -webkit-text-stroke:3px #ff278c;
-  text-shadow:
-    0 5px #a60050,
-    0 0 25px #ff2b91;
-  opacity:0;
-  pointer-events:none;
-}
-#noCount.show{
-  animation:noCountPop .6s ease-out forwards;
-}
-@keyframes noCountPop{
-  0%{
-    opacity:0;
-    transform:translate(-50%,-50%) scale(.15);
-  }
-  60%{
-    opacity:1;
-    transform:translate(-50%,-50%) scale(1.15);
-  }
-  100%{
-    opacity:1;
-    transform:translate(-50%,-50%) scale(1);
-  }
+#specialFX.fire .fxTitle {
+  display:none;
 }
 
-/* ===== STARS：元コード ===== */
+/* 画像2：次回予告 */
 
-.star{
-  position:absolute;
-  z-index:42;
-  width:4px;
-  height:4px;
+#specialFX.preview {
+  background:
+    url("./0EB99059-7515-429E-B34D-8BFCE53ED083.png")
+    center/cover no-repeat;
+}
+
+#specialFX.preview .fxTitle {
+  display:none;
+}
+
+/* 画像3：虹色爆発 */
+
+#specialFX.rainbow {
+  background:
+    url("./CC92EC2B-BC54-4037-9F8C-45DB1AE891E2.png")
+    center/cover no-repeat;
+  animation:fxHue 1s linear infinite;
+}
+
+#specialFX.rainbow .fxTitle {
+  display:none;
+}
+
+/* 画像4：画面破壊 */
+
+#specialFX.crash {
+  background:
+    url("./8CC59DB8-9809-47C1-89F3-8FA4895B18BD.png")
+    center/cover no-repeat;
+  animation:fxPulse .18s infinite alternate;
+}
+
+#specialFX.crash .fxTitle {
+  font-size:clamp(28px,8vw,48px);
+  background:#05000677;
+  border-radius:18px;
+  padding:12px 20px;
+}
+
+/* フリーズ */
+
+#specialFX.freeze {
+  background:#000;
+}
+
+/* PUSH演出 */
+
+#specialFX.push {
+  background:radial-gradient(circle,#581000,#080008 80%);
+}
+
+#specialFX.push .fxTitle {
+  font-size:clamp(25px,7vw,48px);
+}
+
+/* 画像5：デカPUSH */
+
+#specialFX .fxButton {
+  pointer-events:auto;
+  border:3px solid #ffdf78;
   border-radius:50%;
-  background:#fff;
-  box-shadow:
-    0 0 7px #fff,
-    0 0 15px #ff78c1,
-    0 0 26px #ff1687;
-  pointer-events:none;
+  width:min(72vw,310px);
+  height:min(72vw,310px);
+  background:
+    url("./BF43324D-F195-4E15-A371-AA8862724654.png")
+    center/cover no-repeat;
+  box-shadow:0 0 25px #f80,0 0 50px #d00;
+  color:transparent;
+  font-size:clamp(40px,13vw,70px);
+  font-weight:1000;
+  animation:fxPulse .45s infinite alternate;
+  cursor:pointer;
 }
-.star::after{
-  content:"";
-  position:absolute;
-  right:1px;
-  top:50%;
-  width:80px;
-  height:2px;
-  transform:translateY(-50%) rotate(45deg);
-  transform-origin:right center;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,.92)
-  );
-}
-.star.fly{
-  animation:starFly var(--dur) linear forwards;
-}
-@keyframes starFly{
-  from{
-    opacity:0;
-    transform:translate(0,0);
+
+@keyframes fxPulse {
+  from {
+    transform:scale(.96);
+    filter:brightness(.85);
   }
-  8%{opacity:1;}
-  85%{opacity:1;}
-  to{
-    opacity:0;
-    transform:translate(var(--dx),var(--dy));
+  to {
+    transform:scale(1.04);
+    filter:brightness(1.3);
   }
 }
 
-/* ===== GENERAL：元コード ===== */
-
-.hitShake{
-  animation:hitShake .48s linear;
-}
-@keyframes hitShake{
-  0%{transform:translate(0,0)}
-  10%{transform:translate(-14px,8px)}
-  20%{transform:translate(13px,-9px)}
-  30%{transform:translate(-11px,-5px)}
-  40%{transform:translate(14px,7px)}
-  50%{transform:translate(-8px,4px)}
-  60%{transform:translate(9px,-6px)}
-  70%{transform:translate(-5px,3px)}
-  80%{transform:translate(5px,-2px)}
-  100%{transform:translate(0,0)}
-}
-.hitZoom{
-  animation:hitZoom .55s ease-out;
-}
-@keyframes hitZoom{
-  0%{transform:scale(1)}
-  45%{transform:scale(1.07)}
-  100%{transform:scale(1)}
-}
-.fadeWhite{
-  animation:fadeWhite .23s ease-out;
-}
-@keyframes fadeWhite{
-  0%{opacity:0;}
-  40%{opacity:1;}
-  100%{opacity:0;}
-}
-.noiseGo{
-  animation:noiseGo .55s steps(2,end);
-}
-@keyframes noiseGo{
-  0%{opacity:0;}
-  20%{opacity:.75;}
-  38%{opacity:.18;}
-  55%{opacity:.85;}
-  70%{opacity:.25;}
-  100%{opacity:0;}
-}
-.lightningGo{
-  animation:lightningGo .4s ease-out;
-}
-@keyframes lightningGo{
-  0%{opacity:0;}
-  15%{opacity:1;}
-  35%{opacity:.1;}
-  52%{opacity:.9;}
-  100%{opacity:0;}
-}
-.logoGlowGo{
-  animation:logoGlowGo .85s ease-out;
-}
-@keyframes logoGlowGo{
-  0%{opacity:0;}
-  30%{opacity:1;}
-  100%{opacity:0;}
-}
-.bgDarkGo{
-  opacity:1!important;
+@keyframes fxHue {
+  to {filter:hue-rotate(360deg)}
 }
 </style>
 </head>
@@ -740,1358 +714,121 @@ body{touch-action:manipulation;}
 
 <div id="stage">
 
-  <div id="bgDark"></div>
-  <div id="logoGlow"></div>
-
-  <div id="startScreen">
-
-    <button id="expectButton">
-      演出期待度を見る
-    </button>
-
-    <div id="probability">
-      <div class="lottery-title">完全抽選</div>
-      <div class="lottery-rate">1 / 25</div>
-      <div class="lottery-sub">毎回独立抽選</div>
-    </div>
-
-    <button id="startButton">START</button>
-
+  <div id="specialFX" aria-live="polite">
+    <div class="fxTitle"></div>
+    <div class="fxSub"></div>
   </div>
 
-  <div id="number"></div>
+  <div id="start">
+    <button id="guideBtn">演出期待度を見る</button>
+    <div id="rate">
+      完全抽選
+      <b>1 / 25</b>
+      毎回独立抽選
+    </div>
+    <button id="startBtn">START</button>
+  </div>
 
-  <div id="darkOverlay"></div>
-  <div id="hitDark"></div>
+  <div id="dim"></div>
+  <div id="num"></div>
+  <div id="black"></div>
   <div id="noise"></div>
   <div id="lightning"></div>
 
-  <div id="slash1"></div>
-  <div id="slash2"></div>
-
-  <div id="impactWhite"></div>
-  <div id="flash"></div>
-
-  <div id="hitText">当たり</div>
-
-  <div id="hitInfo">
-    <div id="hitInfoLabel">
-      ✨ 今回の当選演出 ✨
-    </div>
-    <div id="hitRouteName"></div>
-  </div>
-
-  <div id="hitTapGuide">
-    画面をタップして戻る
-  </div>
-
-  <div id="missResult">
-    <div id="missSub"></div>
-
-    <div id="missMain">
+  <div id="result">
+    <div id="near"></div>
+    <div id="mainResult">
       ハズレ
-      <svg id="missCracks"
+      <svg
+        id="cracks"
         viewBox="0 0 320 130"
-        preserveAspectRatio="none">
-        <g fill="none"
-          stroke="#fff"
-          stroke-width="3"
-          stroke-linecap="round">
-          <path d="M155 0 L144 24 L170 38 L147 56 L181 77 L155 100 L176 130"/>
-          <path d="M144 24 L107 14 L90 35 L58 28"/>
-          <path d="M170 38 L208 23 L230 44 L267 29"/>
-          <path d="M147 56 L108 70 L84 63 L42 92"/>
-          <path d="M181 77 L220 88 L243 74 L294 96"/>
-          <path d="M155 100 L125 118 L92 105"/>
+        preserveAspectRatio="none"
+      >
+        <g fill="none" stroke="white" stroke-width="3">
+          <path d="M155 0 L143 24 L169 38 L147 56 L180 77 L155 100 L175 130"/>
+          <path d="M143 24 L106 15 L88 35 L54 28"/>
+          <path d="M169 38 L208 22 L229 44 L269 29"/>
+          <path d="M147 56 L107 70 L83 63 L40 93"/>
+          <path d="M180 77 L220 88 L244 74 L296 96"/>
+          <path d="M155 100 L124 118 L90 105"/>
         </g>
       </svg>
     </div>
-
-    <div id="missMessage"></div>
+    <div id="message"></div>
   </div>
 
-  <div id="noCount">ノーカン！？</div>
+  <div id="slash1" class="slash"></div>
+  <div id="slash2" class="slash"></div>
+  <div id="flash"></div>
+
+  <div id="hit">当たり</div>
+
+  <div id="hitInfo">
+    ✨ 今回の当選演出 ✨
+    <div><span id="hitName"></span></div>
+  </div>
+
+  <div id="tap">画面をタップして戻る</div>
 
 </div>
 
-<div id="expectModal">
-  <div id="expectBox">
-
-    <div id="expectTitle">✨ 演出期待度 ✨</div>
-
-    <div class="expectRow">
-      ⚡ ピンク稲妻
-      <span class="expectChance">チャンス！</span>
-    </div>
-
-    <div class="expectRow">
-      ❓「？」出現
-      <span class="expectChance">チャンス！</span>
-    </div>
-
-    <div class="expectRow">
-      ✨ 流れ星大量
-      <span class="expectChance">期待度UP！</span>
-    </div>
-
-    <div class="expectRow">
-      🌑 ブラックアウト
-      <span class="expectBig">大チャンス！？</span>
-    </div>
-
-    <div class="expectRow">
-      🟡 金色変化
-      <span class="expectBig">大チャンス！？</span>
-    </div>
-
-    <div class="expectRow">
-      🔥「…」出現
-      <span class="expectBig">大チャンス！？</span>
-    </div>
-
-    <div class="expectRow">
-      ⚔️ 斬撃＋「当たり」
-      <span class="expectSure">当選確定！</span>
-    </div>
-
-    <button id="expectClose">閉じる</button>
-
+<div id="modal">
+  <div id="guide">
+    <h2>✨ 演出期待度 ✨</h2>
+    <p>⚡ ピンク稲妻 → <em>チャンス！</em></p>
+    <p>❓「？」出現 → <em>チャンス！</em></p>
+    <p>✨ 流れ星大量 → <em>期待度UP！</em></p>
+    <p>🌑 ブラックアウト → <em>大チャンス！？</em></p>
+    <p>🟡 金色変化 → <em>大チャンス！？</em></p>
+    <p>🔥 金炎・激熱 → <em>激アツ！</em></p>
+    <p>🎬 次回予告 → <em>激アツ！</em></p>
+    <p>💥 画面破壊 → <em>大チャンス！</em></p>
+    <p>🌈 虹色爆発 → <em>当選確定！</em></p>
+    <p>⚔️ 斬撃＋「当たり」 → <em>当選確定！</em></p>
+    <button id="closeGuide">閉じる</button>
   </div>
 </div>
 
 <script>
 "use strict";
 
-const $=id=>document.getElementById(id);
-const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-
-function rand(min,max){
-  return Math.floor(Math.random()*(max-min+1))+min;
-}
-function chance(p){
-  return Math.random()<p;
-}
-
-const stage=$("stage");
-const startScreen=$("startScreen");
-const startButton=$("startButton");
-const number=$("number");
-
-const darkOverlay=$("darkOverlay");
-const hitDark=$("hitDark");
-const slash1=$("slash1");
-const slash2=$("slash2");
-const impactWhite=$("impactWhite");
-const flash=$("flash");
-const hitText=$("hitText");
-const hitTapGuide=$("hitTapGuide");
-
-const noise=$("noise");
-const lightning=$("lightning");
-const bgDark=$("bgDark");
-const logoGlow=$("logoGlow");
-
-const missResult=$("missResult");
-const missSub=$("missSub");
-const missMain=$("missMain");
-const missMessage=$("missMessage");
-const missCracks=$("missCracks");
-
-const noCount=$("noCount");
-const hitInfo=$("hitInfo");
-const hitRouteName=$("hitRouteName");
-
-const expectModal=$("expectModal");
-
-let playing=false;
-let hitWaitingForTap=false;
-let playToken=0;
-let starTimers=[];
-
-/* ===== EXPECTATION ===== */
-
-$("expectButton").addEventListener("click",e=>{
-  e.stopPropagation();
-  expectModal.classList.add("show");
-});
-
-$("expectClose").addEventListener("click",e=>{
-  e.stopPropagation();
-  expectModal.classList.remove("show");
-});
-
-expectModal.addEventListener("click",e=>{
-  if(e.target===expectModal){
-    expectModal.classList.remove("show");
-  }
-});
-
-/* ===== HELPERS ===== */
-
-function restartAnimation(el,cls){
-  el.classList.remove(cls);
-  void el.offsetWidth;
-  el.classList.add(cls);
-}
-
-function resetNumberStyle(){
-  number.className="";
-  number.style.color="";
-  number.style.opacity="";
-  number.style.transform="";
-}
-
-/* ===== AUDIO：元コード ===== */
-
-let audioCtx=null;
-let tensionBuffer=null;
-let hitBuffer=null;
-let tensionSource=null;
-let hitSource=null;
-let audioLoaded=false;
-let audioLoading=null;
-
-function ensureAudioContext(){
-  if(!audioCtx){
-    const AC=
-      window.AudioContext ||
-      window.webkitAudioContext;
-
-    if(AC)audioCtx=new AC();
-  }
-  return audioCtx;
-}
-
-async function prepareAudio(){
-  if(audioLoaded)return;
-  if(audioLoading)return audioLoading;
-
-  audioLoading=(async()=>{
-    ensureAudioContext();
-    if(!audioCtx)return;
-
-    const [tensionRes,hitRes]=await Promise.all([
-      fetch("./Tension.mp3"),
-      fetch("./hit_music_final.mp3")
-    ]);
-
-    if(!tensionRes.ok||!hitRes.ok){
-      throw new Error("音声ファイルを読み込めません");
-    }
-
-    const [tensionData,hitData]=await Promise.all([
-      tensionRes.arrayBuffer(),
-      hitRes.arrayBuffer()
-    ]);
-
-    tensionBuffer=
-      await audioCtx.decodeAudioData(tensionData);
-
-    hitBuffer=
-      await audioCtx.decodeAudioData(hitData);
-
-    audioLoaded=true;
-  })();
-
-  try{
-    await audioLoading;
-  }finally{
-    audioLoading=null;
-  }
-}
-
-function stopTension(){
-  if(tensionSource){
-    try{tensionSource.stop();}catch(e){}
-    tensionSource=null;
-  }
-}
-
-function startTension(){
-  stopTension();
-  if(!audioCtx||!tensionBuffer)return;
-
-  const source=audioCtx.createBufferSource();
-  const gain=audioCtx.createGain();
-
-  source.buffer=tensionBuffer;
-  source.loop=true;
-  gain.gain.value=.72;
-
-  source.connect(gain);
-  gain.connect(audioCtx.destination);
-  source.start(0);
-  tensionSource=source;
-}
-
-function stopHitMusic(){
-  if(hitSource){
-    try{hitSource.stop();}catch(e){}
-    hitSource=null;
-  }
-}
-
-function playHitMusic(){
-  stopHitMusic();
-  if(!audioCtx||!hitBuffer)return;
-
-  const source=audioCtx.createBufferSource();
-  const gain=audioCtx.createGain();
-
-  source.buffer=hitBuffer;
-  gain.gain.value=1;
-
-  source.connect(gain);
-  gain.connect(audioCtx.destination);
-  source.start(0);
-  hitSource=source;
-}
-
-/* ===== COUNTDOWN：元コード ===== */
-
-async function showNumber(value,ms=1250){
-  resetNumberStyle();
-  number.textContent=value;
-  number.classList.add("show");
-
-  await sleep(ms);
-
-  number.classList.remove("show");
-}
-
-async function normalCount(){
-  await showNumber("3",1250);
-  await sleep(190);
-
-  await showNumber("2",1250);
-  await sleep(190);
-
-  await showNumber("1",1450);
-}
-
-async function quickCount(){
-  await showNumber("3",550);
-  await showNumber("2",550);
-  await showNumber("1",700);
-}
-
-async function showDots(ms=1800){
-  resetNumberStyle();
-
-  number.textContent="…";
-  number.classList.add("show","dots");
-
-  await sleep(ms);
-
-  number.classList.remove("show","dots");
-}
-
-/* ===== STARS：元コード ===== */
-
-function clearStars(){
-  starTimers.forEach(t=>clearTimeout(t));
-  starTimers=[];
-
-  document.querySelectorAll(".star")
-    .forEach(el=>el.remove());
-}
-
-function makeStar(){
-  const s=document.createElement("div");
-  s.className="star";
-
-  if(chance(.55)){
-    s.style.left=rand(-8,55)+"%";
-    s.style.top=rand(-5,28)+"%";
-  }else{
-    s.style.left=rand(-8,12)+"%";
-    s.style.top=rand(4,48)+"%";
-  }
-
-  s.style.setProperty("--dx",rand(220,520)+"px");
-  s.style.setProperty("--dy",rand(260,620)+"px");
-  s.style.setProperty("--dur",rand(700,1250)+"ms");
-
-  stage.appendChild(s);
-
-  requestAnimationFrame(()=>{
-    s.classList.add("fly");
-  });
-
-  setTimeout(()=>s.remove(),1500);
-}
-
-function starBurst(){
-  let count;
-  const r=Math.random();
-
-  if(r<.75){
-    count=rand(1,3);
-  }else if(r<.95){
-    count=rand(4,6);
-  }else{
-    count=rand(7,10);
-  }
-
-  for(let i=0;i<count;i++){
-    setTimeout(makeStar,i*rand(80,170));
-  }
-}
-
-function scheduleStars(token){
-  if(!chance(.27))return;
-
-  const t1=setTimeout(()=>{
-    if(token!==playToken)return;
-    starBurst();
-  },rand(850,3900));
-
-  starTimers.push(t1);
-
-  if(chance(.15)){
-    const t2=setTimeout(()=>{
-      if(token!==playToken)return;
-      starBurst();
-    },rand(4200,6800));
-
-    starTimers.push(t2);
-  }
-}
-
-/* ===== EFFECTS：元コード ===== */
-
-async function pinkLightning(){
-  restartAnimation(lightning,"lightningGo");
-  await sleep(420);
-}
-
-async function screenNoise(){
-  restartAnimation(noise,"noiseGo");
-  await sleep(580);
-}
-
-async function logoFlash(){
-  restartAnimation(logoGlow,"logoGlowGo");
-  await sleep(870);
-}
-
-async function blackout(ms=1400){
-  darkOverlay.style.opacity="1";
-  await sleep(ms);
-  darkOverlay.style.opacity="0";
-}
-
-async function slash(doubleSlash=false){
-  restartAnimation(slash1,"slashGo");
-
-  if(doubleSlash){
-    await sleep(115);
-    restartAnimation(slash2,"slashGo");
-  }
-
-  await sleep(360);
-}
-
-/* ===== REAL HIT：元演出＋演出名 ===== */
-
-async function realHit(options={}){
-  const silence=options.silence??700;
-  const doubleSlash=
-    options.doubleSlash??chance(.25);
-
-  stopTension();
-  number.classList.remove("show");
-
-  await sleep(silence);
-
-  hitDark.style.opacity="1";
-  await sleep(310);
-  hitDark.style.opacity="0";
-  await sleep(70);
-
-  stage.classList.add("hitZoom");
-  document.body.classList.add("hitShake");
-
-  restartAnimation(impactWhite,"fadeWhite");
-
-  await slash(doubleSlash);
-
-  restartAnimation(flash,"fadeWhite");
-
-  restartAnimation(hitText,"go");
-  playHitMusic();
-
-  await sleep(260);
-
-  document.body.classList.remove("hitShake");
-  void document.body.offsetWidth;
-  document.body.classList.add("hitShake");
-
-  await sleep(900);
-
-  document.body.classList.remove("hitShake");
-  stage.classList.remove("hitZoom");
-
-  hitRouteName.textContent=
-    options.routeName||"スペシャル当選";
-
-  restartAnimation(hitInfo,"show");
-
-  hitWaitingForTap=true;
-  hitTapGuide.classList.add("show");
-}
-
-/* ===== HIT ROUTES：元の演出 ===== */
-
-async function normalHitAt(n){
-  if(n===3){
-    await showNumber("3",900);
-  }else if(n===2){
-    await showNumber("3",1100);
-    await showNumber("2",900);
-  }else if(n===1){
-    await showNumber("3",1100);
-    await showNumber("2",1100);
-    await showNumber("1",850);
-  }else{
-    await normalCount();
-    await sleep(550);
-  }
-  await realHit();
-}
-
-async function normalBlackout(){
-  await normalCount();
-  await blackout(rand(1500,2300));
-  await realHit();
-}
-
-async function freezeTwo(){
-  await showNumber("3",1150);
-  await showNumber("2",rand(2600,3400));
-  await realHit();
-}
-
-async function reverseCountdown(){
-  await showNumber("3",1000);
-  await showNumber("2",1000);
-  await showNumber("1",950);
-  await sleep(350);
-  await showNumber("2",750);
-  await sleep(400);
-  await realHit();
-}
-
-async function zeroPremium(){
-  await normalCount();
-  await sleep(350);
-  await showNumber("0",800);
-  await realHit({doubleSlash:true});
-}
-
-async function numberDisappear(){
-  await showNumber("3",1100);
-  await showNumber("2",1100);
-
-  resetNumberStyle();
-  number.textContent="1";
-  number.classList.add("show");
-
-  await sleep(700);
-  number.classList.remove("show");
-  await sleep(1800);
-  await realHit();
-}
-
-async function soundStopPattern(){
-  await showNumber("3",1100);
-  await showNumber("2",1100);
-  stopTension();
-  await showNumber("1",1600);
-  await sleep(1800);
-  await realHit({silence:350});
-}
-
-async function longOne(){
-  await showNumber("3",1100);
-  await showNumber("2",1100);
-  await showNumber("1",rand(3300,4300));
-  await realHit();
-}
-
-async function recountSequence(){
-  await normalCount();
-  await sleep(700);
-  await showNumber("3",650);
-  await showNumber("2",650);
-  await showNumber("1",800);
-  await realHit();
-}
-
-async function doubleCountdown(){
-  await quickCount();
-  await sleep(500);
-  await quickCount();
-  await realHit({doubleSlash:true});
-}
-
-async function puchunDirect(){
-  await showNumber("3",1150);
-  await showNumber("2",1150);
-
-  resetNumberStyle();
-  number.textContent="1";
-  number.classList.add("show");
-
-  await sleep(800);
-  stopTension();
-  number.classList.remove("show");
-
-  darkOverlay.style.opacity="1";
-  await sleep(rand(2400,3300));
-  darkOverlay.style.opacity="0";
-
-  await sleep(500);
-  await realHit({silence:450});
-}
-
-async function puchunRecount(){
-  await normalCount();
-  stopTension();
-
-  number.classList.remove("show");
-  darkOverlay.style.opacity="1";
-
-  await sleep(rand(2200,2900));
-  darkOverlay.style.opacity="0";
-  await sleep(700);
-
-  startTension();
-  await showNumber("3",850);
-  await showNumber("2",850);
-  await showNumber("1",950);
-
-  await realHit();
-}
-
-async function fakeSlashPattern(){
-  await normalCount();
-  stopTension();
-  await sleep(650);
-  await slash(false);
-  await sleep(1300);
-  startTension();
-  await showNumber("1",1000);
-  await realHit();
-}
-
-async function weirdCountdown(){
-  await showNumber("3",900);
-  await showNumber("1",900);
-  await sleep(400);
-  await showNumber("2",1000);
-  await sleep(500);
-  await realHit();
-}
-
-async function silentStart(){
-  stopTension();
-  await showNumber("3",1200);
-  await showNumber("2",1200);
-  await showNumber("1",1500);
-  await sleep(900);
-  await realHit({silence:350});
-}
-
-async function classicRevival(){
-  await normalCount();
-  await showDots(rand(1700,2300));
-  await sleep(800);
-  await showNumber("1",900);
-  await realHit();
-}
-
-async function skipCountHit(){
-  await showNumber("3",1050);
-  await sleep(450);
-  await showNumber("1",1100);
-  await realHit();
-}
-
-async function oneVanishHit(){
-  await showNumber("3",1050);
-  await showNumber("2",1050);
-
-  resetNumberStyle();
-  number.textContent="1";
-  number.classList.add("show");
-
-  await sleep(900);
-  number.style.opacity="0";
-  await sleep(1800);
-  number.classList.remove("show");
-  number.style.opacity="";
-
-  await realHit();
-}
-
-async function oneBackToTwoHit(){
-  await normalCount();
-  await sleep(500);
-  await showNumber("2",950);
-  await realHit();
-}
-
-async function speedCountHit(){
-  await showNumber("3",450);
-  await showNumber("2",450);
-  await showNumber("1",550);
-  await realHit();
-}
-
-async function doubleSlashHit(){
-  await normalCount();
-  await realHit({doubleSlash:true});
-}
-
-async function silentOddityHit(){
-  await showNumber("3",1100);
-  stopTension();
-  await sleep(1100);
-  await showNumber("2",1000);
-  await sleep(900);
-  await showNumber("1",1200);
-  await realHit({silence:500});
-}
-
-async function questionHit(){
-  await normalCount();
-  resetNumberStyle();
-  number.textContent="?";
-  number.classList.add("show","question");
-
-  await sleep(1200);
-
-  number.classList.remove("show","question");
-  await realHit();
-}
-
-async function blackoutReturnHit(){
-  await normalCount();
-  await blackout(1500);
-  await showNumber("1",900);
-  await realHit();
-}
-
-async function dotsDirectHit(){
-  await normalCount();
-  await showDots(1800);
-  await sleep(700);
-  await realHit();
-}
-
-async function dotsOneRevival(){
-  await normalCount();
-  await showDots(1800);
-  await showNumber("1",900);
-  await realHit();
-}
-
-async function dotsBlackoutHit(){
-  await normalCount();
-  stopTension();
-  await showDots(1400);
-  await blackout(1600);
-  await realHit({silence:450});
-}
-
-async function dotsStarHit(){
-  await normalCount();
-  await showDots(1300);
-  starBurst();
-  await sleep(1000);
-  await realHit();
-}
-
-async function dotsLongSilenceHit(){
-  await normalCount();
-  stopTension();
-  await showDots(1400);
-  await sleep(2300);
-  await realHit({
-    silence:450,
-    doubleSlash:true
-  });
-}
-
-/* ===== SHARED EFFECTS：12種類維持 ===== */
-
-async function fxBigNumber(){
-  await showNumber("3",950);
-  await showNumber("2",950);
-
-  resetNumberStyle();
-  number.textContent="1";
-  number.classList.add("show","big");
-
-  await sleep(1600);
-
-  number.classList.remove("show","big");
-}
-
-async function fxCrack(){
-  await showNumber("3",950);
-  await showNumber("2",950);
-
-  resetNumberStyle();
-  number.textContent="1";
-  number.classList.add("show","crack");
-
-  await sleep(1500);
-
-  number.classList.remove("show","crack");
-}
-
-async function fxLightning(){
-  await normalCount();
-  await pinkLightning();
-}
-
-async function fxNoise(){
-  await showNumber("3",950);
-  await screenNoise();
-  await showNumber("2",950);
-  await showNumber("1",1100);
-}
-
-async function fxColorStep(){
-  resetNumberStyle();
-  number.textContent="3";
-  number.classList.add("show");
-
-  await sleep(700);
-  number.classList.add("pink");
-
-  await sleep(450);
-  number.classList.remove("pink");
-  number.classList.add("red");
-
-  await sleep(450);
-  number.classList.remove("red");
-  number.classList.add("gold");
-
-  await sleep(650);
-  number.classList.remove("show","gold");
-}
-
-async function fxSuperLongOne(){
-  await showNumber("3",950);
-  await showNumber("2",950);
-  await showNumber("1",rand(3800,4800));
-}
-
-async function fxQuestion(){
-  await normalCount();
-
-  resetNumberStyle();
-  number.textContent="?";
-  number.classList.add("show","question");
-
-  await sleep(1100);
-  number.classList.remove("show","question");
-}
-
-async function fxBackgroundDark(){
-  bgDark.classList.add("bgDarkGo");
-  await normalCount();
-  await sleep(700);
-  bgDark.classList.remove("bgDarkGo");
-}
-
-async function fxStopRestart(){
-  await showNumber("3",950);
-  await showNumber("2",950);
-  await sleep(1300);
-  await showNumber("2",700);
-  await showNumber("1",1100);
-}
-
-async function fxSilentDisappear(){
-  await normalCount();
-  stopTension();
-  number.classList.remove("show");
-  await sleep(2100);
-}
-
-async function fxFakeFinish(){
-  await normalCount();
-  await sleep(1700);
-  await showNumber("3",650);
-  await showNumber("2",650);
-  await showNumber("1",800);
-}
-
-async function fxLogoGlow(){
-  await showNumber("3",900);
-  await logoFlash();
-  await showNumber("2",900);
-  await showNumber("1",1100);
-}
-
-const commonFx=[
-  fxBigNumber,
-  fxCrack,
-  fxLightning,
-  fxNoise,
-  fxColorStep,
-  fxSuperLongOne,
-  fxQuestion,
-  fxBackgroundDark,
-  fxStopRestart,
-  fxSilentDisappear,
-  fxFakeFinish,
-  fxLogoGlow
-];
-
-async function commonFxHit(i){
-  await commonFx[i]();
-  await realHit();
-}
-
-/* ===== MISS RESULT：メッセージ追加 ===== */
-
-function clearMissDisplay(){
-  missResult.classList.remove("show");
-  missSub.classList.remove("show");
-  missMain.classList.remove("show","shaking");
-  missCracks.classList.remove("show");
-  missMessage.classList.remove("show");
-  missMessage.innerHTML="";
-}
-
-async function showBareMiss(ms=1500){
-  stopTension();
-  resetNumberStyle();
-  number.textContent="";
-
-  darkOverlay.style.opacity="0";
-  hitDark.style.opacity="0";
-  bgDark.classList.remove("bgDarkGo");
-
-  clearMissDisplay();
-  missSub.textContent="";
-  missResult.classList.add("show");
-
-  restartAnimation(missMain,"show");
-  await sleep(ms);
-}
-
-async function showMissResult(close=false){
-  stopTension();
-  resetNumberStyle();
-  number.textContent="";
-
-  darkOverlay.style.opacity="0";
-  hitDark.style.opacity="0";
-  bgDark.classList.remove("bgDarkGo");
-
-  clearMissDisplay();
-
-  missSub.textContent=close?"惜しい！":"";
-
-  missMessage.innerHTML=close
-    ?"今の演出は熱かった…！🔥<br>次のチャレンジに期待✨"
-    :"またのチャレンジをお待ちしてます✨";
-
-  missResult.classList.add("show");
-
-  if(close){
-    restartAnimation(missSub,"show");
-    await sleep(180);
-  }
-
-  restartAnimation(missMain,"show");
-  await sleep(550);
-
-  restartAnimation(missMessage,"show");
-  await sleep(2300);
-
-  clearMissDisplay();
-  resetToStart();
-}
-
-/* ===== 新演出①：ハズレ→暗転→復活 ===== */
-
-async function revivalBlackout(){
-  await normalCount();
-  await showBareMiss(1900);
-
-  clearMissDisplay();
-
-  darkOverlay.style.opacity="1";
-  await sleep(2000);
-
-  darkOverlay.style.opacity="0";
-  await sleep(450);
-
-  await realHit({
-    routeName:"ハズレからブラックアウト復活",
-    silence:250,
-    doubleSlash:true
-  });
-}
-
-/* ===== 新演出②④：ノーカン共通 ===== */
-
-async function noCountReplay(){
-  clearMissDisplay();
-
-  restartAnimation(flash,"fadeWhite");
-  await screenNoise();
-
-  restartAnimation(noCount,"show");
-  await sleep(1600);
-
-  noCount.classList.remove("show");
-  noCount.style.opacity="0";
-
-  startTension();
-  await quickCount();
-}
-
-async function revivalNoCount(){
-  await normalCount();
-  await showBareMiss(1500);
-  await noCountReplay();
-
-  await realHit({
-    routeName:"ノーカン再チャレンジ成功"
-  });
-}
-
-async function missNoCount(){
-  await normalCount();
-  await showBareMiss(1500);
-  await noCountReplay();
-
-  await sleep(600);
-  await showMissResult(true);
-}
-
-/* ===== 新演出③：ヒビ→斬撃→粉砕 ===== */
-
-function createFragments(){
-  const symbols=["◆","✦","◈","✧","♦","★"];
-
-  for(let i=0;i<42;i++){
-    const piece=document.createElement("div");
-    piece.className="fragment";
-
-    piece.textContent=symbols[rand(0,symbols.length-1)];
-    piece.style.left=(35+Math.random()*30)+"%";
-    piece.style.top=(40+Math.random()*18)+"%";
-
-    piece.style.setProperty(
-      "--fx",(Math.random()*520-260)+"px"
-    );
-    piece.style.setProperty(
-      "--fy",(Math.random()*520-260)+"px"
-    );
-    piece.style.setProperty(
-      "--fr",(Math.random()*900-450)+"deg"
-    );
-
-    stage.appendChild(piece);
-    setTimeout(()=>piece.remove(),1100);
-  }
-}
-
-async function revivalCrack(){
-  await normalCount();
-  await showBareMiss(1500);
-
-  restartAnimation(missCracks,"show");
-  await sleep(700);
-
-  missMain.classList.remove("show");
-  restartAnimation(missMain,"shaking");
-  await sleep(1100);
-
-  restartAnimation(slash1,"slashGo");
-  await sleep(115);
-  restartAnimation(slash2,"slashGo");
-  await sleep(250);
-
-  createFragments();
-  restartAnimation(impactWhite,"fadeWhite");
-
-  clearMissDisplay();
-  await sleep(350);
-
-  await blackout(650);
-
-  await realHit({
-    routeName:"ハズレ粉砕・復活",
-    silence:200,
-    doubleSlash:true
-  });
-}
-
-/* ===== 新演出④：2連続ノーカン ===== */
-
-async function doubleNoCountSequence(){
-  await normalCount();
-  await showBareMiss(1250);
-  await noCountReplay();
-
-  await showBareMiss(1250);
-  await noCountReplay();
-}
-
-async function revivalDoubleNoCount(){
-  await doubleNoCountSequence();
-
-  await realHit({
-    routeName:"2連続ノーカンからの当たり",
-    doubleSlash:true
-  });
-}
-
-async function missDoubleNoCount(){
-  await doubleNoCountSequence();
-
-  await sleep(650);
-  await showMissResult(true);
-}
-
-/* ===== MISS ROUTES：元のガセ演出 ===== */
-
-async function normalMiss(){
-  await normalCount();
-
-  stopTension();
-  number.classList.remove("show");
-
-  await sleep(650);
-  await showMissResult(false);
-}
-
-async function weakFake(i){
-  switch(i){
-
-    case 0:
-      await showNumber("3",1100);
-      await showNumber("2",3100);
-      await showNumber("1",1300);
-      break;
-
-    case 1:
-      await showNumber("3",1050);
-      await showNumber("2",1050);
-      await showNumber("1",3500);
-      break;
-
-    case 2:
-      await showNumber("3",1050);
-      await showNumber("2",1050);
-
-      resetNumberStyle();
-      number.textContent="1";
-      number.classList.add("show","red");
-
-      await sleep(700);
-      number.classList.remove("red");
-      await sleep(900);
-      number.classList.remove("show");
-      break;
-
-    case 3:
-      await showNumber("3",1050);
-      await showNumber("2",1050);
-      stopTension();
-      await showNumber("1",1600);
-      await sleep(1700);
-      break;
-
-    case 4:
-      await normalCount();
-      await blackout(550);
-      await sleep(1000);
-      break;
-
-    case 5:
-      await showNumber("3",3100);
-      await showNumber("2",1000);
-      await showNumber("1",1100);
-      break;
-
-    case 6:
-      await showNumber("3",1050);
-
-      resetNumberStyle();
-      number.textContent="2";
-      number.classList.add("show","red");
-
-      await sleep(650);
-      number.classList.remove("red");
-      await sleep(550);
-      number.classList.remove("show");
-
-      await showNumber("1",1200);
-      break;
-
-    case 7:
-      await showNumber("3",1000);
-      await showNumber("2",1000);
-      await showNumber("0",550);
-      await showNumber("1",1200);
-      break;
-
-    case 8:
-      await showNumber("3",1000);
-      await showNumber("2",1000);
-
-      resetNumberStyle();
-      number.textContent="1";
-      number.classList.add("show");
-
-      number.style.transform=
-        "translate(-50%,-50%) scale(.78)";
-
-      await sleep(1700);
-
-      number.style.transform="";
-      number.classList.remove("show");
-      break;
-
-    case 9:
-      await showNumber("3",450);
-      await showNumber("2",450);
-      await showNumber("1",1500);
-      break;
-  }
-
-  stopTension();
-
-  /* 「…」はここでは出さない */
-  await sleep(1100);
-  await showMissResult(false);
-}
-
-async function strongFake(i){
-  switch(i){
-
-    case 0:
-      await normalCount();
-      stopTension();
-      await sleep(500);
-      await slash(false);
-      await sleep(1200);
-      break;
-
-    case 1:
-      await normalCount();
-      stopTension();
-      await blackout(1900);
-      break;
-
-    case 2:
-      await showNumber("3",1000);
-      await showNumber("2",1000);
-
-      resetNumberStyle();
-      number.textContent="1";
-      number.classList.add("show","gold");
-
-      await sleep(3000);
-      number.classList.remove("show","gold");
-      break;
-
-    case 3:
-      await normalCount();
-      stopTension();
-      await slash(false);
-      restartAnimation(flash,"fadeWhite");
-      await sleep(1300);
-      break;
-
-    case 4:
-      await normalCount();
-      stopTension();
-      await blackout(1400);
-      await showNumber("1",2100);
-      break;
-
-    case 5:
-      await showNumber("3",1000);
-      await showNumber("2",1000);
-
-      resetNumberStyle();
-      number.textContent="1";
-      number.classList.add("show","gold");
-
-      await sleep(800);
-      stopTension();
-      await sleep(2600);
-
-      number.classList.remove("show","gold");
-      break;
-  }
-
-  await blackout(500);
-
-  /* 「…」はここでは出さない */
-  await sleep(1000);
-  await showMissResult(true);
-}
-
-async function commonFxMiss(i){
-  await commonFx[i]();
-
-  stopTension();
-
-  /* 共通演出のガセでも「…」は出さない */
-  await sleep(rand(800,1500));
-
-  await showMissResult(true);
-}
-
-/* ===== 「…」専用の激レアハズレ ===== */
-
-async function dotsHotMiss(){
-  const pattern=rand(0,3);
-
-  await normalCount();
-  stopTension();
-
-  if(pattern===0){
-    await showDots(1900);
-    await sleep(900);
-
-  }else if(pattern===1){
-    await showDots(1600);
-    await blackout(1500);
-
-  }else if(pattern===2){
-    await showDots(1700);
-    await showNumber("1",950);
-
-  }else{
-    await showDots(1600);
-    starBurst();
-    await sleep(1100);
-  }
-
-  await showMissResult(true);
-}
-
-/* ===== 44種類の当選演出名 ===== */
-
-const hitNames=[
-  "3からの即当たり",
-  "2からの即当たり",
-  "1からの直撃",
-  "王道カウントダウン",
+const $ = id => document.getElementById(id);
+
+const wait = ms =>
+  new Promise(resolve => setTimeout(resolve,ms));
+
+const rnd = (a,b) =>
+  Math.floor(Math.random() * (b-a+1)) + a;
+
+const roll = p => Math.random() < p;
+
+const stage = $("stage");
+const num = $("num");
+const result = $("result");
+const near = $("near");
+const main = $("mainResult");
+const message = $("message");
+const black = $("black");
+const fx = $("specialFX");
+
+let busy = false;
+let tapReady = false;
+let session = 0;
+
+let audioCtx = null;
+let tensionBuf = null;
+let hitBuf = null;
+let tensionSource = null;
+let hitSource = null;
+let audioLoading = null;
+
+/* 既存44種類の当選演出 */
+
+const winNames = [
+  "ハズレからブラックアウト復活",
+  "ノーカン！？再チャレンジ",
+  "ハズレ粉砕・復活",
+  "ダブルノーカン大逆転",
   "ブラックアウト直撃",
   "2で停止",
   "カウントダウン逆転",
@@ -2115,293 +852,1121 @@ const hitNames=[
   "突然の静寂",
   "？出現からの当たり",
   "ブラックアウト復活",
-  "沈黙直撃",
-  "1復活",
-  "暗転復活",
-  "流れ星復活",
-  "長い沈黙",
+  "「…」直撃",
+  "「…」からの復活",
+  "「…」暗転復活",
+  "「…」流れ星復活",
+  "「…」長い沈黙",
   "巨大数字変化",
-  "数字ひび割れ",
+  "数字色変化",
   "ピンク稲妻",
   "ノイズ発生",
   "金色変化",
   "超ロング1",
   "？出現",
   "背景暗転",
-  "カウントダウン再停止",
+  "カウントダウン停止",
   "無音消失",
-  "フェイント再始動",
+  "カウントダウンやり直し",
   "ロゴ発光"
 ];
 
-/* ===== HIT SELECTOR ===== */
+/* 基本アニメーション */
 
-/*
-  44種類の既存演出は維持。
+function anim(el,c) {
+  el.classList.remove(c);
+  void el.offsetWidth;
+  el.classList.add(c);
+}
 
-  「…」を含まない当たりルートでのみ
-  低確率で新しい復活演出へ分岐する。
+function clearNum() {
+  num.textContent = "";
+  num.className = "";
+  num.style.opacity = "";
+}
 
-  「…」当たりルートは
-  18、27、28、29、30、31の6種類。
-*/
+async function digit(s,t=1050,c="") {
+  clearNum();
+  num.textContent = s;
+  if(c) num.classList.add(c);
+  num.classList.add("show");
+  await wait(t);
+  num.classList.remove("show");
+}
 
-async function runHitRoute(){
-  const route=Math.floor(Math.random()*44);
+async function count() {
+  await digit("3",1100);
+  await wait(150);
+  await digit("2",1100);
+  await wait(150);
+  await digit("1",1250);
+}
 
-  const dotsRoutes=[18,27,28,29,30,31];
+async function fastCount() {
+  await digit("3",500);
+  await digit("2",500);
+  await digit("1",650);
+}
 
-  if(!dotsRoutes.includes(route)&&chance(.16)){
-    const revival=rand(0,3);
+async function dots() {
+  await digit("…",1700,"dots");
+}
 
-    if(revival===0)return revivalBlackout();
-    if(revival===1)return revivalNoCount();
-    if(revival===2)return revivalCrack();
-    return revivalDoubleNoCount();
+async function blackout(t=1400) {
+  black.style.opacity = "1";
+  await wait(t);
+  black.style.opacity = "0";
+}
+
+async function flash() {
+  anim($("flash"),"flashGo");
+  await wait(340);
+}
+
+async function lightning() {
+  anim($("lightning"),"lightGo");
+  await wait(560);
+}
+
+async function noise() {
+  anim($("noise"),"noiseGo");
+  await wait(630);
+}
+
+async function slashes() {
+  anim($("slash1"),"go");
+  await wait(135);
+  anim($("slash2"),"go");
+  await wait(320);
+}
+
+function stars(n=8) {
+  for(let i=0;i<n;i++) {
+    setTimeout(() => {
+      if(!busy) return;
+
+      const s = document.createElement("div");
+      s.className = "shooting";
+      s.style.left = rnd(0,65)+"%";
+      s.style.top = rnd(0,35)+"%";
+
+      stage.append(s);
+      setTimeout(() => s.remove(),1000);
+    },i*85);
+  }
+}
+
+function fragments() {
+  const glyphs = ["◆","✦","◈","✧","★"];
+
+  for(let i=0;i<40;i++) {
+    const e = document.createElement("div");
+    e.className = "particle";
+    e.textContent = glyphs[rnd(0,glyphs.length-1)];
+    e.style.left = rnd(33,65)+"%";
+    e.style.top = rnd(35,57)+"%";
+    e.style.setProperty("--dx",rnd(-260,260)+"px");
+    e.style.setProperty("--dy",rnd(-310,310)+"px");
+    e.style.setProperty("--rot",rnd(-500,500)+"deg");
+
+    stage.append(e);
+    setTimeout(() => e.remove(),1150);
+  }
+}
+
+/* 追加演出 */
+
+function fxShow(mode,title,sub="") {
+  fx.className = "active "+mode;
+  fx.querySelector(".fxTitle").textContent = title;
+  fx.querySelector(".fxSub").textContent = sub;
+}
+
+function fxHide() {
+  fx.className = "";
+  fx.querySelector(".fxTitle").textContent = "";
+  fx.querySelector(".fxSub").textContent = "";
+  fx.querySelectorAll("button").forEach(b => b.remove());
+}
+
+/* フリーズ */
+
+async function fxFreeze() {
+  stopTension();
+  fxShow("freeze","……","フリーズ");
+  await wait(2200);
+  fxHide();
+  tension();
+}
+
+/* 次回予告 */
+
+async function fxPreview() {
+  await blackout(450);
+  fxShow("preview","次回予告","");
+  await wait(2300);
+  fxHide();
+}
+
+/* 金炎・激熱 */
+
+async function fxFire() {
+  fxShow("fire","激 熱！！","");
+  await wait(2100);
+  fxHide();
+}
+
+/* 当たり確定：虹色爆発 */
+
+async function fxRainbow() {
+  fxShow("rainbow","虹色爆発！！","");
+  fragments();
+  await wait(2300);
+  fxHide();
+}
+
+/* カウントダウン昇格 */
+
+async function fxPromotion() {
+  await digit("3",700);
+  await digit("2",650,"red");
+  await digit("1",1000,"gold");
+  await fxFire();
+}
+
+/* 逆転カウント */
+
+async function fxReverse() {
+  await digit("3",650);
+  await digit("2",650);
+  await digit("1",650);
+  await noise();
+  await digit("2",700,"red");
+  await digit("3",800,"gold");
+}
+
+/* 画面破壊 */
+
+async function fxBreak() {
+  fxShow("crash","画面破壊！","");
+  await slashes();
+  fragments();
+  await wait(1500);
+  fxHide();
+}
+
+/* デカPUSH */
+
+async function fxPush() {
+  fxShow("push","最終決戦！","ボタンを押せ！");
+
+  const button = document.createElement("button");
+  button.className = "fxButton";
+  button.textContent = "PUSH";
+  button.setAttribute("aria-label","結果を表示");
+
+  fx.append(button);
+
+  await new Promise(resolve => {
+    let done = false;
+
+    const finish = () => {
+      if(done) return;
+      done = true;
+      resolve();
+    };
+
+    button.addEventListener(
+      "click",
+      e => {
+        e.stopPropagation();
+        finish();
+      },
+      {once:true}
+    );
+
+    setTimeout(finish,12000);
+  });
+
+  fxHide();
+  await flash();
+}
+
+/* 新演出ルート */
+
+async function newRoute(kind,won) {
+  switch(kind) {
+    case "freeze":
+      await count();
+      await fxFreeze();
+      break;
+
+    case "preview":
+      await count();
+      await fxPreview();
+      break;
+
+    case "push":
+      await count();
+      await fxPush();
+      break;
+
+    case "promotion":
+      await fxPromotion();
+      break;
+
+    case "rainbow":
+      await fxFreeze();
+      await fxRainbow();
+      break;
+
+    case "reverse":
+      await fxReverse();
+      break;
+
+    case "break":
+      await count();
+      await fxBreak();
+      break;
+
+    case "fire":
+      await count();
+      await fxFire();
+      break;
+
+    case "odd":
+      await digit("3");
+      await wait(800);
+      await digit("3",750,"red");
+      await fxFreeze();
+      break;
+
+    case "rainbowBurst":
+      await fxRainbow();
+      break;
   }
 
-  /*
-    realHitに演出名を渡すため、
-    この当選1回だけ名前を保持する。
-  */
-  currentHitRouteName=hitNames[route];
+  const names = {
+    freeze:"フリーズ",
+    preview:"次回予告",
+    push:"デカPUSH",
+    promotion:"カウントダウン昇格",
+    rainbow:"レインボーフリーズ",
+    reverse:"逆転カウント",
+    break:"画面破壊",
+    fire:"金炎・激熱",
+    odd:"違和感",
+    rainbowBurst:"虹色爆発"
+  };
 
-  switch(route){
-    case 0:return normalHitAt(3);
-    case 1:return normalHitAt(2);
-    case 2:return normalHitAt(1);
-    case 3:return normalHitAt(0);
-    case 4:return normalBlackout();
-    case 5:return freezeTwo();
-    case 6:return reverseCountdown();
-    case 7:return zeroPremium();
-    case 8:return numberDisappear();
-    case 9:return soundStopPattern();
-    case 10:return longOne();
-    case 11:return recountSequence();
-    case 12:return doubleCountdown();
-    case 13:return puchunDirect();
-    case 14:return puchunRecount();
-    case 15:return fakeSlashPattern();
-    case 16:return weirdCountdown();
-    case 17:return silentStart();
-    case 18:return classicRevival();
-    case 19:return skipCountHit();
-    case 20:return oneVanishHit();
-    case 21:return oneBackToTwoHit();
-    case 22:return speedCountHit();
-    case 23:return doubleSlashHit();
-    case 24:return silentOddityHit();
-    case 25:return questionHit();
-    case 26:return blackoutReturnHit();
-    case 27:return dotsDirectHit();
-    case 28:return dotsOneRevival();
-    case 29:return dotsBlackoutHit();
-    case 30:return dotsStarHit();
-    case 31:return dotsLongSilenceHit();
+  if(won) {
+    await hit(names[kind]);
+  } else {
+    await miss(true);
+  }
+}
+
+/* 音楽 */
+
+function stopSource(src) {
+  if(src) {
+    try {
+      src.stop();
+    } catch(e) {}
+  }
+}
+
+function stopMusic() {
+  stopSource(tensionSource);
+  stopSource(hitSource);
+  tensionSource = null;
+  hitSource = null;
+}
+
+async function prepareAudio() {
+  try {
+    if(!audioCtx) {
+      const AC =
+        window.AudioContext ||
+        window.webkitAudioContext;
+
+      if(!AC) return;
+      audioCtx = new AC();
+    }
+
+    await audioCtx.resume();
+
+    if(!audioLoading) {
+      audioLoading = Promise.all(
+        [
+          "./Tension.mp3",
+          "./hit_music_final.mp3"
+        ].map(async url => {
+          const response = await fetch(url);
+          if(!response.ok) throw Error(url);
+
+          return audioCtx.decodeAudioData(
+            await response.arrayBuffer()
+          );
+        })
+      ).then(buffers => {
+        [tensionBuf,hitBuf] = buffers;
+      }).catch(err => {
+        console.warn("音声ファイル未読込",err);
+      });
+    }
+
+    await audioLoading;
+
+  } catch(err) {
+    console.warn(err);
+  }
+}
+
+function play(buf,loop=false) {
+  if(!audioCtx || !buf) return null;
+
+  const source = audioCtx.createBufferSource();
+  const gain = audioCtx.createGain();
+
+  source.buffer = buf;
+  source.loop = loop;
+  gain.gain.value = loop ? .7 : 1;
+
+  source.connect(gain);
+  gain.connect(audioCtx.destination);
+  source.start();
+
+  return source;
+}
+
+function tension() {
+  stopSource(tensionSource);
+  tensionSource = play(tensionBuf,true);
+}
+
+function stopTension() {
+  stopSource(tensionSource);
+  tensionSource = null;
+}
+
+/* ハズレ表示 */
+
+function showFalseMiss() {
+  result.classList.add("show");
+  near.textContent = "";
+  message.textContent = "";
+  main.style.opacity = "1";
+  $("cracks").classList.remove("show");
+  result.classList.remove("shaking");
+  anim(main,"appear");
+}
+
+function hideFalseMiss() {
+  result.classList.remove("show","shaking");
+  main.classList.remove("appear");
+  $("cracks").classList.remove("show");
+  main.style.opacity = "1";
+}
+
+async function miss(strong=false) {
+  stopTension();
+  clearNum();
+
+  black.style.opacity = "0";
+  $("dim").style.opacity = "0";
+
+  showFalseMiss();
+
+  near.textContent = strong ? "惜しい！" : "";
+
+  message.innerHTML = strong
+    ? "今の演出は熱かった…！🔥<br>次のチャレンジに期待✨"
+    : "またのチャレンジをお待ちしてます✨";
+
+  await wait(3100);
+  reset();
+}
+
+/* 当たり表示 */
+
+async function hit(name) {
+  stopTension();
+  hideFalseMiss();
+  clearNum();
+
+  await wait(400);
+  await blackout(300);
+  await flash();
+  await slashes();
+
+  anim($("hit"),"go");
+
+  hitSource = play(hitBuf);
+
+  await wait(1000);
+
+  $("hitName").textContent = name;
+  anim($("hitInfo"),"show");
+
+  await wait(450);
+
+  tapReady = true;
+  $("tap").classList.add("show");
+}
+
+/* 復活演出4種類 */
+
+async function falseMissPause(ms=1700) {
+  showFalseMiss();
+  await wait(ms);
+}
+
+async function noCount() {
+  hideFalseMiss();
+  await noise();
+  await digit("ノーカン！？",1300,"question");
+  await fastCount();
+}
+
+/* ① ブラックアウト復活 */
+
+async function revivalBlack() {
+  await count();
+  await falseMissPause(1850);
+  await blackout(1700);
+  await hit(winNames[0]);
+}
+
+/* ② ノーカン復活 */
+
+async function revivalNoCount(won) {
+  await count();
+  await falseMissPause(1500);
+  await noCount();
+
+  if(won) {
+    await hit(winNames[1]);
+  } else {
+    await miss(true);
+  }
+}
+
+/* ③ 画面粉砕復活 */
+
+async function revivalCrack() {
+  await count();
+  await falseMissPause(1600);
+
+  anim($("cracks"),"show");
+  await wait(650);
+
+  result.classList.add("shaking");
+  await wait(900);
+
+  await slashes();
+  fragments();
+
+  result.classList.remove("shaking");
+  main.style.opacity = "0";
+
+  await flash();
+  await blackout(550);
+  await hit(winNames[2]);
+}
+
+/* ④ ダブルノーカン */
+
+async function revivalDouble(won) {
+  await count();
+  await falseMissPause(1200);
+  await noCount();
+  await falseMissPause(1150);
+  await noCount();
+
+  if(won) {
+    await hit(winNames[3]);
+  } else {
+    await miss(true);
+  }
+}
+
+/* 共通演出12種類 */
+
+async function common(i) {
+  switch(i) {
+    case 0:
+      await count();
+      await digit("1",1500,"big");
+      break;
+
+    case 1:
+      await count();
+      await digit("1",900,"red");
+      break;
+
+    case 2:
+      await count();
+      await lightning();
+      break;
+
+    case 3:
+      await digit("3");
+      await noise();
+      await digit("2");
+      await digit("1");
+      break;
+
+    case 4:
+      await digit("3",700);
+      await digit("3",450,"red");
+      await digit("3",700,"gold");
+      break;
+
+    case 5:
+      await digit("3");
+      await digit("2");
+      await digit("1",3700);
+      break;
+
+    case 6:
+      await count();
+      await digit("?",1200,"question");
+      break;
+
+    case 7:
+      $("dim").style.opacity = "1";
+      await count();
+      $("dim").style.opacity = "0";
+      break;
+
+    case 8:
+      await digit("3");
+      await digit("2");
+      await digit("2",700);
+      await digit("1");
+      break;
+
+    case 9:
+      await count();
+      stopTension();
+      await wait(1700);
+      break;
+
+    case 10:
+      await count();
+      await wait(950);
+      await fastCount();
+      break;
+
+    case 11:
+      await digit("3");
+      await flash();
+      await digit("2");
+      await digit("1");
+      break;
+  }
+}
+
+/* 既存44種類の当選ルート */
+
+async function winRoute(i) {
+  if(i===0) return revivalBlack();
+  if(i===1) return revivalNoCount(true);
+  if(i===2) return revivalCrack();
+  if(i===3) return revivalDouble(true);
+
+  switch(i) {
+    case 4:
+      await count();
+      await blackout(1600);
+      break;
+
+    case 5:
+      await digit("3");
+      await digit("2",3100);
+      break;
+
+    case 6:
+      await count();
+      await digit("2",800);
+      break;
+
+    case 7:
+      await count();
+      await digit("0",800,"gold");
+      break;
+
+    case 8:
+      await count();
+      await wait(1700);
+      break;
+
+    case 9:
+      await digit("3");
+      await digit("2");
+      stopTension();
+      await digit("1",1500);
+      await wait(1200);
+      break;
+
+    case 10:
+      await digit("3");
+      await digit("2");
+      await digit("1",3600);
+      break;
+
+    case 11:
+      await count();
+      await fastCount();
+      break;
+
+    case 12:
+      await fastCount();
+      await fastCount();
+      break;
+
+    case 13:
+      await count();
+      stopTension();
+      await blackout(2300);
+      break;
+
+    case 14:
+      await count();
+      await blackout(1600);
+      await fastCount();
+      break;
+
+    case 15:
+      await count();
+      await slashes();
+      await digit("1");
+      break;
+
+    case 16:
+      await digit("3");
+      await digit("1");
+      await digit("2");
+      break;
+
+    case 17:
+      stopTension();
+      await count();
+      break;
+
+    case 18:
+      await count();
+      await dots();
+      await digit("1",850);
+      break;
+
+    case 19:
+      await digit("3");
+      await digit("1");
+      break;
+
+    case 20:
+      await count();
+      await wait(1800);
+      break;
+
+    case 21:
+      await count();
+      await digit("2");
+      break;
+
+    case 22:
+      await fastCount();
+      break;
+
+    case 23:
+      await count();
+      await slashes();
+      break;
+
+    case 24:
+      await digit("3");
+      stopTension();
+      await wait(1100);
+      await digit("2");
+      await digit("1");
+      break;
+
+    case 25:
+      await count();
+      await digit("?",1000,"question");
+      break;
+
+    case 26:
+      await count();
+      await blackout(1600);
+      await digit("1");
+      break;
+
+    case 27:
+      await count();
+      await dots();
+      break;
+
+    case 28:
+      await count();
+      await dots();
+      await digit("1");
+      break;
+
+    case 29:
+      await count();
+      await dots();
+      await blackout(1500);
+      break;
+
+    case 30:
+      await count();
+      await dots();
+      stars(12);
+      await wait(1000);
+      break;
+
+    case 31:
+      await count();
+      stopTension();
+      await dots();
+      await wait(2100);
+      break;
 
     default:
-      return commonFxHit(route-32);
+      await common(i-32);
+      break;
   }
+
+  await hit(winNames[i]);
 }
 
-let currentHitRouteName="";
+/* 弱いハズレ演出 */
 
-/*
-  既存のrealHit呼び出しで、
-  演出名を指定していない場合のみ
-  44種類の名前を使う。
-*/
-const originalRealHit=realHit;
+async function weakMiss(i) {
+  switch(i) {
+    case 0:
+      await digit("3");
+      await digit("2",2900);
+      await digit("1");
+      break;
 
-realHit=async function(options={}){
-  return originalRealHit({
-    ...options,
-    routeName:
-      options.routeName||
-      currentHitRouteName||
-      "スペシャル当選"
-  });
+    case 1:
+      await digit("3");
+      await digit("2");
+      await digit("1",3200);
+      break;
+
+    case 2:
+      await count();
+      await digit("1",750,"red");
+      break;
+
+    case 3:
+      stopTension();
+      await count();
+      await wait(1300);
+      break;
+
+    case 4:
+      await count();
+      await blackout(550);
+      break;
+
+    case 5:
+      await digit("3",3000);
+      await digit("2");
+      await digit("1");
+      break;
+
+    case 6:
+      await digit("3");
+      await digit("2",650,"red");
+      await digit("1");
+      break;
+
+    case 7:
+      await count();
+      await digit("0",500);
+      break;
+
+    case 8:
+      await count();
+      await wait(950);
+      break;
+
+    case 9:
+      await fastCount();
+      await wait(900);
+      break;
+  }
+
+  await miss(false);
+}
+
+/* 強いハズレ演出 */
+
+async function strongMiss(i) {
+  switch(i) {
+    case 0:
+      await count();
+      await slashes();
+      break;
+
+    case 1:
+      await count();
+      await blackout(1800);
+      break;
+
+    case 2:
+      await digit("3");
+      await digit("2");
+      await digit("1",2700,"gold");
+      break;
+
+    case 3:
+      await count();
+      await slashes();
+      await flash();
+      break;
+
+    case 4:
+      await count();
+      await blackout(1600);
+      await digit("1",1900);
+      break;
+
+    case 5:
+      await count();
+      await digit("1",1000,"gold");
+      await wait(1900);
+      break;
+  }
+
+  await miss(true);
+}
+
+/* 「…」からハズレ */
+
+async function dotsMiss() {
+  await count();
+  await dots();
+
+  switch(rnd(0,3)) {
+    case 0:
+      await wait(1400);
+      break;
+
+    case 1:
+      await blackout(1500);
+      break;
+
+    case 2:
+      await digit("1",1100);
+      break;
+
+    case 3:
+      stars(10);
+      await wait(1300);
+      break;
+  }
+
+  await miss(true);
+}
+
+/* ハズレ側の演出振り分け */
+
+async function missRoute() {
+  if(roll(1/704)) {
+    return dotsMiss();
+  }
+
+  const r = Math.random();
+
+  if(r < .08) {
+    return revivalNoCount(false);
+  }
+
+  if(r < .105) {
+    return revivalDouble(false);
+  }
+
+  if(r < .36) {
+    await common(rnd(0,11));
+    return miss(false);
+  }
+
+  if(r < .66) {
+    await count();
+    return miss(false);
+  }
+
+  if(r < .84) {
+    return weakMiss(rnd(0,9));
+  }
+
+  return strongMiss(rnd(0,5));
+}
+
+/* 初期画面に戻す */
+
+function reset() {
+  fxHide();
+  session++;
+  stopMusic();
+
+  busy = false;
+  tapReady = false;
+
+  clearNum();
+  hideFalseMiss();
+
+  $("start").style.display = "block";
+  $("hit").classList.remove("go");
+  $("hitInfo").classList.remove("show");
+  $("hitName").textContent = "";
+  $("tap").classList.remove("show");
+
+  $("dim").style.opacity = "0";
+  black.style.opacity = "0";
+
+  $("flash").classList.remove("flashGo");
+  $("slash1").classList.remove("go");
+  $("slash2").classList.remove("go");
+
+  stage.querySelectorAll(
+    ".particle,.shooting"
+  ).forEach(el => el.remove());
+}
+
+/* 説明画面 */
+
+$("guideBtn").onclick = () => {
+  $("modal").classList.add("open");
 };
 
-/* ===== MISS SELECTOR ===== */
+$("closeGuide").onclick = () => {
+  $("modal").classList.remove("open");
+};
 
-/*
-  STARTで当選した場合:
-    44ルート中6ルートで「…」
-
-  STARTでハズレの場合:
-    704分の1で「…」
-
-  P(当たり | 「…」出現)
-    = (1/25 × 6/44)
-      / ((1/25 × 6/44)+(24/25 × 1/704))
-    = 80%
-
-  ノーカン演出でも再抽選はしない。
-*/
-
-async function runMissRoute(){
-  /* 「…」専用のハズレ */
-  if(chance(1/704)){
-    return dotsHotMiss();
+$("modal").onclick = e => {
+  if(e.target === $("modal")) {
+    $("modal").classList.remove("open");
   }
+};
 
-  /* ノーカン1回：ハズレもあり */
-  if(chance(.012)){
-    return missNoCount();
-  }
+/* 当選後タップして戻る */
 
-  /* ノーカン2回：さらにレア */
-  if(chance(.003)){
-    return missDoubleNoCount();
-  }
+stage.onclick = () => {
+  if(tapReady) reset();
+};
 
-  /* 既存の共通演出 */
-  if(Math.random()<.36){
-    return commonFxMiss(
-      Math.floor(Math.random()*12)
-    );
-  }
+/* STARTボタン */
 
-  const r=Math.random();
-
-  if(r<.50){
-    return normalMiss();
-
-  }else if(r<.75){
-    return weakFake(
-      Math.floor(Math.random()*10)
-    );
-
-  }else{
-    return strongFake(
-      Math.floor(Math.random()*6)
-    );
-  }
-}
-
-/* ===== RESET ===== */
-
-function resetVisuals(){
-  clearStars();
-
-  document.querySelectorAll(".fragment")
-    .forEach(el=>el.remove());
-
-  resetNumberStyle();
-  number.textContent="";
-
-  darkOverlay.style.opacity="0";
-  hitDark.style.opacity="0";
-
-  bgDark.classList.remove("bgDarkGo");
-
-  hitText.classList.remove("go");
-  hitText.style.opacity="";
-
-  hitTapGuide.classList.remove("show");
-  hitInfo.classList.remove("show");
-  hitRouteName.textContent="";
-
-  clearMissDisplay();
-
-  noCount.classList.remove("show");
-  noCount.style.opacity="0";
-
-  stage.classList.remove("hitZoom");
-  document.body.classList.remove("hitShake");
-
-  slash1.classList.remove("slashGo");
-  slash2.classList.remove("slashGo");
-
-  noise.classList.remove("noiseGo");
-  lightning.classList.remove("lightningGo");
-  logoGlow.classList.remove("logoGlowGo");
-
-  impactWhite.classList.remove("fadeWhite");
-  flash.classList.remove("fadeWhite");
-
-  expectModal.classList.remove("show");
-
-  currentHitRouteName="";
-}
-
-function resetToStart(){
-  playToken++;
-
-  stopTension();
-  stopHitMusic();
-
-  resetVisuals();
-
-  hitWaitingForTap=false;
-  playing=false;
-
-  startScreen.style.display="block";
-}
-
-/* ===== HIT SCREEN TAP ===== */
-
-stage.addEventListener("click",()=>{
-  if(!hitWaitingForTap)return;
-  resetToStart();
-});
-
-/* ===== START ===== */
-
-startButton.addEventListener("click",async e=>{
+$("startBtn").onclick = async e => {
   e.stopPropagation();
 
-  if(playing)return;
+  if(busy) return;
 
-  playing=true;
-  hitWaitingForTap=false;
+  busy = true;
+  tapReady = false;
 
-  playToken++;
-  const thisPlay=playToken;
+  const id = ++session;
 
-  clearStars();
-  currentHitRouteName="";
+  $("start").style.display = "none";
 
   /*
-    当落はSTARTごとに一度だけ決定。
-    音声の読み込み中も再抽選しない。
+    ここで1回だけ抽選。
+    毎回完全独立の1/25。
+    演出によって当選確率は変わらない。
   */
-  const win=Math.random()<(1/25);
 
-  startScreen.style.display="none";
+  const won = roll(1/25);
 
-  try{
-    ensureAudioContext();
+  const route = won ? rnd(0,43) : -1;
 
-    if(audioCtx){
-      await Promise.all([
-        audioCtx.resume(),
-        prepareAudio()
-      ]);
+  try {
+    await prepareAudio();
+
+    if(id !== session) return;
+
+    tension();
+
+    if(roll(.28)) {
+      stars(rnd(2,9));
     }
-  }catch(err){
-    console.log("Audio load error:",err);
-  }
 
-  if(thisPlay!==playToken)return;
+    if(won) {
+      /*
+        当たり時：
+        35%で新演出、
+        65%で既存44ルート。
+      */
 
-  startTension();
-  scheduleStars(thisPlay);
+      if(roll(.35)) {
+        const kinds = [
+          "freeze",
+          "preview",
+          "push",
+          "promotion",
+          "rainbow",
+          "reverse",
+          "break",
+          "fire",
+          "odd",
+          "rainbowBurst"
+        ];
 
-  try{
-    if(win){
-      await runHitRoute();
-    }else{
-      await runMissRoute();
+        const kind = kinds[
+          rnd(0,kinds.length-1)
+        ];
+
+        await newRoute(kind,true);
+
+      } else {
+        await winRoute(route);
+      }
+
+    } else {
+      /*
+        ハズレ時：
+        10%で新演出、
+        90%で既存ハズレ演出。
+
+        虹色系はハズレ側に入れない。
+      */
+
+      if(roll(.10)) {
+        const kinds = [
+          "freeze",
+          "preview",
+          "push",
+          "promotion",
+          "reverse",
+          "break",
+          "fire",
+          "odd"
+        ];
+
+        const kind = kinds[
+          rnd(0,kinds.length-1)
+        ];
+
+        await newRoute(kind,false);
+
+      } else {
+        await missRoute();
+      }
     }
-  }catch(err){
-    console.error("Game error:",err);
-    resetToStart();
+
+  } catch(err) {
+    console.error(err);
+    reset();
   }
-});
+};
+
 </script>
-
 </body>
 </html>
