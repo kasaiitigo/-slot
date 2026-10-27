@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#170010">
 <title>Red Peanuts SLOT</title>
-
 <style>
 *{
   box-sizing:border-box;
@@ -20,13 +19,10 @@ html,body{
   background:#170010;
   color:#fff;
   font-family:-apple-system,BlinkMacSystemFont,
-    "Hiragino Kaku Gothic ProN",sans-serif;
+  "Hiragino Kaku Gothic ProN",sans-serif;
   touch-action:manipulation;
 }
-button{
-  font:inherit;
-  cursor:pointer;
-}
+button{font:inherit;cursor:pointer}
 #stage{
   position:fixed;
   inset:0;
@@ -35,12 +31,9 @@ button{
     url("./9E28B31B-C619-4F41-AB55-91C025168D02.png")
     center top/auto 100% no-repeat;
 }
-#stage.broken{
-  background:#110816;
-}
+#stage.broken{background:#110816}
 
 /* START */
-
 #start{
   position:absolute;
   inset:0;
@@ -89,8 +82,7 @@ button{
   box-shadow:0 0 14px #ff3896;
 }
 
-/* NUMBER */
-
+/* 数字 */
 #num{
   position:absolute;
   z-index:25;
@@ -112,29 +104,22 @@ button{
   opacity:1;
   animation:numPop .23s ease-out;
 }
-#num.red{
-  color:#ff508b;
-}
+#num.red{color:#ff508b}
 #num.gold{
   color:#fff1a8;
   -webkit-text-stroke:6px #f4a000;
   text-shadow:0 0 30px #ffd100;
 }
-#num.question{
-  font-size:min(40vw,190px);
-}
+#num.question{font-size:min(40vw,190px)}
 #num.dots{
   font-size:min(34vw,155px);
   color:#fff1a8;
 }
-#num.big{
-  font-size:min(65vw,300px);
-}
+#num.big{font-size:min(65vw,300px)}
 #num.nocount{
   width:94%;
   font-size:clamp(31px,9vw,56px);
   white-space:nowrap;
-  letter-spacing:-.05em;
   -webkit-text-stroke:2px #ff4b9d;
 }
 @keyframes numPop{
@@ -143,22 +128,15 @@ button{
   to{transform:translate(-50%,-50%) scale(1)}
 }
 
-/* BASIC EFFECTS */
-
+/* 基本演出 */
 #dim,#black,#noise,#lightning,#flash{
   position:absolute;
   inset:0;
   opacity:0;
   pointer-events:none;
 }
-#dim{
-  z-index:12;
-  background:#0009;
-}
-#black{
-  z-index:29;
-  background:#000;
-}
+#dim{z-index:12;background:#0009}
+#black{z-index:29;background:#000}
 #noise{
   z-index:30;
   background:repeating-linear-gradient(
@@ -168,18 +146,12 @@ button{
 #lightning{
   z-index:31;
   background:linear-gradient(
-    120deg,
-    transparent 42%,
-    #fff 47%,
-    #ff5db6 49%,
-    transparent 54%
+    120deg,transparent 42%,#fff 47%,
+    #ff5db6 49%,transparent 54%
   );
   filter:drop-shadow(0 0 24px #ff1494);
 }
-#flash{
-  z-index:165;
-  background:#fff;
-}
+#flash{z-index:165;background:#fff}
 .flashGo,.noiseGo,.lightGo{
   animation:flashAnim .4s ease-out;
 }
@@ -188,8 +160,7 @@ button{
   40%{opacity:1}
 }
 
-/* MISS */
-
+/* ハズレ */
 #result{
   position:absolute;
   z-index:36;
@@ -204,9 +175,7 @@ button{
   text-align:center;
   pointer-events:none;
 }
-#result.show{
-  display:flex;
-}
+#result.show{display:flex}
 #near{
   font-size:clamp(26px,9vw,56px);
   font-weight:1000;
@@ -238,8 +207,7 @@ button{
   to{opacity:1;transform:scale(1)}
 }
 
-/* SLASH */
-
+/* 斬撃 */
 .slash{
   position:absolute;
   z-index:95;
@@ -251,28 +219,15 @@ button{
   pointer-events:none;
   transform-origin:left center;
   background:linear-gradient(
-    90deg,
-    transparent,
-    #ff87c9 10%,
-    #fff 30%,
-    #fff 75%,
-    #ff1785,
-    transparent
+    90deg,transparent,#ff87c9 10%,
+    #fff 30%,#fff 75%,#ff1785,transparent
   );
   box-shadow:0 0 13px #fff,0 0 35px #ff0087;
 }
-#slash1{
-  transform:rotate(-22deg) scaleX(0);
-}
-#slash2{
-  transform:rotate(19deg) scaleX(0);
-}
-#slash1.go{
-  animation:slashA .4s ease-out;
-}
-#slash2.go{
-  animation:slashB .4s ease-out;
-}
+#slash1{transform:rotate(-22deg) scaleX(0)}
+#slash2{transform:rotate(19deg) scaleX(0)}
+#slash1.go{animation:slashA .4s ease-out}
+#slash2.go{animation:slashB .4s ease-out}
 @keyframes slashA{
   0%{opacity:0;transform:rotate(-22deg) scaleX(0)}
   25%,75%{opacity:1}
@@ -284,8 +239,7 @@ button{
   100%{opacity:0;transform:rotate(19deg) scaleX(1)}
 }
 
-/* HIT */
-
+/* 当たり */
 #hit{
   position:absolute;
   z-index:180;
@@ -302,10 +256,7 @@ button{
   font-weight:1000;
   color:#fff2a8;
   -webkit-text-stroke:clamp(4px,1.2vw,7px) #ff266b;
-  text-shadow:
-    0 6px #ff9b00,
-    0 12px #a90043,
-    0 0 28px #fff;
+  text-shadow:0 6px #ff9b00,0 12px #a90043,0 0 28px #fff;
 }
 #hit.go{
   animation:hitPop .7s cubic-bezier(.16,.7,.2,1.2) forwards;
@@ -327,9 +278,7 @@ button{
   font-weight:900;
   text-shadow:0 2px 5px #000;
 }
-#hitInfo.show{
-  animation:info .6s forwards;
-}
+#hitInfo.show{animation:info .6s forwards}
 #hitName{
   display:inline-block;
   max-width:100%;
@@ -356,16 +305,13 @@ button{
   font-weight:900;
   text-shadow:0 2px 5px #000;
 }
-#tap.show{
-  animation:blink 1.2s infinite;
-}
+#tap.show{animation:blink 1.2s infinite}
 @keyframes blink{
   0%,100%{opacity:.4}
   50%{opacity:1}
 }
 
-/* SPECIAL FX */
-
+/* 特殊演出 */
 #specialFX{
   position:absolute;
   inset:0;
@@ -379,9 +325,7 @@ button{
   background:#100516;
   overflow:hidden;
 }
-#specialFX.active{
-  display:flex;
-}
+#specialFX.active{display:flex}
 #specialFX .fxTitle{
   font-size:clamp(38px,12vw,86px);
   font-weight:1000;
@@ -398,24 +342,18 @@ button{
     url("./0EB99059-7515-429E-B34D-8BFCE53ED083.png")
     center/contain no-repeat;
 }
-#specialFX.preview .fxTitle{
-  display:none;
-}
+#specialFX.preview .fxTitle{display:none}
 #specialFX.rainbow{
   background:#100516
     url("./CC92EC2B-BC54-4037-9F8C-45DB1AE891E2.png")
     center/contain no-repeat;
   animation:rainbowHue 1s linear infinite;
 }
-#specialFX.rainbow .fxTitle{
-  display:none;
-}
+#specialFX.rainbow .fxTitle{display:none}
 @keyframes rainbowHue{
   to{filter:hue-rotate(360deg)}
 }
-#specialFX.freeze{
-  background:#000;
-}
+#specialFX.freeze{background:#000}
 #specialFX.push{
   background:radial-gradient(circle,#581000,#080008 80%);
 }
@@ -442,8 +380,7 @@ button{
   to{transform:scale(1.04)}
 }
 
-/* STARS */
-
+/* 流れ星 */
 .shooting{
   position:absolute;
   z-index:32;
@@ -470,8 +407,7 @@ button{
   to{opacity:0;transform:translate(240px,370px)}
 }
 
-/* GLASS */
-
+/* 画面破壊 */
 #glassArea{
   position:absolute;
   inset:0;
@@ -480,9 +416,7 @@ button{
   display:none;
   pointer-events:none;
 }
-#glassArea.active{
-  display:block;
-}
+#glassArea.active{display:block}
 #glassCanvas{
   position:absolute;
   inset:0;
@@ -495,21 +429,16 @@ button{
   opacity:0;
   background:radial-gradient(
     circle at 50% 48%,
-    #fff 0%,
-    #ffffffb0 12%,
-    transparent 65%
+    #fff 0%,#ffffffb0 12%,transparent 65%
   );
 }
-#glassLight.go{
-  animation:glassFlash .35s ease-out;
-}
+#glassLight.go{animation:glassFlash .35s ease-out}
 @keyframes glassFlash{
   0%,100%{opacity:0}
   25%{opacity:1}
 }
 
-/* GUIDE */
-
+/* 説明画面 */
 #modal{
   position:fixed;
   inset:0;
@@ -520,9 +449,7 @@ button{
   background:#000d;
   padding:15px;
 }
-#modal.open{
-  display:flex;
-}
+#modal.open{display:flex}
 #guide{
   width:min(94vw,430px);
   max-height:88dvh;
@@ -533,9 +460,7 @@ button{
   border-radius:22px;
   background:linear-gradient(#580031,#1b0013);
 }
-#guide h2{
-  color:#ffe6a1;
-}
+#guide h2{color:#ffe6a1}
 #guide p{
   padding:8px 0;
   border-bottom:1px solid #ffffff30;
@@ -565,24 +490,19 @@ button{
   pointer-events:none;
   text-shadow:0 2px 5px #000;
 }
-#audioStatus.show{
-  display:block;
-}
+#audioStatus.show{display:block}
 </style>
 </head>
 
 <body>
-
 <div id="stage">
 
   <div id="start">
     <button id="guideBtn">演出期待度を見る</button>
-
     <div id="rate">
       大当たり確率
       <b>1 / 25</b>
     </div>
-
     <button id="startBtn">START</button>
   </div>
 
@@ -621,13 +541,11 @@ button{
 
   <div id="tap">画面をタップして戻る</div>
   <div id="audioStatus"></div>
-
 </div>
 
 <div id="modal">
   <div id="guide">
     <h2>✨ 演出期待度 ✨</h2>
-
     <p>⚡ ピンク稲妻 → <em>チャンス</em></p>
     <p>❓「？」出現 → <em>チャンス</em></p>
     <p>🌑 ブラックアウト → <em>大チャンス</em></p>
@@ -636,7 +554,6 @@ button{
     <p>🌈 レインボー → <em>当たり確定</em></p>
     <p>💥 画面破壊 → <em>当たり確定</em></p>
     <p>🔴 デカPUSH → <em>チャンス</em></p>
-
     <button id="closeGuide">閉じる</button>
   </div>
 </div>
@@ -644,9 +561,9 @@ button{
 <script>
 "use strict";
 
-/* ======================================
-   CONFIG
-====================================== */
+/* ==================================
+   設定
+================================== */
 
 const TEST_MODE = false;
 const WIN_PROBABILITY = 1 / 25;
@@ -668,73 +585,79 @@ const GLASS_SOUND_MOV =
   "./glass_crack_crack_shatter_v3_preview.mov";
 
 /*
-  演出の振り分け。
+  大当たりはSTART時に1回だけ抽選。
 
-  先に1/25で大当たり抽選。
-  そのあと当たり用・ハズレ用の演出を選ぶ。
-
-  これなら演出の期待度を調整しても
-  大当たり確率そのものは変わらない。
+  当たり側の演出振り分け。
+  合計は1.0。
 */
 
-const WIN_EFFECT_WEIGHTS = [
-  ["glass",   0.16],
-  ["rainbow", 0.08],
-  ["preview", 0.18],
-  ["gold",    0.08],
-  ["black",   0.07],
-  ["pink",    0.08],
-  ["push",    0.06],
-  ["normal",  0.29]
+const WIN_EFFECTS = [
+  ["glass",      0.15],
+  ["rainbow",    0.07],
+  ["preview",    0.17],
+  ["pinkPush",   0.06],
+  ["goldBlack",  0.06],
+  ["pink",       0.07],
+  ["gold",       0.07],
+  ["black",      0.06],
+  ["push",       0.05],
+  ["normal",     0.24]
 ];
 
 /*
-  次回予告の出現時期待度を約95%にする
-  ハズレ側の出現率。
-
-  P(当たり|予告) = 0.95
-
-  1/25の全体抽選は維持。
+  次回予告の信頼度を約95%に調整。
 */
-const PREVIEW_WIN_WEIGHT = 0.18;
+
+const PREVIEW_WIN_RATE = 0.17;
 const PREVIEW_EXPECTATION = 0.95;
 
-const PREVIEW_MISS_WEIGHT =
+const PREVIEW_MISS_RATE =
   WIN_PROBABILITY *
-  PREVIEW_WIN_WEIGHT *
-  (1 / PREVIEW_EXPECTATION - 1) /
-  (1 - WIN_PROBABILITY);
+  PREVIEW_WIN_RATE *
+  (1 - PREVIEW_EXPECTATION) /
+  (
+    PREVIEW_EXPECTATION *
+    (1 - WIN_PROBABILITY)
+  );
 
-const MISS_EFFECT_WEIGHTS = [
-  ["preview", PREVIEW_MISS_WEIGHT],
-  ["gold",    0.0025],
-  ["black",   0.0020],
-  ["pink",    0.0120],
-  ["push",    0.0150]
+/*
+  ハズレ側の演出振り分け。
+
+  余った確率は通常ハズレ。
+*/
+
+const MISS_EFFECTS = [
+  ["preview",   PREVIEW_MISS_RATE],
+  ["pinkPush",  0.0012],
+  ["goldBlack", 0.0010],
+  ["pink",      0.0130],
+  ["gold",      0.0025],
+  ["black",     0.0020],
+  ["push",      0.0120]
 ];
 
-/* ======================================
-   BASIC
-====================================== */
+/* ==================================
+   基本関数
+================================== */
 
 const $ = id => document.getElementById(id);
-const wait = ms => new Promise(r => setTimeout(r, ms));
 
-const rnd = (a, b) =>
-  Math.floor(Math.random() * (b - a + 1)) + a;
+const wait = ms =>
+  new Promise(resolve => setTimeout(resolve,ms));
 
-const roll = p => Math.random() < p;
+const rnd = (a,b) =>
+  Math.floor(Math.random()*(b-a+1))+a;
 
-function weightedChoice(items, fallback) {
-  const r = Math.random();
-  let sum = 0;
+const roll = probability =>
+  Math.random()<probability;
 
-  for (const [name, weight] of items) {
-    sum += weight;
+function chooseWeighted(entries,fallback="normal"){
+  const random = Math.random();
+  let total = 0;
 
-    if (r < sum) {
-      return name;
-    }
+  for(const [kind,weight] of entries){
+    total += weight;
+    if(random<total)return kind;
   }
 
   return fallback;
@@ -759,20 +682,21 @@ let busy = false;
 let tapReady = false;
 let runId = 0;
 
-/* ======================================
-   AUDIO
-====================================== */
+/* ==================================
+   iPhone対応 音声
+================================== */
 
 const AudioContextClass =
-  window.AudioContext || window.webkitAudioContext;
+  window.AudioContext ||
+  window.webkitAudioContext;
 
 let audioCtx = null;
 let audioLoadPromise = null;
 
 const buffers = {
-  tension: null,
-  hit: null,
-  glass: null
+  tension:null,
+  hit:null,
+  glass:null
 };
 
 let tensionSource = null;
@@ -783,45 +707,46 @@ const fallbackGlassAudio = new Audio();
 fallbackGlassAudio.preload = "auto";
 fallbackGlassAudio.volume = 1;
 
-function showAudioStatus(text) {
+function showAudioStatus(text){
   const el = $("audioStatus");
-
   el.textContent = text;
-  el.classList.toggle("show", Boolean(text));
+  el.classList.toggle("show",Boolean(text));
 }
 
-function activateAudio() {
-  if (!AudioContextClass) {
+function activateAudio(){
+  if(!AudioContextClass){
     return Promise.resolve();
   }
 
-  if (!audioCtx) {
+  if(!audioCtx){
     audioCtx = new AudioContextClass();
   }
 
-  try {
+  try{
     const silent = audioCtx.createBuffer(
-      1, 1, audioCtx.sampleRate
+      1,1,audioCtx.sampleRate
     );
 
     const source = audioCtx.createBufferSource();
     source.buffer = silent;
     source.connect(audioCtx.destination);
     source.start(0);
-  } catch (error) {
+  }catch(error){
     console.warn(error);
   }
 
-  return audioCtx.resume().catch(console.warn);
+  return audioCtx.resume().catch(error=>{
+    console.warn(error);
+  });
 }
 
-async function loadBuffer(url) {
-  if (!audioCtx) return null;
+async function loadBuffer(url){
+  if(!audioCtx)return null;
 
-  try {
+  try{
     const response = await fetch(url);
 
-    if (!response.ok) {
+    if(!response.ok){
       throw new Error(url);
     }
 
@@ -830,17 +755,17 @@ async function loadBuffer(url) {
     return await audioCtx.decodeAudioData(
       bytes.slice(0)
     );
-  } catch (error) {
-    console.warn("音声読み込み:", url, error);
+  }catch(error){
+    console.warn("音声読み込み:",url,error);
     return null;
   }
 }
 
-async function prepareAudio() {
-  if (!audioCtx) return;
+async function prepareAudio(){
+  if(!audioCtx)return;
 
-  if (!audioLoadPromise) {
-    audioLoadPromise = (async () => {
+  if(!audioLoadPromise){
+    audioLoadPromise = (async()=>{
       const data = await Promise.all([
         loadBuffer(TENSION_SOUND),
         loadBuffer(HIT_SOUND),
@@ -851,12 +776,12 @@ async function prepareAudio() {
       buffers.hit = data[1];
       buffers.glass = data[2];
 
-      if (!buffers.glass) {
+      if(!buffers.glass){
         fallbackGlassAudio.src = GLASS_SOUND_MOV;
         fallbackGlassAudio.load();
       }
 
-      if (!buffers.hit) {
+      if(!buffers.hit){
         showAudioStatus(
           "当たりBGMのファイルを確認してください"
         );
@@ -867,10 +792,10 @@ async function prepareAudio() {
   await audioLoadPromise;
 }
 
-function makeSound(buffer, loop = false, volume = 1) {
-  if (!audioCtx || !buffer) return null;
+function makeSound(buffer,loop=false,volume=1){
+  if(!audioCtx||!buffer)return null;
 
-  try {
+  try{
     const source = audioCtx.createBufferSource();
     const gain = audioCtx.createGain();
 
@@ -884,42 +809,42 @@ function makeSound(buffer, loop = false, volume = 1) {
     source.start(0);
 
     return source;
-  } catch (error) {
+  }catch(error){
     console.warn(error);
     return null;
   }
 }
 
-function stopSource(source) {
-  if (!source) return;
+function stopSource(source){
+  if(!source)return;
 
-  try {
+  try{
     source.stop(0);
-  } catch (error) {}
+  }catch(error){}
 }
 
-function tension() {
+function tension(){
   stopSource(tensionSource);
 
   tensionSource = makeSound(
-    buffers.tension, true, .7
+    buffers.tension,true,.7
   );
 }
 
-function stopTension() {
+function stopTension(){
   stopSource(tensionSource);
   tensionSource = null;
 }
 
-function playHitBGM() {
+function playHitBGM(){
   stopTension();
 
   stopSource(glassSource);
   glassSource = null;
 
-  try {
+  try{
     fallbackGlassAudio.pause();
-  } catch (error) {}
+  }catch(error){}
 
   stopSource(hitSource);
 
@@ -929,34 +854,36 @@ function playHitBGM() {
     1
   );
 
-  if (!hitSource) {
-    showAudioStatus("当たりBGMを再生できません");
-  } else {
+  if(!hitSource){
+    showAudioStatus(
+      "当たりBGMを再生できません"
+    );
+  }else{
     showAudioStatus("");
   }
 }
 
-function playGlassSound() {
+function playGlassSound(){
   stopSource(glassSource);
 
   glassSource = makeSound(
-    buffers.glass, false, 1
+    buffers.glass,false,1
   );
 
-  if (!glassSource) {
-    try {
+  if(!glassSource){
+    try{
       fallbackGlassAudio.currentTime = 0;
 
       const playing = fallbackGlassAudio.play();
 
-      if (playing && playing.catch) {
-        playing.catch(() => {});
+      if(playing&&playing.catch){
+        playing.catch(()=>{});
       }
-    } catch (error) {}
+    }catch(error){}
   }
 }
 
-function stopMusic() {
+function stopMusic(){
   stopSource(tensionSource);
   stopSource(hitSource);
   stopSource(glassSource);
@@ -965,25 +892,25 @@ function stopMusic() {
   hitSource = null;
   glassSource = null;
 
-  try {
+  try{
     fallbackGlassAudio.pause();
     fallbackGlassAudio.currentTime = 0;
-  } catch (error) {}
+  }catch(error){}
 }
 
-document.addEventListener("visibilitychange", () => {
-  if (!audioCtx) return;
+document.addEventListener("visibilitychange",()=>{
+  if(!audioCtx)return;
 
-  if (document.hidden) {
-    audioCtx.suspend().catch(() => {});
-  } else if (busy) {
-    audioCtx.resume().catch(() => {});
+  if(document.hidden){
+    audioCtx.suspend().catch(()=>{});
+  }else if(busy){
+    audioCtx.resume().catch(()=>{});
   }
 });
 
-/* ======================================
-   44 WIN ROUTES
-====================================== */
+/* ==================================
+   44種類の当選ルート名
+================================== */
 
 const winNames = [
   "ハズレからブラックアウト復活",
@@ -1032,174 +959,178 @@ const winNames = [
   "ロゴ発光"
 ];
 
-/* ======================================
-   GENERAL ANIMATION
-====================================== */
+/* ==================================
+   基本アニメーション
+================================== */
 
-function anim(el, cls) {
+function anim(el,cls){
   el.classList.remove(cls);
   void el.offsetWidth;
   el.classList.add(cls);
 }
 
-function clearNum() {
+function clearNum(){
   num.textContent = "";
   num.className = "";
 }
 
-function showNum(text, cls = "") {
+function showNum(text,cls=""){
   clearNum();
 
   num.textContent = text;
 
-  if (cls) {
+  if(cls){
     num.classList.add(cls);
   }
 
   num.classList.add("show");
 }
 
-async function digit(text, ms = 1000, cls = "") {
-  showNum(text, cls);
+async function digit(text,ms=1000,cls=""){
+  showNum(text,cls);
   await wait(ms);
   num.classList.remove("show");
 }
 
-async function count() {
-  await digit("3", 1000);
+async function count(){
+  await digit("3",1000);
   await wait(140);
 
-  await digit("2", 1000);
+  await digit("2",1000);
   await wait(140);
 
-  await digit("1", 1150);
+  await digit("1",1150);
 }
 
-async function fastCount() {
-  await digit("3", 500);
-  await digit("2", 500);
-  await digit("1", 650);
+async function fastCount(){
+  await digit("3",500);
+  await digit("2",500);
+  await digit("1",650);
 }
 
 /*
-  「1」の震えは入れない。
-  数字は普通に静止させる。
+  「1」は震えない。
+  静止したまま表示する。
 */
 
-async function holdOne(ms = 1800) {
+async function holdOne(ms=1800){
   showNum("1");
   await wait(ms);
   num.classList.remove("show");
 }
 
-async function slowCountdown() {
-  await digit("3", rnd(850, 1300));
-  await wait(rnd(100, 320));
+async function slowCountdown(){
+  await digit("3",rnd(850,1250));
+  await wait(rnd(100,250));
 
-  await digit("2", rnd(900, 1550));
-  await wait(rnd(100, 400));
+  await digit("2",rnd(850,1300));
+  await wait(rnd(100,300));
 
-  await holdOne(rnd(1300, 2300));
+  await holdOne(rnd(1150,2000));
 }
 
-async function quietCountdown() {
-  await digit("3", 950);
-  await digit("2", 1000);
+async function quietCountdown(){
+  await digit("3",900);
+  await digit("2",950);
 
   stopTension();
 
-  await holdOne(2200);
-  await wait(500);
+  await holdOne(1700);
+  await wait(450);
 }
 
-async function rewindCountdown() {
-  await digit("3", 900);
-  await digit("2", 1150);
-  await digit("1", 850);
-  await digit("2", 850, "red");
-  await holdOne(1300);
+async function rewindCountdown(){
+  await digit("3",900);
+  await digit("2",1100);
+  await digit("1",850);
+  await digit("2",800,"red");
+  await holdOne(1200);
 }
 
-async function dots() {
-  await digit("…", 1700, "dots");
+async function dots(){
+  await digit("…",1700,"dots");
 }
 
-async function blackout(ms = 1400) {
+async function blackout(ms=1400){
   black.style.opacity = "1";
   await wait(ms);
   black.style.opacity = "0";
 }
 
-async function flash() {
-  anim($("flash"), "flashGo");
+async function flash(){
+  anim($("flash"),"flashGo");
   await wait(340);
 }
 
-async function lightning() {
-  anim($("lightning"), "lightGo");
+async function lightning(){
+  anim($("lightning"),"lightGo");
   await wait(500);
 }
 
-async function noise() {
-  anim($("noise"), "noiseGo");
+async function noise(){
+  anim($("noise"),"noiseGo");
   await wait(550);
 }
 
-async function slashes() {
-  anim($("slash1"), "go");
+async function slashes(){
+  anim($("slash1"),"go");
   await wait(135);
-
-  anim($("slash2"), "go");
+  anim($("slash2"),"go");
   await wait(320);
 }
 
-/* ======================================
-   SPECIAL FX
-====================================== */
+/* ==================================
+   特殊演出
+================================== */
 
-function fxShow(mode, title = "", sub = "") {
-  fx.className = "active " + mode;
+function fxShow(mode,title="",sub=""){
+  fx.className = "active "+mode;
 
   fx.querySelector(".fxTitle").textContent = title;
   fx.querySelector(".fxSub").textContent = sub;
 }
 
-function fxHide() {
+function fxHide(){
   fx.className = "";
 
   fx.querySelector(".fxTitle").textContent = "";
   fx.querySelector(".fxSub").textContent = "";
 
-  fx.querySelectorAll("button").forEach(button => {
-    button.remove();
-  });
+  fx.querySelectorAll("button").forEach(
+    button=>button.remove()
+  );
 }
 
-async function fxFreeze() {
+async function fxFreeze(){
   stopTension();
 
-  fxShow("freeze", "……", "フリーズ");
+  fxShow("freeze","……","フリーズ");
   await wait(2200);
 
   fxHide();
   tension();
 }
 
-async function fxPreview() {
+async function fxPreview(){
   await blackout(450);
 
-  fxShow("preview", "");
+  fxShow("preview","");
   await wait(2300);
   fxHide();
 }
 
-async function fxRainbow() {
-  fxShow("rainbow", "");
+async function fxRainbow(){
+  fxShow("rainbow","");
   await wait(2300);
   fxHide();
 }
 
-async function fxPush() {
+/* ==================================
+   PUSH
+   押すまで絶対に自動進行しない
+================================== */
+
+async function fxPush(){
   fxShow(
     "push",
     "最終決戦！",
@@ -1210,74 +1141,74 @@ async function fxPush() {
 
   button.className = "fxButton";
   button.textContent = "PUSH";
-  button.setAttribute("aria-label", "PUSH");
+  button.setAttribute("aria-label","PUSH");
 
   fx.append(button);
 
-  await new Promise(resolve => {
-    let done = false;
+  /*
+    自動進行タイマーは置かない。
 
-    const timer = setTimeout(finish, 12000);
+    プレイヤーがPUSHを押した時だけ
+    Promiseが完了して次へ進む。
 
-    function finish() {
-      if (done) return;
+    10秒でも、1分でも、何分でも
+    押さずに待つことができる。
+  */
 
-      done = true;
-      clearTimeout(timer);
-      resolve();
-    }
-
-    button.onclick = event => {
+  await new Promise(resolve=>{
+    button.onclick = event=>{
       event.stopPropagation();
-      finish();
+
+      button.disabled = true;
+
+      resolve();
     };
   });
 
   fxHide();
 }
 
-async function fxReverse() {
-  await rewindCountdown();
-  await noise();
-  await digit("3", 800, "gold");
-}
-
-async function fxPromotion() {
-  await digit("3", 700);
-  await digit("2", 650, "red");
-  await digit("1", 1000, "gold");
+async function fxPromotion(){
+  await digit("3",700);
+  await digit("2",650,"red");
+  await digit("1",1000,"gold");
   await lightning();
 }
 
-/* ======================================
-   RESULT
-====================================== */
+async function fxReverse(){
+  await rewindCountdown();
+  await noise();
+  await digit("3",800,"gold");
+}
 
-function showFalseMiss() {
+/* ==================================
+   当たり / ハズレ
+================================== */
+
+function showFalseMiss(){
   result.classList.add("show");
 
   near.textContent = "";
   message.textContent = "";
 
   main.style.opacity = "1";
-  anim(main, "appear");
+  anim(main,"appear");
 }
 
-function hideFalseMiss() {
+function hideFalseMiss(){
   result.classList.remove("show");
   main.classList.remove("appear");
 }
 
-async function falseMissPause(ms = 1500) {
+async function falseMissPause(ms=1500){
   clearNum();
   showFalseMiss();
   await wait(ms);
 }
 
-async function miss(strong = false) {
+async function miss(strong=false){
   stopTension();
   clearNum();
-
   showFalseMiss();
 
   near.textContent = strong ? "惜しい！" : "";
@@ -1287,11 +1218,10 @@ async function miss(strong = false) {
     : "またチャレンジしてね！";
 
   await wait(2900);
-
   reset();
 }
 
-async function hit(name) {
+async function hit(name){
   stopTension();
 
   hideFalseMiss();
@@ -1301,13 +1231,14 @@ async function hit(name) {
   await flash();
   await slashes();
 
-  anim($("hit"), "go");
+  anim($("hit"),"go");
+
   playHitBGM();
 
   await wait(950);
 
   $("hitName").textContent = name;
-  anim($("hitInfo"), "show");
+  anim($("hitInfo"),"show");
 
   await wait(450);
 
@@ -1315,38 +1246,42 @@ async function hit(name) {
   $("tap").classList.add("show");
 }
 
-async function noCount() {
+async function noCount(){
   hideFalseMiss();
   await noise();
-  await digit("ノーカン！？", 1300, "nocount");
+
+  await digit(
+    "ノーカン！？",1300,"nocount"
+  );
+
   await fastCount();
 }
 
-/* ======================================
-   STARS
-====================================== */
+/* ==================================
+   流れ星
+================================== */
 
-function stars(n = 8) {
-  for (let i = 0; i < n; i++) {
-    setTimeout(() => {
-      if (!busy) return;
+function stars(n=8){
+  for(let i=0;i<n;i++){
+    setTimeout(()=>{
+      if(!busy)return;
 
-      const s = document.createElement("div");
+      const star = document.createElement("div");
 
-      s.className = "shooting";
-      s.style.left = rnd(0, 65) + "%";
-      s.style.top = rnd(0, 35) + "%";
+      star.className = "shooting";
+      star.style.left = rnd(0,65)+"%";
+      star.style.top = rnd(0,35)+"%";
 
-      stage.append(s);
+      stage.append(star);
 
-      setTimeout(() => s.remove(), 1000);
-    }, i * 85);
+      setTimeout(()=>star.remove(),1000);
+    },i*85);
   }
 }
 
-/* ======================================
-   GLASS IMAGES
-====================================== */
+/* ==================================
+   画面破壊の準備
+================================== */
 
 const bgImage = new Image();
 const crackImage = new Image();
@@ -1364,66 +1299,74 @@ let cw = 0;
 let ch = 0;
 let dpr = 1;
 
-function resizeCanvases() {
+function resizeCanvases(){
   cw = stage.clientWidth;
   ch = stage.clientHeight;
 
   dpr = Math.min(
-    window.devicePixelRatio || 1, 2
+    window.devicePixelRatio||1,
+    2
   );
 
-  glassCanvas.width = Math.round(cw * dpr);
-  glassCanvas.height = Math.round(ch * dpr);
+  glassCanvas.width = Math.round(cw*dpr);
+  glassCanvas.height = Math.round(ch*dpr);
 
-  snapshot.width = Math.round(cw * dpr);
-  snapshot.height = Math.round(ch * dpr);
+  snapshot.width = Math.round(cw*dpr);
+  snapshot.height = Math.round(ch*dpr);
 
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  snapCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  snapCtx.setTransform(dpr,0,0,dpr,0,0);
 }
 
-window.addEventListener("resize", resizeCanvases);
+window.addEventListener("resize",resizeCanvases);
 
-function imageLoaded(img) {
-  if (img.complete) {
-    return Promise.resolve(img.naturalWidth > 0);
+function imageLoaded(img){
+  if(img.complete){
+    return Promise.resolve(
+      img.naturalWidth>0
+    );
   }
 
-  return new Promise(resolve => {
+  return new Promise(resolve=>{
     img.addEventListener(
-      "load", () => resolve(true), { once:true }
+      "load",
+      ()=>resolve(true),
+      {once:true}
     );
 
     img.addEventListener(
-      "error", () => resolve(false), { once:true }
+      "error",
+      ()=>resolve(false),
+      {once:true}
     );
   });
 }
 
-function drawBackground(target) {
+function drawBackground(target){
   target.fillStyle = "#170010";
-  target.fillRect(0, 0, cw, ch);
+  target.fillRect(0,0,cw,ch);
 
-  if (!bgImage.naturalWidth) return;
+  if(!bgImage.naturalWidth)return;
 
-  const scale = ch / bgImage.naturalHeight;
-  const width = bgImage.naturalWidth * scale;
+  const scale = ch/bgImage.naturalHeight;
+  const width = bgImage.naturalWidth*scale;
 
   target.drawImage(
     bgImage,
-    (cw - width) / 2,
+    (cw-width)/2,
     0,
     width,
     ch
   );
 }
 
-function captureScreen() {
-  snapCtx.clearRect(0, 0, cw, ch);
+function captureScreen(){
+  snapCtx.clearRect(0,0,cw,ch);
   drawBackground(snapCtx);
 
-  if (num.classList.contains("show")) {
+  if(num.classList.contains("show")){
     const value = num.textContent;
+
     const fontSize = parseFloat(
       getComputedStyle(num).fontSize
     );
@@ -1431,40 +1374,50 @@ function captureScreen() {
     snapCtx.save();
 
     snapCtx.font =
-      "1000 " + fontSize + "px sans-serif";
+      "1000 "+fontSize+"px sans-serif";
 
     snapCtx.textAlign = "center";
     snapCtx.textBaseline = "middle";
     snapCtx.lineJoin = "round";
-    snapCtx.lineWidth = Math.max(5, fontSize * .09);
+
+    snapCtx.lineWidth = Math.max(
+      5,fontSize*.09
+    );
 
     snapCtx.strokeStyle =
       num.classList.contains("gold")
-        ? "#f4a000" : "#ff4b9d";
+        ? "#f4a000"
+        : "#ff4b9d";
 
     snapCtx.fillStyle =
       num.classList.contains("gold")
-        ? "#fff1a8" : "#fff";
+        ? "#fff1a8"
+        : "#fff";
 
     snapCtx.shadowColor = "#ff379a";
     snapCtx.shadowBlur = 18;
 
-    snapCtx.strokeText(value, cw * .5, ch * .61);
-    snapCtx.fillText(value, cw * .5, ch * .61);
+    snapCtx.strokeText(
+      value,cw*.5,ch*.61
+    );
+
+    snapCtx.fillText(
+      value,cw*.5,ch*.61
+    );
 
     snapCtx.restore();
   }
 
-  if (result.classList.contains("show")) {
+  if(result.classList.contains("show")){
     snapCtx.save();
 
     snapCtx.fillStyle = "rgba(0,0,0,.6)";
-    snapCtx.fillRect(0, 0, cw, ch);
+    snapCtx.fillRect(0,0,cw,ch);
 
-    const fontSize = Math.min(cw * .17, 82);
+    const fontSize = Math.min(cw*.17,82);
 
     snapCtx.font =
-      "1000 " + fontSize + "px sans-serif";
+      "1000 "+fontSize+"px sans-serif";
 
     snapCtx.textAlign = "center";
     snapCtx.textBaseline = "middle";
@@ -1473,121 +1426,133 @@ function captureScreen() {
 
     snapCtx.strokeStyle = "#e00073";
     snapCtx.fillStyle = "#fff";
+
     snapCtx.shadowColor = "#ff379a";
     snapCtx.shadowBlur = 20;
 
-    snapCtx.strokeText("ハズレ", cw * .5, ch * .5);
-    snapCtx.fillText("ハズレ", cw * .5, ch * .5);
+    snapCtx.strokeText(
+      "ハズレ",cw*.5,ch*.5
+    );
+
+    snapCtx.fillText(
+      "ハズレ",cw*.5,ch*.5
+    );
 
     snapCtx.restore();
   }
 }
 
-/* ======================================
-   CRACK IMAGE MATCHING
-====================================== */
+/* ==================================
+   ヒビ画像解析
+================================== */
 
 let crackPixels = null;
 let mapW = 0;
 let mapH = 0;
 
-function buildCrackMap() {
+function buildCrackMap(){
   const scale = Math.min(
-    1, 480 / Math.max(cw, ch)
+    1,
+    480/Math.max(cw,ch)
   );
 
-  mapW = Math.max(1, Math.floor(cw * scale));
-  mapH = Math.max(1, Math.floor(ch * scale));
+  mapW = Math.max(
+    1,Math.floor(cw*scale)
+  );
+
+  mapH = Math.max(
+    1,Math.floor(ch*scale)
+  );
 
   crackMap.width = mapW;
   crackMap.height = mapH;
 
-  crackCtx.clearRect(0, 0, mapW, mapH);
+  crackCtx.clearRect(0,0,mapW,mapH);
 
-  if (!crackImage.naturalWidth) {
+  if(!crackImage.naturalWidth){
     crackPixels = null;
     return;
   }
 
-  const scaleImage = Math.min(
-    mapW / crackImage.naturalWidth,
-    mapH / crackImage.naturalHeight
+  const imageScale = Math.min(
+    mapW/crackImage.naturalWidth,
+    mapH/crackImage.naturalHeight
   );
 
-  const iw = crackImage.naturalWidth * scaleImage;
-  const ih = crackImage.naturalHeight * scaleImage;
+  const iw = crackImage.naturalWidth*imageScale;
+  const ih = crackImage.naturalHeight*imageScale;
 
   crackCtx.drawImage(
     crackImage,
-    (mapW - iw) / 2,
-    (mapH - ih) / 2,
+    (mapW-iw)/2,
+    (mapH-ih)/2,
     iw,
     ih
   );
 
-  try {
+  try{
     crackPixels = crackCtx.getImageData(
-      0, 0, mapW, mapH
+      0,0,mapW,mapH
     );
-  } catch (error) {
+  }catch(error){
     crackPixels = null;
   }
 }
 
-function crackBrightness(x, y) {
-  if (!crackPixels) return 0;
+function crackBrightness(x,y){
+  if(!crackPixels)return 0;
 
-  const px = Math.floor(x / cw * mapW);
-  const py = Math.floor(y / ch * mapH);
+  const px = Math.floor(x/cw*mapW);
+  const py = Math.floor(y/ch*mapH);
 
-  if (
-    px < 0 || py < 0 ||
-    px >= mapW || py >= mapH
-  ) {
+  if(
+    px<0||py<0||
+    px>=mapW||py>=mapH
+  ){
     return 0;
   }
 
-  const i = (py * mapW + px) * 4;
+  const i = (py*mapW+px)*4;
   const d = crackPixels.data;
 
   return (
-    d[i] * .30 +
-    d[i + 1] * .55 +
-    d[i + 2] * .15
-  ) * (d[i + 3] / 255) / 255;
+    d[i]*.30+
+    d[i+1]*.55+
+    d[i+2]*.15
+  )*(d[i+3]/255)/255;
 }
 
-function snapToCrack(x, y, radius = 18) {
-  if (!crackPixels) return {x, y};
+function snapToCrack(x,y,radius=18){
+  if(!crackPixels)return {x,y};
 
   let bestX = x;
   let bestY = y;
   let bestScore = -1;
 
-  const step = Math.max(3, radius / 4);
+  const step = Math.max(3,radius/4);
 
-  for (
-    let dy = -radius;
-    dy <= radius;
-    dy += step
-  ) {
-    for (
-      let dx = -radius;
-      dx <= radius;
-      dx += step
-    ) {
-      const distance = Math.hypot(dx, dy);
+  for(
+    let dy=-radius;
+    dy<=radius;
+    dy+=step
+  ){
+    for(
+      let dx=-radius;
+      dx<=radius;
+      dx+=step
+    ){
+      const distance = Math.hypot(dx,dy);
 
-      if (distance > radius) continue;
+      if(distance>radius)continue;
 
-      const bx = x + dx;
-      const by = y + dy;
+      const bx = x+dx;
+      const by = y+dy;
 
       const score =
-        crackBrightness(bx, by) -
-        distance / radius * .27;
+        crackBrightness(bx,by)-
+        distance/radius*.27;
 
-      if (score > bestScore) {
+      if(score>bestScore){
         bestScore = score;
         bestX = bx;
         bestY = by;
@@ -1595,186 +1560,193 @@ function snapToCrack(x, y, radius = 18) {
     }
   }
 
-  if (bestScore < .22) return {x, y};
+  if(bestScore<.22)return {x,y};
 
-  return {x:bestX, y:bestY};
+  return {x:bestX,y:bestY};
 }
 
-/* ======================================
-   GLASS GEOMETRY
-====================================== */
+/* ==================================
+   ガラス破片生成
+================================== */
 
 let shards = [];
 let crackLines = [];
 let dust = [];
 
-function makeGeometry() {
+function makeGeometry(){
   shards = [];
   crackLines = [];
   dust = [];
 
-  const cx = cw * .5;
-  const cy = ch * .48;
+  const cx = cw*.5;
+  const cy = ch*.48;
 
-  const maxRadius = Math.hypot(cw, ch) * .9;
-  const rings = [0, 37, 91, 160, 270, maxRadius];
+  const maxRadius = Math.hypot(cw,ch)*.9;
+
+  const rings = [
+    0,37,91,160,270,maxRadius
+  ];
+
   const sides = 28;
   const vertices = [];
 
-  for (
-    let ring = 0;
-    ring < rings.length;
+  for(
+    let ring=0;
+    ring<rings.length;
     ring++
-  ) {
+  ){
     vertices[ring] = [];
 
-    for (let i = 0; i < sides; i++) {
-      if (ring === 0) {
-        vertices[ring][i] = {x:cx, y:cy};
+    for(let i=0;i<sides;i++){
+      if(ring===0){
+        vertices[ring][i] = {x:cx,y:cy};
         continue;
       }
 
       const angle =
-        i / sides * Math.PI * 2 +
-        (Math.random() - .5) * .09;
+        i/sides*Math.PI*2+
+        (Math.random()-.5)*.09;
 
       const radius =
-        rings[ring] *
-        (1 + (Math.random() - .5) * .1);
+        rings[ring]*
+        (1+(Math.random()-.5)*.1);
 
-      const x = cx + Math.cos(angle) * radius;
-      const y = cy + Math.sin(angle) * radius;
+      const x = cx+Math.cos(angle)*radius;
+      const y = cy+Math.sin(angle)*radius;
 
       vertices[ring][i] = snapToCrack(
-        x, y, ring < 2 ? 12 : 22
+        x,y,ring<2?12:22
       );
     }
   }
 
-  function line(a, b) {
-    crackLines.push({a, b});
+  function addLine(a,b){
+    crackLines.push({a,b});
   }
 
-  function shard(points) {
+  function addShard(points){
     const mx = points.reduce(
-      (s, p) => s + p.x, 0
-    ) / points.length;
+      (sum,p)=>sum+p.x,0
+    )/points.length;
 
     const my = points.reduce(
-      (s, p) => s + p.y, 0
-    ) / points.length;
+      (sum,p)=>sum+p.y,0
+    )/points.length;
 
     const angle = Math.atan2(
-      my - cy, mx - cx
+      my-cy,mx-cx
     );
 
-    const speed = 170 + Math.random() * 360;
+    const speed = 170+Math.random()*360;
 
     shards.push({
       points,
       mx,
       my,
-      vx:Math.cos(angle) * speed +
-        (Math.random() - .5) * 140,
-      vy:Math.sin(angle) * speed +
-        (Math.random() - .5) * 130,
-      spin:(Math.random() - .5) * 9,
-      depth:.65 + Math.random() * 1.55,
-      delay:Math.random() * .09,
-      duration:.9 + Math.random() * .65,
+      vx:
+        Math.cos(angle)*speed+
+        (Math.random()-.5)*140,
+      vy:
+        Math.sin(angle)*speed+
+        (Math.random()-.5)*130,
+      spin:(Math.random()-.5)*9,
+      depth:.65+Math.random()*1.55,
+      delay:Math.random()*.09,
+      duration:.9+Math.random()*.65,
       shine:Math.random()
     });
   }
 
-  for (
-    let ring = 0;
-    ring < rings.length - 1;
+  for(
+    let ring=0;
+    ring<rings.length-1;
     ring++
-  ) {
-    for (let i = 0; i < sides; i++) {
-      const j = (i + 1) % sides;
+  ){
+    for(let i=0;i<sides;i++){
+      const j = (i+1)%sides;
 
       const a = vertices[ring][i];
-      const b = vertices[ring + 1][i];
-      const c = vertices[ring + 1][j];
+      const b = vertices[ring+1][i];
+      const c = vertices[ring+1][j];
       const d = vertices[ring][j];
 
-      if (ring === 0) {
-        shard([a, b, c]);
-        line(a, b);
-        line(b, c);
-      } else {
-        if (Math.random() < .5) {
-          shard([a, b, c]);
-          shard([a, c, d]);
-          line(a, c);
-        } else {
-          shard([a, b, d]);
-          shard([b, c, d]);
-          line(b, d);
+      if(ring===0){
+        addShard([a,b,c]);
+        addLine(a,b);
+        addLine(b,c);
+      }else{
+        if(Math.random()<.5){
+          addShard([a,b,c]);
+          addShard([a,c,d]);
+          addLine(a,c);
+        }else{
+          addShard([a,b,d]);
+          addShard([b,c,d]);
+          addLine(b,d);
         }
 
-        line(a, b);
-        line(b, c);
+        addLine(a,b);
+        addLine(b,c);
       }
     }
   }
 
-  for (let i = 0; i < 180; i++) {
-    const angle = Math.random() * Math.PI * 2;
-    const speed = 120 + Math.random() * 540;
+  for(let i=0;i<180;i++){
+    const angle = Math.random()*Math.PI*2;
+    const speed = 120+Math.random()*540;
 
     dust.push({
-      x:cx + (Math.random() - .5) * 35,
-      y:cy + (Math.random() - .5) * 35,
-      vx:Math.cos(angle) * speed,
-      vy:Math.sin(angle) * speed,
-      size:.5 + Math.random() * 2.4,
-      life:.5 + Math.random() * 1.1,
-      delay:Math.random() * .18
+      x:cx+(Math.random()-.5)*35,
+      y:cy+(Math.random()-.5)*35,
+      vx:Math.cos(angle)*speed,
+      vy:Math.sin(angle)*speed,
+      size:.5+Math.random()*2.4,
+      life:.5+Math.random()*1.1,
+      delay:Math.random()*.18
     });
   }
 }
 
-/* ======================================
-   DRAW CRACKS
-====================================== */
+/* ==================================
+   ヒビ描画
+================================== */
 
-function drawCrackLines(progress) {
-  const cx = cw * .5;
-  const cy = ch * .48;
-  const radius = Math.hypot(cw, ch) * progress;
+function drawCrackLines(progress){
+  const cx = cw*.5;
+  const cy = ch*.48;
+
+  const radius = Math.hypot(cw,ch)*progress;
 
   ctx.save();
   ctx.lineCap = "round";
   ctx.lineJoin = "round";
 
-  if (crackImage.naturalWidth) {
+  if(crackImage.naturalWidth){
     const scale = Math.min(
-      cw / crackImage.naturalWidth,
-      ch / crackImage.naturalHeight
+      cw/crackImage.naturalWidth,
+      ch/crackImage.naturalHeight
     );
 
-    const iw = crackImage.naturalWidth * scale;
-    const ih = crackImage.naturalHeight * scale;
+    const iw = crackImage.naturalWidth*scale;
+    const ih = crackImage.naturalHeight*scale;
 
     ctx.save();
 
     ctx.beginPath();
     ctx.arc(
-      cx, cy,
-      Math.max(1, radius),
-      0, Math.PI * 2
+      cx,cy,
+      Math.max(1,radius),
+      0,Math.PI*2
     );
-    ctx.clip();
 
+    ctx.clip();
     ctx.globalAlpha = .16;
     ctx.globalCompositeOperation = "screen";
 
     ctx.drawImage(
       crackImage,
-      (cw - iw) / 2,
-      (ch - ih) / 2,
+      (cw-iw)/2,
+      (ch-ih)/2,
       iw,
       ih
     );
@@ -1782,17 +1754,19 @@ function drawCrackLines(progress) {
     ctx.restore();
   }
 
-  for (const line of crackLines) {
-    const mx = (line.a.x + line.b.x) / 2;
-    const my = (line.a.y + line.b.y) / 2;
+  for(const line of crackLines){
+    const mx = (line.a.x+line.b.x)/2;
+    const my = (line.a.y+line.b.y)/2;
 
-    if (Math.hypot(mx - cx, my - cy) > radius) {
+    if(
+      Math.hypot(mx-cx,my-cy)>radius
+    ){
       continue;
     }
 
     ctx.beginPath();
-    ctx.moveTo(line.a.x, line.a.y);
-    ctx.lineTo(line.b.x, line.b.y);
+    ctx.moveTo(line.a.x,line.a.y);
+    ctx.lineTo(line.b.x,line.b.y);
 
     ctx.strokeStyle = "rgba(20,37,55,.82)";
     ctx.lineWidth = 3.5;
@@ -1800,8 +1774,8 @@ function drawCrackLines(progress) {
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.moveTo(line.a.x, line.a.y);
-    ctx.lineTo(line.b.x, line.b.y);
+    ctx.moveTo(line.a.x,line.a.y);
+    ctx.lineTo(line.b.x,line.b.y);
 
     ctx.strokeStyle = "rgba(245,251,255,.94)";
     ctx.lineWidth = 1.3;
@@ -1813,39 +1787,43 @@ function drawCrackLines(progress) {
   ctx.restore();
 }
 
-/* ======================================
-   DRAW SHARDS
-====================================== */
+/* ==================================
+   ガラス片描画
+================================== */
 
-function drawShard(s, elapsed) {
-  const t = elapsed - s.delay;
-  if (t < 0) return;
+function drawShard(s,elapsed){
+  const t = elapsed-s.delay;
 
-  const p = t / s.duration;
-  if (p >= 1) return;
+  if(t<0)return;
 
-  const dx = s.vx * t;
-  const dy = s.vy * t + 150 * t * t;
+  const p = t/s.duration;
+
+  if(p>=1)return;
+
+  const dx = s.vx*t;
+  const dy = s.vy*t+150*t*t;
 
   ctx.save();
 
-  ctx.globalAlpha = Math.pow(1 - p, 1.15);
+  ctx.globalAlpha = Math.pow(1-p,1.15);
 
-  ctx.translate(s.mx + dx, s.my + dy);
-  ctx.rotate(s.spin * t);
+  ctx.translate(s.mx+dx,s.my+dy);
+  ctx.rotate(s.spin*t);
+
   ctx.scale(
-    1 + p * s.depth,
-    1 + p * s.depth
+    1+p*s.depth,
+    1+p*s.depth
   );
-  ctx.translate(-s.mx, -s.my);
+
+  ctx.translate(-s.mx,-s.my);
 
   ctx.beginPath();
 
-  s.points.forEach((point, i) => {
-    if (i === 0) {
-      ctx.moveTo(point.x, point.y);
-    } else {
-      ctx.lineTo(point.x, point.y);
+  s.points.forEach((point,i)=>{
+    if(i===0){
+      ctx.moveTo(point.x,point.y);
+    }else{
+      ctx.lineTo(point.x,point.y);
     }
   });
 
@@ -1856,27 +1834,29 @@ function drawShard(s, elapsed) {
 
   ctx.drawImage(
     snapshot,
-    0, 0, snapshot.width, snapshot.height,
-    0, 0, cw, ch
+    0,0,
+    snapshot.width,
+    snapshot.height,
+    0,0,cw,ch
   );
 
   const gradient = ctx.createLinearGradient(
-    s.mx - 35,
-    s.my - 35,
-    s.mx + 35,
-    s.my + 35
+    s.mx-35,
+    s.my-35,
+    s.mx+35,
+    s.my+35
   );
 
   gradient.addColorStop(
-    0, "rgba(255,255,255,.30)"
+    0,"rgba(255,255,255,.30)"
   );
 
   gradient.addColorStop(
-    .45, "rgba(165,215,255,.03)"
+    .45,"rgba(165,215,255,.03)"
   );
 
   gradient.addColorStop(
-    1, "rgba(255,255,255,.24)"
+    1,"rgba(255,255,255,.24)"
   );
 
   ctx.fillStyle = gradient;
@@ -1890,20 +1870,20 @@ function drawShard(s, elapsed) {
   ctx.shadowBlur = 5;
   ctx.stroke();
 
-  if (s.shine > .8) {
+  if(s.shine>.8){
     const a = s.points[0];
     const b = s.points[1];
 
     ctx.beginPath();
 
     ctx.moveTo(
-      a.x * .75 + b.x * .25,
-      a.y * .75 + b.y * .25
+      a.x*.75+b.x*.25,
+      a.y*.75+b.y*.25
     );
 
     ctx.lineTo(
-      a.x * .25 + b.x * .75,
-      a.y * .25 + b.y * .75
+      a.x*.25+b.x*.75,
+      a.y*.25+b.y*.75
     );
 
     ctx.strokeStyle = "rgba(255,255,255,.92)";
@@ -1914,26 +1894,27 @@ function drawShard(s, elapsed) {
   ctx.restore();
 }
 
-function drawDust(elapsed) {
+function drawDust(elapsed){
   ctx.save();
 
-  for (const d of dust) {
-    const t = elapsed - d.delay;
+  for(const d of dust){
+    const t = elapsed-d.delay;
 
-    if (t < 0 || t > d.life) continue;
+    if(t<0||t>d.life)continue;
 
-    const p = t / d.life;
+    const p = t/d.life;
 
-    ctx.globalAlpha = 1 - p;
-    ctx.fillStyle = p < .5 ? "#fff" : "#c8efff";
+    ctx.globalAlpha = 1-p;
+    ctx.fillStyle = p<.5?"#fff":"#c8efff";
 
     ctx.beginPath();
 
     ctx.arc(
-      d.x + d.vx * t,
-      d.y + d.vy * t + 160 * t * t,
-      d.size * (1 - p * .4),
-      0, Math.PI * 2
+      d.x+d.vx*t,
+      d.y+d.vy*t+160*t*t,
+      d.size*(1-p*.4),
+      0,
+      Math.PI*2
     );
 
     ctx.fill();
@@ -1942,24 +1923,25 @@ function drawDust(elapsed) {
   ctx.restore();
 }
 
-function growCracks(from, to, duration) {
-  return new Promise(resolve => {
+function growCracks(from,to,duration){
+  return new Promise(resolve=>{
     const started = performance.now();
 
-    function frame(now) {
+    function frame(now){
       const p = Math.min(
-        (now - started) / duration, 1
+        (now-started)/duration,
+        1
       );
 
-      ctx.clearRect(0, 0, cw, ch);
+      ctx.clearRect(0,0,cw,ch);
 
       drawCrackLines(
-        from + (to - from) * p
+        from+(to-from)*p
       );
 
-      if (p < 1) {
+      if(p<1){
         requestAnimationFrame(frame);
-      } else {
+      }else{
         resolve();
       }
     }
@@ -1968,25 +1950,25 @@ function growCracks(from, to, duration) {
   });
 }
 
-function flyGlass() {
-  return new Promise(resolve => {
+function flyGlass(){
+  return new Promise(resolve=>{
     const started = performance.now();
 
-    function frame(now) {
-      const elapsed = (now - started) / 1000;
+    function frame(now){
+      const elapsed = (now-started)/1000;
 
-      ctx.clearRect(0, 0, cw, ch);
+      ctx.clearRect(0,0,cw,ch);
 
-      for (const shard of shards) {
-        drawShard(shard, elapsed);
+      for(const shard of shards){
+        drawShard(shard,elapsed);
       }
 
       drawDust(elapsed);
 
-      if (elapsed < 1.65) {
+      if(elapsed<1.65){
         requestAnimationFrame(frame);
-      } else {
-        ctx.clearRect(0, 0, cw, ch);
+      }else{
+        ctx.clearRect(0,0,cw,ch);
         resolve();
       }
     }
@@ -1995,11 +1977,11 @@ function flyGlass() {
   });
 }
 
-/* ======================================
-   SCREEN BREAK
-====================================== */
+/* ==================================
+   画面破壊演出
+================================== */
 
-async function glassBreak() {
+async function glassBreak(){
   await Promise.all([
     imageLoaded(bgImage),
     imageLoaded(crackImage)
@@ -2013,17 +1995,21 @@ async function glassBreak() {
   stopTension();
 
   glassArea.classList.add("active");
-  ctx.clearRect(0, 0, cw, ch);
+
+  ctx.clearRect(0,0,cw,ch);
 
   playGlassSound();
 
-  await growCracks(0, .26, 360);
+  /* 1回目のヒビ */
+  await growCracks(0,.26,360);
   await wait(150);
 
-  await growCracks(.26, 1.08, 440);
+  /* 2回目のヒビ */
+  await growCracks(.26,1.08,440);
   await wait(130);
 
-  anim(glassLight, "go");
+  /* 画面破壊 */
+  anim(glassLight,"go");
 
   stage.classList.add("broken");
 
@@ -2046,14 +2032,14 @@ async function glassBreak() {
   await flash();
 }
 
-/* ======================================
-   GLASS HIT - 8 TIMINGS
-====================================== */
+/* ==================================
+   画面破壊 8タイミング
+================================== */
 
-async function guaranteedGlassHit() {
-  const pattern = rnd(0, 7);
+async function guaranteedGlassHit(){
+  const pattern = rnd(0,7);
 
-  switch (pattern) {
+  switch(pattern){
     case 0:
       await wait(650);
       break;
@@ -2064,14 +2050,14 @@ async function guaranteedGlassHit() {
       break;
 
     case 2:
-      await digit("3", 800);
+      await digit("3",800);
       showNum("2");
       await wait(780);
       break;
 
     case 3:
-      await digit("3", 800);
-      await digit("2", 800);
+      await digit("3",800);
+      await digit("2",800);
       showNum("1");
       await wait(780);
       break;
@@ -2090,53 +2076,60 @@ async function guaranteedGlassHit() {
       await count();
       await falseMissPause(1000);
       await noCount();
+
       showNum("1");
       await wait(650);
       break;
 
     case 7:
       await count();
+
+      /*
+        このPUSHも押すまで待つ。
+      */
       await fxPush();
+
       showNum("1");
       await wait(550);
       break;
   }
 
   await glassBreak();
+
   await hit("画面破壊・当たり確定");
 }
 
-/* ======================================
-   REVIVALS
-====================================== */
+/* ==================================
+   復活演出
+================================== */
 
-async function revivalBlack() {
+async function revivalBlack(){
   await slowCountdown();
   await falseMissPause(1600);
   await blackout(1700);
   await hit(winNames[0]);
 }
 
-async function revivalNoCount(won) {
+async function revivalNoCount(won){
   await slowCountdown();
   await falseMissPause(1300);
   await noCount();
 
-  if (won) {
+  if(won){
     await hit(winNames[1]);
-  } else {
+  }else{
     await miss(true);
   }
 }
 
-async function revivalCrack() {
+async function revivalCrack(){
   await count();
   await falseMissPause(1300);
   await glassBreak();
   await hit(winNames[2]);
 }
 
-async function revivalDouble(won) {
+async function revivalDouble(won){
   await count();
   await falseMissPause(1100);
   await noCount();
@@ -2144,41 +2137,41 @@ async function revivalDouble(won) {
   await falseMissPause(1100);
   await noCount();
 
-  if (won) {
+  if(won){
     await hit(winNames[3]);
-  } else {
+  }else{
     await miss(true);
   }
 }
 
-/* ======================================
-   44 WIN ROUTES
-====================================== */
+/* ==================================
+   44種類の当選ルート
+================================== */
 
-async function winRoute(i) {
-  if (i === 0) return revivalBlack();
-  if (i === 1) return revivalNoCount(true);
-  if (i === 2) return revivalCrack();
-  if (i === 3) return revivalDouble(true);
+async function winRoute(i){
+  if(i===0)return revivalBlack();
+  if(i===1)return revivalNoCount(true);
+  if(i===2)return revivalCrack();
+  if(i===3)return revivalDouble(true);
 
-  switch (i) {
+  switch(i){
     case 4:
       await blackout(1200);
       break;
 
     case 5:
       await digit("3");
-      await digit("2", 2200);
+      await digit("2",2200);
       break;
 
     case 6:
       await count();
-      await digit("2", 900);
+      await digit("2",900);
       break;
 
     case 7:
       await count();
-      await digit("0", 900, "gold");
+      await digit("0",900,"gold");
       break;
 
     case 8:
@@ -2188,7 +2181,7 @@ async function winRoute(i) {
 
     case 9:
       stopTension();
-      await digit("3", 1400);
+      await digit("3",1400);
       await wait(1000);
       break;
 
@@ -2237,12 +2230,12 @@ async function winRoute(i) {
     case 18:
       await slowCountdown();
       await dots();
-      await digit("1", 850);
+      await digit("1",850);
       break;
 
     case 19:
-      await digit("3", 1200);
-      await digit("1", 1100);
+      await digit("3",1200);
+      await digit("1",1100);
       break;
 
     case 20:
@@ -2271,7 +2264,7 @@ async function winRoute(i) {
 
     case 25:
       await count();
-      await digit("?", 1200, "question");
+      await digit("?",1200,"question");
       break;
 
     case 26:
@@ -2287,7 +2280,7 @@ async function winRoute(i) {
     case 28:
       await slowCountdown();
       await dots();
-      await digit("1", 850);
+      await digit("1",850);
       break;
 
     case 29:
@@ -2311,12 +2304,12 @@ async function winRoute(i) {
 
     case 32:
       await count();
-      await digit("1", 1500, "big");
+      await digit("1",1500,"big");
       break;
 
     case 33:
       await count();
-      await digit("1", 1000, "red");
+      await digit("1",1000,"red");
       break;
 
     case 34:
@@ -2331,7 +2324,7 @@ async function winRoute(i) {
 
     case 36:
       await count();
-      await digit("1", 1000, "gold");
+      await digit("1",1000,"gold");
       break;
 
     case 37:
@@ -2342,7 +2335,7 @@ async function winRoute(i) {
 
     case 38:
       await slowCountdown();
-      await digit("?", 1200, "question");
+      await digit("?",1200,"question");
       break;
 
     case 39:
@@ -2352,8 +2345,8 @@ async function winRoute(i) {
       break;
 
     case 40:
-      await digit("3", 1000);
-      await digit("2", 1900);
+      await digit("3",1000);
+      await digit("2",1900);
       await holdOne(2600);
       break;
 
@@ -2377,27 +2370,27 @@ async function winRoute(i) {
   await hit(winNames[i]);
 }
 
-/* ======================================
-   SUDDEN HIT
-====================================== */
+/* ==================================
+   普通の突然当たり
+================================== */
 
-async function suddenHit() {
-  const timing = rnd(0, 4);
+async function suddenHit(){
+  const timing = rnd(0,4);
 
-  switch (timing) {
+  switch(timing){
     case 0:
-      await digit("3", rnd(650, 1200));
+      await digit("3",rnd(650,1200));
       break;
 
     case 1:
-      await digit("3", 950);
-      await digit("2", rnd(650, 1400));
+      await digit("3",950);
+      await digit("2",rnd(650,1400));
       break;
 
     case 2:
-      await digit("3", 850);
-      await digit("2", 950);
-      await holdOne(rnd(850, 1900));
+      await digit("3",850);
+      await digit("2",950);
+      await holdOne(rnd(850,1900));
       break;
 
     case 3:
@@ -2413,124 +2406,158 @@ async function suddenHit() {
   await hit("突然当たり");
 }
 
-/* ======================================
-   EXPECTATION EFFECT ROUTES
-====================================== */
+/* ==================================
+   演出発展
+================================== */
 
-async function pinkEffect(won) {
-  await digit("3", 900);
+/*
+  ピンク稲妻 → PUSH
 
+  PUSHはプレイヤーが押すまで
+  無制限で待つ。
+*/
+
+async function pinkPushEffect(won){
+  await digit("3",850);
   await lightning();
 
-  await digit("2", 1100, "red");
-  await holdOne(1600);
+  await digit("2",1000,"red");
+  await holdOne(1200);
 
-  if (won) {
-    await hit("ピンク稲妻");
-  } else {
-    await miss(true);
-  }
-}
-
-async function goldEffect(won) {
-  await digit("3", 950);
-  await digit("2", 1100);
-
-  await digit("1", 2100, "gold");
-  await wait(600);
-
-  if (won) {
-    await hit("金色変化");
-  } else {
-    await miss(true);
-  }
-}
-
-async function blackEffect(won) {
-  await slowCountdown();
-
-  stopTension();
-  await blackout(1900);
-
-  if (won) {
-    await hit("ブラックアウト");
-  } else {
-    await miss(true);
-  }
-}
-
-async function previewEffect(won) {
-  await slowCountdown();
-  await fxPreview();
-
-  if (won) {
-    await hit("次回予告");
-  } else {
-    await miss(true);
-  }
-}
-
-async function pushEffect(won) {
-  await slowCountdown();
   await fxPush();
 
   await blackout(450);
 
-  if (won) {
-    await hit("デカPUSH");
-  } else {
+  if(won){
+    await hit("ピンク稲妻 → PUSH");
+  }else{
     await miss(true);
   }
 }
 
-async function rainbowEffect() {
+/*
+  金色変化 → ブラックアウト
+*/
+
+async function goldBlackEffect(won){
+  await digit("3",850);
+  await digit("2",1050);
+
+  await digit("1",1500,"gold");
+
+  stopTension();
+
+  await blackout(1800);
+
+  if(won){
+    await hit("金色変化 → ブラックアウト");
+  }else{
+    await miss(true);
+  }
+}
+
+/* ==================================
+   単独チャンス演出
+================================== */
+
+async function pinkEffect(won){
+  await digit("3",900);
+  await lightning();
+
+  await digit("2",1100,"red");
+  await holdOne(1600);
+
+  if(won){
+    await hit("ピンク稲妻");
+  }else{
+    await miss(true);
+  }
+}
+
+async function goldEffect(won){
+  await digit("3",950);
+  await digit("2",1100);
+  await digit("1",2100,"gold");
+
+  await wait(600);
+
+  if(won){
+    await hit("金色変化");
+  }else{
+    await miss(true);
+  }
+}
+
+async function blackEffect(won){
+  await slowCountdown();
+  stopTension();
+
+  await blackout(1900);
+
+  if(won){
+    await hit("ブラックアウト");
+  }else{
+    await miss(true);
+  }
+}
+
+async function previewEffect(won){
+  await slowCountdown();
+  await fxPreview();
+
+  if(won){
+    await hit("次回予告");
+  }else{
+    await miss(true);
+  }
+}
+
+async function pushEffect(won){
+  await slowCountdown();
+
+  /*
+    タップされるまで待機する。
+  */
+  await fxPush();
+
+  await blackout(450);
+
+  if(won){
+    await hit("デカPUSH");
+  }else{
+    await miss(true);
+  }
+}
+
+async function rainbowEffect(){
   await fxRainbow();
+
   await hit("レインボー・当たり確定");
 }
 
-/* ======================================
-   OTHER WIN ROUTES
-====================================== */
+/* ==================================
+   通常当選ルート
+================================== */
 
-/*
-  元の44ルートはすべて残す。
-
-  普通のカウントダウンからでも
-  当たりが出るようにする。
-
-  ここで選ばれる通常系ルートは
-  金色・稲妻・ブラックアウトなど
-  特定演出の出現率に影響することがある。
-*/
-
-async function normalWinRoute() {
-  /*
-    普通のカウントダウンから
-    突然当たるルートを入れる。
-  */
-
-  if (roll(.38)) {
+async function normalWinRoute(){
+  if(roll(.38)){
     return suddenHit();
   }
 
-  /*
-    その他は元の44ルート。
-  */
-
-  return winRoute(rnd(0, 43));
+  return winRoute(rnd(0,43));
 }
 
-/* ======================================
-   WIN EFFECT SELECTION
-====================================== */
+/* ==================================
+   当たり演出振り分け
+================================== */
 
-async function regularWinRoute() {
-  const kind = weightedChoice(
-    WIN_EFFECT_WEIGHTS,
+async function regularWinRoute(){
+  const kind = chooseWeighted(
+    WIN_EFFECTS,
     "normal"
   );
 
-  switch (kind) {
+  switch(kind){
     case "glass":
       return guaranteedGlassHit();
 
@@ -2540,14 +2567,20 @@ async function regularWinRoute() {
     case "preview":
       return previewEffect(true);
 
+    case "pinkPush":
+      return pinkPushEffect(true);
+
+    case "goldBlack":
+      return goldBlackEffect(true);
+
+    case "pink":
+      return pinkEffect(true);
+
     case "gold":
       return goldEffect(true);
 
     case "black":
       return blackEffect(true);
-
-    case "pink":
-      return pinkEffect(true);
 
     case "push":
       return pushEffect(true);
@@ -2557,25 +2590,25 @@ async function regularWinRoute() {
   }
 }
 
-/* ======================================
-   NORMAL MISS ROUTES
-====================================== */
+/* ==================================
+   通常ハズレ演出
+================================== */
 
-async function weakMiss(i) {
-  switch (i) {
+async function weakMiss(i){
+  switch(i){
     case 0:
       await slowCountdown();
       break;
 
     case 1:
-      await digit("3", 1000);
-      await digit("2", 1200);
+      await digit("3",1000);
+      await digit("2",1200);
       await holdOne(2700);
       break;
 
     case 2:
       await slowCountdown();
-      await digit("1", 750, "red");
+      await digit("1",750,"red");
       break;
 
     case 3:
@@ -2588,20 +2621,20 @@ async function weakMiss(i) {
       break;
 
     case 5:
-      await digit("3", 2500);
-      await digit("2", 1000);
+      await digit("3",2500);
+      await digit("2",1000);
       await holdOne(1500);
       break;
 
     case 6:
       await digit("3");
-      await digit("2", 650, "red");
+      await digit("2",650,"red");
       await holdOne(1900);
       break;
 
     case 7:
       await slowCountdown();
-      await digit("0", 500);
+      await digit("0",500);
       break;
 
     case 8:
@@ -2618,12 +2651,8 @@ async function weakMiss(i) {
   await miss(false);
 }
 
-/* ======================================
-   MISS REVIVALS / NEAR MISS
-====================================== */
-
-async function strongMiss(i) {
-  switch (i) {
+async function strongMiss(i){
+  switch(i){
     case 0:
       await slowCountdown();
       await slashes();
@@ -2636,7 +2665,7 @@ async function strongMiss(i) {
 
     case 2:
       await slowCountdown();
-      await digit("1", 1200, "red");
+      await digit("1",1200,"red");
       break;
 
     case 3:
@@ -2660,56 +2689,62 @@ async function strongMiss(i) {
   await miss(true);
 }
 
-async function normalMissRoute() {
+async function normalMissRoute(){
   const r = Math.random();
 
-  if (r < .06) {
+  if(r<.06){
     return revivalNoCount(false);
   }
 
-  if (r < .085) {
+  if(r<.085){
     return revivalDouble(false);
   }
 
-  if (r < .40) {
+  if(r<.40){
     await slowCountdown();
     return miss(false);
   }
 
-  if (r < .58) {
+  if(r<.58){
     await quietCountdown();
     return miss(false);
   }
 
-  if (r < .84) {
-    return weakMiss(rnd(0, 9));
+  if(r<.84){
+    return weakMiss(rnd(0,9));
   }
 
-  return strongMiss(rnd(0, 5));
+  return strongMiss(rnd(0,5));
 }
 
-/* ======================================
-   MISS EFFECT SELECTION
-====================================== */
+/* ==================================
+   ハズレ演出振り分け
+================================== */
 
-async function missRoute() {
-  const kind = weightedChoice(
-    MISS_EFFECT_WEIGHTS,
+async function missRoute(){
+  const kind = chooseWeighted(
+    MISS_EFFECTS,
     "normal"
   );
 
-  switch (kind) {
+  switch(kind){
     case "preview":
       return previewEffect(false);
+
+    case "pinkPush":
+      return pinkPushEffect(false);
+
+    case "goldBlack":
+      return goldBlackEffect(false);
+
+    case "pink":
+      return pinkEffect(false);
 
     case "gold":
       return goldEffect(false);
 
     case "black":
       return blackEffect(false);
-
-    case "pink":
-      return pinkEffect(false);
 
     case "push":
       return pushEffect(false);
@@ -2719,12 +2754,13 @@ async function missRoute() {
   }
 }
 
-/* ======================================
-   RESET
-====================================== */
+/* ==================================
+   リセット
+================================== */
 
-function reset() {
+function reset(){
   runId++;
+
   stopMusic();
 
   busy = false;
@@ -2756,49 +2792,49 @@ function reset() {
   result.style.visibility = "";
   $("dim").style.visibility = "";
 
-  ctx.clearRect(0, 0, cw, ch);
+  ctx.clearRect(0,0,cw,ch);
 
-  stage.querySelectorAll(".shooting").forEach(el => {
-    el.remove();
-  });
+  stage.querySelectorAll(".shooting").forEach(
+    el=>el.remove()
+  );
 }
 
-/* ======================================
-   GUIDE
-====================================== */
+/* ==================================
+   演出期待度
+================================== */
 
-$("guideBtn").onclick = () => {
+$("guideBtn").onclick = ()=>{
   $("modal").classList.add("open");
 };
 
-$("closeGuide").onclick = () => {
+$("closeGuide").onclick = ()=>{
   $("modal").classList.remove("open");
 };
 
-$("modal").onclick = event => {
-  if (event.target === $("modal")) {
+$("modal").onclick = event=>{
+  if(event.target===$("modal")){
     $("modal").classList.remove("open");
   }
 };
 
-/* ======================================
-   TAP RETURN
-====================================== */
+/* ==================================
+   当たり後 タップで戻る
+================================== */
 
-stage.onclick = () => {
-  if (tapReady) {
+stage.onclick = ()=>{
+  if(tapReady){
     reset();
   }
 };
 
-/* ======================================
+/* ==================================
    START
-====================================== */
+================================== */
 
-$("startBtn").onclick = async event => {
+$("startBtn").onclick = async event=>{
   event.stopPropagation();
 
-  if (busy) return;
+  if(busy)return;
 
   busy = true;
   tapReady = false;
@@ -2808,54 +2844,53 @@ $("startBtn").onclick = async event => {
   $("start").style.display = "none";
 
   /*
-    大当たり抽選はSTART時に1回。
+    大当たり抽選はSTART時に1回だけ。
 
-    1/25で大当たり。
-    演出の途中で抽選結果は変わらない。
+    確率は1/25。
+
+    演出途中で再抽選しない。
+    PUSHの押すタイミングでも
+    当たり・ハズレは変化しない。
   */
 
   const won = TEST_MODE
     ? true
     : roll(WIN_PROBABILITY);
 
-  /*
-    音声はSTART時に有効化する。
-  */
-
-  try {
+  try{
     await activateAudio();
     await prepareAudio();
 
-    if (id !== runId) return;
+    if(id!==runId)return;
 
     tension();
 
-    if (roll(.28)) {
-      stars(rnd(2, 9));
+    if(roll(.28)){
+      stars(rnd(2,9));
     }
 
-    if (TEST_MODE) {
+    if(TEST_MODE){
       await guaranteedGlassHit();
 
-    } else if (won) {
+    }else if(won){
       await regularWinRoute();
 
-    } else {
+    }else{
       await missRoute();
     }
 
-  } catch (error) {
+  }catch(error){
     console.error(error);
 
-    if (id === runId) {
+    if(id===runId){
       reset();
     }
   }
 };
 
-/* ======================================
-   INIT
-====================================== */
+/* ==================================
+   初期化
+================================== */
 
 resizeCanvases();
 reset();
