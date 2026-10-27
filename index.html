@@ -8,510 +8,738 @@
 <title>Red Peanuts SLOT</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
 }
-html, body {
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: #170010;
-  color: white;
-  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", sans-serif;
-  touch-action: manipulation;
+
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#170010;
+  color:#fff;
+  font-family:-apple-system,BlinkMacSystemFont,
+    "Hiragino Kaku Gothic ProN",sans-serif;
+  touch-action:manipulation;
 }
-button {
-  font: inherit;
-  cursor: pointer;
+
+button{
+  font:inherit;
+  cursor:pointer;
 }
-#stage {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
-  background: #170010 url("./9E28B31B-C619-4F41-AB55-91C025168D02.png") center top / auto 100% no-repeat;
+
+#stage{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  background:#170010
+    url("./9E28B31B-C619-4F41-AB55-91C025168D02.png")
+    center top/auto 100% no-repeat;
 }
 
 /* START */
 
-#start {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
+#start{
+  position:absolute;
+  inset:0;
+  z-index:10;
 }
-#startBtn {
-  position: absolute;
-  left: 50%;
-  bottom: 8.5%;
-  transform: translateX(-50%);
-  width: min(80vw,390px);
-  height: 70px;
-  border: 2px solid white;
-  border-radius: 45px;
-  background: linear-gradient(#ff78c4,#d00068);
-  color: white;
-  font-size: 28px;
-  font-weight: 1000;
-  box-shadow: 0 0 28px #ff008d;
+
+#startBtn{
+  position:absolute;
+  left:50%;
+  bottom:8.5%;
+  transform:translateX(-50%);
+  width:min(80vw,390px);
+  height:70px;
+  border:2px solid white;
+  border-radius:45px;
+  background:linear-gradient(#ff78c4,#d00068);
+  color:white;
+  font-size:28px;
+  font-weight:1000;
+  box-shadow:0 0 28px #ff008d;
 }
-#rate {
-  position: absolute;
-  bottom: 23%;
-  width: 100%;
-  text-align: center;
-  font-weight: 900;
-  text-shadow: 0 2px 7px black;
+
+#rate{
+  position:absolute;
+  bottom:23%;
+  width:100%;
+  text-align:center;
+  font-weight:900;
+  text-shadow:0 2px 7px black;
 }
-#rate b {
-  display: block;
-  color: #ffed9d;
-  font-size: 30px;
+
+#rate b{
+  display:block;
+  color:#ffed9d;
+  font-size:30px;
 }
-#guideBtn {
-  position: absolute;
-  bottom: 34%;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 11px 22px;
-  white-space: nowrap;
-  border: 1px solid white;
-  border-radius: 30px;
-  background: #580033df;
-  color: white;
-  font-weight: 900;
-  box-shadow: 0 0 14px #ff3896;
+
+#guideBtn{
+  position:absolute;
+  bottom:34%;
+  left:50%;
+  transform:translateX(-50%);
+  padding:11px 22px;
+  white-space:nowrap;
+  border:1px solid white;
+  border-radius:30px;
+  background:#580033df;
+  color:white;
+  font-weight:900;
+  box-shadow:0 0 14px #ff3896;
 }
-#testLabel {
-  position: absolute;
-  top: max(14px,env(safe-area-inset-top));
-  right: 12px;
-  padding: 6px 12px;
-  border: 1px solid #ffed9d;
-  border-radius: 20px;
-  background: #580033dc;
-  color: #ffed9d;
-  font-size: 12px;
-  font-weight: 900;
+
+#testLabel{
+  position:absolute;
+  top:max(14px,env(safe-area-inset-top));
+  right:12px;
+  padding:6px 12px;
+  border:1px solid #ffed9d;
+  border-radius:20px;
+  background:#580033dc;
+  color:#ffed9d;
+  font-size:12px;
+  font-weight:900;
 }
 
 /* NUMBER */
 
-#num {
-  position: absolute;
-  z-index: 25;
-  top: 61%;
-  left: 50%;
-  width: 100%;
-  transform: translate(-50%,-50%);
-  text-align: center;
-  font-size: min(52vw,255px);
-  line-height: 1.1;
-  font-weight: 1000;
-  color: white;
-  -webkit-text-stroke: clamp(5px,1.5vw,9px) #ff4b9d;
-  text-shadow: 0 7px #ae0054,0 14px 10px #370018;
-  opacity: 0;
-  pointer-events: none;
+#num{
+  position:absolute;
+  z-index:25;
+  top:61%;
+  left:50%;
+  width:100%;
+  transform:translate(-50%,-50%);
+  text-align:center;
+  font-size:min(52vw,255px);
+  line-height:1.1;
+  font-weight:1000;
+  color:white;
+  -webkit-text-stroke:
+    clamp(5px,1.5vw,9px) #ff4b9d;
+  text-shadow:
+    0 7px #ae0054,
+    0 14px 10px #370018;
+  opacity:0;
+  pointer-events:none;
 }
-#num.show {
-  opacity: 1;
-  animation: numPop .23s ease-out;
+
+#num.show{
+  opacity:1;
+  animation:numPop .23s ease-out;
 }
-#num.red { color: #ff508b; }
-#num.gold {
-  color: #fff1a8;
-  -webkit-text-stroke: 6px #f4a000;
-  text-shadow: 0 0 30px #ffd100;
+
+#num.red{
+  color:#ff508b;
 }
-#num.question { font-size: min(40vw,190px); }
-#num.dots {
-  font-size: min(34vw,155px);
-  color: #fff1a8;
+
+#num.gold{
+  color:#fff1a8;
+  -webkit-text-stroke:6px #f4a000;
+  text-shadow:0 0 30px #ffd100;
 }
-#num.big { font-size: min(65vw,300px); }
-#num.nocount {
-  width: 94%;
-  font-size: clamp(31px,9vw,56px);
-  white-space: nowrap;
-  letter-spacing: -.05em;
-  -webkit-text-stroke: 2px #ff4b9d;
+
+#num.question{
+  font-size:min(40vw,190px);
 }
-@keyframes numPop {
-  from { transform: translate(-50%,-50%) scale(.6); }
-  75% { transform: translate(-50%,-50%) scale(1.1); }
-  to { transform: translate(-50%,-50%) scale(1); }
+
+#num.dots{
+  font-size:min(34vw,155px);
+  color:#fff1a8;
+}
+
+#num.big{
+  font-size:min(65vw,300px);
+}
+
+#num.nocount{
+  width:94%;
+  font-size:clamp(31px,9vw,56px);
+  white-space:nowrap;
+  letter-spacing:-.05em;
+  -webkit-text-stroke:2px #ff4b9d;
+}
+
+@keyframes numPop{
+  from{
+    transform:translate(-50%,-50%) scale(.6);
+  }
+  75%{
+    transform:translate(-50%,-50%) scale(1.1);
+  }
+  to{
+    transform:translate(-50%,-50%) scale(1);
+  }
 }
 
 /* BASIC EFFECTS */
 
-#dim,#black,#noise,#lightning,#flash {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  pointer-events: none;
+#dim,
+#black,
+#noise,
+#lightning,
+#flash{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  pointer-events:none;
 }
-#dim {
-  z-index: 12;
-  background: #0009;
+
+#dim{
+  z-index:12;
+  background:#0009;
 }
-#black {
-  z-index: 29;
-  background: black;
+
+#black{
+  z-index:29;
+  background:black;
 }
-#noise {
-  z-index: 30;
-  background: repeating-linear-gradient(0deg,#fff6 0 2px,#0005 2px 5px);
+
+#noise{
+  z-index:30;
+  background:repeating-linear-gradient(
+    0deg,#fff6 0 2px,#0005 2px 5px
+  );
 }
-#lightning {
-  z-index: 31;
-  background: linear-gradient(120deg,transparent 42%,white 47%,#ff5db6 49%,transparent 54%);
-  filter: drop-shadow(0 0 24px #ff1494);
+
+#lightning{
+  z-index:31;
+  background:linear-gradient(
+    120deg,
+    transparent 42%,
+    white 47%,
+    #ff5db6 49%,
+    transparent 54%
+  );
+  filter:drop-shadow(0 0 24px #ff1494);
 }
-#flash {
-  z-index: 165;
-  background: white;
+
+#flash{
+  z-index:165;
+  background:white;
 }
-.flashGo,.noiseGo,.lightGo {
-  animation: flashAnim .4s ease-out;
+
+.flashGo,.noiseGo,.lightGo{
+  animation:flashAnim .4s ease-out;
 }
-@keyframes flashAnim {
-  0%,100% { opacity: 0; }
-  40% { opacity: 1; }
+
+@keyframes flashAnim{
+  0%,100%{opacity:0}
+  40%{opacity:1}
 }
 
 /* MISS */
 
-#result {
-  position: absolute;
-  z-index: 36;
-  inset: 0;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 18px;
-  background: #000a;
-  text-align: center;
-  pointer-events: none;
+#result{
+  position:absolute;
+  z-index:36;
+  inset:0;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:18px;
+  background:#000a;
+  text-align:center;
+  pointer-events:none;
 }
-#result.show { display: flex; }
-#near {
-  font-size: clamp(26px,9vw,56px);
-  font-weight: 1000;
-  color: #ffe18d;
-  text-shadow: 0 0 18px #ff8a00;
+
+#result.show{
+  display:flex;
 }
-#mainResult {
-  position: relative;
-  font-size: clamp(42px,15vw,82px);
-  white-space: nowrap;
-  line-height: 1.2;
-  font-weight: 1000;
-  color: white;
-  -webkit-text-stroke: 3px #e00073;
-  text-shadow: 0 5px #8e0044,0 0 18px #ff379a;
+
+#near{
+  font-size:clamp(26px,9vw,56px);
+  font-weight:1000;
+  color:#ffe18d;
+  text-shadow:0 0 18px #ff8a00;
 }
-#mainResult.appear {
-  animation: resultPop .5s ease-out;
+
+#mainResult{
+  position:relative;
+  font-size:clamp(42px,15vw,82px);
+  white-space:nowrap;
+  line-height:1.2;
+  font-weight:1000;
+  color:white;
+  -webkit-text-stroke:3px #e00073;
+  text-shadow:
+    0 5px #8e0044,
+    0 0 18px #ff379a;
 }
-#message {
-  font-size: clamp(14px,4vw,20px);
-  font-weight: 900;
-  color: #ffe5aa;
-  line-height: 1.7;
-  text-shadow: 0 2px 5px black;
+
+#mainResult.appear{
+  animation:resultPop .5s ease-out;
 }
-@keyframes resultPop {
-  from { opacity: 0; transform: scale(.3); }
-  65% { transform: scale(1.1); }
-  to { opacity: 1; transform: scale(1); }
+
+#message{
+  font-size:clamp(14px,4vw,20px);
+  font-weight:900;
+  color:#ffe5aa;
+  line-height:1.7;
+  text-shadow:0 2px 5px black;
+}
+
+@keyframes resultPop{
+  from{
+    opacity:0;
+    transform:scale(.3);
+  }
+  65%{
+    transform:scale(1.1);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
 }
 
 /* SLASH */
 
-.slash {
-  position: absolute;
-  z-index: 95;
-  left: -30%;
-  top: 48%;
-  width: 160%;
-  height: 22px;
-  opacity: 0;
-  pointer-events: none;
-  transform-origin: left center;
-  background: linear-gradient(90deg,transparent,#ff87c9 10%,white 30%,white 75%,#ff1785,transparent);
-  box-shadow: 0 0 13px white,0 0 35px #ff0087;
+.slash{
+  position:absolute;
+  z-index:95;
+  left:-30%;
+  top:48%;
+  width:160%;
+  height:22px;
+  opacity:0;
+  pointer-events:none;
+  transform-origin:left center;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    #ff87c9 10%,
+    white 30%,
+    white 75%,
+    #ff1785,
+    transparent
+  );
+  box-shadow:
+    0 0 13px white,
+    0 0 35px #ff0087;
 }
-#slash1 { transform: rotate(-22deg) scaleX(0); }
-#slash2 { transform: rotate(19deg) scaleX(0); }
-#slash1.go { animation: slashA .4s ease-out; }
-#slash2.go { animation: slashB .4s ease-out; }
-@keyframes slashA {
-  0% { opacity: 0; transform: rotate(-22deg) scaleX(0); }
-  25%,75% { opacity: 1; }
-  100% { opacity: 0; transform: rotate(-22deg) scaleX(1); }
+
+#slash1{
+  transform:rotate(-22deg) scaleX(0);
 }
-@keyframes slashB {
-  0% { opacity: 0; transform: rotate(19deg) scaleX(0); }
-  25%,75% { opacity: 1; }
-  100% { opacity: 0; transform: rotate(19deg) scaleX(1); }
+
+#slash2{
+  transform:rotate(19deg) scaleX(0);
+}
+
+#slash1.go{
+  animation:slashA .4s ease-out;
+}
+
+#slash2.go{
+  animation:slashB .4s ease-out;
+}
+
+@keyframes slashA{
+  0%{
+    opacity:0;
+    transform:rotate(-22deg) scaleX(0);
+  }
+  25%,75%{opacity:1}
+  100%{
+    opacity:0;
+    transform:rotate(-22deg) scaleX(1);
+  }
+}
+
+@keyframes slashB{
+  0%{
+    opacity:0;
+    transform:rotate(19deg) scaleX(0);
+  }
+  25%,75%{opacity:1}
+  100%{
+    opacity:0;
+    transform:rotate(19deg) scaleX(1);
+  }
 }
 
 /* HIT */
 
-#hit {
-  position: absolute;
-  z-index: 180;
-  top: 46%;
-  left: 50%;
-  width: 100%;
-  text-align: center;
-  white-space: nowrap;
-  opacity: 0;
-  transform: translate(-50%,-50%) scale(.1);
-  pointer-events: none;
-  font-size: clamp(65px,23vw,155px);
-  line-height: 1.2;
-  font-weight: 1000;
-  color: #fff2a8;
-  -webkit-text-stroke: clamp(4px,1.2vw,7px) #ff266b;
-  text-shadow: 0 6px #ff9b00,0 12px #a90043,0 0 28px white;
+#hit{
+  position:absolute;
+  z-index:180;
+  top:46%;
+  left:50%;
+  width:100%;
+  text-align:center;
+  white-space:nowrap;
+  opacity:0;
+  transform:translate(-50%,-50%) scale(.1);
+  pointer-events:none;
+  font-size:clamp(65px,23vw,155px);
+  line-height:1.2;
+  font-weight:1000;
+  color:#fff2a8;
+  -webkit-text-stroke:
+    clamp(4px,1.2vw,7px) #ff266b;
+  text-shadow:
+    0 6px #ff9b00,
+    0 12px #a90043,
+    0 0 28px white;
 }
-#hit.go {
-  animation: hitPop .7s cubic-bezier(.16,.7,.2,1.2) forwards;
+
+#hit.go{
+  animation:hitPop .7s
+    cubic-bezier(.16,.7,.2,1.2) forwards;
 }
-@keyframes hitPop {
-  0% { opacity: 0; transform: translate(-50%,-50%) scale(.1); }
-  55% { opacity: 1; transform: translate(-50%,-50%) scale(1.18); }
-  100% { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+
+@keyframes hitPop{
+  0%{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(.1);
+  }
+  55%{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1.18);
+  }
+  100%{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1);
+  }
 }
-#hitInfo {
-  position: absolute;
-  z-index: 181;
-  top: 65%;
-  left: 4%;
-  width: 92%;
-  text-align: center;
-  opacity: 0;
-  pointer-events: none;
-  font-weight: 900;
-  text-shadow: 0 2px 5px black;
+
+#hitInfo{
+  position:absolute;
+  z-index:181;
+  top:65%;
+  left:4%;
+  width:92%;
+  text-align:center;
+  opacity:0;
+  pointer-events:none;
+  font-weight:900;
+  text-shadow:0 2px 5px black;
 }
-#hitInfo.show { animation: info .6s forwards; }
-#hitName {
-  display: inline-block;
-  margin-top: 9px;
-  padding: 10px 18px;
-  border: 1px solid #ffe391;
-  border-radius: 14px;
-  background: #530b33e8;
-  color: #ffec9c;
-  font-size: clamp(15px,4.8vw,24px);
+
+#hitInfo.show{
+  animation:info .6s forwards;
 }
-@keyframes info {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+
+#hitName{
+  display:inline-block;
+  margin-top:9px;
+  padding:10px 18px;
+  border:1px solid #ffe391;
+  border-radius:14px;
+  background:#530b33e8;
+  color:#ffec9c;
+  font-size:clamp(15px,4.8vw,24px);
 }
-#tap {
-  position: absolute;
-  z-index: 182;
-  bottom: 9%;
-  width: 100%;
-  text-align: center;
-  opacity: 0;
-  pointer-events: none;
-  font-weight: 900;
-  text-shadow: 0 2px 5px black;
+
+@keyframes info{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
-#tap.show { animation: blink 1.2s infinite; }
-@keyframes blink {
-  0%,100% { opacity: .4; }
-  50% { opacity: 1; }
+
+#tap{
+  position:absolute;
+  z-index:182;
+  bottom:9%;
+  width:100%;
+  text-align:center;
+  opacity:0;
+  pointer-events:none;
+  font-weight:900;
+  text-shadow:0 2px 5px black;
+}
+
+#tap.show{
+  animation:blink 1.2s infinite;
+}
+
+@keyframes blink{
+  0%,100%{opacity:.4}
+  50%{opacity:1}
 }
 
 /* SPECIAL EFFECTS */
 
-#specialFX {
-  position: absolute;
-  inset: 0;
-  z-index: 90;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  pointer-events: none;
-  background: #100516;
-  overflow: hidden;
+#specialFX{
+  position:absolute;
+  inset:0;
+  z-index:90;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  pointer-events:none;
+  background:#100516;
+  overflow:hidden;
 }
-#specialFX.active { display: flex; }
-#specialFX .fxTitle {
-  font-size: clamp(38px,12vw,86px);
-  font-weight: 1000;
-  text-shadow: 0 0 18px #ffbc33;
+
+#specialFX.active{
+  display:flex;
 }
-#specialFX .fxSub {
-  margin-top: 22px;
-  font-size: clamp(16px,5vw,29px);
-  font-weight: 900;
-  text-shadow: 0 3px 8px black;
+
+#specialFX .fxTitle{
+  font-size:clamp(38px,12vw,86px);
+  font-weight:1000;
+  text-shadow:0 0 18px #ffbc33;
 }
-#specialFX.preview {
-  background: #100516 url("./0EB99059-7515-429E-B34D-8BFCE53ED083.png") center / contain no-repeat;
+
+#specialFX .fxSub{
+  margin-top:22px;
+  font-size:clamp(16px,5vw,29px);
+  font-weight:900;
+  text-shadow:0 3px 8px black;
 }
-#specialFX.preview .fxTitle { display: none; }
-#specialFX.rainbow {
-  background: #100516 url("./CC92EC2B-BC54-4037-9F8C-45DB1AE891E2.png") center / contain no-repeat;
-  animation: rainbowHue 1s linear infinite;
+
+#specialFX.preview{
+  background:#100516
+    url("./0EB99059-7515-429E-B34D-8BFCE53ED083.png")
+    center/contain no-repeat;
 }
-#specialFX.rainbow .fxTitle { display: none; }
-@keyframes rainbowHue {
-  to { filter: hue-rotate(360deg); }
+
+#specialFX.preview .fxTitle{
+  display:none;
 }
-#specialFX.freeze { background: black; }
-#specialFX.push {
-  background: radial-gradient(circle,#581000,#080008 80%);
+
+#specialFX.rainbow{
+  background:#100516
+    url("./CC92EC2B-BC54-4037-9F8C-45DB1AE891E2.png")
+    center/contain no-repeat;
+  animation:rainbowHue 1s linear infinite;
 }
-#specialFX.push .fxTitle {
-  font-size: clamp(25px,7vw,48px);
+
+#specialFX.rainbow .fxTitle{
+  display:none;
 }
-#specialFX .fxButton {
-  pointer-events: auto;
-  border: 3px solid #ffdf78;
-  border-radius: 50%;
-  width: min(59vw,245px);
-  height: min(59vw,245px);
-  background: url("./BF43324D-F195-4E15-A371-AA8862724654.png") center / contain no-repeat;
-  color: transparent;
-  font-size: 60px;
-  font-weight: 1000;
-  box-shadow: 0 0 25px #f80,0 0 50px #d00;
-  animation: pushPulse .45s infinite alternate;
+
+@keyframes rainbowHue{
+  to{
+    filter:hue-rotate(360deg);
+  }
 }
-@keyframes pushPulse {
-  from { transform: scale(.96); }
-  to { transform: scale(1.04); }
+
+#specialFX.freeze{
+  background:black;
+}
+
+#specialFX.push{
+  background:radial-gradient(
+    circle,#581000,#080008 80%
+  );
+}
+
+#specialFX.push .fxTitle{
+  font-size:clamp(25px,7vw,48px);
+}
+
+#specialFX .fxButton{
+  pointer-events:auto;
+  border:3px solid #ffdf78;
+  border-radius:50%;
+  width:min(59vw,245px);
+  height:min(59vw,245px);
+  background:
+    url("./BF43324D-F195-4E15-A371-AA8862724654.png")
+    center/contain no-repeat;
+  color:transparent;
+  font-size:60px;
+  font-weight:1000;
+  box-shadow:0 0 25px #f80,0 0 50px #d00;
+  animation:pushPulse .45s infinite alternate;
+}
+
+@keyframes pushPulse{
+  from{transform:scale(.96)}
+  to{transform:scale(1.04)}
 }
 
 /* STARS */
 
-.shooting {
-  position: absolute;
-  z-index: 32;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0 0 12px white,0 0 25px #ff62b9;
-  pointer-events: none;
-  animation: shoot .9s linear forwards;
+.shooting{
+  position:absolute;
+  z-index:32;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:white;
+  box-shadow:
+    0 0 12px white,
+    0 0 25px #ff62b9;
+  pointer-events:none;
+  animation:shoot .9s linear forwards;
 }
-.shooting::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 2px;
-  width: 75px;
-  height: 2px;
-  background: linear-gradient(90deg,transparent,white);
+
+.shooting::after{
+  content:"";
+  position:absolute;
+  right:0;
+  top:2px;
+  width:75px;
+  height:2px;
+  background:linear-gradient(
+    90deg,transparent,white
+  );
 }
-@keyframes shoot {
-  from { opacity: 0; transform: translate(0,0); }
-  20% { opacity: 1; }
-  to { opacity: 0; transform: translate(240px,370px); }
+
+@keyframes shoot{
+  from{
+    opacity:0;
+    transform:translate(0,0);
+  }
+  20%{opacity:1}
+  to{
+    opacity:0;
+    transform:translate(240px,370px);
+  }
 }
 
 /* GLASS BREAK */
 
-#glassArea {
-  position: absolute;
-  inset: 0;
-  z-index: 120;
-  overflow: hidden;
-  display: none;
-  pointer-events: none;
+#glassArea{
+  position:absolute;
+  inset:0;
+  z-index:120;
+  overflow:hidden;
+  display:none;
+  pointer-events:none;
 }
-#glassArea.active { display: block; }
-#glassCanvas {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  width: 100%;
-  height: 100%;
+
+#glassArea.active{
+  display:block;
 }
-#glassUnder {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: #110816;
-  opacity: 0;
+
+#glassCanvas{
+  position:absolute;
+  inset:0;
+  z-index:3;
+  width:100%;
+  height:100%;
 }
-#glassLight {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  opacity: 0;
-  background: radial-gradient(circle at 50% 48%,white 0%,#ffffffc9 12%,#ccefff77 35%,transparent 70%);
+
+#glassUnder{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:#110816;
+  opacity:0;
 }
-#glassLight.go {
-  animation: glassFlash .35s ease-out;
+
+#glassLight{
+  position:absolute;
+  inset:0;
+  z-index:4;
+  opacity:0;
+  background:radial-gradient(
+    circle at 50% 48%,
+    white 0%,
+    #ffffffc9 12%,
+    #ccefff77 35%,
+    transparent 70%
+  );
 }
-@keyframes glassFlash {
-  0%,100% { opacity: 0; }
-  25% { opacity: 1; }
+
+#glassLight.go{
+  animation:glassFlash .35s ease-out;
 }
-#glassArea.shake {
-  animation: glassShake .09s linear infinite;
+
+@keyframes glassFlash{
+  0%,100%{opacity:0}
+  25%{opacity:1}
 }
-@keyframes glassShake {
-  0% { transform: translate(0,0); }
-  25% { transform: translate(-5px,3px); }
-  50% { transform: translate(5px,-4px); }
-  75% { transform: translate(-3px,-3px); }
+
+#glassArea.shake{
+  animation:glassShake .09s linear infinite;
+}
+
+@keyframes glassShake{
+  0%{transform:translate(0,0)}
+  25%{transform:translate(-5px,3px)}
+  50%{transform:translate(5px,-4px)}
+  75%{transform:translate(-3px,-3px)}
 }
 
 /* GUIDE */
 
-#modal {
-  position: fixed;
-  inset: 0;
-  z-index: 300;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  background: #000d;
-  padding: 15px;
+#modal{
+  position:fixed;
+  inset:0;
+  z-index:300;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:#000d;
+  padding:15px;
 }
-#modal.open { display: flex; }
-#guide {
-  width: min(94vw,430px);
-  max-height: 88dvh;
-  overflow: auto;
-  padding: 20px 14px;
-  text-align: center;
-  border: 2px solid #ff8bc5;
-  border-radius: 22px;
-  background: linear-gradient(#580031,#1b0013);
+
+#modal.open{
+  display:flex;
 }
-#guide h2 { color: #ffe6a1; }
-#guide p {
-  padding: 8px 0;
-  border-bottom: 1px solid #ffffff30;
-  font-weight: 800;
+
+#guide{
+  width:min(94vw,430px);
+  max-height:88dvh;
+  overflow:auto;
+  padding:20px 14px;
+  text-align:center;
+  border:2px solid #ff8bc5;
+  border-radius:22px;
+  background:linear-gradient(#580031,#1b0013);
 }
-#guide em {
-  color: #ffe58d;
-  font-style: normal;
+
+#guide h2{
+  color:#ffe6a1;
 }
-#closeGuide {
-  margin: 12px;
-  padding: 10px 50px;
-  background: #ed2c8d;
-  color: white;
-  border: 1px solid white;
-  border-radius: 25px;
+
+#guide p{
+  padding:8px 0;
+  border-bottom:1px solid #ffffff30;
+  font-weight:800;
+}
+
+#guide em{
+  color:#ffe58d;
+  font-style:normal;
+}
+
+#closeGuide{
+  margin:12px;
+  padding:10px 50px;
+  background:#ed2c8d;
+  color:white;
+  border:1px solid white;
+  border-radius:25px;
+}
+
+/* AUDIO STATUS */
+
+#audioStatus{
+  position:absolute;
+  z-index:190;
+  bottom:3%;
+  width:100%;
+  text-align:center;
+  font-size:11px;
+  color:#ffdf98;
+  opacity:0;
+  pointer-events:none;
+  text-shadow:0 2px 5px black;
+}
+
+#audioStatus.show{
+  opacity:1;
 }
 </style>
 </head>
@@ -521,14 +749,25 @@ button {
 <div id="stage">
 
   <div id="start">
-    <div id="testLabel">画面破壊テスト版</div>
-    <button id="guideBtn">演出期待度を見る</button>
+
+    <div id="testLabel">
+      画面破壊テスト版
+    </div>
+
+    <button id="guideBtn">
+      演出期待度を見る
+    </button>
+
     <div id="rate">
       画面破壊テスト
       <b>当たり確定</b>
       STARTで毎回発生
     </div>
-    <button id="startBtn">START</button>
+
+    <button id="startBtn">
+      START
+    </button>
+
   </div>
 
   <div id="dim"></div>
@@ -558,19 +797,29 @@ button {
   </div>
 
   <div id="flash"></div>
+
   <div id="hit">当たり</div>
 
   <div id="hitInfo">
     ✨ 今回の当選演出 ✨
-    <div><span id="hitName"></span></div>
+    <div>
+      <span id="hitName"></span>
+    </div>
   </div>
 
-  <div id="tap">画面をタップして戻る</div>
+  <div id="tap">
+    画面をタップして戻る
+  </div>
+
+  <div id="audioStatus"></div>
+
 </div>
 
 <div id="modal">
   <div id="guide">
+
     <h2>✨ 演出期待度 ✨</h2>
+
     <p>⚡ ピンク稲妻 → <em>チャンス</em></p>
     <p>❓「？」出現 → <em>チャンス</em></p>
     <p>🌑 ブラックアウト → <em>大チャンス</em></p>
@@ -579,26 +828,43 @@ button {
     <p>🌈 レインボー → <em>当たり確定</em></p>
     <p>💥 画面破壊 → <em>当たり確定</em></p>
     <p>🔴 デカPUSH → <em>チャンス</em></p>
+
     <p style="color:#ffe58d">
       現在は画面破壊テスト中。
       STARTで毎回当たります。
     </p>
-    <button id="closeGuide">閉じる</button>
+
+    <button id="closeGuide">
+      閉じる
+    </button>
+
   </div>
 </div>
 
 <script>
 "use strict";
 
-/* ==================================
+/* ==============================
    SETTINGS
-================================== */
+============================== */
 
 /*
-  true  : 毎回画面破壊で当たり
-  false : 1/25の通常抽選
+  true:
+    テストモード
+    STARTで毎回画面破壊当たり
+
+  false:
+    通常モード
+    当選確率1/25
 */
+
 const TEST_MODE = true;
+
+/*
+  当たりBGMはループ再生する。
+*/
+
+const LOOP_HIT_BGM = true;
 
 const BACKGROUND_IMAGE =
   "./9E28B31B-C619-4F41-AB55-91C025168D02.png";
@@ -606,8 +872,11 @@ const BACKGROUND_IMAGE =
 const CRACK_IMAGE =
   "./8CC59DB8-9809-47C1-89F3-8FA4895B18BD.png";
 
-const TENSION_SOUND = "./Tension.mp3";
-const HIT_SOUND = "./hit_music_final.mp3";
+const TENSION_SOUND =
+  "./Tension.mp3";
+
+const HIT_SOUND =
+  "./hit_music_final.mp3";
 
 const GLASS_SOUND_MP3 =
   "./glass_crack_crack_shatter_v3.mp3";
@@ -615,16 +884,21 @@ const GLASS_SOUND_MP3 =
 const GLASS_SOUND_MOV =
   "./glass_crack_crack_shatter_v3_preview.mov";
 
-/* ==================================
+/* ==============================
    BASIC
-================================== */
+============================== */
 
-const $ = id => document.getElementById(id);
+const $ = id =>
+  document.getElementById(id);
+
 const wait = ms =>
-  new Promise(resolve => setTimeout(resolve,ms));
+  new Promise(resolve=>setTimeout(resolve,ms));
+
 const rnd = (a,b) =>
   Math.floor(Math.random()*(b-a+1))+a;
-const roll = p => Math.random()<p;
+
+const roll = p =>
+  Math.random()<p;
 
 const stage = $("stage");
 const num = $("num");
@@ -645,90 +919,373 @@ let busy = false;
 let tapReady = false;
 let runId = 0;
 
-/* ==================================
-   AUDIO
-================================== */
+/* ==============================
+   IPHONE AUDIO FIX
 
-const tensionAudio = new Audio(TENSION_SOUND);
-const hitAudio = new Audio(HIT_SOUND);
-const glassAudio = new Audio();
+   Web Audio APIを使い、
+   STARTのタップ操作内で
+   AudioContextを有効化。
 
-tensionAudio.loop = true;
-tensionAudio.volume = .7;
-hitAudio.volume = 1;
-glassAudio.volume = 1;
+   BGMを事前にデコードし、
+   当たり時にBufferSourceで
+   再生する。
+============================== */
 
-tensionAudio.preload = "auto";
-hitAudio.preload = "auto";
+const AudioContextClass =
+  window.AudioContext ||
+  window.webkitAudioContext;
 
-let glassSoundReady = false;
-let soundChecked = false;
+let audioCtx = null;
 
-async function chooseGlassSound() {
-  if (soundChecked) return;
-  soundChecked = true;
+const buffers = {
+  tension:null,
+  hit:null,
+  glass:null
+};
 
-  for (const url of [GLASS_SOUND_MP3,GLASS_SOUND_MOV]) {
-    try {
-      const response = await fetch(url,{
-        method:"HEAD",
-        cache:"no-store"
-      });
+let tensionSource = null;
+let hitSource = null;
+let glassSource = null;
 
-      if (response.ok) {
-        glassAudio.src = url;
-        glassAudio.load();
-        glassSoundReady = true;
-        return;
+let audioLoadPromise = null;
+let audioEnabled = false;
+
+const fallbackGlassAudio = new Audio();
+fallbackGlassAudio.preload = "auto";
+fallbackGlassAudio.volume = 1;
+
+function showAudioStatus(text){
+
+  const el = $("audioStatus");
+
+  el.textContent = text;
+
+  if(text){
+    el.classList.add("show");
+  }else{
+    el.classList.remove("show");
+  }
+}
+
+/*
+  iPhoneではユーザー操作の中で
+  resume()を呼ぶことが重要。
+*/
+
+function activateAudio(){
+
+  if(!AudioContextClass){
+    showAudioStatus(
+      "このブラウザは音声機能に対応していません"
+    );
+    return Promise.resolve();
+  }
+
+  if(!audioCtx){
+    audioCtx = new AudioContextClass();
+  }
+
+  /*
+    無音の短い音を鳴らし、
+    START操作で音声を有効化する。
+  */
+
+  try{
+    const silent = audioCtx.createBuffer(
+      1,1,audioCtx.sampleRate
+    );
+
+    const source =
+      audioCtx.createBufferSource();
+
+    source.buffer = silent;
+    source.connect(audioCtx.destination);
+    source.start(0);
+  }catch(error){
+    console.warn("音声初期化:",error);
+  }
+
+  const promise = audioCtx.resume();
+
+  return Promise.resolve(promise)
+    .then(()=>{
+      audioEnabled =
+        audioCtx.state==="running";
+    })
+    .catch(error=>{
+      console.warn("音声有効化:",error);
+      audioEnabled = false;
+    });
+}
+
+/*
+  音声をダウンロードして
+  ブラウザ内でデコードする。
+*/
+
+async function loadAudioBuffer(url){
+
+  if(!audioCtx)return null;
+
+  try{
+
+    const response = await fetch(url);
+
+    if(!response.ok){
+      throw new Error(
+        "HTTP "+response.status+" : "+url
+      );
+    }
+
+    const bytes = await response.arrayBuffer();
+
+    return await audioCtx.decodeAudioData(
+      bytes.slice(0)
+    );
+
+  }catch(error){
+
+    console.warn(
+      "音声ファイルの読み込み失敗:",
+      url,error
+    );
+
+    return null;
+  }
+}
+
+/*
+  STARTした時点で3種類を読み込む。
+
+  最初のSTARTでは、
+  読み込みが終わってから演出開始。
+*/
+
+async function prepareAudio(){
+
+  if(!audioCtx)return;
+
+  if(!audioLoadPromise){
+
+    audioLoadPromise = (async()=>{
+
+      const loaded = await Promise.all([
+        loadAudioBuffer(TENSION_SOUND),
+        loadAudioBuffer(HIT_SOUND),
+        loadAudioBuffer(GLASS_SOUND_MP3)
+      ]);
+
+      buffers.tension = loaded[0];
+      buffers.hit = loaded[1];
+      buffers.glass = loaded[2];
+
+      /*
+        MP3がない場合、
+        GitHubにあるMOVを予備に使う。
+      */
+
+      if(!buffers.glass){
+
+        fallbackGlassAudio.src =
+          GLASS_SOUND_MOV;
+
+        fallbackGlassAudio.load();
       }
-    } catch (error) {
+
+      if(!buffers.hit){
+
+        showAudioStatus(
+          "当たりBGMが読み込めません。hit_music_final.mp3 を確認"
+        );
+      }
+
+    })();
+  }
+
+  await audioLoadPromise;
+}
+
+/*
+  BufferSourceは1回ごとに新しく作る。
+  iPhoneでも後から再生できる方式。
+*/
+
+function createSound(buffer,loop=false,volume=1){
+
+  if(!audioCtx || !buffer)return null;
+
+  try{
+
+    const source =
+      audioCtx.createBufferSource();
+
+    const gain =
+      audioCtx.createGain();
+
+    source.buffer = buffer;
+    source.loop = loop;
+
+    gain.gain.value = volume;
+
+    source.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    source.start(0);
+
+    return source;
+
+  }catch(error){
+
+    console.warn("BGM再生:",error);
+    return null;
+  }
+}
+
+function stopSource(source){
+
+  if(!source)return;
+
+  try{
+    source.stop(0);
+  }catch(error){}
+}
+
+function tension(){
+
+  stopSource(tensionSource);
+
+  tensionSource = createSound(
+    buffers.tension,
+    true,
+    .7
+  );
+}
+
+function stopTension(){
+
+  stopSource(tensionSource);
+  tensionSource = null;
+}
+
+/*
+  当たり後のBGM。
+  START画面へ戻るまで流す。
+*/
+
+function playHitBGM(){
+
+  stopTension();
+  stopSource(glassSource);
+  glassSource = null;
+
+  try{
+    fallbackGlassAudio.pause();
+  }catch(error){}
+
+  stopSource(hitSource);
+
+  hitSource = createSound(
+    buffers.hit,
+    LOOP_HIT_BGM,
+    1
+  );
+
+  if(!hitSource){
+
+    showAudioStatus(
+      "当たりBGMを再生できません。音声ファイルと音量を確認"
+    );
+
+  }else{
+
+    showAudioStatus("");
+  }
+}
+
+function playGlassSound(){
+
+  stopSource(glassSource);
+
+  glassSource = createSound(
+    buffers.glass,
+    false,
+    1
+  );
+
+  if(!glassSource){
+
+    /*
+      MP3がない場合のMOV予備再生。
+      MOVはSafariで再生できない
+      可能性がある。
+    */
+
+    try{
+
+      fallbackGlassAudio.currentTime = 0;
+
+      const promise = fallbackGlassAudio.play();
+
+      if(promise && promise.catch){
+        promise.catch(error=>{
+          console.warn("ガラス音:",error);
+        });
+      }
+
+    }catch(error){
       console.warn(error);
     }
   }
-  console.warn("ガラス音声が見つかりません");
 }
 
-function playAudio(audio) {
-  try {
-    audio.pause();
-    audio.currentTime = 0;
-    const promise = audio.play();
-    if (promise && promise.catch) {
-      promise.catch(e => console.warn("音声再生:",e));
+function stopMusic(){
+
+  stopSource(tensionSource);
+  stopSource(hitSource);
+  stopSource(glassSource);
+
+  tensionSource = null;
+  hitSource = null;
+  glassSource = null;
+
+  try{
+    fallbackGlassAudio.pause();
+    fallbackGlassAudio.currentTime = 0;
+  }catch(error){}
+}
+
+/*
+  ページが隠れたときは
+  音声を一時停止する。
+*/
+
+document.addEventListener(
+  "visibilitychange",
+  ()=>{
+    if(!audioCtx)return;
+
+    if(document.hidden){
+
+      audioCtx.suspend().catch(()=>{});
+
+    }else if(busy){
+
+      audioCtx.resume().catch(()=>{});
     }
-  } catch (error) {
-    console.warn(error);
   }
-}
+);
 
-function stopAudio(audio) {
-  try {
-    audio.pause();
-    audio.currentTime = 0;
-  } catch (error) {}
-}
-
-function tension() {
-  playAudio(tensionAudio);
-}
-function stopTension() {
-  stopAudio(tensionAudio);
-}
-function stopMusic() {
-  stopAudio(tensionAudio);
-  stopAudio(hitAudio);
-  stopAudio(glassAudio);
-}
-
-/* ==================================
+/* ==============================
    44 WIN ROUTES
-================================== */
+============================== */
 
 const winNames = [
+
   "ハズレからブラックアウト復活",
   "ノーカン！？再チャレンジ",
   "ハズレ粉砕・復活",
   "ダブルノーカン大逆転",
+
   "ブラックアウト直撃",
   "2で停止",
   "カウントダウン逆転",
@@ -737,174 +1294,264 @@ const winNames = [
   "無音からの復活",
   "1ロング停止",
   "カウントダウン再始動",
+
   "ダブルカウントダウン",
   "プチュン暗転",
   "ブラックアウト再始動",
   "斬撃フェイント復活",
+
   "変則カウントダウン",
   "無音カウントダウン",
   "沈黙からの復活",
   "数字飛ばし",
+
   "1消失からの復活",
   "2への巻き戻し",
   "高速カウントダウン",
   "ダブル斬撃",
+
   "突然の静寂",
   "？出現からの当たり",
   "ブラックアウト復活",
   "「…」直撃",
+
   "「…」からの復活",
   "「…」暗転復活",
   "「…」流れ星復活",
   "「…」長い沈黙",
+
   "巨大数字変化",
   "数字色変化",
   "ピンク稲妻",
   "ノイズ発生",
+
   "金色変化",
   "超ロング1",
   "？出現",
   "背景暗転",
+
   "カウントダウン停止",
   "無音消失",
   "カウントダウンやり直し",
   "ロゴ発光"
+
 ];
 
-/* ==================================
-   ANIMATIONS
-================================== */
+/* ==============================
+   BASIC ANIMATIONS
+============================== */
 
-function anim(el,cls) {
+function anim(el,cls){
+
   el.classList.remove(cls);
   void el.offsetWidth;
   el.classList.add(cls);
 }
 
-function clearNum() {
+function clearNum(){
+
   num.textContent = "";
   num.className = "";
 }
 
-async function digit(text,ms=1000,cls="") {
+async function digit(text,ms=1000,cls=""){
+
   clearNum();
+
   num.textContent = text;
-  if (cls) num.classList.add(cls);
+
+  if(cls){
+    num.classList.add(cls);
+  }
+
   num.classList.add("show");
+
   await wait(ms);
+
   num.classList.remove("show");
 }
 
-async function count() {
+async function count(){
+
   await digit("3",1000);
   await wait(140);
+
   await digit("2",1000);
   await wait(140);
+
   await digit("1",1150);
 }
 
-async function fastCount() {
+async function fastCount(){
+
   await digit("3",500);
   await digit("2",500);
   await digit("1",650);
 }
 
-async function dots() {
+async function dots(){
+
   await digit("…",1700,"dots");
 }
 
-async function blackout(ms=1400) {
+async function blackout(ms=1400){
+
   black.style.opacity = "1";
+
   await wait(ms);
+
   black.style.opacity = "0";
 }
 
-async function flash() {
+async function flash(){
+
   anim($("flash"),"flashGo");
+
   await wait(340);
 }
-async function lightning() {
+
+async function lightning(){
+
   anim($("lightning"),"lightGo");
+
   await wait(500);
 }
-async function noise() {
+
+async function noise(){
+
   anim($("noise"),"noiseGo");
+
   await wait(550);
 }
-async function slashes() {
+
+async function slashes(){
+
   anim($("slash1"),"go");
+
   await wait(135);
+
   anim($("slash2"),"go");
+
   await wait(320);
 }
 
-/* ==================================
-   EXTRA FX
-================================== */
+/* ==============================
+   SPECIAL EFFECTS
+============================== */
 
-function fxShow(mode,title="",sub="") {
+function fxShow(mode,title="",sub=""){
+
   fx.className = "active "+mode;
-  fx.querySelector(".fxTitle").textContent = title;
-  fx.querySelector(".fxSub").textContent = sub;
+
+  fx.querySelector(".fxTitle").textContent =
+    title;
+
+  fx.querySelector(".fxSub").textContent =
+    sub;
 }
-function fxHide() {
+
+function fxHide(){
+
   fx.className = "";
+
   fx.querySelector(".fxTitle").textContent = "";
   fx.querySelector(".fxSub").textContent = "";
-  fx.querySelectorAll("button").forEach(b=>b.remove());
+
+  fx.querySelectorAll("button").forEach(
+    button=>button.remove()
+  );
 }
-async function fxFreeze() {
+
+async function fxFreeze(){
+
   stopTension();
+
   fxShow("freeze","……","フリーズ");
+
   await wait(2200);
+
   fxHide();
+
   tension();
 }
-async function fxPreview() {
+
+async function fxPreview(){
+
   await blackout(450);
+
   fxShow("preview","");
+
   await wait(2300);
+
   fxHide();
 }
-async function fxRainbow() {
+
+async function fxRainbow(){
+
   fxShow("rainbow","");
+
   await wait(2300);
+
   fxHide();
 }
-async function fxPromotion() {
+
+async function fxPromotion(){
+
   await digit("3",700);
   await digit("2",650,"red");
   await digit("1",1000,"gold");
+
   await lightning();
 }
-async function fxReverse() {
+
+async function fxReverse(){
+
   await digit("3",650);
   await digit("2",650);
   await digit("1",650);
+
   await noise();
+
   await digit("2",700,"red");
   await digit("3",800,"gold");
 }
-async function fxPush() {
-  fxShow("push","最終決戦！","ボタンを押せ！");
 
-  const button = document.createElement("button");
+async function fxPush(){
+
+  fxShow(
+    "push",
+    "最終決戦！",
+    "ボタンを押せ！"
+  );
+
+  const button =
+    document.createElement("button");
+
   button.className = "fxButton";
   button.textContent = "PUSH";
   button.setAttribute("aria-label","PUSH");
+
   fx.append(button);
 
   await new Promise(resolve=>{
+
     let done = false;
-    const timer = setTimeout(finish,12000);
-    function finish() {
-      if (done) return;
+
+    const timer =
+      setTimeout(finish,12000);
+
+    function finish(){
+
+      if(done)return;
+
       done = true;
       clearTimeout(timer);
       resolve();
     }
-    button.onclick = e => {
-      e.stopPropagation();
+
+    button.onclick = event=>{
+
+      event.stopPropagation();
       finish();
     };
   });
@@ -912,93 +1559,146 @@ async function fxPush() {
   fxHide();
 }
 
-/* ==================================
+/* ==============================
    RESULT
-================================== */
+============================== */
 
-function showFalseMiss() {
+function showFalseMiss(){
+
   result.classList.add("show");
+
   near.textContent = "";
   message.textContent = "";
+
   main.style.opacity = "1";
+
   anim(main,"appear");
 }
 
-function hideFalseMiss() {
+function hideFalseMiss(){
+
   result.classList.remove("show");
+
   main.classList.remove("appear");
+
   main.style.opacity = "1";
 }
 
-async function falseMissPause(ms=1500) {
+async function falseMissPause(ms=1500){
+
   clearNum();
   showFalseMiss();
+
   await wait(ms);
 }
 
-async function miss(strong=false) {
+async function miss(strong=false){
+
   stopTension();
   clearNum();
+
   showFalseMiss();
 
-  near.textContent = strong ? "惜しい！" : "";
-  message.textContent = strong
-    ? "次のチャレンジに期待！"
-    : "またチャレンジしてね！";
+  near.textContent =
+    strong ? "惜しい！" : "";
+
+  message.textContent =
+    strong
+      ? "次のチャレンジに期待！"
+      : "またチャレンジしてね！";
 
   await wait(2900);
+
   reset();
 }
 
-async function hit(name) {
+/*
+  当たり演出。
+
+  ここで必ず当たりBGMを開始。
+  途中で止めずループする。
+*/
+
+async function hit(name){
+
   stopTension();
+
   hideFalseMiss();
   clearNum();
 
   await wait(220);
+
   await flash();
   await slashes();
 
   anim($("hit"),"go");
-  playAudio(hitAudio);
+
+  /*
+    修正ポイント：
+    当たり表示と同時にBGM再生。
+  */
+
+  playHitBGM();
 
   await wait(950);
+
   $("hitName").textContent = name;
+
   anim($("hitInfo"),"show");
 
   await wait(450);
+
   tapReady = true;
+
   $("tap").classList.add("show");
 }
 
-async function noCount() {
+async function noCount(){
+
   hideFalseMiss();
+
   await noise();
-  await digit("ノーカン！？",1300,"nocount");
+
+  await digit(
+    "ノーカン！？",
+    1300,
+    "nocount"
+  );
+
   await fastCount();
 }
 
-/* ==================================
+/* ==============================
    STARS
-================================== */
+============================== */
 
-function stars(n=8) {
-  for (let i=0;i<n;i++) {
+function stars(n=8){
+
+  for(let i=0;i<n;i++){
+
     setTimeout(()=>{
-      if (!busy) return;
-      const s = document.createElement("div");
+
+      if(!busy)return;
+
+      const s =
+        document.createElement("div");
+
       s.className = "shooting";
+
       s.style.left = rnd(0,65)+"%";
       s.style.top = rnd(0,35)+"%";
+
       stage.append(s);
+
       setTimeout(()=>s.remove(),1000);
+
     },i*85);
   }
 }
 
-/* ==================================
-   IMAGES AND CANVAS
-================================== */
+/* ==============================
+   IMAGE LOADING
+============================== */
 
 const bgImage = new Image();
 const crackImage = new Image();
@@ -1006,145 +1706,244 @@ const crackImage = new Image();
 bgImage.src = BACKGROUND_IMAGE;
 crackImage.src = CRACK_IMAGE;
 
-const snapshot = document.createElement("canvas");
-const snapCtx = snapshot.getContext("2d");
+const snapshot =
+  document.createElement("canvas");
 
-const crackMap = document.createElement("canvas");
-const crackCtx = crackMap.getContext("2d");
+const snapCtx =
+  snapshot.getContext("2d");
+
+const crackMap =
+  document.createElement("canvas");
+
+const crackCtx =
+  crackMap.getContext("2d");
 
 let cw = 0;
 let ch = 0;
 let dpr = 1;
 let frameId = null;
 
-function resizeCanvases() {
+function resizeCanvases(){
+
   cw = stage.clientWidth;
   ch = stage.clientHeight;
 
-  dpr = Math.min(window.devicePixelRatio||1,2);
+  dpr = Math.min(
+    window.devicePixelRatio||1,
+    2
+  );
 
-  glassCanvas.width = Math.round(cw*dpr);
-  glassCanvas.height = Math.round(ch*dpr);
-  snapshot.width = Math.round(cw*dpr);
-  snapshot.height = Math.round(ch*dpr);
+  glassCanvas.width =
+    Math.round(cw*dpr);
 
-  ctx.setTransform(dpr,0,0,dpr,0,0);
-  snapCtx.setTransform(dpr,0,0,dpr,0,0);
+  glassCanvas.height =
+    Math.round(ch*dpr);
+
+  snapshot.width =
+    Math.round(cw*dpr);
+
+  snapshot.height =
+    Math.round(ch*dpr);
+
+  ctx.setTransform(
+    dpr,0,0,dpr,0,0
+  );
+
+  snapCtx.setTransform(
+    dpr,0,0,dpr,0,0
+  );
 }
 
-window.addEventListener("resize",resizeCanvases);
+window.addEventListener(
+  "resize",
+  resizeCanvases
+);
 
-function imageLoaded(img) {
-  if (img.complete) {
-    return Promise.resolve(img.naturalWidth>0);
+function imageLoaded(img){
+
+  if(img.complete){
+    return Promise.resolve(
+      img.naturalWidth>0
+    );
   }
+
   return new Promise(resolve=>{
-    img.addEventListener("load",()=>resolve(true),{once:true});
-    img.addEventListener("error",()=>resolve(false),{once:true});
+
+    img.addEventListener(
+      "load",
+      ()=>resolve(true),
+      {once:true}
+    );
+
+    img.addEventListener(
+      "error",
+      ()=>resolve(false),
+      {once:true}
+    );
   });
 }
 
-/* ==================================
-   CAPTURE CURRENT DISPLAY
-================================== */
+/* ==============================
+   CAPTURE DISPLAY
+============================== */
 
-/*
-  DOM画面を撮影する代わりに、
-  背景・数字・ハズレ文字を
-  Canvasへ再現する。
-*/
+function drawBackground(target){
 
-function drawBackground(target) {
   target.fillStyle = "#170010";
+
   target.fillRect(0,0,cw,ch);
 
-  if (!bgImage.naturalWidth) return;
+  if(!bgImage.naturalWidth)return;
 
-  const scale = ch/bgImage.naturalHeight;
-  const w = bgImage.naturalWidth*scale;
+  const scale =
+    ch/bgImage.naturalHeight;
 
-  target.drawImage(bgImage,(cw-w)/2,0,w,ch);
+  const width =
+    bgImage.naturalWidth*scale;
+
+  target.drawImage(
+    bgImage,
+    (cw-width)/2,
+    0,
+    width,
+    ch
+  );
 }
 
-function captureScreen() {
-  snapCtx.clearRect(0,0,cw,ch);
+function captureScreen(){
+
+  snapCtx.clearRect(
+    0,0,cw,ch
+  );
+
   drawBackground(snapCtx);
 
-  if (num.classList.contains("show")) {
+  if(num.classList.contains("show")){
+
     const value = num.textContent;
-    const style = getComputedStyle(num);
-    const fontSize = parseFloat(style.fontSize);
+
+    const style =
+      getComputedStyle(num);
+
+    const fontSize =
+      parseFloat(style.fontSize);
 
     snapCtx.save();
-    snapCtx.font = "1000 "+fontSize+"px sans-serif";
+
+    snapCtx.font =
+      "1000 "+fontSize+"px sans-serif";
+
     snapCtx.textAlign = "center";
     snapCtx.textBaseline = "middle";
     snapCtx.lineJoin = "round";
-    snapCtx.lineWidth = Math.max(5,fontSize*.09);
 
-    snapCtx.strokeStyle = num.classList.contains("gold")
-      ? "#f4a000" : "#ff4b9d";
-    snapCtx.fillStyle = num.classList.contains("gold")
-      ? "#fff1a8" : "#fff";
+    snapCtx.lineWidth =
+      Math.max(5,fontSize*.09);
+
+    snapCtx.strokeStyle =
+      num.classList.contains("gold")
+        ? "#f4a000"
+        : "#ff4b9d";
+
+    snapCtx.fillStyle =
+      num.classList.contains("gold")
+        ? "#fff1a8"
+        : "#fff";
 
     snapCtx.shadowColor = "#ff379a";
     snapCtx.shadowBlur = 18;
 
-    snapCtx.strokeText(value,cw*.5,ch*.61);
-    snapCtx.fillText(value,cw*.5,ch*.61);
+    snapCtx.strokeText(
+      value,
+      cw*.5,
+      ch*.61
+    );
+
+    snapCtx.fillText(
+      value,
+      cw*.5,
+      ch*.61
+    );
+
     snapCtx.restore();
   }
 
-  if (result.classList.contains("show")) {
+  if(result.classList.contains("show")){
+
     snapCtx.save();
 
-    snapCtx.fillStyle = "rgba(0,0,0,.6)";
+    snapCtx.fillStyle =
+      "rgba(0,0,0,.6)";
+
     snapCtx.fillRect(0,0,cw,ch);
 
-    const fontSize = Math.min(cw*.17,82);
+    const fontSize =
+      Math.min(cw*.17,82);
 
-    snapCtx.font = "1000 "+fontSize+"px sans-serif";
+    snapCtx.font =
+      "1000 "+fontSize+"px sans-serif";
+
     snapCtx.textAlign = "center";
     snapCtx.textBaseline = "middle";
     snapCtx.lineJoin = "round";
     snapCtx.lineWidth = 6;
+
     snapCtx.strokeStyle = "#e00073";
     snapCtx.fillStyle = "#fff";
+
     snapCtx.shadowColor = "#ff379a";
     snapCtx.shadowBlur = 20;
 
-    snapCtx.strokeText("ハズレ",cw*.5,ch*.50);
-    snapCtx.fillText("ハズレ",cw*.5,ch*.50);
+    snapCtx.strokeText(
+      "ハズレ",
+      cw*.5,
+      ch*.50
+    );
+
+    snapCtx.fillText(
+      "ハズレ",
+      cw*.5,
+      ch*.50
+    );
 
     snapCtx.restore();
   }
 }
 
-/* ==================================
-   READ CRACK IMAGE
-================================== */
-
-/*
-  割れ画像の明るい部分を読み取り、
-  分割点を少し寄せる。
-  破片とヒビは同じ幾何形状を使う。
-*/
+/* ==============================
+   CRACK IMAGE ANALYSIS
+============================== */
 
 let crackPixels = null;
 let mapW = 0;
 let mapH = 0;
 
-function buildCrackMap() {
-  const scale = Math.min(1,480/Math.max(cw,ch));
+function buildCrackMap(){
 
-  mapW = Math.max(1,Math.floor(cw*scale));
-  mapH = Math.max(1,Math.floor(ch*scale));
+  const scale = Math.min(
+    1,
+    480/Math.max(cw,ch)
+  );
+
+  mapW = Math.max(
+    1,
+    Math.floor(cw*scale)
+  );
+
+  mapH = Math.max(
+    1,
+    Math.floor(ch*scale)
+  );
 
   crackMap.width = mapW;
   crackMap.height = mapH;
-  crackCtx.clearRect(0,0,mapW,mapH);
 
-  if (!crackImage.naturalWidth) {
+  crackCtx.clearRect(
+    0,0,mapW,mapH
+  );
+
+  if(!crackImage.naturalWidth){
+
     crackPixels = null;
     return;
   }
@@ -1154,8 +1953,11 @@ function buildCrackMap() {
     mapH/crackImage.naturalHeight
   );
 
-  const iw = crackImage.naturalWidth*imageScale;
-  const ih = crackImage.naturalHeight*imageScale;
+  const iw =
+    crackImage.naturalWidth*imageScale;
+
+  const ih =
+    crackImage.naturalHeight*imageScale;
 
   crackCtx.drawImage(
     crackImage,
@@ -1164,48 +1966,90 @@ function buildCrackMap() {
     iw,ih
   );
 
-  try {
-    crackPixels = crackCtx.getImageData(0,0,mapW,mapH);
-  } catch (error) {
+  try{
+
+    crackPixels =
+      crackCtx.getImageData(
+        0,0,mapW,mapH
+      );
+
+  }catch(error){
+
     crackPixels = null;
   }
 }
 
-function crackBrightness(x,y) {
-  if (!crackPixels) return 0;
+function crackBrightness(x,y){
 
-  const px = Math.floor(x/cw*mapW);
-  const py = Math.floor(y/ch*mapH);
+  if(!crackPixels)return 0;
 
-  if (px<0||py<0||px>=mapW||py>=mapH) return 0;
+  const px =
+    Math.floor(x/cw*mapW);
 
-  const i = (py*mapW+px)*4;
-  const d = crackPixels.data;
+  const py =
+    Math.floor(y/ch*mapH);
 
-  return (d[i]*.30+d[i+1]*.55+d[i+2]*.15)
-    *(d[i+3]/255)/255;
+  if(
+    px<0 ||
+    py<0 ||
+    px>=mapW ||
+    py>=mapH
+  ){
+    return 0;
+  }
+
+  const i =
+    (py*mapW+px)*4;
+
+  const d =
+    crackPixels.data;
+
+  return (
+    d[i]*.30+
+    d[i+1]*.55+
+    d[i+2]*.15
+  )*(d[i+3]/255)/255;
 }
 
-function snapToCrack(x,y,radius=18) {
-  if (!crackPixels) return {x,y};
+function snapToCrack(x,y,radius=18){
+
+  if(!crackPixels){
+    return {x,y};
+  }
 
   let bestX = x;
   let bestY = y;
   let bestScore = -1;
 
-  const step = Math.max(3,radius/4);
+  const step =
+    Math.max(3,radius/4);
 
-  for (let dy=-radius;dy<=radius;dy+=step) {
-    for (let dx=-radius;dx<=radius;dx+=step) {
-      const distance = Math.hypot(dx,dy);
-      if (distance>radius) continue;
+  for(
+    let dy=-radius;
+    dy<=radius;
+    dy+=step
+  ){
+
+    for(
+      let dx=-radius;
+      dx<=radius;
+      dx+=step
+    ){
+
+      const dist =
+        Math.hypot(dx,dy);
+
+      if(dist>radius)continue;
 
       const bx = x+dx;
       const by = y+dy;
-      const score = crackBrightness(bx,by)
-        -(distance/radius)*.27;
 
-      if (score>bestScore) {
+      const score =
+        crackBrightness(bx,by)
+        -(dist/radius)*.27;
+
+      if(score>bestScore){
+
         bestScore = score;
         bestX = bx;
         bestY = by;
@@ -1213,154 +2057,268 @@ function snapToCrack(x,y,radius=18) {
     }
   }
 
-  if (bestScore<.22) return {x,y};
+  if(bestScore<.22){
+    return {x,y};
+  }
 
-  return {x:bestX,y:bestY};
+  return {
+    x:bestX,
+    y:bestY
+  };
 }
 
-/* ==================================
-   GENERATE GLASS GEOMETRY
-================================== */
+/* ==============================
+   GLASS GEOMETRY
+============================== */
 
 let shards = [];
 let crackLines = [];
 let dust = [];
 
-function makeGeometry() {
+function makeGeometry(){
+
   shards = [];
   crackLines = [];
   dust = [];
 
   const cx = cw*.5;
   const cy = ch*.48;
-  const maxRadius = Math.hypot(cw,ch)*.9;
 
-  const rings = [0,37,91,160,270,maxRadius];
+  const maxRadius =
+    Math.hypot(cw,ch)*.9;
+
+  const rings = [
+    0,37,91,160,270,maxRadius
+  ];
+
   const sides = 28;
   const vertices = [];
 
-  for (let ring=0;ring<rings.length;ring++) {
+  for(
+    let ring=0;
+    ring<rings.length;
+    ring++
+  ){
+
     vertices[ring] = [];
 
-    for (let i=0;i<sides;i++) {
-      if (ring===0) {
-        vertices[ring][i] = {x:cx,y:cy};
+    for(let i=0;i<sides;i++){
+
+      if(ring===0){
+
+        vertices[ring][i] = {
+          x:cx,
+          y:cy
+        };
+
         continue;
       }
 
-      const angle = i/sides*Math.PI*2
-        +(Math.random()-.5)*.09;
-      const radius = rings[ring]
-        *(1+(Math.random()-.5)*.1);
+      const angle =
+        i/sides*Math.PI*2+
+        (Math.random()-.5)*.09;
 
-      const x = cx+Math.cos(angle)*radius;
-      const y = cy+Math.sin(angle)*radius;
+      const radius =
+        rings[ring]*
+        (1+(Math.random()-.5)*.1);
 
-      vertices[ring][i] = snapToCrack(
-        x,y,ring<2?12:22
-      );
+      const x =
+        cx+Math.cos(angle)*radius;
+
+      const y =
+        cy+Math.sin(angle)*radius;
+
+      vertices[ring][i] =
+        snapToCrack(
+          x,y,ring<2?12:22
+        );
     }
   }
 
-  function line(a,b) {
+  function addLine(a,b){
+
     crackLines.push({a,b});
   }
 
-  function shard(points) {
-    const mx = points.reduce((s,p)=>s+p.x,0)/points.length;
-    const my = points.reduce((s,p)=>s+p.y,0)/points.length;
-    const angle = Math.atan2(my-cy,mx-cx);
-    const speed = 170+Math.random()*360;
+  function addShard(points){
+
+    const mx =
+      points.reduce(
+        (s,p)=>s+p.x,0
+      )/points.length;
+
+    const my =
+      points.reduce(
+        (s,p)=>s+p.y,0
+      )/points.length;
+
+    const angle =
+      Math.atan2(
+        my-cy,
+        mx-cx
+      );
+
+    const speed =
+      170+Math.random()*360;
 
     shards.push({
-      points,mx,my,
-      vx:Math.cos(angle)*speed+(Math.random()-.5)*140,
-      vy:Math.sin(angle)*speed+(Math.random()-.5)*130,
-      spin:(Math.random()-.5)*9,
-      depth:.65+Math.random()*1.55,
-      delay:Math.random()*.09,
-      duration:.9+Math.random()*.65,
-      shine:Math.random()
+
+      points,
+      mx,my,
+
+      vx:
+        Math.cos(angle)*speed+
+        (Math.random()-.5)*140,
+
+      vy:
+        Math.sin(angle)*speed+
+        (Math.random()-.5)*130,
+
+      spin:
+        (Math.random()-.5)*9,
+
+      depth:
+        .65+Math.random()*1.55,
+
+      delay:
+        Math.random()*.09,
+
+      duration:
+        .9+Math.random()*.65,
+
+      shine:
+        Math.random()
     });
   }
 
-  for (let ring=0;ring<rings.length-1;ring++) {
-    for (let i=0;i<sides;i++) {
-      const j = (i+1)%sides;
+  for(
+    let ring=0;
+    ring<rings.length-1;
+    ring++
+  ){
 
-      const a = vertices[ring][i];
-      const b = vertices[ring+1][i];
-      const c = vertices[ring+1][j];
-      const d = vertices[ring][j];
+    for(let i=0;i<sides;i++){
 
-      if (ring===0) {
-        shard([a,b,c]);
-        line(a,b);
-        line(b,c);
-      } else {
-        if (Math.random()<.5) {
-          shard([a,b,c]);
-          shard([a,c,d]);
-          line(a,c);
-        } else {
-          shard([a,b,d]);
-          shard([b,c,d]);
-          line(b,d);
+      const j =
+        (i+1)%sides;
+
+      const a =
+        vertices[ring][i];
+
+      const b =
+        vertices[ring+1][i];
+
+      const c =
+        vertices[ring+1][j];
+
+      const d =
+        vertices[ring][j];
+
+      if(ring===0){
+
+        addShard([a,b,c]);
+
+        addLine(a,b);
+        addLine(b,c);
+
+      }else{
+
+        if(Math.random()<.5){
+
+          addShard([a,b,c]);
+          addShard([a,c,d]);
+
+          addLine(a,c);
+
+        }else{
+
+          addShard([a,b,d]);
+          addShard([b,c,d]);
+
+          addLine(b,d);
         }
 
-        line(a,b);
-        line(b,c);
+        addLine(a,b);
+        addLine(b,c);
       }
     }
   }
 
-  for (let i=0;i<180;i++) {
-    const angle = Math.random()*Math.PI*2;
-    const speed = 120+Math.random()*540;
+  for(let i=0;i<180;i++){
+
+    const angle =
+      Math.random()*Math.PI*2;
+
+    const speed =
+      120+Math.random()*540;
 
     dust.push({
+
       x:cx+(Math.random()-.5)*35,
       y:cy+(Math.random()-.5)*35,
+
       vx:Math.cos(angle)*speed,
       vy:Math.sin(angle)*speed,
-      size:.5+Math.random()*2.4,
-      life:.5+Math.random()*1.1,
-      delay:Math.random()*.18
+
+      size:
+        .5+Math.random()*2.4,
+
+      life:
+        .5+Math.random()*1.1,
+
+      delay:
+        Math.random()*.18
     });
   }
 }
 
-/* ==================================
+/* ==============================
    DRAW CRACKS
-================================== */
+============================== */
 
-function drawCrackLines(progress) {
+function drawCrackLines(progress){
+
   const cx = cw*.5;
   const cy = ch*.48;
-  const radius = Math.hypot(cw,ch)*progress;
+
+  const radius =
+    Math.hypot(cw,ch)*progress;
 
   ctx.save();
+
   ctx.lineCap = "round";
   ctx.lineJoin = "round";
 
-  /* 既存画像は弱い質感として使用 */
+  if(crackImage.naturalWidth){
 
-  if (crackImage.naturalWidth) {
     const scale = Math.min(
       cw/crackImage.naturalWidth,
       ch/crackImage.naturalHeight
     );
 
-    const iw = crackImage.naturalWidth*scale;
-    const ih = crackImage.naturalHeight*scale;
+    const iw =
+      crackImage.naturalWidth*scale;
+
+    const ih =
+      crackImage.naturalHeight*scale;
 
     ctx.save();
+
     ctx.beginPath();
-    ctx.arc(cx,cy,Math.max(1,radius),0,Math.PI*2);
+
+    ctx.arc(
+      cx,cy,
+      Math.max(1,radius),
+      0,
+      Math.PI*2
+    );
+
     ctx.clip();
 
     ctx.globalAlpha = .16;
-    ctx.globalCompositeOperation = "screen";
+
+    ctx.globalCompositeOperation =
+      "screen";
 
     ctx.drawImage(
       crackImage,
@@ -1372,66 +2330,136 @@ function drawCrackLines(progress) {
     ctx.restore();
   }
 
-  for (const line of crackLines) {
-    const mx = (line.a.x+line.b.x)/2;
-    const my = (line.a.y+line.b.y)/2;
+  for(const line of crackLines){
 
-    if (Math.hypot(mx-cx,my-cy)>radius) continue;
+    const mx =
+      (line.a.x+line.b.x)/2;
+
+    const my =
+      (line.a.y+line.b.y)/2;
+
+    if(
+      Math.hypot(
+        mx-cx,
+        my-cy
+      )>radius
+    ){
+      continue;
+    }
 
     ctx.beginPath();
-    ctx.moveTo(line.a.x,line.a.y);
-    ctx.lineTo(line.b.x,line.b.y);
 
-    ctx.strokeStyle = "rgba(20,37,55,.82)";
+    ctx.moveTo(
+      line.a.x,
+      line.a.y
+    );
+
+    ctx.lineTo(
+      line.b.x,
+      line.b.y
+    );
+
+    ctx.strokeStyle =
+      "rgba(20,37,55,.82)";
+
     ctx.lineWidth = 3.5;
     ctx.shadowBlur = 0;
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.moveTo(line.a.x,line.a.y);
-    ctx.lineTo(line.b.x,line.b.y);
 
-    ctx.strokeStyle = "rgba(245,251,255,.94)";
+    ctx.moveTo(
+      line.a.x,
+      line.a.y
+    );
+
+    ctx.lineTo(
+      line.b.x,
+      line.b.y
+    );
+
+    ctx.strokeStyle =
+      "rgba(245,251,255,.94)";
+
     ctx.lineWidth = 1.3;
     ctx.shadowColor = "#d7f5ff";
     ctx.shadowBlur = 5;
+
     ctx.stroke();
   }
 
   ctx.restore();
 }
 
-/* ==================================
-   DRAW GLASS PIECE
-================================== */
+/* ==============================
+   DRAW SHARDS
+============================== */
 
-function drawShard(shard,elapsed) {
-  const t = elapsed-shard.delay;
-  if (t<0) return;
+function drawShard(shard,elapsed){
 
-  const p = t/shard.duration;
-  if (p>=1) return;
+  const t =
+    elapsed-shard.delay;
 
-  const dx = shard.vx*t;
-  const dy = shard.vy*t+150*t*t;
-  const rotation = shard.spin*t;
-  const scale = 1+p*shard.depth;
-  const opacity = Math.pow(1-p,1.15);
+  if(t<0)return;
+
+  const p =
+    t/shard.duration;
+
+  if(p>=1)return;
+
+  const dx =
+    shard.vx*t;
+
+  const dy =
+    shard.vy*t+150*t*t;
+
+  const rotation =
+    shard.spin*t;
+
+  const scale =
+    1+p*shard.depth;
+
+  const opacity =
+    Math.pow(1-p,1.15);
 
   ctx.save();
+
   ctx.globalAlpha = opacity;
 
-  ctx.translate(shard.mx+dx,shard.my+dy);
+  ctx.translate(
+    shard.mx+dx,
+    shard.my+dy
+  );
+
   ctx.rotate(rotation);
   ctx.scale(scale,scale);
-  ctx.translate(-shard.mx,-shard.my);
+
+  ctx.translate(
+    -shard.mx,
+    -shard.my
+  );
 
   ctx.beginPath();
 
-  shard.points.forEach((point,i)=>{
-    if (i===0) ctx.moveTo(point.x,point.y);
-    else ctx.lineTo(point.x,point.y);
-  });
+  shard.points.forEach(
+    (point,i)=>{
+
+      if(i===0){
+
+        ctx.moveTo(
+          point.x,
+          point.y
+        );
+
+      }else{
+
+        ctx.lineTo(
+          point.x,
+          point.y
+        );
+      }
+    }
+  );
 
   ctx.closePath();
 
@@ -1440,149 +2468,227 @@ function drawShard(shard,elapsed) {
 
   ctx.drawImage(
     snapshot,
-    0,0,snapshot.width,snapshot.height,
+    0,0,
+    snapshot.width,
+    snapshot.height,
     0,0,cw,ch
   );
 
-  const g = ctx.createLinearGradient(
-    shard.mx-35,shard.my-35,
-    shard.mx+35,shard.my+35
+  const gradient =
+    ctx.createLinearGradient(
+      shard.mx-35,
+      shard.my-35,
+      shard.mx+35,
+      shard.my+35
+    );
+
+  gradient.addColorStop(
+    0,
+    "rgba(255,255,255,.30)"
   );
 
-  g.addColorStop(0,"rgba(255,255,255,.30)");
-  g.addColorStop(.45,"rgba(165,215,255,.03)");
-  g.addColorStop(1,"rgba(255,255,255,.24)");
+  gradient.addColorStop(
+    .45,
+    "rgba(165,215,255,.03)"
+  );
 
-  ctx.fillStyle = g;
+  gradient.addColorStop(
+    1,
+    "rgba(255,255,255,.24)"
+  );
+
+  ctx.fillStyle = gradient;
   ctx.fill();
 
   ctx.restore();
 
   ctx.lineWidth = 1.1;
-  ctx.strokeStyle = "rgba(235,250,255,.84)";
-  ctx.shadowColor = "rgba(160,220,255,.85)";
+
+  ctx.strokeStyle =
+    "rgba(235,250,255,.84)";
+
+  ctx.shadowColor =
+    "rgba(160,220,255,.85)";
+
   ctx.shadowBlur = 5;
   ctx.stroke();
 
-  if (shard.shine>.8) {
-    const a = shard.points[0];
-    const b = shard.points[1];
+  if(shard.shine>.8){
+
+    const a =
+      shard.points[0];
+
+    const b =
+      shard.points[1];
 
     ctx.beginPath();
+
     ctx.moveTo(
       a.x*.75+b.x*.25,
       a.y*.75+b.y*.25
     );
+
     ctx.lineTo(
       a.x*.25+b.x*.75,
       a.y*.25+b.y*.75
     );
 
-    ctx.strokeStyle = "rgba(255,255,255,.92)";
+    ctx.strokeStyle =
+      "rgba(255,255,255,.92)";
+
     ctx.lineWidth = 1;
+
     ctx.stroke();
   }
 
   ctx.restore();
 }
 
-/* ==================================
+/* ==============================
    DRAW DUST
-================================== */
+============================== */
 
-function drawDust(elapsed) {
+function drawDust(elapsed){
+
   ctx.save();
 
-  for (const d of dust) {
-    const t = elapsed-d.delay;
-    if (t<0||t>d.life) continue;
+  for(const d of dust){
 
-    const p = t/d.life;
+    const t =
+      elapsed-d.delay;
+
+    if(t<0 || t>d.life){
+      continue;
+    }
+
+    const p =
+      t/d.life;
+
     ctx.globalAlpha = 1-p;
-    ctx.fillStyle = p<.5 ? "#fff" : "#c8efff";
+
+    ctx.fillStyle =
+      p<.5 ? "#fff" : "#c8efff";
 
     ctx.beginPath();
+
     ctx.arc(
       d.x+d.vx*t,
       d.y+d.vy*t+160*t*t,
       d.size*(1-p*.4),
-      0,Math.PI*2
+      0,
+      Math.PI*2
     );
+
     ctx.fill();
   }
 
   ctx.restore();
 }
 
-/* ==================================
-   SHATTER ANIMATION
-================================== */
+/* ==============================
+   GLASS ANIMATION
+============================== */
 
-function flyGlass() {
+function flyGlass(){
+
   return new Promise(resolve=>{
-    const started = performance.now();
 
-    function frame(now) {
-      const elapsed = (now-started)/1000;
+    const started =
+      performance.now();
 
-      ctx.clearRect(0,0,cw,ch);
+    function frame(now){
 
-      for (const shard of shards) {
-        drawShard(shard,elapsed);
+      const elapsed =
+        (now-started)/1000;
+
+      ctx.clearRect(
+        0,0,cw,ch
+      );
+
+      for(const shard of shards){
+
+        drawShard(
+          shard,
+          elapsed
+        );
       }
 
       drawDust(elapsed);
 
-      if (elapsed<1.65) {
-        frameId = requestAnimationFrame(frame);
-      } else {
+      if(elapsed<1.65){
+
+        frameId =
+          requestAnimationFrame(frame);
+
+      }else{
+
         frameId = null;
-        ctx.clearRect(0,0,cw,ch);
+
+        ctx.clearRect(
+          0,0,cw,ch
+        );
+
         resolve();
       }
     }
 
-    frameId = requestAnimationFrame(frame);
+    frameId =
+      requestAnimationFrame(frame);
   });
 }
 
-/* ==================================
-   CRACK GROWING
-================================== */
+function growCracks(from,to,duration){
 
-function growCracks(from,to,duration) {
   return new Promise(resolve=>{
-    const started = performance.now();
 
-    function frame(now) {
-      const p = Math.min((now-started)/duration,1);
+    const started =
+      performance.now();
 
-      ctx.clearRect(0,0,cw,ch);
-      drawCrackLines(from+(to-from)*p);
+    function frame(now){
 
-      if (p<1) {
-        frameId = requestAnimationFrame(frame);
-      } else {
+      const p = Math.min(
+        (now-started)/duration,
+        1
+      );
+
+      ctx.clearRect(
+        0,0,cw,ch
+      );
+
+      drawCrackLines(
+        from+(to-from)*p
+      );
+
+      if(p<1){
+
+        frameId =
+          requestAnimationFrame(frame);
+
+      }else{
+
         frameId = null;
         resolve();
       }
     }
 
-    frameId = requestAnimationFrame(frame);
+    frameId =
+      requestAnimationFrame(frame);
   });
 }
 
-/* ==================================
-   MAIN GLASS BREAK
-================================== */
+/* ==============================
+   SCREEN BREAK
+============================== */
 
-async function glassBreak() {
+async function glassBreak(){
+
   await Promise.all([
     imageLoaded(bgImage),
     imageLoaded(crackImage)
   ]);
 
   resizeCanvases();
+
   captureScreen();
   buildCrackMap();
   makeGeometry();
@@ -1590,30 +2696,46 @@ async function glassBreak() {
   stopTension();
 
   glassArea.classList.add("active");
+
   glassUnder.style.opacity = "0";
-  ctx.clearRect(0,0,cw,ch);
 
-  /* 効果音開始 */
+  ctx.clearRect(
+    0,0,cw,ch
+  );
 
-  if (glassSoundReady) playAudio(glassAudio);
+  /*
+    ピキッ！ピキッ！パリーン！！
+  */
 
-  /* ピキッ！ */
+  playGlassSound();
 
-  await growCracks(0,.26,360);
+  /* 1回目のヒビ */
+
+  await growCracks(
+    0,
+    .26,
+    360
+  );
+
   await wait(150);
 
-  /* ピキッ！ */
+  /* 2回目のヒビ */
 
-  await growCracks(.26,1.08,440);
+  await growCracks(
+    .26,
+    1.08,
+    440
+  );
+
   await wait(130);
 
-  /* パリーン！！ */
+  /* 全面破壊 */
 
   glassArea.classList.add("shake");
-  anim(glassLight,"go");
-  glassUnder.style.opacity = "1";
 
-  /* 元画面を隠し、破片の画像へ切り替え */
+  anim(glassLight,"go");
+
+  glassUnder.style.opacity = "1";
 
   num.style.visibility = "hidden";
   result.style.visibility = "hidden";
@@ -1622,27 +2744,38 @@ async function glassBreak() {
 
   glassArea.classList.remove("shake");
   glassArea.classList.remove("active");
+
   glassUnder.style.opacity = "0";
 
   num.style.visibility = "";
   result.style.visibility = "";
 
-  ctx.clearRect(0,0,cw,ch);
+  ctx.clearRect(
+    0,0,cw,ch
+  );
 
   hideFalseMiss();
   clearNum();
 
+  /*
+    最後のフラッシュ後、
+    hit()で当たりBGMを再生。
+  */
+
   await flash();
 }
 
-/* ==================================
-   RANDOM GLASS BREAK HIT
-================================== */
+/* ==============================
+   RANDOM GLASS HIT
+============================== */
 
-async function guaranteedGlassHit() {
-  const pattern = rnd(0,7);
+async function guaranteedGlassHit(){
 
-  switch (pattern) {
+  const pattern =
+    rnd(0,7);
+
+  switch(pattern){
+
     case 0:
       await wait(650);
       break;
@@ -1682,121 +2815,160 @@ async function guaranteedGlassHit() {
       await count();
       await falseMissPause(1000);
       await noCount();
+
       num.textContent = "1";
       num.className = "show";
+
       await wait(650);
       break;
 
     case 7:
       await count();
       await fxPush();
+
       num.textContent = "1";
       num.className = "show";
+
       await wait(550);
       break;
   }
 
   await glassBreak();
+
   await hit("画面破壊・当たり確定");
 }
 
-/* ==================================
+/* ==============================
    REVIVALS
-================================== */
+============================== */
 
-async function revivalBlack() {
+async function revivalBlack(){
+
   await count();
   await falseMissPause(1600);
   await blackout(1700);
+
   await hit(winNames[0]);
 }
 
-async function revivalNoCount(won) {
+async function revivalNoCount(won){
+
   await count();
   await falseMissPause(1300);
   await noCount();
 
-  if (won) await hit(winNames[1]);
-  else await miss(true);
+  if(won){
+
+    await hit(winNames[1]);
+
+  }else{
+
+    await miss(true);
+  }
 }
 
-async function revivalCrack() {
+async function revivalCrack(){
+
   await count();
   await falseMissPause(1300);
+
   await glassBreak();
+
   await hit(winNames[2]);
 }
 
-async function revivalDouble(won) {
+async function revivalDouble(won){
+
   await count();
-  await falseMissPause(1100);
-  await noCount();
+
   await falseMissPause(1100);
   await noCount();
 
-  if (won) await hit(winNames[3]);
-  else await miss(true);
+  await falseMissPause(1100);
+  await noCount();
+
+  if(won){
+
+    await hit(winNames[3]);
+
+  }else{
+
+    await miss(true);
+  }
 }
 
-/* ==================================
+/* ==============================
    COMMON ROUTES
-================================== */
+============================== */
 
-async function common(i) {
-  switch (i) {
+async function common(i){
+
+  switch(i){
+
     case 0:
       await count();
       await digit("1",1500,"big");
       break;
+
     case 1:
       await count();
       await digit("1",900,"red");
       break;
+
     case 2:
       await count();
       await lightning();
       break;
+
     case 3:
       await digit("3");
       await noise();
       await digit("2");
       await digit("1");
       break;
+
     case 4:
       await digit("3",700);
       await digit("3",450,"red");
       await digit("3",700,"gold");
       break;
+
     case 5:
       await digit("3");
       await digit("2");
       await digit("1",3700);
       break;
+
     case 6:
       await count();
       await digit("?",1200,"question");
       break;
+
     case 7:
       $("dim").style.opacity = "1";
       await count();
       $("dim").style.opacity = "0";
       break;
+
     case 8:
       await digit("3");
       await digit("2");
       await digit("2",700);
       await digit("1");
       break;
+
     case 9:
       await count();
       stopTension();
       await wait(1700);
       break;
+
     case 10:
       await count();
       await wait(950);
       await fastCount();
       break;
+
     case 11:
       await digit("3");
       await flash();
@@ -1806,37 +2978,44 @@ async function common(i) {
   }
 }
 
-/* ==================================
+/* ==============================
    ORIGINAL 44 WIN ROUTES
-================================== */
+============================== */
 
-async function winRoute(i) {
-  if (i===0) return revivalBlack();
-  if (i===1) return revivalNoCount(true);
-  if (i===2) return revivalCrack();
-  if (i===3) return revivalDouble(true);
+async function winRoute(i){
 
-  switch (i) {
+  if(i===0)return revivalBlack();
+  if(i===1)return revivalNoCount(true);
+  if(i===2)return revivalCrack();
+  if(i===3)return revivalDouble(true);
+
+  switch(i){
+
     case 4:
       await count();
       await blackout(1600);
       break;
+
     case 5:
       await digit("3");
       await digit("2",3100);
       break;
+
     case 6:
       await count();
       await digit("2",800);
       break;
+
     case 7:
       await count();
       await digit("0",800,"gold");
       break;
+
     case 8:
       await count();
       await wait(1700);
       break;
+
     case 9:
       await digit("3");
       await digit("2");
@@ -1844,67 +3023,82 @@ async function winRoute(i) {
       await digit("1",1500);
       await wait(1200);
       break;
+
     case 10:
       await digit("3");
       await digit("2");
       await digit("1",3600);
       break;
+
     case 11:
       await count();
       await fastCount();
       break;
+
     case 12:
       await fastCount();
       await fastCount();
       break;
+
     case 13:
       await count();
       stopTension();
       await blackout(2300);
       break;
+
     case 14:
       await count();
       await blackout(1600);
       await fastCount();
       break;
+
     case 15:
       await count();
       await slashes();
       await digit("1");
       break;
+
     case 16:
       await digit("3");
       await digit("1");
       await digit("2");
       break;
+
     case 17:
       stopTension();
       await count();
       break;
+
     case 18:
       await count();
       await dots();
       await digit("1",850);
       break;
+
     case 19:
       await digit("3");
       await digit("1");
       break;
+
     case 20:
       await count();
       await wait(1800);
       break;
+
     case 21:
       await count();
       await digit("2");
       break;
+
     case 22:
       await fastCount();
       break;
+
     case 23:
       await count();
       await slashes();
       break;
+
     case 24:
       await digit("3");
       stopTension();
@@ -1912,41 +3106,49 @@ async function winRoute(i) {
       await digit("2");
       await digit("1");
       break;
+
     case 25:
       await count();
       await digit("?",1000,"question");
       break;
+
     case 26:
       await count();
       await blackout(1600);
       await digit("1");
       break;
+
     case 27:
       await count();
       await dots();
       break;
+
     case 28:
       await count();
       await dots();
       await digit("1");
       break;
+
     case 29:
       await count();
       await dots();
       await blackout(1500);
       break;
+
     case 30:
       await count();
       await dots();
       stars(12);
       await wait(1000);
       break;
+
     case 31:
       await count();
       stopTension();
       await dots();
       await wait(2100);
       break;
+
     default:
       await common(i-32);
       break;
@@ -1955,128 +3157,181 @@ async function winRoute(i) {
   await hit(winNames[i]);
 }
 
-/* ==================================
+/* ==============================
    NEW ROUTES
-================================== */
+============================== */
 
-async function newRoute(kind,won) {
-  switch (kind) {
+async function newRoute(kind,won){
+
+  switch(kind){
+
     case "freeze":
       await count();
       await fxFreeze();
       break;
+
     case "preview":
       await count();
       await fxPreview();
       break;
+
     case "push":
       await count();
       await fxPush();
       break;
+
     case "promotion":
       await fxPromotion();
       break;
+
     case "rainbow":
       await fxFreeze();
       await fxRainbow();
       break;
+
     case "reverse":
       await fxReverse();
       break;
+
     case "odd":
       await digit("3");
       await digit("3",750,"red");
       await fxFreeze();
       break;
+
     case "rainbowBurst":
       await fxRainbow();
       break;
   }
 
   const names = {
-    freeze: "フリーズ",
-    preview: "次回予告",
-    push: "デカPUSH",
-    promotion: "カウントダウン昇格",
-    rainbow: "レインボーフリーズ",
-    reverse: "逆転カウント",
-    odd: "違和感",
-    rainbowBurst: "虹色爆発"
+
+    freeze:"フリーズ",
+    preview:"次回予告",
+    push:"デカPUSH",
+    promotion:"カウントダウン昇格",
+    rainbow:"レインボーフリーズ",
+    reverse:"逆転カウント",
+    odd:"違和感",
+    rainbowBurst:"虹色爆発"
+
   };
 
-  if (won) await hit(names[kind]);
-  else await miss(true);
+  if(won){
+
+    await hit(names[kind]);
+
+  }else{
+
+    await miss(true);
+  }
 }
 
-/* ==================================
-   NORMAL WIN ROUTE
-================================== */
+/* ==============================
+   NORMAL WIN ROUTES
+============================== */
 
-async function regularWinRoute() {
+async function regularWinRoute(){
+
   const r = Math.random();
 
-  if (r<.19) return guaranteedGlassHit();
-  if (r<.38) return newRoute("preview",true);
-  if (r<.46) return newRoute("rainbowBurst",true);
-  if (r<.54) return newRoute("rainbow",true);
+  if(r<.19){
 
-  if (r<.70) {
+    return guaranteedGlassHit();
+  }
+
+  if(r<.38){
+
+    return newRoute("preview",true);
+  }
+
+  if(r<.46){
+
+    return newRoute("rainbowBurst",true);
+  }
+
+  if(r<.54){
+
+    return newRoute("rainbow",true);
+  }
+
+  if(r<.70){
+
     const kinds = [
-      "freeze","push","promotion","reverse","odd"
+      "freeze",
+      "push",
+      "promotion",
+      "reverse",
+      "odd"
     ];
-    return newRoute(kinds[rnd(0,kinds.length-1)],true);
+
+    return newRoute(
+      kinds[rnd(0,kinds.length-1)],
+      true
+    );
   }
 
   return winRoute(rnd(0,43));
 }
 
-/* ==================================
+/* ==============================
    MISS ROUTES
-================================== */
+============================== */
 
-async function weakMiss(i) {
-  switch (i) {
+async function weakMiss(i){
+
+  switch(i){
+
     case 0:
       await digit("3");
       await digit("2",2900);
       await digit("1");
       break;
+
     case 1:
       await digit("3");
       await digit("2");
       await digit("1",3200);
       break;
+
     case 2:
       await count();
       await digit("1",750,"red");
       break;
+
     case 3:
       stopTension();
       await count();
       await wait(1300);
       break;
+
     case 4:
       await count();
       await blackout(550);
       break;
+
     case 5:
       await digit("3",3000);
       await digit("2");
       await digit("1");
       break;
+
     case 6:
       await digit("3");
       await digit("2",650,"red");
       await digit("1");
       break;
+
     case 7:
       await count();
       await digit("0",500);
       break;
+
     case 8:
       await count();
       await wait(950);
       break;
+
     case 9:
       await fastCount();
       await wait(900);
@@ -2086,31 +3341,38 @@ async function weakMiss(i) {
   await miss(false);
 }
 
-async function strongMiss(i) {
-  switch (i) {
+async function strongMiss(i){
+
+  switch(i){
+
     case 0:
       await count();
       await slashes();
       break;
+
     case 1:
       await count();
       await blackout(1800);
       break;
+
     case 2:
       await digit("3");
       await digit("2");
       await digit("1",2700,"gold");
       break;
+
     case 3:
       await count();
       await slashes();
       await flash();
       break;
+
     case 4:
       await count();
       await blackout(1600);
       await digit("1",1900);
       break;
+
     case 5:
       await count();
       await digit("1",1000,"gold");
@@ -2121,32 +3383,53 @@ async function strongMiss(i) {
   await miss(true);
 }
 
-async function missRoute() {
+async function missRoute(){
+
   const r = Math.random();
 
-  if (r<.08) return revivalNoCount(false);
-  if (r<.105) return revivalDouble(false);
+  if(r<.08){
 
-  if (r<.36) {
+    return revivalNoCount(false);
+  }
+
+  if(r<.105){
+
+    return revivalDouble(false);
+  }
+
+  if(r<.36){
+
     await common(rnd(0,11));
     return miss(false);
   }
 
-  if (r<.66) {
+  if(r<.66){
+
     await count();
     return miss(false);
   }
 
-  if (r<.84) return weakMiss(rnd(0,9));
+  if(r<.84){
+
+    return weakMiss(rnd(0,9));
+  }
+
   return strongMiss(rnd(0,5));
 }
 
-/* ==================================
+/* ==============================
    RESET
-================================== */
+============================== */
 
-function reset() {
+function reset(){
+
   runId++;
+
+  /*
+    START画面へ戻るときだけ
+    当たりBGMも停止する。
+  */
+
   stopMusic();
 
   busy = false;
@@ -2157,111 +3440,208 @@ function reset() {
   hideFalseMiss();
 
   $("start").style.display = "block";
+
   $("hit").classList.remove("go");
+
   $("hitInfo").classList.remove("show");
+
   $("hitName").textContent = "";
+
   $("tap").classList.remove("show");
 
   $("dim").style.opacity = "0";
   black.style.opacity = "0";
 
   $("flash").classList.remove("flashGo");
+
   $("slash1").classList.remove("go");
   $("slash2").classList.remove("go");
 
   glassArea.className = "";
   glassUnder.style.opacity = "0";
+
   num.style.visibility = "";
   result.style.visibility = "";
 
-  if (frameId!==null) {
+  if(frameId!==null){
+
     cancelAnimationFrame(frameId);
+
     frameId = null;
   }
 
-  if (ctx) ctx.clearRect(0,0,cw,ch);
+  if(ctx){
 
-  stage.querySelectorAll(".shooting").forEach(e=>e.remove());
+    ctx.clearRect(
+      0,0,cw,ch
+    );
+  }
+
+  stage.querySelectorAll(
+    ".shooting"
+  ).forEach(el=>el.remove());
 }
 
-/* ==================================
+/* ==============================
    GUIDE
-================================== */
+============================== */
 
 $("guideBtn").onclick = ()=>{
+
   $("modal").classList.add("open");
 };
 
 $("closeGuide").onclick = ()=>{
+
   $("modal").classList.remove("open");
 };
 
-$("modal").onclick = e=>{
-  if (e.target===$("modal")) {
+$("modal").onclick = event=>{
+
+  if(event.target===$("modal")){
+
     $("modal").classList.remove("open");
   }
 };
 
-/* ==================================
+/* ==============================
    TAP TO RETURN
-================================== */
+============================== */
 
 stage.onclick = ()=>{
-  if (tapReady) reset();
+
+  if(tapReady){
+
+    reset();
+  }
 };
 
-/* ==================================
+/* ==============================
    START
-================================== */
+============================== */
 
-$("startBtn").onclick = async e=>{
-  e.stopPropagation();
+$("startBtn").onclick = async event=>{
 
-  if (busy) return;
+  event.stopPropagation();
+
+  if(busy)return;
 
   busy = true;
   tapReady = false;
 
   const id = ++runId;
+
   $("start").style.display = "none";
 
   /*
-    TEST_MODE=true:
-      毎回100%画面破壊で当たり
-
-    TEST_MODE=false:
-      当選確率1/25
+    テスト中は100%当たり。
+    通常は1/25。
   */
 
-  const won = TEST_MODE ? true : roll(1/25);
+  const won =
+    TEST_MODE ? true : roll(1/25);
 
-  try {
-    await chooseGlassSound();
+  try{
 
-    if (id!==runId) return;
+    /*
+      ★重要★
+
+      STARTボタンを押した直後、
+      awaitする前に音声を有効化。
+
+      iPhoneの自動再生制限対策。
+    */
+
+    const audioActivation =
+      activateAudio();
+
+    await audioActivation;
+
+    /*
+      緊張BGM・当たりBGM・
+      ガラス音を読み込む。
+    */
+
+    await prepareAudio();
+
+    if(id!==runId)return;
+
+    /*
+      音声を読み込めたら
+      カウントダウン開始。
+    */
 
     tension();
 
-    if (roll(.28)) stars(rnd(2,9));
+    if(roll(.28)){
 
-    if (TEST_MODE) {
-      await guaranteedGlassHit();
-    } else if (won) {
-      await regularWinRoute();
-    } else if (roll(1/2400)) {
-      await newRoute("preview",false);
-    } else {
-      await missRoute();
+      stars(rnd(2,9));
     }
-  } catch (error) {
+
+    if(TEST_MODE){
+
+      /*
+        テスト：
+        必ず画面破壊で当たり。
+      */
+
+      await guaranteedGlassHit();
+
+    }else if(won){
+
+      /*
+        通常当たり。
+      */
+
+      await regularWinRoute();
+
+    }else{
+
+      /*
+        通常ハズレ。
+      */
+
+      if(roll(1/2400)){
+
+        await newRoute(
+          "preview",
+          false
+        );
+
+      }else if(roll(.10)){
+
+        const kinds = [
+          "freeze",
+          "push",
+          "promotion",
+          "reverse",
+          "odd"
+        ];
+
+        await newRoute(
+          kinds[rnd(0,kinds.length-1)],
+          false
+        );
+
+      }else{
+
+        await missRoute();
+      }
+    }
+
+  }catch(error){
+
     console.error(error);
-    if (id===runId) reset();
+
+    if(id===runId){
+      reset();
+    }
   }
 };
 
-/* ==================================
+/* ==============================
    INITIALIZE
-================================== */
+============================== */
 
 resizeCanvases();
 reset();
