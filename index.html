@@ -3,742 +3,515 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#170010">
-<title>Red Peanuts SLOT 画面破壊テスト</title>
+<title>Red Peanuts SLOT</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
-html,body{
-  margin:0;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  background:#170010;
-  color:#fff;
-  font-family:-apple-system,BlinkMacSystemFont,
-    "Hiragino Kaku Gothic ProN",sans-serif;
-  touch-action:manipulation;
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #170010;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", sans-serif;
+  touch-action: manipulation;
 }
-button{
-  font:inherit;
-  cursor:pointer;
+button {
+  font: inherit;
+  cursor: pointer;
 }
-#stage{
-  position:fixed;
-  inset:0;
-  overflow:hidden;
-  background:#170010
-    url("./9E28B31B-C619-4F41-AB55-91C025168D02.png")
-    center top/auto 100% no-repeat;
-}
-#start{
-  position:absolute;
-  inset:0;
-  z-index:10;
-}
-#startBtn{
-  position:absolute;
-  left:50%;
-  bottom:8.5%;
-  transform:translateX(-50%);
-  width:min(80vw,390px);
-  height:70px;
-  border:2px solid #fff;
-  border-radius:45px;
-  background:linear-gradient(#ff78c4,#d00068);
-  color:#fff;
-  font-size:28px;
-  font-weight:1000;
-  box-shadow:0 0 28px #ff008d;
-}
-#rate{
-  position:absolute;
-  bottom:23%;
-  width:100%;
-  text-align:center;
-  font-weight:900;
-  text-shadow:0 2px 7px #000;
-}
-#rate b{
-  display:block;
-  color:#ffed9d;
-  font-size:30px;
-}
-#guideBtn{
-  position:absolute;
-  bottom:34%;
-  left:50%;
-  transform:translateX(-50%);
-  padding:11px 22px;
-  white-space:nowrap;
-  border:1px solid #fff;
-  border-radius:30px;
-  background:#580033df;
-  color:#fff;
-  font-weight:900;
-  box-shadow:0 0 14px #ff3896;
-}
-#demoLabel{
-  position:absolute;
-  top:max(14px,env(safe-area-inset-top));
-  right:12px;
-  z-index:11;
-  padding:6px 10px;
-  border:1px solid #ffe59a;
-  border-radius:20px;
-  background:#4f002dc9;
-  color:#ffe59a;
-  font-size:12px;
-  font-weight:900;
+#stage {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: #170010 url("./9E28B31B-C619-4F41-AB55-91C025168D02.png") center top / auto 100% no-repeat;
 }
 
-/* 数字 */
+/* START */
 
-#num{
-  position:absolute;
-  z-index:25;
-  top:61%;
-  left:50%;
-  width:100%;
-  text-align:center;
-  transform:translate(-50%,-50%);
-  font-size:min(52vw,255px);
-  line-height:1.1;
-  font-weight:1000;
-  color:#fff;
-  -webkit-text-stroke:clamp(5px,1.5vw,9px) #ff4b9d;
-  text-shadow:0 7px #ae0054,0 14px 10px #370018;
-  opacity:0;
-  pointer-events:none;
+#start {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
 }
-#num.show{
-  opacity:1;
-  animation:numPop .22s ease-out;
+#startBtn {
+  position: absolute;
+  left: 50%;
+  bottom: 8.5%;
+  transform: translateX(-50%);
+  width: min(80vw,390px);
+  height: 70px;
+  border: 2px solid white;
+  border-radius: 45px;
+  background: linear-gradient(#ff78c4,#d00068);
+  color: white;
+  font-size: 28px;
+  font-weight: 1000;
+  box-shadow: 0 0 28px #ff008d;
 }
-#num.red{
-  color:#ff508b;
+#rate {
+  position: absolute;
+  bottom: 23%;
+  width: 100%;
+  text-align: center;
+  font-weight: 900;
+  text-shadow: 0 2px 7px black;
 }
-#num.gold{
-  color:#fff1a8;
-  -webkit-text-stroke:6px #f4a000;
-  text-shadow:0 0 30px #ffd100;
+#rate b {
+  display: block;
+  color: #ffed9d;
+  font-size: 30px;
 }
-#num.dots{
-  font-size:min(34vw,155px);
-  color:#fff1a8;
+#guideBtn {
+  position: absolute;
+  bottom: 34%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 11px 22px;
+  white-space: nowrap;
+  border: 1px solid white;
+  border-radius: 30px;
+  background: #580033df;
+  color: white;
+  font-weight: 900;
+  box-shadow: 0 0 14px #ff3896;
 }
-#num.question{
-  font-size:min(40vw,190px);
-}
-#num.big{
-  font-size:min(65vw,300px);
-}
-#num.nocount{
-  width:94%;
-  font-size:clamp(31px,9vw,56px);
-  white-space:nowrap;
-  letter-spacing:-.05em;
-  -webkit-text-stroke:2px #ff4b9d;
-}
-@keyframes numPop{
-  from{
-    transform:translate(-50%,-50%) scale(.6);
-  }
-  75%{
-    transform:translate(-50%,-50%) scale(1.1);
-  }
-  to{
-    transform:translate(-50%,-50%) scale(1);
-  }
-}
-
-/* 基本演出 */
-
-#dim,#black,#flash,#lightning,#noise{
-  position:absolute;
-  inset:0;
-  opacity:0;
-  pointer-events:none;
-}
-#dim{
-  z-index:12;
-  background:#0009;
-}
-#black{
-  z-index:28;
-  background:#000;
-}
-#noise{
-  z-index:29;
-  background:repeating-linear-gradient(
-    0deg,#fff6 0 2px,#0005 2px 5px
-  );
-}
-#lightning{
-  z-index:30;
-  background:linear-gradient(
-    120deg,
-    transparent 42%,
-    #fff 47%,
-    #ff5db6 49%,
-    transparent 54%
-  );
-  filter:drop-shadow(0 0 24px #ff1494);
-}
-#flash{
-  z-index:160;
-  background:#fff;
-}
-.flashGo,.lightGo,.noiseGo{
-  animation:flashAnim .4s ease-out;
-}
-@keyframes flashAnim{
-  0%,100%{opacity:0}
-  40%{opacity:1}
+#testLabel {
+  position: absolute;
+  top: max(14px,env(safe-area-inset-top));
+  right: 12px;
+  padding: 6px 12px;
+  border: 1px solid #ffed9d;
+  border-radius: 20px;
+  background: #580033dc;
+  color: #ffed9d;
+  font-size: 12px;
+  font-weight: 900;
 }
 
-/* ハズレ */
+/* NUMBER */
 
-#result{
-  position:absolute;
-  z-index:35;
-  inset:0;
-  display:none;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  padding:18px;
-  background:#000a;
-  text-align:center;
-  pointer-events:none;
+#num {
+  position: absolute;
+  z-index: 25;
+  top: 61%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+  font-size: min(52vw,255px);
+  line-height: 1.1;
+  font-weight: 1000;
+  color: white;
+  -webkit-text-stroke: clamp(5px,1.5vw,9px) #ff4b9d;
+  text-shadow: 0 7px #ae0054,0 14px 10px #370018;
+  opacity: 0;
+  pointer-events: none;
 }
-#result.show{
-  display:flex;
+#num.show {
+  opacity: 1;
+  animation: numPop .23s ease-out;
 }
-#near{
-  font-size:clamp(26px,9vw,56px);
-  font-weight:1000;
-  color:#ffe18d;
-  text-shadow:0 0 18px #ff8a00;
+#num.red { color: #ff508b; }
+#num.gold {
+  color: #fff1a8;
+  -webkit-text-stroke: 6px #f4a000;
+  text-shadow: 0 0 30px #ffd100;
 }
-#mainResult{
-  position:relative;
-  display:inline-block;
-  white-space:nowrap;
-  font-size:clamp(42px,15vw,82px);
-  font-weight:1000;
-  color:#fff;
-  -webkit-text-stroke:3px #e00073;
-  text-shadow:0 5px #8e0044,0 0 18px #ff379a;
+#num.question { font-size: min(40vw,190px); }
+#num.dots {
+  font-size: min(34vw,155px);
+  color: #fff1a8;
 }
-#mainResult.appear{
-  animation:resultPop .55s ease-out;
+#num.big { font-size: min(65vw,300px); }
+#num.nocount {
+  width: 94%;
+  font-size: clamp(31px,9vw,56px);
+  white-space: nowrap;
+  letter-spacing: -.05em;
+  -webkit-text-stroke: 2px #ff4b9d;
 }
-#message{
-  font-size:clamp(14px,4vw,20px);
-  font-weight:900;
-  color:#ffe5aa;
-  line-height:1.7;
-  text-shadow:0 2px 5px #000;
-}
-@keyframes resultPop{
-  from{
-    opacity:0;
-    transform:scale(.3);
-  }
-  65%{transform:scale(1.1)}
-  to{
-    opacity:1;
-    transform:scale(1);
-  }
-}
-#cracks{
-  position:absolute;
-  inset:-7%;
-  width:114%;
-  height:114%;
-  opacity:0;
-  pointer-events:none;
-}
-#cracks.show{
-  opacity:1;
-}
-#result.shaking #mainResult{
-  animation:shake .12s linear infinite;
-}
-@keyframes shake{
-  0%,100%{transform:translate(0,0)}
-  25%{transform:translate(-8px,5px)}
-  50%{transform:translate(7px,-5px)}
-  75%{transform:translate(-5px,-7px)}
+@keyframes numPop {
+  from { transform: translate(-50%,-50%) scale(.6); }
+  75% { transform: translate(-50%,-50%) scale(1.1); }
+  to { transform: translate(-50%,-50%) scale(1); }
 }
 
-/* 斬撃 */
+/* BASIC EFFECTS */
 
-.slash{
-  position:absolute;
-  z-index:90;
-  left:-30%;
-  top:48%;
-  width:160%;
-  height:22px;
-  opacity:0;
-  pointer-events:none;
-  transform-origin:left center;
-  background:linear-gradient(
-    90deg,transparent,#ff87c9 10%,
-    #fff 30%,#fff 75%,#ff1785,transparent
-  );
-  box-shadow:0 0 13px #fff,0 0 35px #ff0087;
+#dim,#black,#noise,#lightning,#flash {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
 }
-#slash1{
-  transform:rotate(-22deg) scaleX(0);
+#dim {
+  z-index: 12;
+  background: #0009;
 }
-#slash2{
-  transform:rotate(19deg) scaleX(0);
+#black {
+  z-index: 29;
+  background: black;
 }
-#slash1.go{
-  animation:slashA .4s ease-out;
+#noise {
+  z-index: 30;
+  background: repeating-linear-gradient(0deg,#fff6 0 2px,#0005 2px 5px);
 }
-#slash2.go{
-  animation:slashB .4s ease-out;
+#lightning {
+  z-index: 31;
+  background: linear-gradient(120deg,transparent 42%,white 47%,#ff5db6 49%,transparent 54%);
+  filter: drop-shadow(0 0 24px #ff1494);
 }
-@keyframes slashA{
-  0%{
-    opacity:0;
-    transform:rotate(-22deg) scaleX(0);
-  }
-  25%,75%{opacity:1}
-  100%{
-    opacity:0;
-    transform:rotate(-22deg) scaleX(1);
-  }
+#flash {
+  z-index: 165;
+  background: white;
 }
-@keyframes slashB{
-  0%{
-    opacity:0;
-    transform:rotate(19deg) scaleX(0);
-  }
-  25%,75%{opacity:1}
-  100%{
-    opacity:0;
-    transform:rotate(19deg) scaleX(1);
-  }
+.flashGo,.noiseGo,.lightGo {
+  animation: flashAnim .4s ease-out;
+}
+@keyframes flashAnim {
+  0%,100% { opacity: 0; }
+  40% { opacity: 1; }
 }
 
-/* 当たり */
+/* MISS */
 
-#hit{
-  position:absolute;
-  z-index:180;
-  top:46%;
-  left:50%;
-  width:100%;
-  text-align:center;
-  white-space:nowrap;
-  opacity:0;
-  transform:translate(-50%,-50%) scale(.1);
-  pointer-events:none;
-  font-size:clamp(65px,23vw,155px);
-  line-height:1.2;
-  font-weight:1000;
-  color:#fff2a8;
-  -webkit-text-stroke:clamp(4px,1.2vw,7px) #ff266b;
-  text-shadow:
-    0 6px #ff9b00,
-    0 12px #a90043,
-    0 0 28px #fff;
+#result {
+  position: absolute;
+  z-index: 36;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 18px;
+  background: #000a;
+  text-align: center;
+  pointer-events: none;
 }
-#hit.go{
-  animation:hitPop .7s
-    cubic-bezier(.16,.7,.2,1.2) forwards;
+#result.show { display: flex; }
+#near {
+  font-size: clamp(26px,9vw,56px);
+  font-weight: 1000;
+  color: #ffe18d;
+  text-shadow: 0 0 18px #ff8a00;
 }
-@keyframes hitPop{
-  0%{
-    opacity:0;
-    transform:translate(-50%,-50%) scale(.1);
-  }
-  55%{
-    opacity:1;
-    transform:translate(-50%,-50%) scale(1.18);
-  }
-  100%{
-    opacity:1;
-    transform:translate(-50%,-50%) scale(1);
-  }
+#mainResult {
+  position: relative;
+  font-size: clamp(42px,15vw,82px);
+  white-space: nowrap;
+  line-height: 1.2;
+  font-weight: 1000;
+  color: white;
+  -webkit-text-stroke: 3px #e00073;
+  text-shadow: 0 5px #8e0044,0 0 18px #ff379a;
 }
-#hitInfo{
-  position:absolute;
-  z-index:181;
-  top:65%;
-  left:4%;
-  width:92%;
-  text-align:center;
-  opacity:0;
-  pointer-events:none;
-  font-weight:900;
-  text-shadow:0 2px 5px #000;
+#mainResult.appear {
+  animation: resultPop .5s ease-out;
 }
-#hitInfo.show{
-  animation:info .6s forwards;
+#message {
+  font-size: clamp(14px,4vw,20px);
+  font-weight: 900;
+  color: #ffe5aa;
+  line-height: 1.7;
+  text-shadow: 0 2px 5px black;
 }
-#hitName{
-  display:inline-block;
-  margin-top:9px;
-  padding:10px 18px;
-  border:1px solid #ffe391;
-  border-radius:14px;
-  background:#530b33e8;
-  color:#ffec9c;
-  font-size:clamp(15px,4.8vw,24px);
-}
-@keyframes info{
-  from{
-    opacity:0;
-    transform:translateY(20px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-#tap{
-  position:absolute;
-  z-index:182;
-  bottom:9%;
-  width:100%;
-  text-align:center;
-  opacity:0;
-  pointer-events:none;
-  text-shadow:0 2px 5px #000;
-}
-#tap.show{
-  animation:blink 1.2s infinite;
-}
-@keyframes blink{
-  0%,100%{opacity:.4}
-  50%{opacity:1}
+@keyframes resultPop {
+  from { opacity: 0; transform: scale(.3); }
+  65% { transform: scale(1.1); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-/* 追加演出 */
+/* SLASH */
 
-#specialFX{
-  position:absolute;
-  inset:0;
-  z-index:95;
-  display:none;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  pointer-events:none;
-  overflow:hidden;
-  background:#100516;
+.slash {
+  position: absolute;
+  z-index: 95;
+  left: -30%;
+  top: 48%;
+  width: 160%;
+  height: 22px;
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: left center;
+  background: linear-gradient(90deg,transparent,#ff87c9 10%,white 30%,white 75%,#ff1785,transparent);
+  box-shadow: 0 0 13px white,0 0 35px #ff0087;
 }
-#specialFX.active{
-  display:flex;
+#slash1 { transform: rotate(-22deg) scaleX(0); }
+#slash2 { transform: rotate(19deg) scaleX(0); }
+#slash1.go { animation: slashA .4s ease-out; }
+#slash2.go { animation: slashB .4s ease-out; }
+@keyframes slashA {
+  0% { opacity: 0; transform: rotate(-22deg) scaleX(0); }
+  25%,75% { opacity: 1; }
+  100% { opacity: 0; transform: rotate(-22deg) scaleX(1); }
 }
-#specialFX .fxTitle{
-  font-size:clamp(38px,12vw,86px);
-  font-weight:1000;
-  text-shadow:0 0 18px #ffbc33;
-}
-#specialFX .fxSub{
-  font-size:clamp(16px,5vw,29px);
-  font-weight:900;
-  margin-top:22px;
-  text-shadow:0 3px 8px #000;
-}
-#specialFX.preview{
-  background:#100516
-    url("./0EB99059-7515-429E-B34D-8BFCE53ED083.png")
-    center/contain no-repeat;
-}
-#specialFX.preview .fxTitle{
-  display:none;
-}
-#specialFX.rainbow{
-  background:#100516
-    url("./CC92EC2B-BC54-4037-9F8C-45DB1AE891E2.png")
-    center/contain no-repeat;
-  animation:rainbowHue 1s linear infinite;
-}
-#specialFX.rainbow .fxTitle{
-  display:none;
-}
-@keyframes rainbowHue{
-  to{filter:hue-rotate(360deg)}
-}
-#specialFX.freeze{
-  background:#000;
-}
-#specialFX.push{
-  background:radial-gradient(circle,#581000,#080008 80%);
-}
-#specialFX.push .fxTitle{
-  font-size:clamp(25px,7vw,48px);
-}
-#specialFX .fxButton{
-  pointer-events:auto;
-  border:3px solid #ffdf78;
-  border-radius:50%;
-  width:min(59vw,245px);
-  height:min(59vw,245px);
-  background:
-    url("./BF43324D-F195-4E15-A371-AA8862724654.png")
-    center/contain no-repeat;
-  color:transparent;
-  font-size:60px;
-  font-weight:1000;
-  box-shadow:0 0 25px #f80,0 0 50px #d00;
-  animation:pushPulse .45s infinite alternate;
-}
-@keyframes pushPulse{
-  from{transform:scale(.96)}
-  to{transform:scale(1.04)}
+@keyframes slashB {
+  0% { opacity: 0; transform: rotate(19deg) scaleX(0); }
+  25%,75% { opacity: 1; }
+  100% { opacity: 0; transform: rotate(19deg) scaleX(1); }
 }
 
-/* =========================
-   画面完全破壊
-========================= */
+/* HIT */
 
-/*
-  画面上にヒビを重ね、
-  その下の表示をCanvas上に再現し、
-  破片ごとに分割して飛ばす。
-*/
-
-#glassArea{
-  position:absolute;
-  inset:0;
-  z-index:120;
-  pointer-events:none;
-  overflow:hidden;
-  display:none;
+#hit {
+  position: absolute;
+  z-index: 180;
+  top: 46%;
+  left: 50%;
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%,-50%) scale(.1);
+  pointer-events: none;
+  font-size: clamp(65px,23vw,155px);
+  line-height: 1.2;
+  font-weight: 1000;
+  color: #fff2a8;
+  -webkit-text-stroke: clamp(4px,1.2vw,7px) #ff266b;
+  text-shadow: 0 6px #ff9b00,0 12px #a90043,0 0 28px white;
 }
-#glassArea.active{
-  display:block;
+#hit.go {
+  animation: hitPop .7s cubic-bezier(.16,.7,.2,1.2) forwards;
 }
-
-/* 元の割れ画像を使用 */
-
-#glassCrack{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  opacity:0;
-  background:
-    url("./8CC59DB8-9809-47C1-89F3-8FA4895B18BD.png")
-    center/contain no-repeat;
-  mix-blend-mode:screen;
-  filter:contrast(1.45) brightness(1.35);
-  transform-origin:50% 48%;
+@keyframes hitPop {
+  0% { opacity: 0; transform: translate(-50%,-50%) scale(.1); }
+  55% { opacity: 1; transform: translate(-50%,-50%) scale(1.18); }
+  100% { opacity: 1; transform: translate(-50%,-50%) scale(1); }
 }
-
-#glassCrack.first{
-  animation:firstCrack .38s steps(3,end) forwards;
+#hitInfo {
+  position: absolute;
+  z-index: 181;
+  top: 65%;
+  left: 4%;
+  width: 92%;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  font-weight: 900;
+  text-shadow: 0 2px 5px black;
 }
-#glassCrack.second{
-  animation:secondCrack .42s steps(3,end) forwards;
+#hitInfo.show { animation: info .6s forwards; }
+#hitName {
+  display: inline-block;
+  margin-top: 9px;
+  padding: 10px 18px;
+  border: 1px solid #ffe391;
+  border-radius: 14px;
+  background: #530b33e8;
+  color: #ffec9c;
+  font-size: clamp(15px,4.8vw,24px);
 }
-@keyframes firstCrack{
-  0%{
-    opacity:0;
-    clip-path:circle(0% at 50% 48%);
-    transform:scale(.9);
-  }
-  100%{
-    opacity:1;
-    clip-path:circle(24% at 50% 48%);
-    transform:scale(1);
-  }
+@keyframes info {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-@keyframes secondCrack{
-  0%{
-    opacity:1;
-    clip-path:circle(24% at 50% 48%);
-    transform:scale(1);
-  }
-  100%{
-    opacity:1;
-    clip-path:circle(95% at 50% 48%);
-    transform:scale(1.06);
-  }
+#tap {
+  position: absolute;
+  z-index: 182;
+  bottom: 9%;
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  font-weight: 900;
+  text-shadow: 0 2px 5px black;
 }
-
-/* 画面ごと割れるようにするための
-   カバーと破片用Canvas */
-
-#glassUnder{
-  position:absolute;
-  inset:0;
-  z-index:1;
-  background:#0c0612;
-  opacity:0;
-}
-#glassCanvas{
-  position:absolute;
-  inset:0;
-  z-index:3;
-  width:100%;
-  height:100%;
-}
-#glassCrack{
-  z-index:2;
-}
-#glassGlare{
-  position:absolute;
-  inset:0;
-  z-index:4;
-  opacity:0;
-  background:radial-gradient(
-    circle at 50% 48%,
-    #fff 0%,
-    #ffffff9c 13%,
-    #b5edff55 42%,
-    transparent 72%
-  );
-}
-#glassGlare.go{
-  animation:glassGlare .35s ease-out;
-}
-@keyframes glassGlare{
-  0%,100%{opacity:0}
-  24%{opacity:1}
+#tap.show { animation: blink 1.2s infinite; }
+@keyframes blink {
+  0%,100% { opacity: .4; }
+  50% { opacity: 1; }
 }
 
-#glassArea.rumbling{
-  animation:glassRumble .09s linear infinite;
+/* SPECIAL EFFECTS */
+
+#specialFX {
+  position: absolute;
+  inset: 0;
+  z-index: 90;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+  background: #100516;
+  overflow: hidden;
 }
-@keyframes glassRumble{
-  0%{transform:translate(0,0)}
-  25%{transform:translate(-5px,3px)}
-  50%{transform:translate(5px,-4px)}
-  75%{transform:translate(-3px,-3px)}
+#specialFX.active { display: flex; }
+#specialFX .fxTitle {
+  font-size: clamp(38px,12vw,86px);
+  font-weight: 1000;
+  text-shadow: 0 0 18px #ffbc33;
+}
+#specialFX .fxSub {
+  margin-top: 22px;
+  font-size: clamp(16px,5vw,29px);
+  font-weight: 900;
+  text-shadow: 0 3px 8px black;
+}
+#specialFX.preview {
+  background: #100516 url("./0EB99059-7515-429E-B34D-8BFCE53ED083.png") center / contain no-repeat;
+}
+#specialFX.preview .fxTitle { display: none; }
+#specialFX.rainbow {
+  background: #100516 url("./CC92EC2B-BC54-4037-9F8C-45DB1AE891E2.png") center / contain no-repeat;
+  animation: rainbowHue 1s linear infinite;
+}
+#specialFX.rainbow .fxTitle { display: none; }
+@keyframes rainbowHue {
+  to { filter: hue-rotate(360deg); }
+}
+#specialFX.freeze { background: black; }
+#specialFX.push {
+  background: radial-gradient(circle,#581000,#080008 80%);
+}
+#specialFX.push .fxTitle {
+  font-size: clamp(25px,7vw,48px);
+}
+#specialFX .fxButton {
+  pointer-events: auto;
+  border: 3px solid #ffdf78;
+  border-radius: 50%;
+  width: min(59vw,245px);
+  height: min(59vw,245px);
+  background: url("./BF43324D-F195-4E15-A371-AA8862724654.png") center / contain no-repeat;
+  color: transparent;
+  font-size: 60px;
+  font-weight: 1000;
+  box-shadow: 0 0 25px #f80,0 0 50px #d00;
+  animation: pushPulse .45s infinite alternate;
+}
+@keyframes pushPulse {
+  from { transform: scale(.96); }
+  to { transform: scale(1.04); }
 }
 
-/* 選べるヒビ発生タイミングの表示 */
+/* STARS */
 
-#breakHint{
-  position:absolute;
-  z-index:125;
-  bottom:17%;
-  width:100%;
-  text-align:center;
-  color:#dff9ff;
-  font-size:14px;
-  font-weight:900;
-  opacity:0;
-  pointer-events:none;
-  text-shadow:0 0 12px #fff,0 2px 5px #000;
+.shooting {
+  position: absolute;
+  z-index: 32;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 12px white,0 0 25px #ff62b9;
+  pointer-events: none;
+  animation: shoot .9s linear forwards;
 }
-
-/* 流れ星とキラキラ */
-
-.shooting{
-  position:absolute;
-  z-index:32;
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:#fff;
-  box-shadow:0 0 12px #fff,0 0 25px #ff62b9;
-  pointer-events:none;
-  animation:shoot .9s linear forwards;
+.shooting::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 2px;
+  width: 75px;
+  height: 2px;
+  background: linear-gradient(90deg,transparent,white);
 }
-.shooting::after{
-  content:"";
-  position:absolute;
-  right:0;
-  top:2px;
-  width:75px;
-  height:2px;
-  background:linear-gradient(90deg,transparent,#fff);
-}
-@keyframes shoot{
-  from{
-    opacity:0;
-    transform:translate(0,0);
-  }
-  20%{opacity:1}
-  to{
-    opacity:0;
-    transform:translate(240px,370px);
-  }
-}
-.particle{
-  position:absolute;
-  z-index:100;
-  pointer-events:none;
-  color:#fff;
-  font-size:25px;
-  text-shadow:0 0 12px #fff,0 0 20px #ff2194;
-  animation:particleFly 1.1s ease-out forwards;
-}
-@keyframes particleFly{
-  from{
-    opacity:1;
-    transform:translate(0,0) rotate(0);
-  }
-  to{
-    opacity:0;
-    transform:
-      translate(var(--dx),var(--dy))
-      rotate(var(--rot)) scale(.2);
-  }
+@keyframes shoot {
+  from { opacity: 0; transform: translate(0,0); }
+  20% { opacity: 1; }
+  to { opacity: 0; transform: translate(240px,370px); }
 }
 
-/* 期待度 */
+/* GLASS BREAK */
 
-#modal{
-  position:fixed;
-  inset:0;
-  z-index:300;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  background:#000d;
-  padding:15px;
+#glassArea {
+  position: absolute;
+  inset: 0;
+  z-index: 120;
+  overflow: hidden;
+  display: none;
+  pointer-events: none;
 }
-#modal.open{
-  display:flex;
+#glassArea.active { display: block; }
+#glassCanvas {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
 }
-#guide{
-  width:min(94vw,430px);
-  max-height:88dvh;
-  overflow:auto;
-  padding:20px 14px;
-  text-align:center;
-  border:2px solid #ff8bc5;
-  border-radius:22px;
-  background:linear-gradient(#580031,#1b0013);
+#glassUnder {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: #110816;
+  opacity: 0;
 }
-#guide h2{
-  color:#ffe6a1;
+#glassLight {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  opacity: 0;
+  background: radial-gradient(circle at 50% 48%,white 0%,#ffffffc9 12%,#ccefff77 35%,transparent 70%);
 }
-#guide p{
-  padding:8px 0;
-  border-bottom:1px solid #ffffff30;
-  font-weight:800;
+#glassLight.go {
+  animation: glassFlash .35s ease-out;
 }
-#guide em{
-  color:#ffe58d;
-  font-style:normal;
+@keyframes glassFlash {
+  0%,100% { opacity: 0; }
+  25% { opacity: 1; }
 }
-#closeGuide{
-  margin:12px;
-  padding:10px 50px;
-  border:1px solid #fff;
-  border-radius:25px;
-  background:#ed2c8d;
-  color:#fff;
+#glassArea.shake {
+  animation: glassShake .09s linear infinite;
+}
+@keyframes glassShake {
+  0% { transform: translate(0,0); }
+  25% { transform: translate(-5px,3px); }
+  50% { transform: translate(5px,-4px); }
+  75% { transform: translate(-3px,-3px); }
+}
+
+/* GUIDE */
+
+#modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: #000d;
+  padding: 15px;
+}
+#modal.open { display: flex; }
+#guide {
+  width: min(94vw,430px);
+  max-height: 88dvh;
+  overflow: auto;
+  padding: 20px 14px;
+  text-align: center;
+  border: 2px solid #ff8bc5;
+  border-radius: 22px;
+  background: linear-gradient(#580031,#1b0013);
+}
+#guide h2 { color: #ffe6a1; }
+#guide p {
+  padding: 8px 0;
+  border-bottom: 1px solid #ffffff30;
+  font-weight: 800;
+}
+#guide em {
+  color: #ffe58d;
+  font-style: normal;
+}
+#closeGuide {
+  margin: 12px;
+  padding: 10px 50px;
+  background: #ed2c8d;
+  color: white;
+  border: 1px solid white;
+  border-radius: 25px;
 }
 </style>
 </head>
@@ -748,18 +521,13 @@ button{
 <div id="stage">
 
   <div id="start">
-    <div id="demoLabel">画面破壊テスト版</div>
-
-    <button id="guideBtn">
-      演出期待度を見る
-    </button>
-
+    <div id="testLabel">画面破壊テスト版</div>
+    <button id="guideBtn">演出期待度を見る</button>
     <div id="rate">
       画面破壊テスト
       <b>当たり確定</b>
       STARTで毎回発生
     </div>
-
     <button id="startBtn">START</button>
   </div>
 
@@ -771,21 +539,7 @@ button{
 
   <div id="result">
     <div id="near"></div>
-
-    <div id="mainResult">
-      ハズレ
-      <svg id="cracks" viewBox="0 0 320 130"
-        preserveAspectRatio="none">
-        <g fill="none" stroke="white" stroke-width="3">
-          <path d="M155 0 L143 24 L169 38 L147 56 L180 77 L155 100 L175 130"/>
-          <path d="M143 24 L106 15 L88 35 L54 28"/>
-          <path d="M169 38 L208 22 L229 44 L269 29"/>
-          <path d="M147 56 L107 70 L83 63 L40 93"/>
-          <path d="M180 77 L220 88 L244 74 L296 96"/>
-        </g>
-      </svg>
-    </div>
-
+    <div id="mainResult">ハズレ</div>
     <div id="message"></div>
   </div>
 
@@ -797,17 +551,13 @@ button{
     <div class="fxSub"></div>
   </div>
 
-  <!-- ガラス破壊 -->
   <div id="glassArea">
     <div id="glassUnder"></div>
-    <div id="glassCrack"></div>
     <canvas id="glassCanvas"></canvas>
-    <div id="glassGlare"></div>
+    <div id="glassLight"></div>
   </div>
 
-  <div id="breakHint"></div>
   <div id="flash"></div>
-
   <div id="hit">当たり</div>
 
   <div id="hitInfo">
@@ -816,22 +566,21 @@ button{
   </div>
 
   <div id="tap">画面をタップして戻る</div>
-
 </div>
 
 <div id="modal">
   <div id="guide">
     <h2>✨ 演出期待度 ✨</h2>
     <p>⚡ ピンク稲妻 → <em>チャンス</em></p>
-    <p>❓「？」 → <em>チャンス</em></p>
+    <p>❓「？」出現 → <em>チャンス</em></p>
     <p>🌑 ブラックアウト → <em>大チャンス</em></p>
+    <p>🟡 金色変化 → <em>大チャンス</em></p>
     <p>🎬 次回予告 → <em>約95%</em></p>
     <p>🌈 レインボー → <em>当たり確定</em></p>
     <p>💥 画面破壊 → <em>当たり確定</em></p>
     <p>🔴 デカPUSH → <em>チャンス</em></p>
-    <p>⚔️ 斬撃＋当たり → <em>当たり確定</em></p>
     <p style="color:#ffe58d">
-      ※この版は画面破壊を試すため、
+      現在は画面破壊テスト中。
       STARTで毎回当たります。
     </p>
     <button id="closeGuide">閉じる</button>
@@ -841,21 +590,14 @@ button{
 <script>
 "use strict";
 
-/* ==========================
-   設定
-========================== */
+/* ==================================
+   SETTINGS
+================================== */
 
 /*
-  true  = 画面破壊テスト
-          毎回必ず当たり
-
-  false = 通常モード
-          当選確率1/25
-
-  完成演出を見るため、
-  今はtrueにしています。
+  true  : 毎回画面破壊で当たり
+  false : 1/25の通常抽選
 */
-
 const TEST_MODE = true;
 
 const BACKGROUND_IMAGE =
@@ -864,19 +606,8 @@ const BACKGROUND_IMAGE =
 const CRACK_IMAGE =
   "./8CC59DB8-9809-47C1-89F3-8FA4895B18BD.png";
 
-const TENSION_SOUND =
-  "./Tension.mp3";
-
-const HIT_SOUND =
-  "./hit_music_final.mp3";
-
-/*
-  MOVはSafariで音声のみの再生に
-  失敗する場合があるため、
-  同名MP3がある場合はそちらを優先。
-
-  今GitHubにあるMOVも予備として指定。
-*/
+const TENSION_SOUND = "./Tension.mp3";
+const HIT_SOUND = "./hit_music_final.mp3";
 
 const GLASS_SOUND_MP3 =
   "./glass_crack_crack_shatter_v3.mp3";
@@ -884,36 +615,29 @@ const GLASS_SOUND_MP3 =
 const GLASS_SOUND_MOV =
   "./glass_crack_crack_shatter_v3_preview.mov";
 
-/* ==========================
-   基本
-========================== */
+/* ==================================
+   BASIC
+================================== */
 
 const $ = id => document.getElementById(id);
-
 const wait = ms =>
   new Promise(resolve => setTimeout(resolve,ms));
-
-const rnd = (min,max) =>
-  Math.floor(
-    Math.random()*(max-min+1)
-  )+min;
-
-const roll = chance =>
-  Math.random()<chance;
+const rnd = (a,b) =>
+  Math.floor(Math.random()*(b-a+1))+a;
+const roll = p => Math.random()<p;
 
 const stage = $("stage");
 const num = $("num");
 const result = $("result");
-const main = $("mainResult");
 const near = $("near");
+const main = $("mainResult");
 const message = $("message");
 const black = $("black");
 const fx = $("specialFX");
 
 const glassArea = $("glassArea");
-const glassCrack = $("glassCrack");
 const glassUnder = $("glassUnder");
-const glassGlare = $("glassGlare");
+const glassLight = $("glassLight");
 const glassCanvas = $("glassCanvas");
 const ctx = glassCanvas.getContext("2d");
 
@@ -921,9 +645,9 @@ let busy = false;
 let tapReady = false;
 let runId = 0;
 
-/* ==========================
-   音声
-========================== */
+/* ==================================
+   AUDIO
+================================== */
 
 const tensionAudio = new Audio(TENSION_SOUND);
 const hitAudio = new Audio(HIT_SOUND);
@@ -931,168 +655,74 @@ const glassAudio = new Audio();
 
 tensionAudio.loop = true;
 tensionAudio.volume = .7;
-
 hitAudio.volume = 1;
 glassAudio.volume = 1;
 
 tensionAudio.preload = "auto";
 hitAudio.preload = "auto";
 
-let glassSoundChosen = false;
-let glassSoundAvailable = false;
+let glassSoundReady = false;
+let soundChecked = false;
 
-async function chooseGlassSound(){
+async function chooseGlassSound() {
+  if (soundChecked) return;
+  soundChecked = true;
 
-  if(glassSoundChosen)return;
-
-  glassSoundChosen = true;
-
-  /*
-    MP3が存在すればMP3を使用。
-    なければMOVを試す。
-  */
-
-  for(const url of [
-    GLASS_SOUND_MP3,
-    GLASS_SOUND_MOV
-  ]){
-
-    try{
+  for (const url of [GLASS_SOUND_MP3,GLASS_SOUND_MOV]) {
+    try {
       const response = await fetch(url,{
         method:"HEAD",
         cache:"no-store"
       });
 
-      if(response.ok){
+      if (response.ok) {
         glassAudio.src = url;
         glassAudio.load();
-        glassSoundAvailable = true;
+        glassSoundReady = true;
         return;
       }
-    }catch(e){}
-  }
-
-  console.warn(
-    "ガラス破壊音のファイルが見つかりません"
-  );
-}
-
-function playAudio(audio){
-  try{
-    audio.pause();
-    audio.currentTime = 0;
-
-    const promise = audio.play();
-
-    if(promise && promise.catch){
-      promise.catch(error=>{
-        console.warn("音声再生:",error);
-      });
+    } catch (error) {
+      console.warn(error);
     }
-  }catch(e){
-    console.warn(e);
+  }
+  console.warn("ガラス音声が見つかりません");
+}
+
+function playAudio(audio) {
+  try {
+    audio.pause();
+    audio.currentTime = 0;
+    const promise = audio.play();
+    if (promise && promise.catch) {
+      promise.catch(e => console.warn("音声再生:",e));
+    }
+  } catch (error) {
+    console.warn(error);
   }
 }
 
-function stopAudio(audio){
-  try{
+function stopAudio(audio) {
+  try {
     audio.pause();
     audio.currentTime = 0;
-  }catch(e){}
+  } catch (error) {}
 }
 
-function tension(){
+function tension() {
   playAudio(tensionAudio);
 }
-
-function stopTension(){
+function stopTension() {
   stopAudio(tensionAudio);
 }
-
-function stopMusic(){
+function stopMusic() {
   stopAudio(tensionAudio);
   stopAudio(hitAudio);
   stopAudio(glassAudio);
 }
 
-/* ==========================
-   アニメーション共通
-========================== */
-
-function anim(el,cls){
-  el.classList.remove(cls);
-  void el.offsetWidth;
-  el.classList.add(cls);
-}
-
-function clearNum(){
-  num.textContent = "";
-  num.className = "";
-}
-
-async function digit(text,ms=1050,cls=""){
-  clearNum();
-
-  num.textContent = text;
-
-  if(cls)num.classList.add(cls);
-
-  num.classList.add("show");
-
-  await wait(ms);
-
-  num.classList.remove("show");
-}
-
-async function count(){
-  await digit("3",1000);
-  await wait(120);
-  await digit("2",1000);
-  await wait(120);
-  await digit("1",1150);
-}
-
-async function fastCount(){
-  await digit("3",500);
-  await digit("2",500);
-  await digit("1",650);
-}
-
-async function dots(){
-  await digit("…",1600,"dots");
-}
-
-async function blackout(ms=1400){
-  black.style.opacity = "1";
-  await wait(ms);
-  black.style.opacity = "0";
-}
-
-async function flash(){
-  anim($("flash"),"flashGo");
-  await wait(340);
-}
-
-async function lightning(){
-  anim($("lightning"),"lightGo");
-  await wait(500);
-}
-
-async function noise(){
-  anim($("noise"),"noiseGo");
-  await wait(550);
-}
-
-async function slashes(){
-  anim($("slash1"),"go");
-  await wait(135);
-  anim($("slash2"),"go");
-  await wait(320);
-}
-
-/* ==========================
-   44種類の当選演出名
-========================== */
+/* ==================================
+   44 WIN ROUTES
+================================== */
 
 const winNames = [
   "ハズレからブラックアウト復活",
@@ -1141,54 +771,113 @@ const winNames = [
   "ロゴ発光"
 ];
 
-/* ==========================
-   追加演出
-========================== */
+/* ==================================
+   ANIMATIONS
+================================== */
 
-function fxShow(mode,title="",sub=""){
+function anim(el,cls) {
+  el.classList.remove(cls);
+  void el.offsetWidth;
+  el.classList.add(cls);
+}
+
+function clearNum() {
+  num.textContent = "";
+  num.className = "";
+}
+
+async function digit(text,ms=1000,cls="") {
+  clearNum();
+  num.textContent = text;
+  if (cls) num.classList.add(cls);
+  num.classList.add("show");
+  await wait(ms);
+  num.classList.remove("show");
+}
+
+async function count() {
+  await digit("3",1000);
+  await wait(140);
+  await digit("2",1000);
+  await wait(140);
+  await digit("1",1150);
+}
+
+async function fastCount() {
+  await digit("3",500);
+  await digit("2",500);
+  await digit("1",650);
+}
+
+async function dots() {
+  await digit("…",1700,"dots");
+}
+
+async function blackout(ms=1400) {
+  black.style.opacity = "1";
+  await wait(ms);
+  black.style.opacity = "0";
+}
+
+async function flash() {
+  anim($("flash"),"flashGo");
+  await wait(340);
+}
+async function lightning() {
+  anim($("lightning"),"lightGo");
+  await wait(500);
+}
+async function noise() {
+  anim($("noise"),"noiseGo");
+  await wait(550);
+}
+async function slashes() {
+  anim($("slash1"),"go");
+  await wait(135);
+  anim($("slash2"),"go");
+  await wait(320);
+}
+
+/* ==================================
+   EXTRA FX
+================================== */
+
+function fxShow(mode,title="",sub="") {
   fx.className = "active "+mode;
   fx.querySelector(".fxTitle").textContent = title;
   fx.querySelector(".fxSub").textContent = sub;
 }
-
-function fxHide(){
+function fxHide() {
   fx.className = "";
   fx.querySelector(".fxTitle").textContent = "";
   fx.querySelector(".fxSub").textContent = "";
-  fx.querySelectorAll("button").forEach(
-    button=>button.remove()
-  );
+  fx.querySelectorAll("button").forEach(b=>b.remove());
 }
-
-async function fxFreeze(){
+async function fxFreeze() {
   stopTension();
   fxShow("freeze","……","フリーズ");
   await wait(2200);
   fxHide();
   tension();
 }
-
-async function fxPreview(){
+async function fxPreview() {
   await blackout(450);
   fxShow("preview","");
   await wait(2300);
   fxHide();
 }
-
-async function fxRainbow(){
+async function fxRainbow() {
   fxShow("rainbow","");
   await wait(2300);
   fxHide();
 }
-
-async function fxPromotion(){
+async function fxPromotion() {
   await digit("3",700);
   await digit("2",650,"red");
   await digit("1",1000,"gold");
   await lightning();
 }
-
-async function fxReverse(){
+async function fxReverse() {
   await digit("3",650);
   await digit("2",650);
   await digit("1",650);
@@ -1196,31 +885,25 @@ async function fxReverse(){
   await digit("2",700,"red");
   await digit("3",800,"gold");
 }
-
-async function fxPush(){
+async function fxPush() {
   fxShow("push","最終決戦！","ボタンを押せ！");
 
   const button = document.createElement("button");
-
   button.className = "fxButton";
   button.textContent = "PUSH";
   button.setAttribute("aria-label","PUSH");
-
-  fx.appendChild(button);
+  fx.append(button);
 
   await new Promise(resolve=>{
     let done = false;
-
     const timer = setTimeout(finish,12000);
-
-    function finish(){
-      if(done)return;
+    function finish() {
+      if (done) return;
       done = true;
       clearTimeout(timer);
       resolve();
     }
-
-    button.onclick = e=>{
+    button.onclick = e => {
       e.stopPropagation();
       finish();
     };
@@ -1229,108 +912,93 @@ async function fxPush(){
   fxHide();
 }
 
-/* ==========================
-   ハズレと当たり表示
-========================== */
+/* ==================================
+   RESULT
+================================== */
 
-function showFalseMiss(){
+function showFalseMiss() {
   result.classList.add("show");
   near.textContent = "";
   message.textContent = "";
   main.style.opacity = "1";
-
-  $("cracks").classList.remove("show");
-  result.classList.remove("shaking");
-
   anim(main,"appear");
 }
 
-function hideFalseMiss(){
-  result.classList.remove("show","shaking");
+function hideFalseMiss() {
+  result.classList.remove("show");
   main.classList.remove("appear");
-  $("cracks").classList.remove("show");
   main.style.opacity = "1";
 }
 
-async function falseMissPause(ms=1600){
+async function falseMissPause(ms=1500) {
   clearNum();
   showFalseMiss();
   await wait(ms);
 }
 
-async function miss(strong=false){
+async function miss(strong=false) {
   stopTension();
   clearNum();
-
   showFalseMiss();
 
   near.textContent = strong ? "惜しい！" : "";
-
   message.textContent = strong
     ? "次のチャレンジに期待！"
     : "またチャレンジしてね！";
 
-  await wait(2600);
+  await wait(2900);
   reset();
 }
 
-async function hit(name){
+async function hit(name) {
   stopTension();
-
   hideFalseMiss();
   clearNum();
 
-  await wait(180);
+  await wait(220);
   await flash();
   await slashes();
 
   anim($("hit"),"go");
   playAudio(hitAudio);
 
-  await wait(900);
-
+  await wait(950);
   $("hitName").textContent = name;
   anim($("hitInfo"),"show");
 
   await wait(450);
-
   tapReady = true;
   $("tap").classList.add("show");
 }
 
-async function noCount(){
+async function noCount() {
   hideFalseMiss();
   await noise();
   await digit("ノーカン！？",1300,"nocount");
   await fastCount();
 }
 
-/* ==========================
-   流れ星
-========================== */
+/* ==================================
+   STARS
+================================== */
 
-function stars(n=8){
-  for(let i=0;i<n;i++){
+function stars(n=8) {
+  for (let i=0;i<n;i++) {
     setTimeout(()=>{
-      if(!busy)return;
-
+      if (!busy) return;
       const s = document.createElement("div");
-
       s.className = "shooting";
       s.style.left = rnd(0,65)+"%";
       s.style.top = rnd(0,35)+"%";
-
-      stage.appendChild(s);
-
+      stage.append(s);
       setTimeout(()=>s.remove(),1000);
-
     },i*85);
   }
 }
 
-/* ==========================
-   画面破壊用画像
-========================== */
+/* ==================================
+   IMAGES AND CANVAS
+================================== */
 
 const bgImage = new Image();
 const crackImage = new Image();
@@ -1338,123 +1006,96 @@ const crackImage = new Image();
 bgImage.src = BACKGROUND_IMAGE;
 crackImage.src = CRACK_IMAGE;
 
-let cw = 0;
-let ch = 0;
-let dpr = 1;
-
-let animationId = null;
-
-/*
-  表示中の画面をCanvasに描くための
-  オフスクリーンCanvas
-*/
-
 const snapshot = document.createElement("canvas");
 const snapCtx = snapshot.getContext("2d");
 
-function resizeCanvas(){
+const crackMap = document.createElement("canvas");
+const crackCtx = crackMap.getContext("2d");
+
+let cw = 0;
+let ch = 0;
+let dpr = 1;
+let frameId = null;
+
+function resizeCanvases() {
   cw = stage.clientWidth;
   ch = stage.clientHeight;
 
-  dpr = Math.min(
-    window.devicePixelRatio || 1,
-    2
-  );
+  dpr = Math.min(window.devicePixelRatio||1,2);
 
   glassCanvas.width = Math.round(cw*dpr);
   glassCanvas.height = Math.round(ch*dpr);
-
   snapshot.width = Math.round(cw*dpr);
   snapshot.height = Math.round(ch*dpr);
-
-  glassCanvas.style.width = cw+"px";
-  glassCanvas.style.height = ch+"px";
 
   ctx.setTransform(dpr,0,0,dpr,0,0);
   snapCtx.setTransform(dpr,0,0,dpr,0,0);
 }
 
-window.addEventListener("resize",resizeCanvas);
+window.addEventListener("resize",resizeCanvases);
 
-/* ==========================
-   元の画面を描画
-========================== */
+function imageLoaded(img) {
+  if (img.complete) {
+    return Promise.resolve(img.naturalWidth>0);
+  }
+  return new Promise(resolve=>{
+    img.addEventListener("load",()=>resolve(true),{once:true});
+    img.addEventListener("error",()=>resolve(false),{once:true});
+  });
+}
 
-function drawBackground(target){
+/* ==================================
+   CAPTURE CURRENT DISPLAY
+================================== */
+
+/*
+  DOM画面を撮影する代わりに、
+  背景・数字・ハズレ文字を
+  Canvasへ再現する。
+*/
+
+function drawBackground(target) {
   target.fillStyle = "#170010";
   target.fillRect(0,0,cw,ch);
 
-  if(bgImage.complete &&
-     bgImage.naturalWidth>0){
+  if (!bgImage.naturalWidth) return;
 
-    const scale = ch/bgImage.naturalHeight;
+  const scale = ch/bgImage.naturalHeight;
+  const w = bgImage.naturalWidth*scale;
 
-    const w = bgImage.naturalWidth*scale;
-
-    target.drawImage(
-      bgImage,
-      (cw-w)/2,
-      0,
-      w,ch
-    );
-  }
+  target.drawImage(bgImage,(cw-w)/2,0,w,ch);
 }
 
-function captureDisplay(){
-
+function captureScreen() {
   snapCtx.clearRect(0,0,cw,ch);
-
   drawBackground(snapCtx);
 
-  /*
-    現在表示されている数字を
-    同じ位置に描く。
-  */
-
-  if(num.classList.contains("show")){
-
-    const text = num.textContent;
-
+  if (num.classList.contains("show")) {
+    const value = num.textContent;
     const style = getComputedStyle(num);
     const fontSize = parseFloat(style.fontSize);
 
     snapCtx.save();
-
-    snapCtx.font =
-      "1000 "+fontSize+"px sans-serif";
-
+    snapCtx.font = "1000 "+fontSize+"px sans-serif";
     snapCtx.textAlign = "center";
     snapCtx.textBaseline = "middle";
-
     snapCtx.lineJoin = "round";
     snapCtx.lineWidth = Math.max(5,fontSize*.09);
 
-    snapCtx.strokeStyle =
-      num.classList.contains("gold")
-        ? "#f4a000"
-        : "#ff4b9d";
-
-    snapCtx.fillStyle =
-      num.classList.contains("gold")
-        ? "#fff1a8"
-        : "#fff";
+    snapCtx.strokeStyle = num.classList.contains("gold")
+      ? "#f4a000" : "#ff4b9d";
+    snapCtx.fillStyle = num.classList.contains("gold")
+      ? "#fff1a8" : "#fff";
 
     snapCtx.shadowColor = "#ff379a";
     snapCtx.shadowBlur = 18;
 
-    snapCtx.strokeText(text,cw*.5,ch*.61);
-    snapCtx.fillText(text,cw*.5,ch*.61);
-
+    snapCtx.strokeText(value,cw*.5,ch*.61);
+    snapCtx.fillText(value,cw*.5,ch*.61);
     snapCtx.restore();
   }
 
-  /*
-    ハズレ表示中なら
-    ハズレ文字も破片に含める。
-  */
-
-  if(result.classList.contains("show")){
-
+  if (result.classList.contains("show")) {
     snapCtx.save();
 
     snapCtx.fillStyle = "rgba(0,0,0,.6)";
@@ -1462,9 +1103,7 @@ function captureDisplay(){
 
     const fontSize = Math.min(cw*.17,82);
 
-    snapCtx.font =
-      "1000 "+fontSize+"px sans-serif";
-
+    snapCtx.font = "1000 "+fontSize+"px sans-serif";
     snapCtx.textAlign = "center";
     snapCtx.textBaseline = "middle";
     snapCtx.lineJoin = "round";
@@ -1481,231 +1120,320 @@ function captureDisplay(){
   }
 }
 
-/* ==========================
-   ガラス破片作成
-========================== */
+/* ==================================
+   READ CRACK IMAGE
+================================== */
 
-let shards = [];
-let dust = [];
+/*
+  割れ画像の明るい部分を読み取り、
+  分割点を少し寄せる。
+  破片とヒビは同じ幾何形状を使う。
+*/
 
-function createShards(){
+let crackPixels = null;
+let mapW = 0;
+let mapH = 0;
 
-  shards = [];
-  dust = [];
+function buildCrackMap() {
+  const scale = Math.min(1,480/Math.max(cw,ch));
 
-  const centerX = cw*.5;
-  const centerY = ch*.48;
+  mapW = Math.max(1,Math.floor(cw*scale));
+  mapH = Math.max(1,Math.floor(ch*scale));
 
-  /*
-    画面を多数の不規則な三角形に分ける。
+  crackMap.width = mapW;
+  crackMap.height = mapH;
+  crackCtx.clearRect(0,0,mapW,mapH);
 
-    各破片に元の画面を映して
-    バラバラに飛ばす。
-  */
+  if (!crackImage.naturalWidth) {
+    crackPixels = null;
+    return;
+  }
 
-  const maxRadius =
-    Math.sqrt(cw*cw+ch*ch);
+  const imageScale = Math.min(
+    mapW/crackImage.naturalWidth,
+    mapH/crackImage.naturalHeight
+  );
 
-  const rings = [
-    0,
-    38,
-    90,
-    160,
-    270,
-    maxRadius
-  ];
+  const iw = crackImage.naturalWidth*imageScale;
+  const ih = crackImage.naturalHeight*imageScale;
 
-  const segments = [
-    16,22,30,38,46
-  ];
+  crackCtx.drawImage(
+    crackImage,
+    (mapW-iw)/2,
+    (mapH-ih)/2,
+    iw,ih
+  );
 
-  for(let ring=0;ring<rings.length-1;ring++){
+  try {
+    crackPixels = crackCtx.getImageData(0,0,mapW,mapH);
+  } catch (error) {
+    crackPixels = null;
+  }
+}
 
-    const count = segments[ring];
+function crackBrightness(x,y) {
+  if (!crackPixels) return 0;
 
-    const inner = rings[ring];
-    const outer = rings[ring+1];
+  const px = Math.floor(x/cw*mapW);
+  const py = Math.floor(y/ch*mapH);
 
-    for(let i=0;i<count;i++){
+  if (px<0||py<0||px>=mapW||py>=mapH) return 0;
 
-      const a1 =
-        i/count*Math.PI*2;
+  const i = (py*mapW+px)*4;
+  const d = crackPixels.data;
 
-      const a2 =
-        (i+1)/count*Math.PI*2;
+  return (d[i]*.30+d[i+1]*.55+d[i+2]*.15)
+    *(d[i+3]/255)/255;
+}
 
-      const p1 = {
-        x:centerX+Math.cos(a1)*inner,
-        y:centerY+Math.sin(a1)*inner
-      };
+function snapToCrack(x,y,radius=18) {
+  if (!crackPixels) return {x,y};
 
-      const p2 = {
-        x:centerX+Math.cos(a1)*outer,
-        y:centerY+Math.sin(a1)*outer
-      };
+  let bestX = x;
+  let bestY = y;
+  let bestScore = -1;
 
-      const p3 = {
-        x:centerX+Math.cos(a2)*outer,
-        y:centerY+Math.sin(a2)*outer
-      };
+  const step = Math.max(3,radius/4);
 
-      const p4 = {
-        x:centerX+Math.cos(a2)*inner,
-        y:centerY+Math.sin(a2)*inner
-      };
+  for (let dy=-radius;dy<=radius;dy+=step) {
+    for (let dx=-radius;dx<=radius;dx+=step) {
+      const distance = Math.hypot(dx,dy);
+      if (distance>radius) continue;
 
-      /*
-        1区画を2つの三角形に分割。
-      */
+      const bx = x+dx;
+      const by = y+dy;
+      const score = crackBrightness(bx,by)
+        -(distance/radius)*.27;
 
-      const triangles = [
-        [p1,p2,p3],
-        [p1,p3,p4]
-      ];
-
-      for(const points of triangles){
-
-        const mx = points.reduce(
-          (sum,p)=>sum+p.x,0
-        )/3;
-
-        const my = points.reduce(
-          (sum,p)=>sum+p.y,0
-        )/3;
-
-        const angle = Math.atan2(
-          my-centerY,
-          mx-centerX
-        );
-
-        const speed =
-          180+Math.random()*430;
-
-        shards.push({
-          points,
-          mx,my,
-
-          vx:
-            Math.cos(angle)*speed+
-            (Math.random()-.5)*200,
-
-          vy:
-            Math.sin(angle)*speed+
-            (Math.random()-.5)*180,
-
-          rotation:
-            (Math.random()-.5)*11,
-
-          depth:
-            .6+Math.random()*1.8,
-
-          duration:
-            .85+Math.random()*.65,
-
-          delay:
-            Math.random()*.12,
-
-          glint:
-            Math.random()
-        });
+      if (score>bestScore) {
+        bestScore = score;
+        bestX = bx;
+        bestY = by;
       }
     }
   }
 
-  /*
-    細かいガラス粉
-  */
+  if (bestScore<.22) return {x,y};
 
-  for(let i=0;i<240;i++){
+  return {x:bestX,y:bestY};
+}
 
+/* ==================================
+   GENERATE GLASS GEOMETRY
+================================== */
+
+let shards = [];
+let crackLines = [];
+let dust = [];
+
+function makeGeometry() {
+  shards = [];
+  crackLines = [];
+  dust = [];
+
+  const cx = cw*.5;
+  const cy = ch*.48;
+  const maxRadius = Math.hypot(cw,ch)*.9;
+
+  const rings = [0,37,91,160,270,maxRadius];
+  const sides = 28;
+  const vertices = [];
+
+  for (let ring=0;ring<rings.length;ring++) {
+    vertices[ring] = [];
+
+    for (let i=0;i<sides;i++) {
+      if (ring===0) {
+        vertices[ring][i] = {x:cx,y:cy};
+        continue;
+      }
+
+      const angle = i/sides*Math.PI*2
+        +(Math.random()-.5)*.09;
+      const radius = rings[ring]
+        *(1+(Math.random()-.5)*.1);
+
+      const x = cx+Math.cos(angle)*radius;
+      const y = cy+Math.sin(angle)*radius;
+
+      vertices[ring][i] = snapToCrack(
+        x,y,ring<2?12:22
+      );
+    }
+  }
+
+  function line(a,b) {
+    crackLines.push({a,b});
+  }
+
+  function shard(points) {
+    const mx = points.reduce((s,p)=>s+p.x,0)/points.length;
+    const my = points.reduce((s,p)=>s+p.y,0)/points.length;
+    const angle = Math.atan2(my-cy,mx-cx);
+    const speed = 170+Math.random()*360;
+
+    shards.push({
+      points,mx,my,
+      vx:Math.cos(angle)*speed+(Math.random()-.5)*140,
+      vy:Math.sin(angle)*speed+(Math.random()-.5)*130,
+      spin:(Math.random()-.5)*9,
+      depth:.65+Math.random()*1.55,
+      delay:Math.random()*.09,
+      duration:.9+Math.random()*.65,
+      shine:Math.random()
+    });
+  }
+
+  for (let ring=0;ring<rings.length-1;ring++) {
+    for (let i=0;i<sides;i++) {
+      const j = (i+1)%sides;
+
+      const a = vertices[ring][i];
+      const b = vertices[ring+1][i];
+      const c = vertices[ring+1][j];
+      const d = vertices[ring][j];
+
+      if (ring===0) {
+        shard([a,b,c]);
+        line(a,b);
+        line(b,c);
+      } else {
+        if (Math.random()<.5) {
+          shard([a,b,c]);
+          shard([a,c,d]);
+          line(a,c);
+        } else {
+          shard([a,b,d]);
+          shard([b,c,d]);
+          line(b,d);
+        }
+
+        line(a,b);
+        line(b,c);
+      }
+    }
+  }
+
+  for (let i=0;i<180;i++) {
     const angle = Math.random()*Math.PI*2;
-    const speed = 140+Math.random()*640;
+    const speed = 120+Math.random()*540;
 
     dust.push({
-      x:centerX+(Math.random()-.5)*35,
-      y:centerY+(Math.random()-.5)*35,
-
+      x:cx+(Math.random()-.5)*35,
+      y:cy+(Math.random()-.5)*35,
       vx:Math.cos(angle)*speed,
       vy:Math.sin(angle)*speed,
-
-      size:.5+Math.random()*2.5,
-      life:.45+Math.random()*1.1,
-      delay:Math.random()*.2,
-
-      color:
-        Math.random()<.5
-          ? "#fff"
-          : "#c8efff"
+      size:.5+Math.random()*2.4,
+      life:.5+Math.random()*1.1,
+      delay:Math.random()*.18
     });
   }
 }
 
-/* ==========================
-   1枚の破片を描画
-========================== */
+/* ==================================
+   DRAW CRACKS
+================================== */
 
-function renderShard(shard,elapsed){
+function drawCrackLines(progress) {
+  const cx = cw*.5;
+  const cy = ch*.48;
+  const radius = Math.hypot(cw,ch)*progress;
 
+  ctx.save();
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+
+  /* 既存画像は弱い質感として使用 */
+
+  if (crackImage.naturalWidth) {
+    const scale = Math.min(
+      cw/crackImage.naturalWidth,
+      ch/crackImage.naturalHeight
+    );
+
+    const iw = crackImage.naturalWidth*scale;
+    const ih = crackImage.naturalHeight*scale;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(cx,cy,Math.max(1,radius),0,Math.PI*2);
+    ctx.clip();
+
+    ctx.globalAlpha = .16;
+    ctx.globalCompositeOperation = "screen";
+
+    ctx.drawImage(
+      crackImage,
+      (cw-iw)/2,
+      (ch-ih)/2,
+      iw,ih
+    );
+
+    ctx.restore();
+  }
+
+  for (const line of crackLines) {
+    const mx = (line.a.x+line.b.x)/2;
+    const my = (line.a.y+line.b.y)/2;
+
+    if (Math.hypot(mx-cx,my-cy)>radius) continue;
+
+    ctx.beginPath();
+    ctx.moveTo(line.a.x,line.a.y);
+    ctx.lineTo(line.b.x,line.b.y);
+
+    ctx.strokeStyle = "rgba(20,37,55,.82)";
+    ctx.lineWidth = 3.5;
+    ctx.shadowBlur = 0;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(line.a.x,line.a.y);
+    ctx.lineTo(line.b.x,line.b.y);
+
+    ctx.strokeStyle = "rgba(245,251,255,.94)";
+    ctx.lineWidth = 1.3;
+    ctx.shadowColor = "#d7f5ff";
+    ctx.shadowBlur = 5;
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
+
+/* ==================================
+   DRAW GLASS PIECE
+================================== */
+
+function drawShard(shard,elapsed) {
   const t = elapsed-shard.delay;
-
-  if(t<0)return;
+  if (t<0) return;
 
   const p = t/shard.duration;
-
-  if(p>=1)return;
+  if (p>=1) return;
 
   const dx = shard.vx*t;
   const dy = shard.vy*t+150*t*t;
-
-  const angle = shard.rotation*t;
-
-  /*
-    手前へ飛び出すにつれ
-    破片を大きくする。
-  */
-
-  const scale =
-    1+p*shard.depth;
-
-  const opacity =
-    Math.pow(1-p,1.15);
+  const rotation = shard.spin*t;
+  const scale = 1+p*shard.depth;
+  const opacity = Math.pow(1-p,1.15);
 
   ctx.save();
-
   ctx.globalAlpha = opacity;
 
-  ctx.translate(
-    shard.mx+dx,
-    shard.my+dy
-  );
-
-  ctx.rotate(angle);
+  ctx.translate(shard.mx+dx,shard.my+dy);
+  ctx.rotate(rotation);
   ctx.scale(scale,scale);
-
-  ctx.translate(
-    -shard.mx,
-    -shard.my
-  );
+  ctx.translate(-shard.mx,-shard.my);
 
   ctx.beginPath();
 
-  for(let i=0;i<shard.points.length;i++){
-
-    const pt = shard.points[i];
-
-    if(i===0){
-      ctx.moveTo(pt.x,pt.y);
-    }else{
-      ctx.lineTo(pt.x,pt.y);
-    }
-  }
+  shard.points.forEach((point,i)=>{
+    if (i===0) ctx.moveTo(point.x,point.y);
+    else ctx.lineTo(point.x,point.y);
+  });
 
   ctx.closePath();
-
-  /*
-    三角形の内側に
-    割れる前の画面を描く。
-  */
 
   ctx.save();
   ctx.clip();
@@ -1716,260 +1444,190 @@ function renderShard(shard,elapsed){
     0,0,cw,ch
   );
 
-  /*
-    ガラスの反射を重ねる。
-  */
-
-  const gradient = ctx.createLinearGradient(
-    shard.mx-35,
-    shard.my-35,
-    shard.mx+35,
-    shard.my+35
+  const g = ctx.createLinearGradient(
+    shard.mx-35,shard.my-35,
+    shard.mx+35,shard.my+35
   );
 
-  gradient.addColorStop(
-    0,
-    "rgba(255,255,255,.32)"
-  );
+  g.addColorStop(0,"rgba(255,255,255,.30)");
+  g.addColorStop(.45,"rgba(165,215,255,.03)");
+  g.addColorStop(1,"rgba(255,255,255,.24)");
 
-  gradient.addColorStop(
-    .4,
-    "rgba(175,225,255,.05)"
-  );
-
-  gradient.addColorStop(
-    1,
-    "rgba(255,255,255,.20)"
-  );
-
-  ctx.fillStyle = gradient;
+  ctx.fillStyle = g;
   ctx.fill();
 
   ctx.restore();
 
-  /*
-    光るガラスの輪郭
-  */
-
-  ctx.strokeStyle =
-    "rgba(235,250,255,.9)";
-
-  ctx.lineWidth = 1.25;
-
-  ctx.shadowColor =
-    "rgba(160,225,255,.95)";
-
+  ctx.lineWidth = 1.1;
+  ctx.strokeStyle = "rgba(235,250,255,.84)";
+  ctx.shadowColor = "rgba(160,220,255,.85)";
   ctx.shadowBlur = 5;
-
   ctx.stroke();
 
-  /*
-    一部の破片を強く反射
-  */
-
-  if(shard.glint>.76){
-
+  if (shard.shine>.8) {
     const a = shard.points[0];
     const b = shard.points[1];
 
     ctx.beginPath();
-
     ctx.moveTo(
-      a.x*.8+b.x*.2,
-      a.y*.8+b.y*.2
+      a.x*.75+b.x*.25,
+      a.y*.75+b.y*.25
     );
-
     ctx.lineTo(
-      a.x*.2+b.x*.8,
-      a.y*.2+b.y*.8
+      a.x*.25+b.x*.75,
+      a.y*.25+b.y*.75
     );
 
-    ctx.strokeStyle =
-      "rgba(255,255,255,.88)";
-
+    ctx.strokeStyle = "rgba(255,255,255,.92)";
     ctx.lineWidth = 1;
-
     ctx.stroke();
   }
 
   ctx.restore();
 }
 
-/* ==========================
-   ガラス粉
-========================== */
+/* ==================================
+   DRAW DUST
+================================== */
 
-function renderDust(elapsed){
-
+function drawDust(elapsed) {
   ctx.save();
 
-  for(const d of dust){
-
+  for (const d of dust) {
     const t = elapsed-d.delay;
-
-    if(t<0 || t>d.life)continue;
+    if (t<0||t>d.life) continue;
 
     const p = t/d.life;
-
     ctx.globalAlpha = 1-p;
-    ctx.fillStyle = d.color;
+    ctx.fillStyle = p<.5 ? "#fff" : "#c8efff";
 
     ctx.beginPath();
-
     ctx.arc(
       d.x+d.vx*t,
-      d.y+d.vy*t+170*t*t,
+      d.y+d.vy*t+160*t*t,
       d.size*(1-p*.4),
-      0,
-      Math.PI*2
+      0,Math.PI*2
     );
-
     ctx.fill();
   }
 
   ctx.restore();
 }
 
-/* ==========================
-   画面破片アニメーション
-========================== */
+/* ==================================
+   SHATTER ANIMATION
+================================== */
 
-function flyGlass(){
-
-  createShards();
-
+function flyGlass() {
   return new Promise(resolve=>{
+    const started = performance.now();
 
-    const startTime = performance.now();
-
-    function frame(now){
-
-      const elapsed =
-        (now-startTime)/1000;
+    function frame(now) {
+      const elapsed = (now-started)/1000;
 
       ctx.clearRect(0,0,cw,ch);
 
-      for(const shard of shards){
-        renderShard(shard,elapsed);
+      for (const shard of shards) {
+        drawShard(shard,elapsed);
       }
 
-      renderDust(elapsed);
+      drawDust(elapsed);
 
-      if(elapsed<1.65){
-
-        animationId =
-          requestAnimationFrame(frame);
-
-      }else{
-
-        animationId = null;
-
+      if (elapsed<1.65) {
+        frameId = requestAnimationFrame(frame);
+      } else {
+        frameId = null;
         ctx.clearRect(0,0,cw,ch);
-
         resolve();
       }
     }
 
-    animationId = requestAnimationFrame(frame);
+    frameId = requestAnimationFrame(frame);
   });
 }
 
-/* ==========================
-   ピキッ→ピキッ→パリーン
-========================== */
+/* ==================================
+   CRACK GROWING
+================================== */
 
-async function glassBreak(){
+function growCracks(from,to,duration) {
+  return new Promise(resolve=>{
+    const started = performance.now();
 
-  /*
-    ヒビが発生する直前の画面を保存。
-    数字やハズレも描画対象にする。
-  */
+    function frame(now) {
+      const p = Math.min((now-started)/duration,1);
 
-  captureDisplay();
+      ctx.clearRect(0,0,cw,ch);
+      drawCrackLines(from+(to-from)*p);
+
+      if (p<1) {
+        frameId = requestAnimationFrame(frame);
+      } else {
+        frameId = null;
+        resolve();
+      }
+    }
+
+    frameId = requestAnimationFrame(frame);
+  });
+}
+
+/* ==================================
+   MAIN GLASS BREAK
+================================== */
+
+async function glassBreak() {
+  await Promise.all([
+    imageLoaded(bgImage),
+    imageLoaded(crackImage)
+  ]);
+
+  resizeCanvases();
+  captureScreen();
+  buildCrackMap();
+  makeGeometry();
 
   stopTension();
 
   glassArea.classList.add("active");
-
-  glassCrack.className = "";
   glassUnder.style.opacity = "0";
+  ctx.clearRect(0,0,cw,ch);
 
-  /*
-    効果音を開始。
-    MOVだけの環境ではブラウザにより
-    再生できない可能性あり。
-  */
+  /* 効果音開始 */
 
-  if(glassSoundAvailable){
-    playAudio(glassAudio);
-  }
+  if (glassSoundReady) playAudio(glassAudio);
 
-  /* 1発目：ピキッ！ */
+  /* ピキッ！ */
 
-  await wait(90);
+  await growCracks(0,.26,360);
+  await wait(150);
 
-  glassCrack.classList.add("first");
+  /* ピキッ！ */
 
-  await wait(430);
+  await growCracks(.26,1.08,440);
+  await wait(130);
 
-  /* 2発目：ピキッ！ */
+  /* パリーン！！ */
 
-  glassCrack.classList.remove("first");
-
-  void glassCrack.offsetWidth;
-
-  glassCrack.classList.add("second");
-
-  await wait(500);
-
-  /* 3発目：パリーン！！ */
-
-  glassArea.classList.add("rumbling");
-
-  anim(glassGlare,"go");
-
-  /*
-    元の画面を暗くし、
-    ガラス片が飛んでいく奥に
-    暗い空間が見えるようにする。
-  */
-
+  glassArea.classList.add("shake");
+  anim(glassLight,"go");
   glassUnder.style.opacity = "1";
 
-  glassCrack.style.opacity = "0";
-
-  /*
-    元の数字やハズレ表示を
-    破片の裏に隠す。
-  */
+  /* 元画面を隠し、破片の画像へ切り替え */
 
   num.style.visibility = "hidden";
-
-  const hadResult =
-    result.classList.contains("show");
-
-  if(hadResult){
-    result.style.visibility = "hidden";
-  }
-
-  /*
-    保存した元の画面を破片に分け、
-    四方へ飛ばす。
-  */
+  result.style.visibility = "hidden";
 
   await flyGlass();
 
-  glassArea.classList.remove("rumbling");
-
-  glassCrack.className = "";
-  glassCrack.style.opacity = "";
-
+  glassArea.classList.remove("shake");
   glassArea.classList.remove("active");
-
   glassUnder.style.opacity = "0";
 
   num.style.visibility = "";
   result.style.visibility = "";
+
+  ctx.clearRect(0,0,cw,ch);
 
   hideFalseMiss();
   clearNum();
@@ -1977,225 +1635,168 @@ async function glassBreak(){
   await flash();
 }
 
-/* ==========================
-   テスト用画面破壊ルート
-========================== */
+/* ==================================
+   RANDOM GLASS BREAK HIT
+================================== */
 
-/*
-  テストでは毎回画面破壊。
-
-  START直後・数字3・2・1・
-  ハズレ復活・ノーカン・PUSHなど
-  発生タイミングはランダム。
-*/
-
-async function guaranteedGlassHit(){
-
+async function guaranteedGlassHit() {
   const pattern = rnd(0,7);
 
-  switch(pattern){
-
+  switch (pattern) {
     case 0:
-      // START直後
-      await wait(700);
+      await wait(650);
       break;
 
     case 1:
-      // 数字3の途中
       num.textContent = "3";
       num.className = "show";
-      await wait(850);
+      await wait(780);
       break;
 
     case 2:
-      // 数字2の途中
-      await digit("3",750);
-
+      await digit("3",800);
       num.textContent = "2";
       num.className = "show";
-      await wait(850);
+      await wait(780);
       break;
 
     case 3:
-      // 数字1の途中
-      await digit("3",750);
-      await digit("2",750);
-
+      await digit("3",800);
+      await digit("2",800);
       num.textContent = "1";
       num.className = "show";
-      await wait(850);
+      await wait(780);
       break;
 
     case 4:
-      // カウント終了直後
       await count();
-      await wait(600);
+      await wait(650);
       break;
 
     case 5:
-      // ハズレ表示から復活
       await count();
-      await falseMissPause(1400);
+      await falseMissPause(1350);
       break;
 
     case 6:
-      // ノーカンから復活
       await count();
-      await falseMissPause(850);
+      await falseMissPause(1000);
       await noCount();
+      num.textContent = "1";
+      num.className = "show";
+      await wait(650);
+      break;
 
+    case 7:
+      await count();
+      await fxPush();
       num.textContent = "1";
       num.className = "show";
       await wait(550);
       break;
-
-    case 7:
-      // デカPUSH後
-      await count();
-      await fxPush();
-
-      num.textContent = "1";
-      num.className = "show";
-      await wait(500);
-      break;
   }
 
-  /*
-    必ずここで完全破壊。
-  */
-
   await glassBreak();
-
-  /*
-    100%当たり。
-  */
-
-  await hit("画面完全破壊・当たり確定");
+  await hit("画面破壊・当たり確定");
 }
 
-/* ==========================
-   復活4種類
-========================== */
+/* ==================================
+   REVIVALS
+================================== */
 
-async function revivalBlack(){
+async function revivalBlack() {
   await count();
   await falseMissPause(1600);
   await blackout(1700);
   await hit(winNames[0]);
 }
 
-async function revivalNoCount(won){
+async function revivalNoCount(won) {
   await count();
   await falseMissPause(1300);
   await noCount();
 
-  if(won){
-    await hit(winNames[1]);
-  }else{
-    await miss(true);
-  }
+  if (won) await hit(winNames[1]);
+  else await miss(true);
 }
 
-async function revivalCrack(){
+async function revivalCrack() {
   await count();
-  await falseMissPause(1200);
-
-  anim($("cracks"),"show");
-  await wait(500);
-
-  result.classList.add("shaking");
-  await wait(600);
-
+  await falseMissPause(1300);
   await glassBreak();
   await hit(winNames[2]);
 }
 
-async function revivalDouble(won){
+async function revivalDouble(won) {
   await count();
   await falseMissPause(1100);
   await noCount();
   await falseMissPause(1100);
   await noCount();
 
-  if(won){
-    await hit(winNames[3]);
-  }else{
-    await miss(true);
-  }
+  if (won) await hit(winNames[3]);
+  else await miss(true);
 }
 
-/* ==========================
-   既存の通常当選演出
-========================== */
+/* ==================================
+   COMMON ROUTES
+================================== */
 
-async function common(i){
-
-  switch(i){
-
+async function common(i) {
+  switch (i) {
     case 0:
       await count();
       await digit("1",1500,"big");
       break;
-
     case 1:
       await count();
       await digit("1",900,"red");
       break;
-
     case 2:
       await count();
       await lightning();
       break;
-
     case 3:
       await digit("3");
       await noise();
       await digit("2");
       await digit("1");
       break;
-
     case 4:
       await digit("3",700);
       await digit("3",450,"red");
       await digit("3",700,"gold");
       break;
-
     case 5:
       await digit("3");
       await digit("2");
       await digit("1",3700);
       break;
-
     case 6:
       await count();
       await digit("?",1200,"question");
       break;
-
     case 7:
       $("dim").style.opacity = "1";
       await count();
       $("dim").style.opacity = "0";
       break;
-
     case 8:
       await digit("3");
       await digit("2");
       await digit("2",700);
       await digit("1");
       break;
-
     case 9:
       await count();
       stopTension();
       await wait(1700);
       break;
-
     case 10:
       await count();
       await wait(950);
       await fastCount();
       break;
-
     case 11:
       await digit("3");
       await flash();
@@ -2205,40 +1806,37 @@ async function common(i){
   }
 }
 
-async function winRoute(i){
+/* ==================================
+   ORIGINAL 44 WIN ROUTES
+================================== */
 
-  if(i===0)return revivalBlack();
-  if(i===1)return revivalNoCount(true);
-  if(i===2)return revivalCrack();
-  if(i===3)return revivalDouble(true);
+async function winRoute(i) {
+  if (i===0) return revivalBlack();
+  if (i===1) return revivalNoCount(true);
+  if (i===2) return revivalCrack();
+  if (i===3) return revivalDouble(true);
 
-  switch(i){
-
+  switch (i) {
     case 4:
       await count();
       await blackout(1600);
       break;
-
     case 5:
       await digit("3");
       await digit("2",3100);
       break;
-
     case 6:
       await count();
       await digit("2",800);
       break;
-
     case 7:
       await count();
       await digit("0",800,"gold");
       break;
-
     case 8:
       await count();
       await wait(1700);
       break;
-
     case 9:
       await digit("3");
       await digit("2");
@@ -2246,82 +1844,67 @@ async function winRoute(i){
       await digit("1",1500);
       await wait(1200);
       break;
-
     case 10:
       await digit("3");
       await digit("2");
       await digit("1",3600);
       break;
-
     case 11:
       await count();
       await fastCount();
       break;
-
     case 12:
       await fastCount();
       await fastCount();
       break;
-
     case 13:
       await count();
       stopTension();
       await blackout(2300);
       break;
-
     case 14:
       await count();
       await blackout(1600);
       await fastCount();
       break;
-
     case 15:
       await count();
       await slashes();
       await digit("1");
       break;
-
     case 16:
       await digit("3");
       await digit("1");
       await digit("2");
       break;
-
     case 17:
       stopTension();
       await count();
       break;
-
     case 18:
       await count();
       await dots();
       await digit("1",850);
       break;
-
     case 19:
       await digit("3");
       await digit("1");
       break;
-
     case 20:
       await count();
       await wait(1800);
       break;
-
     case 21:
       await count();
       await digit("2");
       break;
-
     case 22:
       await fastCount();
       break;
-
     case 23:
       await count();
       await slashes();
       break;
-
     case 24:
       await digit("3");
       stopTension();
@@ -2329,49 +1912,41 @@ async function winRoute(i){
       await digit("2");
       await digit("1");
       break;
-
     case 25:
       await count();
       await digit("?",1000,"question");
       break;
-
     case 26:
       await count();
       await blackout(1600);
       await digit("1");
       break;
-
     case 27:
       await count();
       await dots();
       break;
-
     case 28:
       await count();
       await dots();
       await digit("1");
       break;
-
     case 29:
       await count();
       await dots();
       await blackout(1500);
       break;
-
     case 30:
       await count();
       await dots();
       stars(12);
       await wait(1000);
       break;
-
     case 31:
       await count();
       stopTension();
       await dots();
       await wait(2100);
       break;
-
     default:
       await common(i-32);
       break;
@@ -2380,172 +1955,128 @@ async function winRoute(i){
   await hit(winNames[i]);
 }
 
-/* ==========================
-   その他の当選演出
-========================== */
+/* ==================================
+   NEW ROUTES
+================================== */
 
-async function newRoute(kind,won){
-
-  switch(kind){
-
+async function newRoute(kind,won) {
+  switch (kind) {
     case "freeze":
       await count();
       await fxFreeze();
       break;
-
     case "preview":
       await count();
       await fxPreview();
       break;
-
     case "push":
       await count();
       await fxPush();
       break;
-
     case "promotion":
       await fxPromotion();
       break;
-
     case "rainbow":
       await fxFreeze();
       await fxRainbow();
       break;
-
     case "reverse":
       await fxReverse();
       break;
-
     case "odd":
       await digit("3");
       await digit("3",750,"red");
       await fxFreeze();
       break;
-
     case "rainbowBurst":
       await fxRainbow();
       break;
   }
 
   const names = {
-    freeze:"フリーズ",
-    preview:"次回予告",
-    push:"デカPUSH",
-    promotion:"カウントダウン昇格",
-    rainbow:"レインボーフリーズ",
-    reverse:"逆転カウント",
-    odd:"違和感",
-    rainbowBurst:"虹色爆発"
+    freeze: "フリーズ",
+    preview: "次回予告",
+    push: "デカPUSH",
+    promotion: "カウントダウン昇格",
+    rainbow: "レインボーフリーズ",
+    reverse: "逆転カウント",
+    odd: "違和感",
+    rainbowBurst: "虹色爆発"
   };
 
-  if(won){
-    await hit(names[kind]);
-  }else{
-    await miss(true);
-  }
+  if (won) await hit(names[kind]);
+  else await miss(true);
 }
 
-/* ==========================
-   通常モード当たり振り分け
-========================== */
+/* ==================================
+   NORMAL WIN ROUTE
+================================== */
 
-async function regularWinRoute(){
-
+async function regularWinRoute() {
   const r = Math.random();
 
-  if(r<.19){
-    return guaranteedGlassHit();
-  }
+  if (r<.19) return guaranteedGlassHit();
+  if (r<.38) return newRoute("preview",true);
+  if (r<.46) return newRoute("rainbowBurst",true);
+  if (r<.54) return newRoute("rainbow",true);
 
-  if(r<.38){
-    return newRoute("preview",true);
-  }
-
-  if(r<.46){
-    return newRoute("rainbowBurst",true);
-  }
-
-  if(r<.54){
-    return newRoute("rainbow",true);
-  }
-
-  if(r<.70){
-
+  if (r<.70) {
     const kinds = [
-      "freeze",
-      "push",
-      "promotion",
-      "reverse",
-      "odd"
+      "freeze","push","promotion","reverse","odd"
     ];
-
-    return newRoute(
-      kinds[rnd(0,kinds.length-1)],
-      true
-    );
+    return newRoute(kinds[rnd(0,kinds.length-1)],true);
   }
 
   return winRoute(rnd(0,43));
 }
 
-/* ==========================
-   通常モードハズレ
-========================== */
+/* ==================================
+   MISS ROUTES
+================================== */
 
-async function weakMiss(i){
-
-  switch(i){
-
+async function weakMiss(i) {
+  switch (i) {
     case 0:
       await digit("3");
       await digit("2",2900);
       await digit("1");
       break;
-
     case 1:
       await digit("3");
       await digit("2");
       await digit("1",3200);
       break;
-
     case 2:
       await count();
       await digit("1",750,"red");
       break;
-
     case 3:
       stopTension();
       await count();
       await wait(1300);
       break;
-
     case 4:
       await count();
       await blackout(550);
       break;
-
     case 5:
       await digit("3",3000);
       await digit("2");
       await digit("1");
       break;
-
     case 6:
       await digit("3");
       await digit("2",650,"red");
       await digit("1");
       break;
-
     case 7:
       await count();
       await digit("0",500);
       break;
-
     case 8:
       await count();
       await wait(950);
       break;
-
     case 9:
       await fastCount();
       await wait(900);
@@ -2555,38 +2086,31 @@ async function weakMiss(i){
   await miss(false);
 }
 
-async function strongMiss(i){
-
-  switch(i){
-
+async function strongMiss(i) {
+  switch (i) {
     case 0:
       await count();
       await slashes();
       break;
-
     case 1:
       await count();
       await blackout(1800);
       break;
-
     case 2:
       await digit("3");
       await digit("2");
       await digit("1",2700,"gold");
       break;
-
     case 3:
       await count();
       await slashes();
       await flash();
       break;
-
     case 4:
       await count();
       await blackout(1600);
       await digit("1",1900);
       break;
-
     case 5:
       await count();
       await digit("1",1000,"gold");
@@ -2597,38 +2121,32 @@ async function strongMiss(i){
   await miss(true);
 }
 
-async function missRoute(){
-
-  if(roll(.08)){
-    return revivalNoCount(false);
-  }
-
-  if(roll(.027)){
-    return revivalDouble(false);
-  }
-
+async function missRoute() {
   const r = Math.random();
 
-  if(r<.30){
+  if (r<.08) return revivalNoCount(false);
+  if (r<.105) return revivalDouble(false);
+
+  if (r<.36) {
+    await common(rnd(0,11));
+    return miss(false);
+  }
+
+  if (r<.66) {
     await count();
     return miss(false);
   }
 
-  if(r<.65){
-    return weakMiss(rnd(0,9));
-  }
-
+  if (r<.84) return weakMiss(rnd(0,9));
   return strongMiss(rnd(0,5));
 }
 
-/* ==========================
+/* ==================================
    RESET
-========================== */
+================================== */
 
-function reset(){
-
+function reset() {
   runId++;
-
   stopMusic();
 
   busy = false;
@@ -2639,10 +2157,8 @@ function reset(){
   hideFalseMiss();
 
   $("start").style.display = "block";
-
   $("hit").classList.remove("go");
   $("hitInfo").classList.remove("show");
-
   $("hitName").textContent = "";
   $("tap").classList.remove("show");
 
@@ -2650,36 +2166,27 @@ function reset(){
   black.style.opacity = "0";
 
   $("flash").classList.remove("flashGo");
-
   $("slash1").classList.remove("go");
   $("slash2").classList.remove("go");
 
   glassArea.className = "";
-  glassCrack.className = "";
-  glassCrack.style.opacity = "";
-
   glassUnder.style.opacity = "0";
-
   num.style.visibility = "";
   result.style.visibility = "";
 
-  if(animationId!==null){
-    cancelAnimationFrame(animationId);
-    animationId = null;
+  if (frameId!==null) {
+    cancelAnimationFrame(frameId);
+    frameId = null;
   }
 
-  if(ctx){
-    ctx.clearRect(0,0,cw,ch);
-  }
+  if (ctx) ctx.clearRect(0,0,cw,ch);
 
-  stage.querySelectorAll(
-    ".particle,.shooting"
-  ).forEach(el=>el.remove());
+  stage.querySelectorAll(".shooting").forEach(e=>e.remove());
 }
 
-/* ==========================
+/* ==================================
    GUIDE
-========================== */
+================================== */
 
 $("guideBtn").onclick = ()=>{
   $("modal").classList.add("open");
@@ -2690,116 +2197,73 @@ $("closeGuide").onclick = ()=>{
 };
 
 $("modal").onclick = e=>{
-  if(e.target===$("modal")){
+  if (e.target===$("modal")) {
     $("modal").classList.remove("open");
   }
 };
 
-/* ==========================
-   当たり後のタップ
-========================== */
+/* ==================================
+   TAP TO RETURN
+================================== */
 
 stage.onclick = ()=>{
-  if(tapReady){
-    reset();
-  }
+  if (tapReady) reset();
 };
 
-/* ==========================
+/* ==================================
    START
-========================== */
+================================== */
 
 $("startBtn").onclick = async e=>{
-
   e.stopPropagation();
 
-  if(busy)return;
+  if (busy) return;
 
   busy = true;
   tapReady = false;
 
   const id = ++runId;
-
   $("start").style.display = "none";
 
   /*
-    TEST_MODE=true の場合、
-    100%当たり。
+    TEST_MODE=true:
+      毎回100%画面破壊で当たり
 
-    falseの場合は1/25。
+    TEST_MODE=false:
+      当選確率1/25
   */
 
-  const won = TEST_MODE
-    ? true
-    : roll(1/25);
+  const won = TEST_MODE ? true : roll(1/25);
 
-  try{
-
-    /*
-      効果音ファイルを確認。
-      取得できなくても
-      アニメーションは実行する。
-    */
-
+  try {
     await chooseGlassSound();
 
-    if(id!==runId)return;
+    if (id!==runId) return;
 
     tension();
 
-    if(roll(.28)){
-      stars(rnd(2,9));
-    }
+    if (roll(.28)) stars(rnd(2,9));
 
-    if(TEST_MODE){
-
-      /*
-        テスト中は必ず
-        完全画面破壊で当たり。
-      */
-
+    if (TEST_MODE) {
       await guaranteedGlassHit();
-
-    }else if(won){
-
-      /*
-        通常モード。
-        1/25で当たった場合。
-      */
-
+    } else if (won) {
       await regularWinRoute();
-
-    }else{
-
-      /*
-        通常モードのハズレ。
-      */
-
-      if(roll(1/2400)){
-
-        await newRoute("preview",false);
-
-      }else{
-
-        await missRoute();
-      }
+    } else if (roll(1/2400)) {
+      await newRoute("preview",false);
+    } else {
+      await missRoute();
     }
-
-  }catch(error){
-
+  } catch (error) {
     console.error(error);
-
-    if(id===runId){
-      reset();
-    }
+    if (id===runId) reset();
   }
 };
 
-/* ==========================
-   初期化
-========================== */
+/* ==================================
+   INITIALIZE
+================================== */
 
-resizeCanvas();
+resizeCanvases();
 reset();
 
 </script>
